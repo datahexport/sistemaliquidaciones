@@ -329,7 +329,7 @@
 
 			</tbody>
 		</table>
-		
+
 		<div class="page-break"></div>
 
 		<table style="width:100%;border-collapse: collapse; margin-bottom: 30px; margin-top: 30px;">
@@ -337,9 +337,9 @@
 			<tr style="text-align: left;">
 				<td style="text-align: left;">
 					<h1 style="color: red;margin: 0; line-height: 1.2;">
-						DISTRIBUCION FRUTA ENTREGADA
+						INFORME LIQUIDACION FRUTA EXPORTACIÓN
 					</h1>
-					<h2 style="margin: 0; line-height: 1.2;">Por Variedad</h2>
+					<h2 style="margin: 0; line-height: 1.2;">FRUTA DENTRO DE NORMA</h2>
 				</td>
 				
 				<td>
