@@ -100,11 +100,11 @@
                                                 $globalpesoneto+=floatval($masa->peso_caja)*floatval($masa->cantidad);
                                                 
                                                 if (!IS_NULL($masa->precio_fob)) {
-                                                  $ventafob+=intval($masa->peso_neto)*floatval($masa->precio_fob);
-                                                  $globalventafob+=intval($masa->peso_neto)*floatval($masa->precio_fob);
+                                                  $ventafob+=floatval($masa->peso_caja)*floatval($masa->cantidad)*floatval($masa->precio_fob);
+                                                  $globalventafob+=floatval($masa->peso_caja)*floatval($masa->cantidad)*floatval($masa->precio_fob);
                                                 } else {
-                                                  $kgsp+=intval($masa->peso_neto);
-                                                  $globalkgsp+=intval($masa->peso_neto);
+                                                  $kgsp+=floatval($masa->peso_caja)*floatval($masa->cantidad);
+                                                  $globalkgsp+=floatval($masa->peso_caja)*floatval($masa->cantidad);
                                                 }
                                                 
                                                  
