@@ -28,8 +28,8 @@ class ComisionImport implements ToCollection, WithStartRow
                  Comision::create([ 
                     'temporada_id'=>$this->temporada,
 
-                    'productor'=> $row[1],
-                    'comision'=> $row[2]
+                    'productor'=> $row[2],
+                    'comision'=> $row[3]
                     
                     /*'flete_huerto'=> $row[3],
                     'minimo_garantizado'=> $row[4],
