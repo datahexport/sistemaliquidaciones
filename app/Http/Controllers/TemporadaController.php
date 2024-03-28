@@ -352,10 +352,10 @@ class TemporadaController extends Controller
 
                 foreach ($fobsall->where('n_variedad',$masa->variedad)->where('semana',$masa->semana) as $fob){
                 
-                    if ($fob->calibre==$calibre && $fob->etiqueta==$masa->etiqueta && $fob->color==$color){
+                    if ($fob->n_calibre==$calibre && $fob->color==$color){
                             $masa->update(['precio_fob'=>$fob->fob_kilo_salida]);
                             $nro+=1;
-                       
+                       break;
                     }
 
                 }
