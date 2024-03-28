@@ -287,7 +287,7 @@
                   Exportadora:<br>
                   <select wire:model.live="filters.exportadora" name="" id="" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-32">
                     <option value="">Todos</option>
-                    <option value="hexport">Hexport</option>
+                    <option value="h-export">H-export</option>
                   </select>
                 </div>
                 
