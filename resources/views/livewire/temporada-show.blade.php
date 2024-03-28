@@ -1117,6 +1117,7 @@
                                   'tipo',
                                   'color_final',
                                   'semana',
+                                  'precio_fob',
                               ];
 
 
@@ -1170,6 +1171,9 @@
                             <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                 <p class="text-gray-900 whitespace-nowrap">{{ $masa->semana }}</p>
                             </td>
+                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                              <p class="text-gray-900 whitespace-nowrap">{{ $masa->precio_fob }}</p>
+                          </td>
                             
                           
                           
