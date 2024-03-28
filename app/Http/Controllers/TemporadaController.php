@@ -219,6 +219,12 @@ class TemporadaController extends Controller
 
         $file = $request->file('file');
 
+        $masas=CostoPacking::where('temporada_id',$request->temporada)->get();
+        
+        foreach ($masas as $masa){
+            $masa->delete();
+        }
+
         FacadesExcel::import(new PackingImport($request->temporada),$file);
 
         $temporada=Temporada::find($request->temporada);
