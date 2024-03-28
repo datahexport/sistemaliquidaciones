@@ -97,7 +97,7 @@
                                                 $cajasbulto+=$masa->cantidad;
                                                 $pesoneto+=floatval($masa->peso_caja)*floatval($masa->cantidad);
                                                 $globalcajasbulto+=$masa->cantidad;
-                                                $globalpesoneto+=$masa->peso_neto;
+                                                $globalpesoneto+=floatval($masa->peso_caja)*floatval($masa->cantidad);
                                                 
                                                 if (!IS_NULL($masa->precio_fob)) {
                                                   $ventafob+=intval($masa->peso_neto)*floatval($masa->precio_fob);
