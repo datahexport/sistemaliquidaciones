@@ -752,15 +752,15 @@
                           </th>
                           <th
                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            TARIFA (DolaresxCaja)
+                           KG
                           </th>
                           <th
                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            DESCRIPCION
+                            TARIFA KG
                           </th>
                           <th
                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            ACCIÓN
+                            TOTAL USD
                           </th>
                         
                       </tr>
@@ -783,12 +783,16 @@
                                     </div>
                                   </div>
                               </td>
+                              
                               <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap"> {{$material->costo_por_caja_usd}}</p>
+                                <p class="text-gray-900 whitespace-no-wrap"> {{$material->kg}}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap"> {{$material->tarifa_kg}}</p>
                               </td>
                               <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                 <p class="text-gray-900 whitespace-no-wrap">
-                                  {{$material->descripcion}}
+                                  {{$material->total_usd}}
                                 </p>
                               </td>
                           
