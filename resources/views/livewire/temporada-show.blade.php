@@ -93,9 +93,9 @@
                                           @endphp
                                           @foreach ($masastotal as $masa)
                                             @php
-                                              if ($masa->n_variedad==$item->name) {
+                                              if ($masa->variedad==$item->name) {
                                                 $cajasbulto+=$masa->cantidad;
-                                                $pesoneto+=$masa->peso_neto;
+                                                $pesoneto+=floatval($masa->peso_caja)*floatval($masa->cantidad);
                                                 $globalcajasbulto+=$masa->cantidad;
                                                 $globalpesoneto+=$masa->peso_neto;
                                                 
