@@ -306,6 +306,7 @@ class TemporadaController extends Controller
         $fobsall=Fob::where('temporada_id',$temporada->id)->get();
         $nro=0;
         foreach($masas as $masa){
+                $calibre='';
                 if ($masa->calibre=='4J' || $masa->calibre=='4JD' || $masa->calibre=='4JDD'){
 				    $calibre='4J';
 									
