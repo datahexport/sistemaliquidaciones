@@ -1075,7 +1075,7 @@
 					$totalgastos=0;
 				@endphp
 				@foreach ($gastos as $gasto)
-					@if ($gasto->familia->name=='Cuenta Corriente')
+					@if ($gasto->familia->name=='Cuenta Corriente' && $gasto->item=='Analisis Multiresiduos')
 						@foreach ($detalles as $detalle)
 							@if (preg_replace('/[\.\-\s]+/', '', strtolower($detalle->item))==preg_replace('/[\.\-\s]+/', '', strtolower($gasto->item)))
 								
@@ -1137,7 +1137,7 @@
 					$totalgastos=0;
 				@endphp
 				@foreach ($gastos as $gasto)
-					@if ($gasto->familia->name=='Cuenta Corriente')
+					@if ($gasto->familia->name=='Cuenta Corriente' && $gasto->item=='Certificaciones')
 						@foreach ($detalles as $detalle)
 							@if (preg_replace('/[\.\-\s]+/', '', strtolower($detalle->item))==preg_replace('/[\.\-\s]+/', '', strtolower($gasto->item)))
 								
@@ -1199,7 +1199,7 @@
 					$totalgastos=0;
 				@endphp
 				@foreach ($gastos as $gasto)
-					@if ($gasto->familia->name=='Cuenta Corriente')
+					@if ($gasto->familia->name=='Cuenta Corriente' && $gasto->item=='Materiales')
 						@foreach ($detalles as $detalle)
 							@if (preg_replace('/[\.\-\s]+/', '', strtolower($detalle->item))==preg_replace('/[\.\-\s]+/', '', strtolower($gasto->item)))
 								
