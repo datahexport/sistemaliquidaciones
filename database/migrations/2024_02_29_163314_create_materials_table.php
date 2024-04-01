@@ -20,6 +20,7 @@ return new class extends Migration
             ->onDelete('cascade');
 
             $table->string('c_embalaje')->nullable();
+            $table->string('descripcion')->nullable();
             $table->string('kg')->nullable();
             $table->string('tarifa_kg')->nullable();
             $table->string('total_usd')->nullable();

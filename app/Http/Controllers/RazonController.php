@@ -78,7 +78,7 @@ class RazonController extends Controller
     public function show(Razonsocial $razonsocial,Temporada $temporada)
     {       
         $temporada=Temporada::find($temporada->id);
-        $masas=Balancemasa::where('temporada_id',$temporada->id)->where('c_productor',$razonsocial->csg)->get();
+        $masas=Balancemasa::where('temporada_id',$temporada->id)->where('csg',$razonsocial->csg)->get();
        
 
 

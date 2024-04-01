@@ -30,10 +30,11 @@ class PackingImport implements ToCollection, WithStartRow
 
                     'cliente'=> $row[0],
                     'especie'=> $row[1],
-                    'n_productor'=> $row[2],
-                    'csg'=> $row[3],
-                    'kg'=> $row[4],
-                    'total_usd'=> $row[5],
+                    'variedad'=> $row[2],
+                    'n_productor'=> $row[3],
+                    'csg'=> $row[4],
+                    'kg'=> $row[5],
+                    'total_usd'=> $row[6],
                     
                 ]);
           
