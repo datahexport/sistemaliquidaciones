@@ -165,7 +165,7 @@
 							@if (($masa->tipo=='PRE-CALIBRE') && $masa->variedad==$variedad)
 									@php
 										$cantidad3j+=floatval($masa->cantidad);
-										$pesoneto3j+=floatval($masa->peso_caja);
+										$pesoneto3j+=floatval($masa->peso_caja)*floatval($masa->cantidad);
 										
 										$cantidadtotal+=floatval($masa->cantidad);
 										$pesonetototal+=floatval($masa->peso_caja);
@@ -174,7 +174,7 @@
 							@if (($masa->tipo=='MERMA DESECHO') && $masa->variedad==$variedad)
 									@php
 										$cantidad2j+=floatval($masa->cantidad);
-										$pesoneto2j+=floatval($masa->peso_caja);
+										$pesoneto2j+=floatval($masa->peso_caja)*floatval($masa->cantidad);
 										
 										$cantidadtotal+=floatval($masa->cantidad);
 										$pesonetototal+=floatval($masa->peso_caja);
@@ -183,7 +183,7 @@
 							@if (($masa->tipo=='MERMA HOJAS') && $masa->variedad==$variedad)
 									@php
 										$cantidadj+=floatval($masa->cantidad);
-										$pesonetoj+=floatval($masa->peso_caja);
+										$pesonetoj+=floatval($masa->peso_caja)*floatval($masa->cantidad);
 										
 										$cantidadtotal+=floatval($masa->cantidad);
 										$pesonetototal+=floatval($masa->peso_caja);
@@ -192,7 +192,7 @@
 							@if (($masa->tipo=='EXPORTACIÓN LIGHT' || $masa->tipo=='EXPORTACIÓN DARK') && $masa->variedad==$variedad)
 									@php
 										$cantidadxl+=floatval($masa->cantidad);
-										$pesonetoxl+=floatval($masa->peso_caja);
+										$pesonetoxl+=floatval($masa->peso_caja)*floatval($masa->cantidad);
 										
 										$cantidadtotal+=floatval($masa->cantidad);
 										$pesonetototal+=floatval($masa->peso_caja);
