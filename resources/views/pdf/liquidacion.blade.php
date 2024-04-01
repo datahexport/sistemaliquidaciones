@@ -1137,12 +1137,27 @@
 				@endphp
 				@foreach ($gastos as $gasto)
 					@if ($gasto->familia->name=='Cuenta Corriente')
-					
+						@foreach ($detalles as $detalle)
+							@if (preg_replace('/[\.\-\s]+/', '', strtolower($detalle->item))==preg_replace('/[\.\-\s]+/', '', strtolower($gasto->item)))
+								
+								<tr>
+								
+									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$detalle->fecha}}</td>
+									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$detalle->item}}</td>
+									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($detalle->cantidad,2)}} USD</td>
+							
+								</tr>
+								@php
+									$totalgastos+=floatval($detalle->cantidad);
+								@endphp
+								
+							@endif
+						@endforeach
 						<tr>
 								
 							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">TOTAL</td>
 							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
-							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(0)}} USD</td>
+							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalgastos,2)}} USD</td>
 					
 						</tr>
 					@endif
@@ -1183,12 +1198,27 @@
 				@endphp
 				@foreach ($gastos as $gasto)
 					@if ($gasto->familia->name=='Cuenta Corriente')
-					
+						@foreach ($detalles as $detalle)
+							@if (preg_replace('/[\.\-\s]+/', '', strtolower($detalle->item))==preg_replace('/[\.\-\s]+/', '', strtolower($gasto->item)))
+								
+								<tr>
+								
+									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$detalle->fecha}}</td>
+									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$detalle->item}}</td>
+									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($detalle->cantidad,2)}} USD</td>
+							
+								</tr>
+								@php
+									$totalgastos+=floatval($detalle->cantidad);
+								@endphp
+								
+							@endif
+						@endforeach
 						<tr>
 								
 							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">TOTAL</td>
 							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
-							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(0)}} USD</td>
+							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalgastos,2)}} USD</td>
 					
 						</tr>
 					@endif
