@@ -8,7 +8,11 @@
 
 	<style>
 
-		
+		@font-face {
+			font-family: "Roboto";
+			src: url("' . public_path('fonts/Roboto-Regular.ttf') . '") format("truetype");
+			/* Agrega aquí otras variantes de la fuente si las necesitas */
+		}
 		/* Estilos CSS para la página */
 		@page {
 			margin-top: 0px;
