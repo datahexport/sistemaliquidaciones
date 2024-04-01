@@ -189,6 +189,15 @@
 										$pesonetototal+=floatval($masa->peso_caja);
 									@endphp	
 							@endif
+							@if (($masa->tipo=='EXPORTACIÓN LIGHT' || $masa->tipo=='EXPORTACIÓN DARK') && $masa->variedad==$variedad)
+									@php
+										$cantidadxl+=floatval($masa->cantidad);
+										$pesonetoxl+=floatval($masa->peso_caja);
+										
+										$cantidadtotal+=floatval($masa->cantidad);
+										$pesonetototal+=floatval($masa->peso_caja);
+									@endphp	
+							@endif
 							
 							
 						@endif
