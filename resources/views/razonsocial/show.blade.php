@@ -724,7 +724,11 @@
                                             <td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$cantidad4j+$cantidad3j+$cantidad2j+$cantidadj+$cantidadxl}}</td>
                                             <td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl}} KGS</td>
                                             <td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$retorno4j+$retorno3j+$retorno2j+$retornoj+$retornoxl}} USD</td>
-                                            <td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno4j+$retorno3j+$retorno2j+$retornoj+$retornoxl)/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2)}} USD/KG</td>
+                                            @if ($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl>0)
+                                              <td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno4j+$retorno3j+$retorno2j+$retornoj+$retornoxl)/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2)}} USD/KG</td>
+                                            @else
+                                              <td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">0 USD/KG</td>
+                                            @endif
                                             
                                           </tr>
                                           
@@ -754,59 +758,13 @@
                                         <td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$cantidadtotal}}</td>
                                         <td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$pesonetototal}} KGS</td>
                                         <td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$retornototal}} USD</td>
-                                        <td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($retornototal/$pesonetototal,2)}} usd/kg</td>
-                                        
+                                        @if ($pesonetototal>0)
+                                          <td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($retornototal/$pesonetototal,2)}} usd/kg</td>
+                                        @else
+                                          <td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">0 usd/kg</td>
+                                        @endif
                                       </tr>
-                                          {{-- comment
-                                            <tr>
-                                              <td>C-14</td>
-                                              <td>Cherries</td>
-                                              <td>Cat 1</td>
-                                              <td>3J</td>
-                                              <td>1,91%</td>
-                                              <td>102</td>
-                                              <td>510 Kg USD</td>
-                                              <td>2.749 USD</td>
-                                              <td>5,39</td>
-                                              
-                                            </tr>
-                                            <tr>
-                                              <td>C-14</td>
-                                              <td>Cherries</td>
-                                              <td>Cat 1</td>
-                                              <td>2J</td>
-                                              <td>14,05%</td>
-                                              <td>750</td>
-                                              <td>3.750 Kg USD</td>
-                                              <td>16.466 USD</td>
-                                              <td>4,39</td>
-                                              
-                                            </tr>
-                                            <tr>
-                                              <td>C-14</td>
-                                              <td>Cherries</td>
-                                              <td>Cat 1</td>
-                                              <td>J</td>
-                                              <td>33,21%</td>
-                                              <td>1.773</td>
-                                              <td>8.865 Kg USD</td>
-                                              <td>25.663 USD</td>
-                                              <td>2,89</td>
-                                              
-                                            </tr>
-                                            <tr>
-                                              <td>C-14</td>
-                                              <td>Cherries</td>
-                                              <td>Cat 1</td>
-                                              <td>XL</td>
-                                              <td>50,76%</td>
-                                              <td>2.710</td>
-                                              <td>13.550 Kg USD</td>
-                                              <td>10.465 USD</td>
-                                              <td>0,77</td>
-                                              
-                                            </tr>
-                                          --}}
+                                      
                               
                                     </tbody>
                                   </table>
