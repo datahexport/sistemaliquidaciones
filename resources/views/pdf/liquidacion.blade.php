@@ -296,6 +296,29 @@
 								$calibrecount+=1;
 							@endphp
 						@endif
+						@if ($cantidadxl>0)
+							<tr>
+							
+								@if ($calibrecount==1)
+									<td>{{$variedad}}</td>
+								@else
+									<td> </td>
+								@endif
+								
+								
+								
+								<td>Merma</td>
+								
+							
+								<td>{{$pesonetoxl}} KGS</td>
+								<td>{{$retornoxl}} USD</td>
+								
+								
+							</tr>
+							@php
+								$calibrecount+=1;
+							@endphp
+						@endif
 
 						
 
