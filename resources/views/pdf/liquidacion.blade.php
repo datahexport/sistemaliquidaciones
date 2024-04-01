@@ -1041,7 +1041,7 @@
 					<h1 style="color: red;margin: 0; line-height: 1.2;">
 						INFORME ANALISIS MULTIRESIDUOS
 					</h1>
-					<h2 style="margin: 0; line-height: 1.2;">Productor: {{$razonsocial->name}}</h2>
+					<h3 style="margin: 0; line-height: 1.2;">Productor: {{$razonsocial->name}}</h3>
 				</td>
 				
 				<td>
@@ -1072,7 +1072,7 @@
 								
 									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$detalle->fecha}}</td>
 									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$detalle->item}}</td>
-									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($detalle->cantidad)}} USD</td>
+									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($detalle->cantidad,2)}} USD</td>
 							
 								</tr>
 								@php
@@ -1085,7 +1085,99 @@
 								
 							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">TOTAL</td>
 							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
-							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalgastos)}} USD</td>
+							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalgastos,2)}} USD</td>
+					
+						</tr>
+					@endif
+				@endforeach
+			
+
+					
+
+			</tbody>
+		</table>
+
+		<table style="width:100%;border-collapse: collapse; margin-bottom: 30px; margin-top: 30px;">
+		
+			<tr style="text-align: left;">
+				<td style="text-align: left;">
+					<h1 style="color: red;margin: 0; line-height: 1.2;">
+						INFORME CERTIFICACIONES
+					</h1>
+					<h3 style="margin: 0; line-height: 1.2;">Productor: {{$razonsocial->name}}</h3>
+				</td>
+				
+				
+			  </tr>
+		</table>
+
+		<table id="balance" style="width:100%; border-collapse: collapse; margin-top: 20px;">
+			<thead style="border-top: 2px solid black; border-bottom: 2px solid black;">
+			  <tr style="border: 1px solid black; font-weight: bold;">
+				<th>Fecha</th>
+				<th>Detalle</th>
+				<th>Usd</th>
+				
+			  </tr>
+			</thead>
+			<tbody>
+				@php
+					$totalgastos=0;
+				@endphp
+				@foreach ($gastos as $gasto)
+					@if ($gasto->familia->name=='Cuenta Corriente')
+					
+						<tr>
+								
+							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">TOTAL</td>
+							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
+							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(0)}} USD</td>
+					
+						</tr>
+					@endif
+				@endforeach
+			
+
+					
+
+			</tbody>
+		</table>
+
+		<table style="width:100%;border-collapse: collapse; margin-bottom: 30px; margin-top: 30px;">
+		
+			<tr style="text-align: left;">
+				<td style="text-align: left;">
+					<h1 style="color: red;margin: 0; line-height: 1.2;">
+						INFORME MATERIALES DE COSECHA ADEUDADOS
+					</h1>
+					<h3 style="margin: 0; line-height: 1.2;">Productor: {{$razonsocial->name}}</h3>
+				</td>
+				
+				
+			  </tr>
+		</table>
+
+		<table id="balance" style="width:100%; border-collapse: collapse; margin-top: 20px;">
+			<thead style="border-top: 2px solid black; border-bottom: 2px solid black;">
+			  <tr style="border: 1px solid black; font-weight: bold;">
+				<th>Fecha</th>
+				<th>Detalle</th>
+				<th>Usd</th>
+				
+			  </tr>
+			</thead>
+			<tbody>
+				@php
+					$totalgastos=0;
+				@endphp
+				@foreach ($gastos as $gasto)
+					@if ($gasto->familia->name=='Cuenta Corriente')
+					
+						<tr>
+								
+							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">TOTAL</td>
+							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
+							<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(0)}} USD</td>
 					
 						</tr>
 					@endif
