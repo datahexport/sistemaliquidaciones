@@ -152,14 +152,15 @@
 					@endphp
 
 					@foreach ($masas as $masa)
-						@if ($masa->tipo=='COMERCIAL' || $masa->tipo=='PRE-CALIBRE' || $masa->tipo=='MERMA DESECHO' || $masa->tipo=='MERMA HOJAS')
-							@if (($masa->tipo=='COMERCIAL') && $masa->variedad==$variedad)
+						@if ($masa->tipo=='COMERCIAL' || $masa->tipo=='PRE-CALIBRE' || $masa->tipo=='MERMA DESECHO' || $masa->tipo=='MERMA HOJAS' || $masa->tipo=='COMERCIAL EMBALADA' || $masa->tipo=='EXPORTACIÓN LIGHT' || $masa->tipo=='EXPORTACIÓN DARK' || $masa->tipo=='EXPORTACIÓN')
+							@if (($masa->tipo=='COMERCIAL' || $masa->tipo=='COMERCIAL EMBALADA') && $masa->variedad==$variedad)
 									@php
 										$cantidad4j+=floatval($masa->cantidad);
-										if ($masa->cantidad>0) {
+
+										if ($masa->peso_caja>0) {
 											$pesoneto4j+=floatval($masa->peso_caja)*floatval($masa->cantidad);
 										} else {
-											$pesoneto4j+=floatval($masa->peso_caja);
+											$pesoneto4j+=floatval($masa->cantidad);
 										}
 										
 											
@@ -172,10 +173,10 @@
 									@php
 										$cantidad3j+=floatval($masa->cantidad);
 
-										if ($masa->cantidad>0) {
+										if ($masa->peso_caja>0) {
 											$pesoneto3j+=floatval($masa->peso_caja)*floatval($masa->cantidad);
 										} else {
-											$pesoneto3j+=floatval($masa->peso_caja);
+											$pesoneto3j+=floatval($masa->cantidad);
 										}
 										
 										$cantidadtotal+=floatval($masa->cantidad);
@@ -186,10 +187,10 @@
 									@php
 										$cantidad2j+=floatval($masa->cantidad);
 
-										if ($masa->cantidad>0) {
+										if ($masa->peso_caja>0) {
 											$pesoneto2j+=floatval($masa->peso_caja)*floatval($masa->cantidad);
 										} else {
-											$pesoneto2j+=floatval($masa->peso_caja);
+											$pesoneto2j+=floatval($masa->cantidad);
 										}
 										
 										$cantidadtotal+=floatval($masa->cantidad);
@@ -200,24 +201,24 @@
 									@php
 										$cantidadj+=floatval($masa->cantidad);
 
-										if ($masa->cantidad>0) {
+										if ($masa->peso_caja>0) {
 											$pesonetoj+=floatval($masa->peso_caja)*floatval($masa->cantidad);
 										} else {
-											$pesonetoj+=floatval($masa->peso_caja);
+											$pesonetoj+=floatval($masa->cantidad);
 										}
 										
 										$cantidadtotal+=floatval($masa->cantidad);
 										$pesonetototal+=floatval($masa->peso_caja);
 									@endphp	
 							@endif
-							@if (($masa->tipo=='EXPORTACIÓN LIGHT' || $masa->tipo=='EXPORTACIÓN DARK') && $masa->variedad==$variedad)
+							@if (($masa->tipo=='EXPORTACIÓN LIGHT' || $masa->tipo=='EXPORTACIÓN DARK' || $masa->tipo=='EXPORTACIÓN') && $masa->variedad==$variedad)
 									@php
 										$cantidadxl+=floatval($masa->cantidad);
 
-										if ($masa->cantidad>0) {
+										if ($masa->peso_caja>0) {
 											$pesonetoxl+=floatval($masa->peso_caja)*floatval($masa->cantidad);
 										} else {
-											$pesonetoxl+=floatval($masa->peso_caja);
+											$pesonetoxl+=floatval($masa->cantidad);
 										}
 										
 										$cantidadtotal+=floatval($masa->cantidad);
