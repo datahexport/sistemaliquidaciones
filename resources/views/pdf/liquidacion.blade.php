@@ -254,12 +254,12 @@
 								
 									<td>{{$variedad}}</td>
 								
-								<td>{{numner_format($pesonetoxl)}}</td>
-								<td>{{numner_format($pesoneto4j)}}</td>
-								<td>{{numner_format($pesoneto3j)}}</td>
-								<td>{{numner_format($pesoneto2j)}}</td>
-								<td>{{numner_format($pesonetoj)}}</td>
-								<td>{{numner_format($pesonetoxl+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj)}}</td>
+								<td>{{number_format($pesonetoxl)}}</td>
+								<td>{{number_format($pesoneto4j)}}</td>
+								<td>{{number_format($pesoneto3j)}}</td>
+								<td>{{number_format($pesoneto2j)}}</td>
+								<td>{{number_format($pesonetoj)}}</td>
+								<td>{{number_format($pesonetoxl+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj)}}</td>
 
 								
 								
