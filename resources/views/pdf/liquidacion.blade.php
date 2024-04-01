@@ -29,12 +29,13 @@
 			margin: 0;
 		}
 		.container {
-			width: 100%; /* Ancho completo */
-            height: 100%;
-			background-image: url({{asset('image/bg_informe.png'); }}); /* Ruta de la imagen de fondo */
-			background-size: cover; /* Para cubrir toda el área del cuerpo */
-			background-position: center; /* Para centrar la imagen */
-		}
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Esto centra verticalmente en la página */
+            text-align: center; /* Esto centra el texto dentro de los elementos */
+        }
 		.cuerpo {
 		margin-left: 30px;
 		margin-right: 30px;
@@ -64,10 +65,16 @@
 </head>
 
 <body>
-	
 	<div class="container">
-		
-	</div>	
+        <h1 style="color:red; margin-top: 150px; font-size: 52px;">Liquidación Cerezas</h1>
+        <h1 style="color:gray; margin-top: 10px;">Temporada 2023-2024</h1>
+        <img class="object-contain" style="height: 550px;"  src="{{asset('image/logo.png')}}" alt="">
+		<h1>{{$razonsocial->name}}</h1>
+    </div>
+
+	
+
+	<div class="page-break"></div>
 	
 	<div class="cuerpo">
 
