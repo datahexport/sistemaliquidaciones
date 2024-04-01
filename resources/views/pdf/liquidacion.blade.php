@@ -255,12 +255,12 @@
 								
 								
 								<td style="border-top: 0.5px groove black;">{{$variedad}}</td>
-								<td style="border-top: 0.5px groove black;">{{number_format($pesonetoxl)}}</td>
-								<td style="border-top: 0.5px groove black;">{{number_format($pesoneto4j)}}</td>
-								<td style="border-top: 0.5px groove black;">{{number_format($pesoneto3j)}}</td>
-								<td style="border-top: 0.5px groove black;">{{number_format($pesoneto2j)}}</td>
-								<td style="border-top: 0.5px groove black;">{{number_format($pesonetoj)}}</td>
-								<td style="border-top: 0.5px groove black;">{{number_format($pesonetoxl+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj)}}</td>
+								<td style="border-top: 0.5px groove black;">{{number_format($pesonetoxl,2)}} KG</td>
+								<td style="border-top: 0.5px groove black;">{{number_format($pesoneto4j,2)}} KG</td>
+								<td style="border-top: 0.5px groove black;">{{number_format($pesoneto3j,2)}} KG</td>
+								<td style="border-top: 0.5px groove black;">{{number_format($pesoneto2j,2)}} KG</td>
+								<td style="border-top: 0.5px groove black;">{{number_format($pesonetoj,2)}} KG</td>
+								<td style="border-top: 0.5px groove black;">{{number_format($pesonetoxl+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj,2)}} KG</td>
 
 								
 								
