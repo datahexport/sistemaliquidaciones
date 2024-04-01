@@ -98,9 +98,11 @@
 					<td style="text-align: center; border: 1px solid black; padding: 2px;">
 						PRODUCTOR
 					</td>
+					{{--  
 					<td style="text-align: center; border: 1px solid black; padding: 2px;">
 						{{$razonsocial->rut}}
 					</td>
+					--}}
 					<td style="text-align: center; border: 1px solid black; padding: 2px;">
 						{{$razonsocial->name}}
 					</td>
@@ -111,18 +113,18 @@
 		
 		<table id="balance" style="width:100%; border-collapse: collapse; margin-top: 20px;">
 			<thead>
-			  <tr>
+			  <tr >
 				
-				<th>KG<br>Variedad</th>
+				<th style="border: 1px solid black;">KG<br>Variedad</th>
 				
-				<th>Tipo<br>Exportación</th>
+				<th style="border: 1px solid black;">Tipo<br>Exportación</th>
 				
 			
-				<th>Comercial</th>
-				<th>PRE-CALIBRE</th>
-				<th>MERMA DESECHO</th>
-				<th>MERMA HOJAS</th>
-				<th>TOTAL</th>
+				<th style="border: 1px solid black;">Comercial</th>
+				<th style="border: 1px solid black;">PRE-CALIBRE</th>
+				<th style="border: 1px solid black;">MERMA DESECHO</th>
+				<th style="border: 1px solid black;">MERMA HOJAS</th>
+				<th style="border: 1px solid black;">TOTAL</th>
 				
 			  </tr>
 			</thead>
@@ -252,14 +254,13 @@
 							<tr>
 								
 								
-									<td>{{$variedad}}</td>
-								
-								<td>{{number_format($pesonetoxl)}}</td>
-								<td>{{number_format($pesoneto4j)}}</td>
-								<td>{{number_format($pesoneto3j)}}</td>
-								<td>{{number_format($pesoneto2j)}}</td>
-								<td>{{number_format($pesonetoj)}}</td>
-								<td>{{number_format($pesonetoxl+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj)}}</td>
+								<td style="border: 1px solid black;">{{$variedad}}</td>
+								<td style="border: 1px solid black;">{{number_format($pesonetoxl)}}</td>
+								<td style="border: 1px solid black;">{{number_format($pesoneto4j)}}</td>
+								<td style="border: 1px solid black;">{{number_format($pesoneto3j)}}</td>
+								<td style="border: 1px solid black;">{{number_format($pesoneto2j)}}</td>
+								<td style="border: 1px solid black;">{{number_format($pesonetoj)}}</td>
+								<td style="border: 1px solid black;">{{number_format($pesonetoxl+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj)}}</td>
 
 								
 								
@@ -283,13 +284,13 @@
 				<tr>
 							
 					
-					<td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">Total</td>
-					<td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalpesonetoxl)}} KG</td>
-					<td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalpesoneto4j)}} KG</td>
-					<td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalpesoneto3j)}} KG</td>
-					<td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalpesoneto2j)}} KG</td>
-					<td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalpesonetoj)}} KG</td>
-					<td style="border-top: 2px solid black; border-bottom: 2px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalpesonetoxl+$totalpesoneto4j+$totalpesoneto3j+$totalpesoneto2j+$totalpesonetoj)}} KG</td>
+					<td style="border: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">Total</td>
+					<td style="border: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalpesonetoxl)}} KG</td>
+					<td style="border: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalpesoneto4j)}} KG</td>
+					<td style="border: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalpesoneto3j)}} KG</td>
+					<td style="border: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalpesoneto2j)}} KG</td>
+					<td style="border: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalpesonetoj)}} KG</td>
+					<td style="border: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalpesonetoxl+$totalpesoneto4j+$totalpesoneto3j+$totalpesoneto2j+$totalpesonetoj)}} KG</td>
 			
 				</tr>
 						
