@@ -1093,7 +1093,7 @@
 			<thead style="border-top: 2px solid black; border-bottom: 2px solid black;">
 			  <tr style="border: 1px solid black; font-weight: bold;">
 				<th>Fecha</th>
-				<th>Detalle</th>
+				<th style="text-align:left;">Detalle</th>
 				<th>Usd</th>
 				
 			  </tr>
@@ -1157,7 +1157,7 @@
 			<thead style="border-top: 2px solid black; border-bottom: 2px solid black;">
 			  <tr style="border: 1px solid black; font-weight: bold;">
 				<th>Fecha</th>
-				<th>Detalle</th>
+				<th style="text-align:left;">Detalle</th>
 				<th>Usd</th>
 				
 			  </tr>
@@ -1221,7 +1221,7 @@
 			<thead style="border-top: 2px solid black; border-bottom: 2px solid black;">
 			  <tr style="border: 1px solid black; font-weight: bold;">
 				<th>Fecha</th>
-				<th>Detalle</th>
+				<th style="text-align:left;">Detalle</th>
 				<th>Usd</th>
 				
 			  </tr>
