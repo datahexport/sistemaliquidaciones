@@ -460,7 +460,7 @@
 					@endforeach
 					@if ($cantidad4j+$cantidad3j+$cantidad2j+$cantidadj+$cantidadxl>0)
 						
-						@if ($unique_calibres->contains('4J') || $unique_calibres->contains('4JD') || $unique_calibres->contains('4JDD'))
+						@if (($unique_calibres->contains('4J') || $unique_calibres->contains('4JD') || $unique_calibres->contains('4JDD')) && $pesoneto4j>0)
 							<tr>
 								<td> </td>
 								@if ($calibrecount==1)
@@ -488,7 +488,7 @@
 								$calibrecount+=1;
 							@endphp
 						@endif
-						@if ($unique_calibres->contains('3J') || $unique_calibres->contains('3JD') || $unique_calibres->contains('3JDD'))
+						@if (($unique_calibres->contains('3J') || $unique_calibres->contains('3JD') || $unique_calibres->contains('3JDD'))&& $pesoneto3j>0)
 							<tr>
 								<td> </td>
 								@if ($calibrecount==1)
@@ -515,7 +515,7 @@
 								$calibrecount+=1;
 							@endphp
 						@endif
-						@if ($unique_calibres->contains('2J') || $unique_calibres->contains('2JD') || $unique_calibres->contains('2JDD'))
+						@if (($unique_calibres->contains('2J') || $unique_calibres->contains('2JD') || $unique_calibres->contains('2JDD'))&& $pesoneto2j>0)
 							<tr>
 								<td> </td>
 								@if ($calibrecount==1)
@@ -542,7 +542,7 @@
 								$calibrecount+=1;
 							@endphp
 						@endif
-						@if ($unique_calibres->contains('J') || $unique_calibres->contains('JD') || $unique_calibres->contains('JDD'))
+						@if (($unique_calibres->contains('J') || $unique_calibres->contains('JD') || $unique_calibres->contains('JDD'))&& $pesonetoj>0)
 							<tr>
 								<td> </td>
 								@if ($calibrecount==1)
@@ -571,7 +571,7 @@
 								$calibrecount+=1;
 							@endphp
 						@endif
-						@if ($unique_calibres->contains('XL') || $unique_calibres->contains('XLD') || $unique_calibres->contains('XLDD'))
+						@if (($unique_calibres->contains('XL') || $unique_calibres->contains('XLD') || $unique_calibres->contains('XLDD'))&& $pesonetoxl>0)
 							<tr>
 								<td> </td>
 								@if ($calibrecount==1)
