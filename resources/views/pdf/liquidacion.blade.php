@@ -1123,7 +1123,7 @@
 						
 					@endif
 				@endforeach
-				<tr>
+				<tr style="background-color: #ddd; " >
 								
 					<td style="font-weight: bold; padding-bottom: 4px; margin-top: 10px;">TOTAL</td>
 					<td style="font-weight: bold; padding-bottom: 4px; margin-top: 10px;"></td>
@@ -1187,7 +1187,7 @@
 						
 					@endif
 				@endforeach
-				<tr>
+				<tr style="background-color: #ddd; " >
 								
 					<td style="font-weight: bold; padding-bottom: 4px; margin-top: 10px;">TOTAL</td>
 					<td style="font-weight: bold; padding-bottom: 4px; margin-top: 10px;"></td>
@@ -1251,7 +1251,7 @@
 						
 					@endif
 				@endforeach
-				<tr>
+				<tr style="background-color: #ddd; " >
 								
 					<td style="font-weight: bold; padding-bottom: 4px; margin-top: 10px;">TOTAL</td>
 					<td style="font-weight: bold; padding-bottom: 4px; margin-top: 10px;"></td>
