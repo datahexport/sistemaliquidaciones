@@ -124,8 +124,8 @@
 
                                                 foreach ($materialestotal as $material) {
                                                   if ($material->c_embalaje==$masa->cod_embalaje) {
-                                                    $totalmateriales+=$masa->cantidad*$material->costo_por_caja_usd;
-                                                    $globaltotalmateriales+=$masa->cantidad*$material->costo_por_caja_usd;
+                                                    $totalmateriales+=$masa->peso_prorrateado*$material->tarifa_kg;
+                                                    $globaltotalmateriales+=$masa->peso_prorrateado*$material->tarifa_kg;
                                                   }  
                                                 }
 
