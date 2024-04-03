@@ -1237,7 +1237,7 @@
 								
 								<tr>
 								
-									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 10px;">{{ substr($detalle->fecha, 0, 11) }}</td>
+									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 30px;">{{ substr($detalle->fecha, 0, 11) }}</td>
 									<td style="padding-bottom: 4px; margin-top: 10px;">{{$detalle->item}}</td>
 									<td style="padding-bottom: 4px; margin-top: 10px;">{{number_format($detalle->cantidad,2)}} USD</td>
 							
