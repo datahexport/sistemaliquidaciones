@@ -20,18 +20,29 @@ return new class extends Migration
             ->onDelete('cascade');
 
             $table->text('proceso')->nullable();
+            $table->text('planta')->nullable();
             $table->text('fecha')->nullable();
-            $table->text('csg')->nullable();
+            $table->text('rut')->nullable();
             $table->text('productor_recep')->nullable();
             $table->text('variedad')->nullable();
+            $table->text('cod_embalaje')->nullable();
+            $table->text('descripcion')->nullable();
             $table->text('envases')->nullable();
+            $table->text('color')->nullable();
             $table->text('calibre')->nullable();
+            $table->text('calibre_real')->nullable();
             $table->text('cantidad')->nullable();
+            $table->text('peso_prorrateado')->nullable();
             $table->text('peso_caja')->nullable();
+            $table->text('tipo_caja')->nullable();
+            $table->text('caja_eq5')->nullable();
             $table->text('tipo')->nullable();
+            $table->text('criterio')->nullable();
             $table->text('color_final')->nullable();
-            $table->text('semana')->nullable();
-            
+            $table->text('exportadora')->nullable();
+            $table->text('norma')->nullable();
+            $table->text('semana')->nullable(); 
+            $table->string('precio_fob')->nullable();         
 
             $table->timestamps();
         });

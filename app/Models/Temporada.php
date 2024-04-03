@@ -40,6 +40,10 @@ class Temporada extends Model
         return $this->hasmany('App\Models\Fob');
     }
 
+    public function fobnacionals(){
+        return $this->hasmany('App\Models\Fobnacional');
+    }
+
     public function masas(){
         return $this->hasmany('App\Models\Balancemasa');
     }

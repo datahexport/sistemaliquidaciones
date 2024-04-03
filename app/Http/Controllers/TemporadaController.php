@@ -26,6 +26,7 @@ use App\Models\Exportacion;
 use App\Models\Familia;
 use App\Models\Flete;
 use App\Models\Fob;
+use App\Models\Fobnacional;
 use App\Models\Gasto;
 use App\Models\Material;
 use App\Models\Razonsocial;
@@ -141,6 +142,13 @@ class TemporadaController extends Controller
         $fob=Fob::where('temporada_id',$temporada->id)->paginate(3);
 
         return view('temporadas.fob',compact('temporada','fob'));
+    }
+
+    public function fobnacional(Temporada $temporada)
+    {  
+        $fob=Fobnacional::where('temporada_id',$temporada->id)->paginate(3);
+
+        return view('temporadas.fobnacional',compact('temporada','fob'));
     }
 
     public function otrosgastos(Temporada $temporada)
@@ -456,11 +464,31 @@ class TemporadaController extends Controller
             $masa->delete();
         }
 
-        FacadesExcel::import(new FobImport($request->temporada),$file);
+        FacadesExcel::import(new FobImport($request->temporada,'exportacion'),$file);
 
         $temporada=Temporada::find($request->temporada);
 
         return redirect()->route('temporada.fob',$temporada)->with('info','Importación realizada con exito');
+    }
+
+    public function importFobnacional(Request $request)
+    {    $request->validate([
+            'file'=>'required|mimes:csv,xlsx'
+        ]);
+
+        $file = $request->file('file');
+
+        $masas=Fobnacional::where('temporada_id',$request->temporada)->get();
+
+        foreach ($masas as $masa){
+            $masa->delete();
+        }
+
+        FacadesExcel::import(new FobImport($request->temporada,'nacional'),$file);
+
+        $temporada=Temporada::find($request->temporada);
+
+        return redirect()->route('temporada.fobnacional',$temporada)->with('info','Importación realizada con exito');
     }
 
     public function importFlete(Request $request)

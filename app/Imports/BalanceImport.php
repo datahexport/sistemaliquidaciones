@@ -31,19 +31,28 @@ class BalanceImport implements ToCollection, WithStartRow
                     'temporada_id' => $this->temporada,
 
                     'proceso' => $row[0],
-                    'fecha' => Carbon::instance(Date::excelToDateTimeObject($row[1])),
-                    'csg' => $row[2],
-                    'productor_recep' => $row[3],
-                    'variedad' => $row[4],
-                    'envases' => $row[5],
-                    'calibre' => $row[6],
-                    'cantidad' => $row[7],
-                    'peso_caja' => $row[8],
-                    'tipo' => $row[9],
-                    'color_final' => $row[10],
-                    'semana' => $row[11]
-
-                                      
+                    'planta' => $row[1],
+                    'fecha' => Carbon::instance(Date::excelToDateTimeObject($row[2])),
+                    'rut' => $row[3],
+                    'productor_recep' => $row[4],
+                    'variedad' => $row[5],
+                    'cod_embalaje' => $row[6],
+                    'descripcion' => $row[7],
+                    'envases' => $row[8],
+                    'color' => $row[9],
+                    'calibre' => $row[10],
+                    'calibre_real' => $row[11],
+                    'cantidad' => $row[12],
+                    'peso_prorrateado' => $row[13],
+                    'peso_caja' => $row[14],
+                    'tipo_caja' => $row[15],
+                    'caja_eq5' => $row[16],
+                    'tipo' => $row[17],
+                    'criterio' => $row[18],
+                    'color_final' => $row[19],
+                    'exportadora' => $row[20],
+                    'norma' => $row[21],
+                    'semana' => $row[22]
 
                 ]);
                 

@@ -1119,16 +1119,27 @@
                                 
                                 $columnas = [
                                   'proceso',
+                                  'planta',
                                   'fecha',
-                                  'csg',
+                                  'rut',
                                   'productor_recep',
                                   'variedad',
+                                  'cod_embalaje',
+                                  'descripcion',
                                   'envases',
+                                  'color',
                                   'calibre',
+                                  'calibre_real',
                                   'cantidad',
+                                  'peso_prorrateado',
                                   'peso_caja',
+                                  'tipo_caja',
+                                  'caja_eq5',
                                   'tipo',
+                                  'criterio',
                                   'color_final',
+                                  'exportadora',
+                                  'norma',
                                   'semana',
                                   'precio_fob',
                               ];
@@ -1150,43 +1161,76 @@
                             <tr>
                               <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                 <p class="text-gray-900 whitespace-nowrap">{{ $masa->proceso }}</p>
-                            </td>
-                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-nowrap">{{ $masa->fecha }}</p>
-                            </td>
-                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-nowrap">{{ $masa->csg }}</p>
-                            </td>
-                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm whitespace-no-wrap">
-                                <p class="text-gray-900 whitespace-nowrap">{{ $masa->productor_recep }}</p>
-                            </td>
-                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-nowrap">{{ $masa->variedad }}</p>
-                            </td>
-                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm whitespace-no-wrap">
-                                <p class="text-gray-900 whitespace-nowrap ">{{ $masa->envases }}</p>
-                            </td>
-                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-nowrap">{{ $masa->calibre }}</p>
-                            </td>
-                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-nowrap">{{ $masa->cantidad }}</p>
-                            </td>
-                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-nowrap">{{ $masa->peso_caja }}</p>
-                            </td>
-                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-nowrap">{{ $masa->tipo }}</p>
-                            </td>
-                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-nowrap">{{ $masa->color_final }}</p>
-                            </td>
-                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-nowrap">{{ $masa->semana }}</p>
-                            </td>
-                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                              <p class="text-gray-900 whitespace-nowrap">{{ $masa->precio_fob }}</p>
-                          </td>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->planta }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->fecha }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->rut }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm whitespace-no-wrap">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->productor_recep }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->variedad }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->cod_embalaje }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->descripcion }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->envases }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->color }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->calibre }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->calibre_real }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->cantidad }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->peso_prorrateado }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->peso_caja }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->tipo_caja }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->caja_eq5 }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->tipo }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->criterio }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->color_final }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->exportadora }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->norma }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->semana }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->precio_fob }}</p>
+                              </td>
                             
                           
                           
@@ -1391,6 +1435,127 @@
                       <tbody>
                     
                           @foreach ($fobs as $fob)
+                            <tr>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <div class="flex items-center">
+                                
+                                    <div class="ml-3">
+                                      <p class="text-gray-900 whitespace-no-wrap">
+                                        {{$fob->n_variedad}}
+                                      </p>
+                                    </div>
+                                  </div>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap"> {{$fob->semana}}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap"> {{$fob->etiqueta}}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap"> {{$fob->n_calibre}}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap"> {{$fob->color}}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap"> {{$fob->categoria}}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap"> {{$fob->fob_kilo_salida}}</p>
+                              </td>
+                          
+                          
+
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <a href="">
+                                  <span class="relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                                        <span aria-hidden
+                                                            class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
+                                  <span class="relative">Editar</span>
+                                </a>
+                                <span  class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                  <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                                  <span class="relative">Eliminar</span>
+                              </span>
+                                </span>
+                              </td>
+                            </tr>
+                          @endforeach
+                
+                      </tbody>
+                  </table>
+                @endif
+
+                @if ($vista=='FOBNACIONAL')
+
+                  <div class="flex justify-center">
+                      <div>
+                        <h1 class="text-xl font-semibold mb-4">
+                            Por favor selecione el archivo de "FOB Nacional" que desea importar
+                        </h1>
+                        <div class="">
+                            <form action="{{route('temporada.importFobnacional')}}"
+                                method="POST"
+                                class="bg-white rounded p-8 shadow"
+                                enctype="multipart/form-data">
+                                
+                                @csrf
+
+                                <input type="hidden" name="temporada" value={{$temporada->id}}>
+
+                                <x-validation-errors class="errors">
+
+                                </x-validation-errors>
+
+                                <input type="file" name="file" accept=".csv,.xlsx">
+
+                                <x-button class="ml-4">
+                                    Importar
+                                </x-button>
+                            </form>
+
+                        </div>
+                      </div>
+                  </div>
+
+                  <table class="min-w-full leading-normal">
+                      <thead>
+                        <tr>
+                          <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            n_variedad
+                          </th>
+                          <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                          Semana
+                          </th>
+                          <th
+                          class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Etiqueta
+                        </th>
+                        <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      Calibre
+                      </th>
+                      <th
+                      class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Color
+                    </th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                          Categoria
+                          </th>
+                          <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            FOB
+                            </th>
+                      
+                        
+                      
+                      </tr>
+                      </thead>
+                      <tbody>
+                    
+                          @foreach ($fobsnacional as $fob)
                             <tr>
                               <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                 <div class="flex items-center">

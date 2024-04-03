@@ -1264,10 +1264,7 @@
 				@php
 					$totalgastos=0;
 				@endphp
-				@foreach ($gastos as $gasto)
-					@if ($gasto->familia->name=='Cuenta Corriente' && $gasto->item=='Analisis Multiresiduos')
-						@foreach ($detalles as $detalle)
-							@if (preg_replace('/[\.\-\s]+/', '', strtolower($detalle->item))==preg_replace('/[\.\-\s]+/', '', strtolower($gasto->item)))
+				@foreach ($anticipos as $anticipo)
 								
 								<tr>
 								
@@ -1279,11 +1276,7 @@
 								@php
 									$totalgastos+=floatval($detalle->cantidad);
 								@endphp
-								
-							@endif
-						@endforeach
-						
-					@endif
+							
 				@endforeach
 				<tr>
 								

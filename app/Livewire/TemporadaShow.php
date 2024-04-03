@@ -13,6 +13,7 @@ use App\Models\Exportacion;
 use App\Models\Familia;
 use App\Models\Flete;
 use App\Models\Fob;
+use App\Models\Fobnacional;
 use App\Models\Gasto;
 use App\Models\Material;
 use App\Models\Razonsocial;
@@ -76,6 +77,9 @@ class TemporadaShow extends Component
         $fobs=Fob::where('temporada_id',$this->temporada->id)->paginate($this->ctd);
         $fobsall=Fob::where('temporada_id',$this->temporada->id)->get();
 
+        $fobsnacional=Fobnacional::where('temporada_id',$this->temporada->id)->paginate($this->ctd);
+        $fobsallnacional=Fobnacional::where('temporada_id',$this->temporada->id)->get();
+
         $masasbalances=Balancemasa::filter($this->filters)
             ->where('temporada_id', $this->temporada->id)
             ->orderByDesc('updated_at') // Ordenar por precio_fob descendente
@@ -100,7 +104,7 @@ class TemporadaShow extends Component
 
         $familias=Familia::where('status','active')->get();
 
-        return view('livewire.temporada-show',compact('familias','fobsall','embarques','embarquestotal','fletestotal','materialestotal','masastotal','fobs','anticipos','unique_especies','unique_variedades','resumes','CostosPackings','CostosPackingsall','materiales','exportacions','razons','comisions','fletes','masasbalances','razonsall'));
+        return view('livewire.temporada-show',compact('familias','fobsallnacional','fobsall','embarques','embarquestotal','fletestotal','materialestotal','masastotal','fobs','fobsnacional','anticipos','unique_especies','unique_variedades','resumes','CostosPackings','CostosPackingsall','materiales','exportacions','razons','comisions','fletes','masasbalances','razonsall'));
     }
 
     public function set_view($vista){

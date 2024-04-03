@@ -1,6 +1,6 @@
 <div>
         <main class="relative z-0 flex-1 pb-8 px-6 bg-white">
-            <div class="grid pb-10  mt-4 " x-data="{@if($vista=='packing') packing: true @else packing: false @endif, @if($vista=='materiales') materiales: true @else materiales: false @endif, @if($vista=='comision') comision: true @else comision: false @endif, @if($vista=='exportacion') exportacion: true @else exportacion: false @endif, @if($vista=='fletes') fletes: true @else fletes: false @endif, @if($vista=='masas') masas: true @else masas: false @endif, @if($vista=='anticipos') anticipos: true @else anticipos: false @endif ,  @if($vista=='fob') fob: true @else fob: false @endif , @if($vista=='gastos') gastos: true @else gastos: false @endif  }">
+            <div class="grid pb-10  mt-4 " x-data="{@if($vista=='packing') packing: true @else packing: false @endif, @if($vista=='materiales') materiales: true @else materiales: false @endif, @if($vista=='comision') comision: true @else comision: false @endif, @if($vista=='exportacion') exportacion: true @else exportacion: false @endif, @if($vista=='fletes') fletes: true @else fletes: false @endif, @if($vista=='masas') masas: true @else masas: false @endif, @if($vista=='anticipos') anticipos: true @else anticipos: false @endif ,  @if($vista=='fob') fob: true @else fob: false @endif ,  @if($vista=='fobnacional') fobnacional: true @else fobnacional: false @endif , @if($vista=='gastos') gastos: true @else gastos: false @endif  }">
                 <!-- Start Content-->
                 <div class="mb-2 grid grid-cols-12 items-center">
                     <div class="col-span-12 sm:col-span-5 md:col-span-5 lg:col-span-5 xxl:col-span-5">
@@ -23,7 +23,7 @@
                     <div class="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-12 xxl:col-span-12">
                     <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-6 mt-3 gap-x-2">
                         
-                        <div class="p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': packing, 'bg-white': ! packing}" @click="packing = true; materiales = false; comision = false; exportacion = false; fletes = false; masas = false; anticipos = false ;  fob= false ; gastos = false">
+                        <div class="p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': packing, 'bg-white': ! packing}" @click="packing = true; materiales = false; comision = false; exportacion = false; fletes = false; masas = false; anticipos = false ;  fob= false ; gastos = false ; fobnacional = false">
                             
                                 @if ($CostosPackings->count()>0)
                                 <p class="text-xl font-bold"> {{$CostosPackings->count()}} </p>
@@ -34,7 +34,7 @@
                             
                             <p class="text-xs font-semibold text-gray-400">Costos Packing</p>
                         </div>
-                        <div class="p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': materiales, 'bg-white': ! materiales}" @click="packing = false; materiales = true; comision = false; exportacion = false; fletes = false; masas = false; anticipos = false ;  fob= false ; gastos = false">
+                        <div class="p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': materiales, 'bg-white': ! materiales}" @click="packing = false; materiales = true; comision = false; exportacion = false; fletes = false; masas = false; anticipos = false ;  fob= false ; gastos = false ; fobnacional = false">
                                 @if ($materiales->count()>0)
                                 <p class="text-xl font-bold"> {{$materiales->count()}} </p>
                                 @else 
@@ -42,7 +42,7 @@
                                 @endif
                             <p class="text-xs font-semibold text-gray-400">Materiales</p>
                         </div>
-                        <div class="p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': exportacion, 'bg-white': ! exportacion}" @click="packing = false; materiales = false; comision = false; exportacion = true; fletes = false; masas = false; anticipos = false ;  fob= false ; gastos = false">
+                        <div class="p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': exportacion, 'bg-white': ! exportacion}" @click="packing = false; materiales = false; comision = false; exportacion = true; fletes = false; masas = false; anticipos = false ;  fob= false ; gastos = false ; fobnacional = false">
                                 @if ($exportacions->count()>0)
                                     <p class="text-xl font-bold"> {{$exportacions->count()}} </p>
                                 @else 
@@ -51,7 +51,7 @@
                             <p class="text-xs font-semibold text-gray-400">Gastos de Exportación</p>
                         </div>
 
-                        <div class=" p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': fletes, 'bg-white': ! fletes}" @click="packing = false; materiales = false; comision = false; exportacion = false; fletes = true; masas = false; anticipos = false ;  fob= false ; gastos = false">
+                        <div class=" p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': fletes, 'bg-white': ! fletes}" @click="packing = false; materiales = false; comision = false; exportacion = false; fletes = true; masas = false; anticipos = false ;  fob= false ; gastos = false ; fobnacional = false">
                             @if ($fletes->count()>0)
                                 <p class="text-xl font-bold"> {{$fletes->count()}} </p>
                             @else 
@@ -60,7 +60,7 @@
                             <p class="text-xs font-semibold text-gray-400">Flete a Huerto</p>
                         </div>
 
-                        <div class=" p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': comision, 'bg-white': ! comision}" @click="packing = false; materiales = false; comision = true; exportacion = false; fletes = false; masas = false; anticipos = false ;  fob= false ; gastos = false">
+                        <div class=" p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': comision, 'bg-white': ! comision}" @click="packing = false; materiales = false; comision = true; exportacion = false; fletes = false; masas = false; anticipos = false ;  fob= false ; gastos = false ; fobnacional = false">
                             @if ($comisions->count()>0)
                                 <p class="text-xl font-bold"> {{$comisions->count()}} </p>
                             @else 
@@ -70,12 +70,12 @@
                         </div>
                         
                     
-                        <div class=" p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': masas, 'bg-white': ! masas}" @click="packing = false; materiales = false; comision = false; exportacion = false; fletes = false; masas = true ; anticipos = false ;  fob= false ; gastos = false">
+                        <div class=" p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': masas, 'bg-white': ! masas}" @click="packing = false; materiales = false; comision = false; exportacion = false; fletes = false; masas = true ; anticipos = false ;  fob= false ; gastos = false ; fobnacional = false">
                                 <p class="text-xl font-bold">5,700</p>
                                 <p class="text-xs font-semibold text-gray-400">Balance de masas</p>
                         </div>
 
-                        <div class=" p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': anticipos, 'bg-white': ! anticipos}" @click="packing = false; materiales = false; comision = false; exportacion = false; fletes = false; masas = false ; anticipos = true  ; fob = false ; gastos = false">
+                        <div class=" p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': anticipos, 'bg-white': ! anticipos}" @click="packing = false; materiales = false; comision = false; exportacion = false; fletes = false; masas = false ; anticipos = true  ; fob = false ; gastos = false ; fobnacional = false">
                             <p class="text-xl font-bold">
                                 @if ($temporada->anticipos->count()>0)
                                     {{$temporada->anticipos->count()}}
@@ -86,7 +86,7 @@
                             <p class="text-xs font-semibold text-gray-400">Anticipos</p>
                         </div>
 
-                        <div class=" p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': fob , 'bg-white': ! fob }" @click="packing = false; materiales = false; comision = false; exportacion = false; fletes = false; masas = false ; anticipos = false  ; fob = true ; gastos = false">
+                        <div class=" p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': fob , 'bg-white': ! fob }" @click="packing = false; materiales = false; comision = false; exportacion = false; fletes = false; masas = false ; anticipos = false  ; fob = true ; gastos = false ; fobnacional = false">
                             <p class="text-xl font-bold">
                                 @if ($temporada->fobs->count()>0)
                                     {{$temporada->fobs->count()}}
@@ -96,7 +96,19 @@
                             </p>
                             <p class="text-xs font-semibold text-gray-400">FOB</p>
                         </div>
-                        <div class=" p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': gastos , 'bg-white': ! gastos }" @click="packing = false; materiales = false; comision = false; exportacion = false; fletes = false; masas = false ; anticipos = false  ; fob = false ; gastos = true">
+
+                        <div class=" p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': fobnacional , 'bg-white': ! fobnacional }" @click="packing = false; materiales = false; comision = false; exportacion = false; fletes = false; masas = false ; anticipos = false  ; fob = false ; fobnacional = true ; gastos = false">
+                            <p class="text-xl font-bold">
+                                @if ($temporada->fobnacionals->count()>0)
+                                    {{$temporada->fobnacionals->count()}}
+                                @else
+                                    PENDIENTE
+                                @endif
+                            </p>
+                            <p class="text-xs font-semibold text-gray-400">FOB NACIONAL</p>
+                        </div>
+
+                        <div class=" p-4 hover:bg-gray-100 hover:rounded-2xl" :class="{'bg-gray-100 rounded-2xl': gastos , 'bg-white': ! gastos }" @click="packing = false; materiales = false; comision = false; exportacion = false; fletes = false; masas = false ; anticipos = false  ; fob = false ; gastos = true ; fobnacional = false">
                             <p class="text-xl font-bold">
                                 @if ($temporada->gastos->count()>0)
                                     {{$temporada->gastos->count()}}
@@ -316,13 +328,13 @@
                     </div>
                 </div>
 
-                <h1 class="text-xl text-center font-semibold mb-4 ml-4" x-show="fletes">
-                    Por favor selecione el archivo de "Flete a huerto" que desea importar
-                  
-                </h1>
+               
                 <div class="flex justify-center" x-show="fletes">
 
-
+                    <h1 class="text-xl text-center font-semibold mb-4 ml-4" x-show="fletes">
+                        Por favor selecione el archivo de "Flete a huerto" que desea importar
+                    
+                    </h1>
                   
                   
   
@@ -349,72 +361,7 @@
                     
                 </div>
                 
-                    <div class="grid grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 mt-3 hidden">
-                        <div class="relative w-full h-52 bg-cover bg-center group rounded-lg overflow-hidden shadow-lg transition duration-300 ease-in-out"
-                            style="background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f868ecef-4b4a-4ddf-8239-83b2568b3a6b/de7hhu3-3eae646a-9b2e-4e42-84a4-532bff43f397.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Y4NjhlY2VmLTRiNGEtNGRkZi04MjM5LTgzYjI1NjhiM2E2YlwvZGU3aGh1My0zZWFlNjQ2YS05YjJlLTRlNDItODRhNC01MzJiZmY0M2YzOTcuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.R0h-BS0osJSrsb1iws4-KE43bUXHMFvu5PvNfoaoi8o');">
-                            <div class="absolute inset-0 bg-pink-900 bg-opacity-75 transition duration-300 ease-in-out"></div>
-                            <div class="relative w-full h-full px-4 sm:px-6 lg:px-4 flex items-center justify-center">
-                                <div>
-                                <h3 class="text-center text-white text-lg">
-                                    Total Balance
-                                </h3>
-                                <h3 class="text-center text-white text-3xl mt-2 font-bold">
-                                    RM 27,580
-                                </h3>
-                                <div class="flex space-x-4 mt-4">
-                                    <button class="block uppercase mx-auto shadow bg-white text-indigo-600 focus:shadow-outline 
-                                    focus:outline-none text-xs py-3 px-4 rounded font-bold">
-                                    Transfer
-                                    </button>
-                                    <button class="block uppercase mx-auto shadow bg-indigo-800 hover:bg-indigo-700 focus:shadow-outline 
-                                    focus:outline-none text-white text-xs py-3 px-4 rounded font-bold">
-                                    Request
-                                    </button>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="relative w-full h-52 bg-cover bg-center group rounded-lg overflow-hidden shadow-lg transition duration-300 ease-in-out"
-                            style="background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f868ecef-4b4a-4ddf-8239-83b2568b3a6b/de7hhu3-3eae646a-9b2e-4e42-84a4-532bff43f397.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Y4NjhlY2VmLTRiNGEtNGRkZi04MjM5LTgzYjI1NjhiM2E2YlwvZGU3aGh1My0zZWFlNjQ2YS05YjJlLTRlNDItODRhNC01MzJiZmY0M2YzOTcuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.R0h-BS0osJSrsb1iws4-KE43bUXHMFvu5PvNfoaoi8o');">
-                            <div class="absolute inset-0 bg-yellow-600 bg-opacity-75 transition duration-300 ease-in-out"></div>
-                                <div class="relative w-full h-full px-4 sm:px-6 lg:px-4 flex items-center">
-                                <div>
-                                <div class="text-white text-lg flex space-x-2 items-center">
-                                    <div class="bg-white rounded-md p-2 flex items-center">
-                                    <i class="fas fa-toggle-off fa-sm text-yellow-300"></i>
-                                    </div>
-                                    <p>Finished Appt</p>
-                                </div>
-                                <h3 class="text-white text-3xl mt-2 font-bold">
-                                    120
-                                </h3>
-                                <h3 class="text-white text-lg mt-2 text-yellow-100 ">
-                                    4 not confirmed
-                                </h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="relative w-full h-52 bg-cover bg-center group rounded-lg overflow-hidden shadow-lg transition duration-300 ease-in-out"
-                            style="background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f868ecef-4b4a-4ddf-8239-83b2568b3a6b/de7hhu3-3eae646a-9b2e-4e42-84a4-532bff43f397.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Y4NjhlY2VmLTRiNGEtNGRkZi04MjM5LTgzYjI1NjhiM2E2YlwvZGU3aGh1My0zZWFlNjQ2YS05YjJlLTRlNDItODRhNC01MzJiZmY0M2YzOTcuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.R0h-BS0osJSrsb1iws4-KE43bUXHMFvu5PvNfoaoi8o');">
-                            <div class="absolute inset-0 bg-blue-900 bg-opacity-75 transition duration-300 ease-in-out"></div>
-                            <div class="relative w-full h-full px-4 sm:px-6 lg:px-4 flex items-center">
-                                <div>
-                                <div class="text-white text-lg flex space-x-2 items-center">
-                                    <div class="bg-white rounded-md p-2 flex items-center">
-                                    <i class="fas fa-clipboard-check fa-sm text-blue-800"></i>
-                                    </div>
-                                    <p>Finished Appt</p>
-                                </div>
-                                <h3 class="text-white text-3xl mt-2 font-bold">
-                                    72
-                                </h3>
-                                <h3 class="text-white text-lg mt-2 ">
-                                    3.4% <span class='font-semibold text-blue-200'>vs last month</span>
-                                </h3>
-                                </div>
-                            </div>
-                        </div>        
-                    </div>
+                  
 
                 <div class="flex justify-center" x-show="masas">
                     <div>
@@ -482,6 +429,36 @@
                         </h1>
                         <div class="">
                             <form action="{{route('temporada.importFob')}}"
+                                method="POST"
+                                class="bg-white rounded p-8 shadow"
+                                enctype="multipart/form-data">
+                                
+                                @csrf
+
+                                <input type="hidden" name="temporada" value={{$temporada->id}}>
+
+                                <x-validation-errors class="errors">
+
+                                </x-validation-errors>
+
+                                <input type="file" name="file" accept=".csv,.xlsx">
+
+                                <x-button class="ml-4">
+                                    Importar
+                                </x-button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center" x-show="fobnacional">
+                    <div>
+                        <h1 class="text-xl font-semibold mb-4">
+                            Por favor selecione el archivo de "FOB NACIONAL" que desea importar
+                        </h1>
+                        <div class="">
+                            <form action="{{route('temporada.importFobnacional')}}"
                                 method="POST"
                                 class="bg-white rounded p-8 shadow"
                                 enctype="multipart/form-data">

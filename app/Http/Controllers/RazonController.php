@@ -38,13 +38,13 @@ class RazonController extends Controller
         $masas=Balancemasa::all();
 
         foreach($masas as $masa){
-            $razon=Razonsocial::where('csg',$masa->csg)->first();
+            $razon=Razonsocial::where('rut',$masa->rut)->first();
             if ($razon){
 
             }else{
                 if($masa->productor_recep){
                     Razonsocial::create(['name'=>$masa->productor_recep,
-                                    'csg'=>$masa->csg]);
+                                    'rut'=>$masa->rut]);
                 }
             }
        }
