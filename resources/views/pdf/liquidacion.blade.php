@@ -1109,9 +1109,9 @@
 								
 								<tr>
 								
-									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$detalle->fecha}}</td>
-									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$detalle->item}}</td>
-									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($detalle->cantidad,2,',','.')}} USD</td>
+									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 30px;">{{ substr($detalle->fecha, 0, 11) }}</td>
+									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 10px;">{{$detalle->item}}</td>
+									<td style="padding-bottom: 4px; margin-top: 10px;">{{number_format($detalle->cantidad,2,',','.')}} USD</td>
 							
 								</tr>
 								@php
@@ -1125,9 +1125,9 @@
 				@endforeach
 				<tr>
 								
-					<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">TOTAL</td>
-					<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
-					<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalgastos,2,',','.')}} USD</td>
+					<td style="font-weight: bold; padding-bottom: 4px; margin-top: 10px;">TOTAL</td>
+					<td style="font-weight: bold; padding-bottom: 4px; margin-top: 10px;"></td>
+					<td style="font-weight: bold; padding-bottom: 4px; margin-top: 10px;">{{number_format($totalgastos,2,',','.')}} USD</td>
 			
 				</tr>
 			
@@ -1173,9 +1173,9 @@
 								
 								<tr>
 								
-									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$detalle->fecha}}</td>
-									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{$detalle->item}}</td>
-									<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($detalle->cantidad,2,',','.')}} USD</td>
+									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 30px;">{{ substr($detalle->fecha, 0, 11) }}</td>
+									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 10px;">{{$detalle->item}}</td>
+									<td style="padding-bottom: 4px; margin-top: 10px;">{{number_format($detalle->cantidad,2,',','.')}} USD</td>
 							
 								</tr>
 								@php
@@ -1189,9 +1189,9 @@
 				@endforeach
 				<tr>
 								
-					<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">TOTAL</td>
-					<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
-					<td style="border-bottom: 1px solid black; padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalgastos,2,',','.')}} USD</td>
+					<td style="font-weight: bold; padding-bottom: 4px; margin-top: 10px;">TOTAL</td>
+					<td style="font-weight: bold; padding-bottom: 4px; margin-top: 10px;"></td>
+					<td style="font-weight: bold; padding-bottom: 4px; margin-top: 10px;">{{number_format($totalgastos,2,',','.')}} USD</td>
 			
 				</tr>
 			
@@ -1238,7 +1238,7 @@
 								<tr>
 								
 									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 30px;">{{ substr($detalle->fecha, 0, 11) }}</td>
-									<td style="padding-bottom: 4px; margin-top: 10px;">{{$detalle->item}}</td>
+									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 10px;">{{$detalle->item}}</td>
 									<td style="padding-bottom: 4px; margin-top: 10px;">{{number_format($detalle->cantidad,2,',','.')}} USD</td>
 							
 								</tr>
@@ -1253,9 +1253,9 @@
 				@endforeach
 				<tr>
 								
-					<td style="padding-bottom: 4px; margin-top: 10px;">TOTAL</td>
-					<td style="padding-bottom: 4px; margin-top: 10px;"></td>
-					<td style="padding-bottom: 4px; margin-top: 10px;">{{number_format($totalgastos,2,',','.')}} USD</td>
+					<td style="font-weight: bold; padding-bottom: 4px; margin-top: 10px;">TOTAL</td>
+					<td style="font-weight: bold; padding-bottom: 4px; margin-top: 10px;"></td>
+					<td style="font-weight: bold; padding-bottom: 4px; margin-top: 10px;">{{number_format($totalgastos,2,',','.')}} USD</td>
 			
 				</tr>
 			
