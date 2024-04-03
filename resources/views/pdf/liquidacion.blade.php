@@ -473,7 +473,7 @@
 								
 								
 								<td>4J</td>
-								<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto4j,0)}} KGS</td>
+								<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto4j,0,',','.')}} KGS</td>
 								<td>{{number_format($retorno4j,2,',','.')}} USD</td>
 								<td>
 									@if ($pesoneto4j)
@@ -500,7 +500,7 @@
 								
 								
 								<td>3J</td>
-								<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto3j,0)}} KGS</td>
+								<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto3j,0,',','.')}} KGS</td>
 								<td>{{number_format($retorno3j,2,',','.')}} USD</td>
 								<td>
 									@if ($pesoneto3j)
@@ -527,7 +527,7 @@
 								
 								
 								<td>2J</td>
-								<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto2j,0)}} KGS</td>
+								<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto2j,0,',','.')}} KGS</td>
 								<td>{{number_format($retorno2j,2,',','.')}} USD</td>
 								<td>
 									@if ($pesoneto2j)
@@ -555,7 +555,7 @@
 								
 								
 								<td>J</td>
-								<td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;" >{{number_format($pesonetoj,0)}} KGS</td>
+								<td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;" >{{number_format($pesonetoj,0,',','.')}} KGS</td>
 								<td>{{number_format($retornoj,2,',','.')}} USD</td>
 								<td>
 									@if ($pesonetoj)
@@ -584,7 +584,7 @@
 								
 								
 								<td>XL</td>
-								<td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd; " >{{number_format($pesonetoxl,0)}} KGS</td>
+								<td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd; " >{{number_format($pesonetoxl,0,',','.')}} KGS</td>
 								<td>{{number_format($retornoxl,2,',','.')}} USD</td>
 						  		<td>
 									@if ($pesonetoxl)
@@ -613,7 +613,7 @@
 							
 							
 							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
-							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; ">{{number_format($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl,0)}} KGS</td>
+							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; ">{{number_format($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl,0,',','.')}} KGS</td>
 							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($retorno4j+$retorno3j+$retorno2j+$retornoj+$retornoxl,2,',','.')}} USD</td>
 							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno4j+$retorno3j+$retorno2j+$retornoj+$retornoxl)/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
 							
@@ -640,7 +640,7 @@
 					
 					
 					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($pesonetototal)}} KGS</td>
+					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($pesonetototal,0,',','.')}} KGS</td>
 					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl,2,',','.')}} USD</td>
 					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)/$pesonetototal,2,',','.')}} usd/kg</td>
 					
@@ -1056,7 +1056,7 @@
 					
 					
 					<td style=" padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
-					<td style=" padding-bottom: 4px; margin-top: 10px; font-weight: bold;border-left: 1px solid #ddd;">{{number_format($pesonetototal)}} KGS</td>
+					<td style=" padding-bottom: 4px; margin-top: 10px; font-weight: bold;border-left: 1px solid #ddd;">{{number_format($pesonetototal,0,',','.')}} KGS</td>
 					<td style=" padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl+$totalretornol),2,',','.')}} USD</td>
 					<td style=" padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl+$totalretornol)/$pesonetototal,2,',','.')}} usd/kg</td>
 					
