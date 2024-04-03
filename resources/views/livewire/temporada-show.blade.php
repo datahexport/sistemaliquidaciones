@@ -281,7 +281,11 @@
               <h2 @click.on="openMenu = 1"  class="cursor-pointer text-xs text-blue-500 font-semibold mb-4"><-Abrir Menu</h2>
 
 
-              <h2 class="text-2xl font-semibold my-4">Filtros {{$vista}}</h2>
+              <h2 class="text-2xl font-semibold my-4">Filtros {{$vista}} @if ($vista=="MASAS")
+                ({{$masastotal->count()}} Registros)
+            @endif
+          </h2>
+              
               <div class="mb-4 flex">
                 <div>
                   Exportadora:<br>
@@ -611,6 +615,34 @@
                   </div>
                 @endif
                 @if ($vista=='PACKING')
+
+                <div>
+                    <h1 class="text-xl font-semibold mb-4 text-center">
+                        Por favor selecione el archivo de "Costos de packing" que desea importar
+                    </h1>
+                    <div class="flex justify-center">
+                        
+                        <form action="{{route('temporada.importCostosPacking')}}"
+                            method="POST"
+                            class="bg-white rounded p-8 shadow"
+                            enctype="multipart/form-data">
+                            
+                            @csrf
+
+                            <input type="hidden" name="temporada" value={{$temporada->id}}>
+
+                            <x-validation-errors class="errors">
+
+                            </x-validation-errors>
+
+                            <input type="file" name="file" accept=".csv,.xlsx">
+
+                            <x-button class="ml-4">
+                                Importar
+                            </x-button>
+                        </form>
+                    </div>
+                </div>
                 
                   <table class="min-w-full leading-normal">
                     <thead>
@@ -675,13 +707,8 @@
                                                     </div>
                                   <div class="ml-3">
                                     <p class="text-gray-900 whitespace-no-wrap">
-                                      @foreach ($razonsall as $razon)
-                                          @if ($razon->csg==$packing->csg)
-                                            <a href="{{route('razonsocial.show',['razonsocial'=>$razon,'temporada'=>$temporada])}}" target="_blank"> 
                                               {{$packing->n_productor}}
-                                            </a>
-                                          @endif
-                                      @endforeach
+                                          
                                       
                                     </p>
                                   </div>
@@ -1122,6 +1149,7 @@
                                   'planta',
                                   'fecha',
                                   'rut',
+                                  'csg',
                                   'productor_recep',
                                   'variedad',
                                   'cod_embalaje',
@@ -1171,6 +1199,9 @@
                               <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                   <p class="text-gray-900 whitespace-nowrap">{{ $masa->rut }}</p>
                               </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-nowrap">{{ $masa->csg }}</p>
+                            </td>
                               <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm whitespace-no-wrap">
                                   <p class="text-gray-900 whitespace-nowrap">{{ $masa->productor_recep }}</p>
                               </td>

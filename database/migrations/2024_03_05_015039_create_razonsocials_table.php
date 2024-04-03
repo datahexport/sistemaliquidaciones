@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('rut')->nullable();
             $table->string('csg')->nullable();
+            $table->string('informe')->nullable();
+            $table->string('tc')->nullable();
 
             $table->timestamps();
         });

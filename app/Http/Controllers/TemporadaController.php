@@ -310,7 +310,7 @@ class TemporadaController extends Controller
     }
 
     public function fobupdate(Temporada $temporada)
-    {   $masas=Balancemasa::where('temporada_id',$temporada->id)->whereNull('precio_fob')->paginate(5000);
+    {   $masas=Balancemasa::where('temporada_id',$temporada->id)->whereNull('precio_fob')->get();
         $fobsall=Fob::where('temporada_id',$temporada->id)->get();
         $nro=0;
         foreach($masas as $masa){

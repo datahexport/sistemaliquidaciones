@@ -127,31 +127,31 @@
 
                 <div class="flex justify-center" x-show="packing">
                     <div>
-                    <h1 class="text-xl font-semibold mb-4">
-                        Por favor selecione el archivo de "Costos de packing" que desea importar
-                    </h1>
-                    <div class="flex">
-                        
-                        <form action="{{route('temporada.importCostosPacking')}}"
-                            method="POST"
-                            class="bg-white rounded p-8 shadow"
-                            enctype="multipart/form-data">
+                        <h1 class="text-xl font-semibold mb-4">
+                            Por favor selecione el archivo de "Costos de packing" que desea importar
+                        </h1>
+                        <div class="flex">
                             
-                            @csrf
+                            <form action="{{route('temporada.importCostosPacking')}}"
+                                method="POST"
+                                class="bg-white rounded p-8 shadow"
+                                enctype="multipart/form-data">
+                                
+                                @csrf
 
-                            <input type="hidden" name="temporada" value={{$temporada->id}}>
+                                <input type="hidden" name="temporada" value={{$temporada->id}}>
 
-                            <x-validation-errors class="errors">
+                                <x-validation-errors class="errors">
 
-                            </x-validation-errors>
+                                </x-validation-errors>
 
-                            <input type="file" name="file" accept=".csv,.xlsx">
+                                <input type="file" name="file" accept=".csv,.xlsx">
 
-                            <x-button class="ml-4">
-                                Importar
-                            </x-button>
-                        </form>
-                    </div>
+                                <x-button class="ml-4">
+                                    Importar
+                                </x-button>
+                            </form>
+                        </div>
                     </div>
                 </div>
 

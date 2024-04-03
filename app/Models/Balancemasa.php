@@ -24,7 +24,7 @@ class Balancemasa extends Model
         $query->when($filters['razonsocial'] ?? null, function ($query, $serie) {
             $query->where('envases', 'like', '%' . $serie . '%')
                 ->orWhere('productor_recep', 'like', '%' . $serie . '%')
-                ->orWhere('csg', 'like', '%' . $serie . '%');
+                ->orWhere('rut', 'like', '%' . $serie . '%');
         })->when($filters['precioFob'] ?? null, function ($query, $precioFob) {
             if ($precioFob == 'null') {
                 $query->whereNull('precio_fob');

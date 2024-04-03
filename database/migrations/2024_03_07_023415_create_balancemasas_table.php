@@ -42,6 +42,7 @@ return new class extends Migration
             $table->text('exportadora')->nullable();
             $table->text('norma')->nullable();
             $table->text('semana')->nullable(); 
+            $table->text('csg')->nullable(); 
             $table->string('precio_fob')->nullable();         
 
             $table->timestamps();

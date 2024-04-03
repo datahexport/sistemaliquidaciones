@@ -33,7 +33,7 @@ class BalanceImport implements ToCollection, WithStartRow
                     'proceso' => $row[0],
                     'planta' => $row[1],
                     'fecha' => Carbon::instance(Date::excelToDateTimeObject($row[2])),
-                    'rut' => $row[3],
+                    'rut' => preg_replace('/[\.\-\s]+/', '', $row[3]),
                     'productor_recep' => $row[4],
                     'variedad' => $row[5],
                     'cod_embalaje' => $row[6],
@@ -52,7 +52,8 @@ class BalanceImport implements ToCollection, WithStartRow
                     'color_final' => $row[19],
                     'exportadora' => $row[20],
                     'norma' => $row[21],
-                    'semana' => $row[22]
+                    'semana' => $row[22],
+                    'csg' => $row[23]
 
                 ]);
                 

@@ -88,7 +88,7 @@ class TemporadaShow extends Component
             
         $masastotal=Balancemasa::filter($this->filters)->where('temporada_id',$this->temporada->id)->get();
         
-        $unique_productores = $masastotal->pluck('csg')->unique();
+        $unique_productores = $masastotal->pluck('rut')->unique();
 
         $masastotal2=Balancemasados::where('temporada_id',$this->temporada->id)->get();
 
@@ -96,9 +96,9 @@ class TemporadaShow extends Component
 
         $unique_variedades = Variedad::where('temporada_id',$this->temporada->id)->get();
         
-        $razons= Razonsocial::filter($this->filters)->whereIn('csg', $unique_productores)->paginate($this->ctd);
+        $razons= Razonsocial::filter($this->filters)->whereIn('rut', $unique_productores)->paginate($this->ctd);
 
-        $razonsall=Razonsocial::whereIn('csg', $unique_productores)->get();
+        $razonsall=Razonsocial::whereIn('rut', $unique_productores)->get();
 
         $comisions=Comision::all();
 
@@ -150,7 +150,7 @@ class TemporadaShow extends Component
         $masas=Balancemasa::where('temporada_id',$temporada->id)->where('productor_recep',$razonsocial->name)->get();
         $unique_variedades = $masas->pluck('variedad')->unique()->sort();
 
-        $packings=CostoPacking::where('temporada_id',$temporada->id)->where('csg',$razonsocial->csg)->get();
+        $packings=CostoPacking::where('temporada_id',$temporada->id)->where('n_productor',$razonsocial->name)->get();
 
         $comisions=Comision::where('temporada_id',$temporada->id)->where('productor',$razonsocial->name)->get();
 

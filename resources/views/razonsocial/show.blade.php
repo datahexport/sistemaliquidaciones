@@ -31,6 +31,10 @@
                         </a>
                   
                       </div>
+
+                      @livewire('temporada-show', ['temporada' => $temporada, 'vista' => 'MASAS'], key($temporada->id))
+
+
                       <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
                           <div class="flex flex-col">
