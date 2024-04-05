@@ -417,7 +417,7 @@
 					@endphp
 
 					@foreach ($masas as $masa)
-							@if (($masa->calibre=='4J' || $masa->calibre=='4JD' || $masa->calibre=='4JDD') && $masa->variedad==$variedad)
+							@if (($masa->calibre_real=='4J') && $masa->variedad==$variedad)
 									@php
 										$cantidad4j+=floatval($masa->cantidad);
 										$pesoneto4j+=floatval($masa->peso_prorrateado);
@@ -429,7 +429,7 @@
 										$pesonetototal+=floatval($masa->peso_caja)*floatval($masa->cantidad)
 									@endphp	
 							@endif
-							@if (($masa->calibre=='3J' || $masa->calibre=='3JD' || $masa->calibre=='3JDD') && $masa->nariedad==$variedad)
+							@if (($masa->calibre_real=='3J') && $masa->nariedad==$variedad)
 									@php
 										$cantidad3j+=$masa->cantidad;
 										$pesoneto3j+=floatval($masa->peso_prorrateado);
@@ -441,7 +441,7 @@
 										$pesonetototal+=floatval($masa->peso_caja)*floatval($masa->cantidad)
 									@endphp	
 							@endif
-							@if (($masa->calibre=='2J' || $masa->calibre=='2JD' || $masa->calibre=='2JDD') && $masa->variedad==$variedad)
+							@if (($masa->calibre_real=='2J') && $masa->variedad==$variedad)
 									@php
 										$cantidad2j+=$masa->cantidad;
 										$pesoneto2j+=floatval($masa->peso_prorrateado);
@@ -453,7 +453,7 @@
 										$pesonetototal+=floatval($masa->peso_caja)*floatval($masa->cantidad)
 									@endphp	
 							@endif
-							@if (($masa->calibre=='J' || $masa->calibre=='JD' || $masa->calibre=='JDD') && $masa->variedad==$variedad)
+							@if (($masa->calibre_real=='J') && $masa->variedad==$variedad)
 									@php
 										$cantidadj+=$masa->cantidad;
 											$pesonetoj+=floatval($masa->peso_prorrateado);
@@ -465,7 +465,7 @@
 											$pesonetototal+=floatval($masa->peso_caja)*floatval($masa->cantidad)
 									@endphp	
 							@endif
-							@if (($masa->calibre=='XL' || $masa->calibre=='XLD' || $masa->calibre=='XLDD') && $masa->variedad==$variedad)
+							@if (($masa->calibre_real=='XL') && $masa->variedad==$variedad)
 									@php
 										$cantidadxl+=$masa->cantidad;
 										$pesonetoxl+=floatval($masa->peso_prorrateado);
@@ -479,6 +479,7 @@
 							@endif
 						
 					@endforeach
+					@if ($cantidad4j+$cantidad3j+$cantidad2j+$cantidadj+$cantidadxl>0)
 						
 						@if ($pesoneto4j>0)
 							<tr>
@@ -619,7 +620,7 @@
 								$calibrecount+=1;
 							@endphp
 						@endif
-				
+					@endif
 					@if ($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl>0)
 						
 						<tr>
