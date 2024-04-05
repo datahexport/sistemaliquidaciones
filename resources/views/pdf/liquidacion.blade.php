@@ -420,7 +420,7 @@
 							@if (($masa->calibre=='4J' || $masa->calibre=='4JD' || $masa->calibre=='4JDD') && $masa->variedad==$variedad)
 									@php
 										$cantidad4j+=floatval($masa->cantidad);
-										$pesoneto4j+=floatval($masa->peso_caja)*floatval($masa->cantidad);
+										$pesoneto4j+=floatval($masa->peso_prorrateado);
 										if (!IS_NULL($masa->precio_fob)) {
                                     	  $retorno4j+=floatval($masa->peso_caja)*floatval($masa->cantidad)*floatval($masa->precio_fob);
                                     	  $totalretorno4j+=floatval($masa->peso_caja)*floatval($masa->cantidad)*floatval($masa->precio_fob);
@@ -432,7 +432,7 @@
 							@if (($masa->calibre=='3J' || $masa->calibre=='3JD' || $masa->calibre=='3JDD') && $masa->nariedad==$variedad)
 									@php
 										$cantidad3j+=$masa->cantidad;
-										$pesoneto3j+=floatval($masa->peso_caja)*floatval($masa->cantidad);
+										$pesoneto3j+=floatval($masa->peso_prorrateado);
 										if (!IS_NULL($masa->precio_fob)) {
                                     	  $retorno3j+=floatval($masa->peso_caja)*floatval($masa->cantidad)*floatval($masa->precio_fob);
                                     	  $totalretorno3j+=floatval($masa->peso_caja)*floatval($masa->cantidad)*floatval($masa->precio_fob);
@@ -444,7 +444,7 @@
 							@if (($masa->calibre=='2J' || $masa->calibre=='2JD' || $masa->calibre=='2JDD') && $masa->variedad==$variedad)
 									@php
 										$cantidad2j+=$masa->cantidad;
-										$pesoneto2j+=floatval($masa->peso_caja)*floatval($masa->cantidad);
+										$pesoneto2j+=floatval($masa->peso_prorrateado);
 										if (!IS_NULL($masa->precio_fob)) {
                                     	  $retorno2j+=floatval($masa->peso_caja)*floatval($masa->cantidad)*floatval($masa->precio_fob);
                                     	  $totalretorno2j+=floatval($masa->peso_caja)*floatval($masa->cantidad)*floatval($masa->precio_fob);
@@ -456,7 +456,7 @@
 							@if (($masa->calibre=='J' || $masa->calibre=='JD' || $masa->calibre=='JDD') && $masa->variedad==$variedad)
 									@php
 										$cantidadj+=$masa->cantidad;
-											$pesonetoj+=floatval($masa->peso_caja)*floatval($masa->cantidad);
+											$pesonetoj+=floatval($masa->peso_prorrateado);
 											if (!IS_NULL($masa->precio_fob)) {
 											$retornoj+=floatval($masa->peso_caja)*floatval($masa->cantidad)*floatval($masa->precio_fob);
 											$totalretornoj+=floatval($masa->peso_caja)*floatval($masa->cantidad)*floatval($masa->precio_fob);
@@ -468,7 +468,7 @@
 							@if (($masa->calibre=='XL' || $masa->calibre=='XLD' || $masa->calibre=='XLDD') && $masa->variedad==$variedad)
 									@php
 										$cantidadxl+=$masa->cantidad;
-										$pesonetoxl+=floatval($masa->peso_caja)*floatval($masa->cantidad);
+										$pesonetoxl+=floatval($masa->peso_prorrateado);
 										if (!IS_NULL($masa->precio_fob)) {
                                     	  $retornoxl+=floatval($masa->peso_caja)*floatval($masa->cantidad)*floatval($masa->precio_fob);
                                     	  $totalretornoxl+=floatval($masa->peso_caja)*floatval($masa->cantidad)*floatval($masa->precio_fob);
