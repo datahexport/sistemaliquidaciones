@@ -546,7 +546,7 @@
 					@endphp
 
 					@foreach ($gastos as $gasto)
-							@if ($gasto->familia->name=='Costos' && $gasto->item=='Otros costos')
+							@if ($gasto->familia->name=='Costos' && $gasto->item=='Otros costoss')
 								@foreach ($detalles as $detalle)
 									@if (preg_replace('/[\.\-\s]+/', '', strtolower($detalle->item))==preg_replace('/[\.\-\s]+/', '', strtolower($gasto->item)))
 										@php
