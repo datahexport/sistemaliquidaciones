@@ -15,10 +15,12 @@ class Fobnacional extends Model
         return $this->belongsTo('App\Models\Temporada');
     }
 
-    public function scopeCalibre($query,$calibre){
-        $query->when($calibre ?? null,function($query,$calibre){
-            $query->where('n_calibre','like','%'.$calibre.'%')->orwhere('etiqueta','like','%'.$calibre.'%');
+    public function scopeFilter($query,$filters){
+        $query->when($filters['razonsocial'] ?? null,function($query,$search){
+            $query->where('n_calibre','like','%'.$search.'%')
+            ->orwhere('etiqueta','like','%'.$search.'%');
+        })->when($filters['variedad'] ?? null,function($query,$variedad){
+            $query->where('n_variedad',$variedad);
         });
     }
-    
 }

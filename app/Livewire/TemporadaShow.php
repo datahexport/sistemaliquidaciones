@@ -76,10 +76,10 @@ class TemporadaShow extends Component
         $fletes=Flete::where('temporada_id',$this->temporada->id)->paginate($this->ctd);
         $fletestotal=Flete::where('temporada_id',$this->temporada->id)->get();
         
-        $fobs=Fob::where('temporada_id',$this->temporada->id)->paginate($this->ctd);
-        $fobsall=Fob::where('temporada_id',$this->temporada->id)->get();
+        $fobs=Fob::filter($this->filters)->where('temporada_id',$this->temporada->id)->paginate($this->ctd);
+        $fobsall=Fob::filter($this->filters)->where('temporada_id',$this->temporada->id)->get();
 
-        $fobsnacional=Fobnacional::where('temporada_id',$this->temporada->id)->paginate($this->ctd);
+        $fobsnacional=Fobnacional::filter($this->filters)->where('temporada_id',$this->temporada->id)->paginate($this->ctd);
         $fobsallnacional=Fobnacional::where('temporada_id',$this->temporada->id)->get();
 
         $masasbalances=Balancemasa::filter($this->filters)
