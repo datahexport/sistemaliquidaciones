@@ -887,7 +887,7 @@
 										$pesonetototal+=floatval($masa->peso_caja)*floatval($masa->cantidad)
 									@endphp	
 							@endif
-							@if (($masa->calibre=='L' || $masa->calibre=='LD' || $masa->calibre=='LDD') && $masa->variedad==$variedad)
+							@if (($masa->calibre_real=='L') && $masa->variedad==$variedad)
 								@php
 									$cantidadl+=$masa->cantidad;
 									$pesonetol+=floatval($masa->peso_caja)*floatval($masa->cantidad);
