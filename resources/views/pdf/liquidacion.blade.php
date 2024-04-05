@@ -150,6 +150,7 @@
 					$totalpesoneto2j=0;
 					$totalpesonetoj=0;
 					$totalpesonetoxl=0;
+					$totalfrutanacional=0;
 				@endphp
 				@foreach ($unique_variedades as $variedad)
 					@php
@@ -266,7 +267,11 @@
 										
 									@endphp	
 							@endif
-							
+							@if ($masa->precio_fob>0)
+								@php
+									$totalfrutanacional+=$masa->precio_fob*$masa->peso_prorrateado;
+								@endphp
+							@endif
 							
 						@endif
 						
@@ -1407,7 +1412,7 @@
 								<tr>
 								
 									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 10px;">RESULTADO COMERCIALIZACIÓN FRUTA MERCADO INTERNO</td>
-									<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10">{{number_format(1000,2)}} USD</td>
+									<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10">{{number_format($totalfrutanacional,2)}} USD</td>
 							
 								</tr>
 								<tr>
