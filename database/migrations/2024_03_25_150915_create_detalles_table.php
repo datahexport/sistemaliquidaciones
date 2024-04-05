@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('item')->nullable();
             $table->string('fecha')->nullable();
             $table->string('cantidad')->nullable();
+            $table->string('variedad')->nullable();
 
             $table->timestamps();
         });

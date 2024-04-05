@@ -36,7 +36,8 @@ class GastoImport implements ToCollection, WithStartRow
                     'n_productor'=> $row[2],
                     'item'=> $row[3],
                     'fecha'=>  Carbon::instance(Date::excelToDateTimeObject($row[4])),
-                    'cantidad'=> $row[5]
+                    'cantidad'=> $row[5],
+                    'variedad'=> $row[6]
                    
                 ]);
             }
