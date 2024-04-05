@@ -95,16 +95,16 @@
                                             @php
                                               if ($masa->variedad==$item->name) {
                                                 $cajasbulto+=$masa->cantidad;
-                                                $pesoneto+=floatval($masa->peso_caja)*floatval($masa->cantidad);
+                                                $pesoneto+=floatval($masa->peso_prorrateado);
                                                 $globalcajasbulto+=$masa->cantidad;
-                                                $globalpesoneto+=floatval($masa->peso_caja)*floatval($masa->cantidad);
+                                                $globalpesoneto+=floatval($masa->peso_prorrateado);
                                                 
                                                 if (!IS_NULL($masa->precio_fob)) {
-                                                  $ventafob+=floatval($masa->peso_caja)*floatval($masa->cantidad)*floatval($masa->precio_fob);
-                                                  $globalventafob+=floatval($masa->peso_caja)*floatval($masa->cantidad)*floatval($masa->precio_fob);
+                                                  $ventafob+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
+                                                  $globalventafob+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
                                                 } else {
-                                                  $kgsp+=floatval($masa->peso_caja)*floatval($masa->cantidad);
-                                                  $globalkgsp+=floatval($masa->peso_caja)*floatval($masa->cantidad);
+                                                  $kgsp+=floatval($masa->peso_prorrateado);
+                                                  $globalkgsp+=floatval($masa->peso_prorrateado);
                                                 }
                                                 
                                                  
@@ -319,19 +319,7 @@
                    
                   </select>
                 </div>
-                <div class="ml-4">
-                  Categoria:<br>
-                  <select wire:model.live="filters.ncategoria" name="" id="" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-40">
-                    <option value="">Todos</option>
-                    <option value="Exportacion">Exportación</option>
-                    <option value="Mercado Interno Exportacion">MI exportación</option>
-                    <option value="Exportacion">Exportación</option>
-                    <option value="Mercado Nacional">Mercado Nacional</option>
-                    <option value="Desecho">Desecho</option>
-                    
-                   
-                  </select>
-                </div>
+              
                 @if ($vista=='MASAS')
                   <div class="ml-4">
                     Precio_fob:<br>
@@ -346,15 +334,23 @@
                 @endif
                   <div class="ml-4">
                     Norma:<br>
-                    <select wire:model.live="filters.norma" name="" id="" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-40">
-                      <option value="">Todos</option>
-                      
-                        <option value="DENTRO DE NORMA">DENTRO DE NORMA</option>
-                        <option value="FUERA DE NORMA">FUERA DE NORMA</option>
-                        <option value="MERCADO INTERNO">MERCADO INTERNO</option>
-                      
-                    
-                    </select>
+                    <div>
+                      <input type="checkbox" wire:model.live="filters.norma" id="norma" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                      <label for="norma">DENTRO DE NORMA</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" wire:model.live="filters.fnorma" id="fnorma" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        <label for="fnorma">FUERA DE NORMA</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" wire:model.live="filters.mi" id="mi" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        <label for="mi">MERCADO INTERNO</label>
+                    </div>
+                  
+
+
+
+
                   </div>
               
 

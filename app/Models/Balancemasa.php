@@ -29,10 +29,31 @@ class Balancemasa extends Model
             if ($precioFob == 'null') {
                 $query->whereNull('precio_fob');
             }
-        })->when($filters['ncategoria'] ?? null, function ($query, $nCategoria) {
-            $query->where('n_categoria_st', $nCategoria);
-        })->when($filters['norma'] ?? null, function ($query, $norma) {
-            $query->where('norma', $norma);
+        })->when($filters['variedad'] ?? null, function ($query, $variedad) {
+            $query->where('variedad',$variedad);
+        })->when($filters['norma'] || $filters['fnorma']  || $filters['mi'], function ($query) use ($filters) {
+            $query->where(function ($query) use ($filters) {
+                if ($filters['norma'] && $filters['fnorma'] && $filters['mi']) {
+                    $query->orWhere('norma', 'DENTRO DE NORMA')
+                          ->orWhere('norma', 'FUERA DE NORMA')
+                          ->orWhere('norma', 'MERCADO INTERNO');
+                }elseif ($filters['norma'] && $filters['fnorma']) {
+                    $query->orwhere('norma', 'DENTRO DE NORMA')
+                            ->orWhere('norma', 'FUERA DE NORMA');
+                }elseif ($filters['norma'] && $filters['mi']) {
+                    $query->orwhere('norma', 'DENTRO DE NORMA')
+                        ->orwhere('norma', 'MERCADO INTERNO');
+                }elseif ($filters['fnorma'] && $filters['mi']) {
+                    $query->orwhere('norma', 'FUERA DE NORMA')
+                        ->orwhere('norma', 'MERCADO INTERNO');
+                }elseif ($filters['norma']) {
+                    $query->where('norma', 'DENTRO DE NORMA');
+                }elseif ($filters['fnorma']) {
+                    $query->where('norma', 'FUERA DE NORMA');
+                }elseif ($filters['mi']) {
+                    $query->where('norma', 'MERCADO INTERNO');
+                }
+            });
         });
     }
     
