@@ -370,8 +370,10 @@ class TemporadaController extends Controller
                     }
                  } else {
                     foreach ($fobnacionalsall->where('n_variedad',$masa->variedad)->where('semana',$masa->semana) as $fob){
-                    
-                        if ($fob->n_calibre==$masa->calibre_real && strtolower($fob->color)==strtolower($masa->color_final)){
+                        if ($masa->calibre_real=='MER' || $masa->calibre_real=='DES') {
+                            $masa->update(['precio_fob'=>0]);
+                            $nro+=1;
+                        } elseif ($fob->n_calibre==$masa->calibre_real && strtolower($fob->color)==strtolower($masa->color_final)){
                                 $masa->update(['precio_fob'=>$fob->fob_kilo_salida]);
                                 $nro+=1;
                         break;
