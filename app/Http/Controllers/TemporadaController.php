@@ -373,7 +373,7 @@ class TemporadaController extends Controller
                         if ($masa->calibre_real=='MER' || $masa->calibre_real=='DES') {
                             $masa->update(['precio_fob'=>0]);
                             $nro+=1;
-                        } elseif ($fob->n_calibre==$masa->calibre_real && strtolower($fob->color)==strtolower($masa->color_final)){
+                        } elseif ($fob->n_calibre==$masa->calibre_real){
                                 $masa->update(['precio_fob'=>$fob->fob_kilo_salida]);
                                 $nro+=1;
                         break;
