@@ -269,7 +269,7 @@
 							@endif
 							@if ($masa->precio_fob>0)
 								@php
-									$totalfrutanacional+=$masa->precio_fob*$masa->peso_prorrateado;
+									$totalfrutanacional+=$masa->peso_prorrateado;
 								@endphp
 							@endif
 							
