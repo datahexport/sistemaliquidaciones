@@ -1221,7 +1221,7 @@
 				@endif
 				
 				@php
-					$totalfueradenorma=(($totalretornol)*0.92-($totalcostopacking+$globaltotalmateriales));
+					$totalfueradenorma=$retornofueradenorma;
 				@endphp
 					
 
