@@ -554,7 +554,7 @@
 								</td>
 								<td>
 									@if ($pesoneto4j)
-										{{number_format($retorno4j/$pesoneto4j,2,',','.')}} USD/kg
+										{{number_format(($retorno4j*0.92-($costopacking*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales4j))/$pesoneto4j,2,',','.')}} USD/kg
 									@else
 										0 USD/kg
 									@endif
@@ -582,7 +582,7 @@
 								</td>
 								<td>
 									@if ($pesoneto3j)
-										{{number_format($retorno3j/$pesoneto3j,2,',','.')}} USD/kg
+										{{number_format(($retorno3j*0.92-($costopacking*($pesoneto3j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales3j))/$pesoneto3j,2,',','.')}} USD/kg
 									@else
 										0 USD/kg
 									@endif
@@ -610,7 +610,7 @@
 								</td>
 								<td>
 									@if ($pesoneto2j)
-										{{number_format($retorno2j/$pesoneto2j,2,',','.')}} USD/kg
+										{{number_format(($retorno2j*0.92-($costopacking*($pesoneto2j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales2j))/$pesoneto2j,2,',','.')}} USD/kg
 									@else
 										0 USD/kg
 									@endif
@@ -639,7 +639,7 @@
 								</td>
 								<td>
 									@if ($pesonetoj)
-										{{number_format($retornoj/$pesonetoj,2,',','.')}} USD/kg
+										{{number_format(($retornoj*0.92-($costopacking*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesj))/$pesonetoj,2,',','.')}} USD/kg
 									@else
 										0 USD/kg
 									@endif
@@ -669,7 +669,7 @@
 								</td>
 						  		<td>
 									@if ($pesonetoxl)
-										{{number_format($retornoxl/$pesonetoxl,2,',','.')}} USD/kg
+										{{number_format(($retornoxl*0.92-($costopacking*($pesonetoxl/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesxl))/$pesonetoxl,2,',','.')}} USD/kg
 									@else
 										0 USD/kg
 									@endif
