@@ -267,9 +267,15 @@
 										
 									@endphp	
 							@endif
-							@if ($masa->precio_fob>0)
+
+							@if ($masa->precio_fob>0 && $masa->variedad==$variedad)
 								@php
-									$totalfrutanacional+=$masa->peso_prorrateado;
+									if ($masa->peso_caja>0) {
+										$totalfrutanacional+=floatval($masa->peso_caja)*floatval($masa->cantidad)*floatval($masa->precio_fob);
+									} else {
+										$totalfrutanacional+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
+									}
+									
 								@endphp
 							@endif
 							
