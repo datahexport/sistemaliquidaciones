@@ -726,7 +726,7 @@
 				@endif
 
 				@php
-					$totaldentrodenorma=$totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl;
+					$totaldentrodenorma=(($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalcostopacking+$globaltotalmateriales));
 				@endphp
 					
 
