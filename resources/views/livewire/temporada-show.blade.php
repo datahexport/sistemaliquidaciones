@@ -266,6 +266,16 @@
             </a>
           </div>
     @endif
+    @php
+        $globalpesoneto=0;
+    @endphp
+    @foreach ($masastotal as $masa)
+      @php
+       
+          $globalpesoneto+=floatval($masa->peso_prorrateado);
+        
+      @endphp
+    @endforeach
 
     <section id="informacion">
     <div class="flex w-full bg-gray-300 mt-2"  @if ($vista=="resumes") x-data="{openMenu: 2}" @else x-data="{openMenu: 1}" @endif >
@@ -281,9 +291,10 @@
               <h2 @click.on="openMenu = 1"  class="cursor-pointer text-xs text-blue-500 font-semibold mb-4"><-Abrir Menu</h2>
 
 
-              <h2 class="text-2xl font-semibold my-4">Filtros {{$vista}} @if ($vista=="MASAS")
-                ({{$masastotal->count()}} Registros)
-            @endif
+              <h2 class="text-2xl font-semibold my-4">Filtros {{$vista}} 
+             
+                ({{$masastotal->count()}} Registros) ({{number_format($globalpesoneto,0)}} KGS)
+             
           </h2>
               
               <div class="mb-4 flex">
