@@ -429,7 +429,7 @@
 										$pesonetototal+=floatval($masa->peso_caja)*floatval($masa->cantidad)
 									@endphp	
 							@endif
-							@if (($masa->calibre_real=='3J') && $masa->nariedad==$variedad)
+							@if (($masa->calibre_real=='3J') && $masa->variedad==$variedad)
 									@php
 										$cantidad3j+=$masa->cantidad;
 										$pesoneto3j+=floatval($masa->peso_prorrateado);
