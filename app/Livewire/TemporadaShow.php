@@ -43,6 +43,7 @@ class TemporadaShow extends Component
         'toDate'=>'',
         'precioFob'=>'',
         'ncategoria'=>'',
+        'norma'=>'',
     ];
 
     #[Url]

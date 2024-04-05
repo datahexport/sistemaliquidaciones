@@ -31,6 +31,8 @@ class Balancemasa extends Model
             }
         })->when($filters['ncategoria'] ?? null, function ($query, $nCategoria) {
             $query->where('n_categoria_st', $nCategoria);
+        })->when($filters['norma'] ?? null, function ($query, $norma) {
+            $query->where('norma', $norma);
         });
     }
     

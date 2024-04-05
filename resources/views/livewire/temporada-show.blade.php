@@ -344,6 +344,19 @@
                     </select>
                   </div>
                 @endif
+                  <div class="ml-4">
+                    Norma:<br>
+                    <select wire:model.live="filters.norma" name="" id="" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-40">
+                      <option value="">Todos</option>
+                      
+                        <option value="DENTRO DE NORMA">DENTRO DE NORMA</option>
+                        <option value="FUERA DE NORMA">FUERA DE NORMA</option>
+                        <option value="MERCADO INTERNO">MERCADO INTERNO</option>
+                      
+                    
+                    </select>
+                  </div>
+              
 
                 @if ($vista=='PACKING')
                   <div class="ml-auto p-3 shadow-lg rounded-lg bg-white">
@@ -1113,9 +1126,11 @@
                       <h1 class="text-xl font-semibold mb-4 ml-4">
                         Por favor selecione el archivo de "Balance de masas" que desea importar. {{$masastotal->count()}}
                       </h1>
-                      <h1 class="text-xl font-semibold mb-4 ml-4">
-                        Fecha de importación: {{$masastotal->first()->created_at}}
-                      </h1>
+                      @if ($masastotal->count()>0)
+                        <h1 class="text-xl font-semibold mb-4 ml-4">
+                          Fecha de importación: {{$masastotal->first()->created_at}}
+                        </h1>
+                      @endif
                       
                           <form action="{{route('temporada.importBalance')}}"
                               method="POST"
@@ -1260,7 +1275,11 @@
                                   <p class="text-gray-900 whitespace-nowrap">{{ $masa->semana }}</p>
                               </td>
                               <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->precio_fob }}</p>
+                                @if ($masaid==$masa->id)
+                                    <input wire:model="preciomasa" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none">
+                                @else
+                                  <p class="text-gray-900 whitespace-no-wrap">{{ $masa->precio_fob }}</p>
+                                @endif
                               </td>
                             
                           
