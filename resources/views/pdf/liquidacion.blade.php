@@ -635,7 +635,7 @@
 								
 								<td>J</td>
 								<td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;" >{{number_format($pesonetoj,0,',','.')}} KGS</td>
-								<td>{{number_format(($retornoj*0.92-$costopacking*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl)+$totalmaterialesj)),2,',','.')}} USD
+								<td>{{number_format(($retornoj*0.92-($costopacking*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesj)),2,',','.')}} USD
 								</td>
 								<td>
 									@if ($pesonetoj)
