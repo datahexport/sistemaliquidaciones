@@ -427,6 +427,9 @@
 						$totalmaterialesj=0;
 						$totalmaterialesxl=0;
 
+						$otroscostos=0;
+						$totalotroscostos=0;
+
 					@endphp
 
 					@foreach ($masas as $masa)
@@ -542,6 +545,21 @@
                         	}
 					@endphp
 
+					@foreach ($gastos as $gasto)
+							@if ($gasto->familia->name=='Costos' && $gasto->item=='Otros costos')
+								@foreach ($detalles as $detalle)
+									@if (preg_replace('/[\.\-\s]+/', '', strtolower($detalle->item))==preg_replace('/[\.\-\s]+/', '', strtolower($gasto->item)))
+										@php
+											$otroscostos+=floatval($detalle->cantidad);
+											$totalotroscostos+=floatval($detalle->cantidad);
+										@endphp
+										
+									@endif
+								@endforeach
+								
+							@endif
+					@endforeach
+
 					@if ($cantidad4j+$cantidad3j+$cantidad2j+$cantidadj+$cantidadxl>0)
 						
 						@if ($pesoneto4j>0)
@@ -558,7 +576,7 @@
 								
 								<td>4J</td>
 								<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto4j,0,',','.')}} KGS</td>
-								<td>{{number_format(($retorno4j*0.92-($costopacking*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmateriales4j)),2,',','.')}} USD 
+								<td>{{number_format(($retorno4j*0.92-(($costopacking+$otroscostos)*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmateriales4j)),2,',','.')}} USD 
 									
 								</td>
 								<td>
@@ -587,7 +605,7 @@
 								
 								<td>3J</td>
 								<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto3j,0,',','.')}} KGS</td>
-								<td>{{number_format(($retorno3j*0.92-($costopacking*($pesoneto3j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmateriales3j)),2,',','.')}} USD
+								<td>{{number_format(($retorno3j*0.92-(($costopacking+$otroscostos)*($pesoneto3j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmateriales3j)),2,',','.')}} USD
 								</td>
 								<td>
 									@if ($pesoneto3j)
@@ -615,7 +633,7 @@
 								
 								<td>2J</td>
 								<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto2j,0,',','.')}} KGS</td>
-								<td>{{number_format(($retorno2j*0.92-($costopacking*($pesoneto2j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmateriales2j)),2,',','.')}} USD
+								<td>{{number_format(($retorno2j*0.92-(($costopacking+$otroscostos)*($pesoneto2j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmateriales2j)),2,',','.')}} USD
 								</td>
 								<td>
 									@if ($pesoneto2j)
@@ -644,7 +662,7 @@
 								
 								<td>J</td>
 								<td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;" >{{number_format($pesonetoj,0,',','.')}} KGS</td>
-								<td>{{number_format(($retornoj*0.92-($costopacking*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesj)),2,',','.')}} USD
+								<td>{{number_format(($retornoj*0.92-(($costopacking+$otroscostos)*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesj)),2,',','.')}} USD
 								</td>
 								<td>
 									@if ($pesonetoj)
@@ -674,7 +692,7 @@
 								
 								<td>XL</td>
 								<td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd; " >{{number_format($pesonetoxl,0,',','.')}} KGS</td>
-								<td>{{number_format(($retornoxl*0.92-($costopacking*($pesonetoxl/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesxl)),2,',','.')}} USD
+								<td>{{number_format(($retornoxl*0.92-(($costopacking+$otroscostos)*($pesonetoxl/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesxl)),2,',','.')}} USD
 								</td>
 						  		<td>
 									@if ($pesonetoxl)
@@ -698,10 +716,10 @@
 							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">Total {{$variedad}}</td>
 							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
 							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; ">{{number_format($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl,0,',','.')}} KGS</td>
-							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($retorno4j*0.92-($costopacking*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales4j))+($retorno3j*0.92-($costopacking*($pesoneto3j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales3j))+($retorno2j*0.92-($costopacking*($pesoneto2j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales2j))+($retornoj*0.92-($costopacking*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesj))+($retornoxl*0.92-($costopacking*($pesonetoxl/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesxl))),2,',','.')}} USD 
+							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($retorno4j*0.92-(($costopacking+$otroscostos)*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales4j))+($retorno3j*0.92-(($costopacking+$otroscostos)*($pesoneto3j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales3j))+($retorno2j*0.92-(($costopacking+$otroscostos)*($pesoneto2j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales2j))+($retornoj*0.92-(($costopacking+$otroscostos)*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesj))+($retornoxl*0.92-(($costopacking+$otroscostos)*($pesonetoxl/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesxl))),2,',','.')}} USD 
 							
 						</td>
-							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($retorno4j*0.92-($costopacking*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales4j))+($retorno3j*0.92-($costopacking*($pesoneto3j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales3j))+($retorno2j*0.92-($costopacking*($pesoneto2j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales2j))+($retornoj*0.92-($costopacking*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesj))+($retornoxl*0.92-($costopacking*($pesonetoxl/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesxl)))/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
+							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($retorno4j*0.92-(($costopacking+$otroscostos)*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales4j))+($retorno3j*0.92-(($costopacking+$otroscostos)*($pesoneto3j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales3j))+($retorno2j*0.92-(($costopacking+$otroscostos)*($pesoneto2j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales2j))+($retornoj*0.92-(($costopacking+$otroscostos)*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesj))+($retornoxl*0.92-(($costopacking+$otroscostos)*($pesonetoxl/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesxl)))/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
 							
 						</tr>
 					@endif
@@ -727,16 +745,16 @@
 					
 					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
 					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($pesonetototal,0,',','.')}} KGS</td>
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalcostopacking+$globaltotalmateriales)),2,',','.')}} USD
+					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalotroscostos+$totalcostopacking+$globaltotalmateriales)),2,',','.')}} USD
 					
 					</td>
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalcostopacking+$globaltotalmateriales))/$pesonetototal,2,',','.')}} usd/kg</td>
+					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalotroscostos+$totalcostopacking+$globaltotalmateriales))/$pesonetototal,2,',','.')}} usd/kg</td>
 					
 				</tr>
 				@endif
 
 				@php
-					$totaldentrodenorma=(($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalcostopacking+$globaltotalmateriales));
+					$totaldentrodenorma=(($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalotroscostos+$totalcostopacking+$globaltotalmateriales));
 				@endphp
 					
 

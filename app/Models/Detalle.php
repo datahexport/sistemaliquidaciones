@@ -14,4 +14,11 @@ class Detalle extends Model
     public function temporada(){
         return $this->belongsTo('App\Models\Temporada');
     }
+
+    public function scopeFilter($query,$filters){
+        $query->when($filters['razonsocial'] ?? null,function($query,$serie){
+            $query->where('n_productor','like','%'.$serie.'%')->orwhere('item','like','%'.$serie.'%')->orwhere('rut','like','%'.$serie.'%');
+        });
+    }
+
 }

@@ -1826,7 +1826,7 @@
                       </form>
                   </div>
 
-                  @if ($temporada->detalles->count()>0)
+                  @if ($detalles->count()>0)
                     <table class="min-w-full leading-normal">
                         <thead>
                           <tr>
@@ -1864,7 +1864,7 @@
                         </thead>
                         <tbody>
                       
-                            @foreach ($temporada->detalles as $detalle)
+                            @foreach ($detalles as $detalle)
                               <tr>
                                 <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                   <div class="flex items-center">
