@@ -312,6 +312,7 @@ class TemporadaController extends Controller
     public function fobupdate(Temporada $temporada)
     {   $masas=Balancemasa::where('temporada_id',$temporada->id)->whereNull('precio_fob')->get();
         $fobsall=Fob::where('temporada_id',$temporada->id)->get();
+        $fobnacionalsall=Fobnacional::where('temporada_id',$temporada->id)->get();
         $nro=0;
         foreach($masas as $masa){
                 $calibre='';
@@ -358,15 +359,25 @@ class TemporadaController extends Controller
                     }
                 }
 
-                foreach ($fobsall->where('n_variedad',$masa->variedad)->where('semana',$masa->semana) as $fob){
-                
-                    if ($fob->n_calibre==$masa->calibre_real && strtolower($fob->color)==strtolower($masa->color_final)){
-                            $masa->update(['precio_fob'=>$fob->fob_kilo_salida]);
-                            $nro+=1;
-                       break;
+                if ($masa->criterio=='EXPORTACIÓN') {
+                    foreach ($fobsall->where('n_variedad',$masa->variedad)->where('semana',$masa->semana) as $fob){
+                    
+                        if ($fob->n_calibre==$masa->calibre_real && strtolower($fob->color)==strtolower($masa->color_final)){
+                                $masa->update(['precio_fob'=>$fob->fob_kilo_salida]);
+                                $nro+=1;
+                        break;
+                        }
                     }
-
-                }
+                 } else {
+                    foreach ($fobnacionalsall->where('n_variedad',$masa->variedad)->where('semana',$masa->semana) as $fob){
+                    
+                        if ($fob->n_calibre==$masa->calibre_real && strtolower($fob->color)==strtolower($masa->color_final)){
+                                $masa->update(['precio_fob'=>$fob->fob_kilo_salida]);
+                                $nro+=1;
+                        break;
+                        }
+                    }
+                 }
                
 
        }
