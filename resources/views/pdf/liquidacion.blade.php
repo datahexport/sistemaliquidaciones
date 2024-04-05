@@ -717,11 +717,10 @@
 					
 					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
 					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($pesonetototal,0,',','.')}} KGS</td>
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl,2,',','.')}} USD
-						( {{$totalcostopacking}} C.P)
-						({{$globaltotalmateriales}} C.M)
+					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalcostopacking+$globaltotalmateriales)),2,',','.')}} USD
+					
 					</td>
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)/$pesonetototal,2,',','.')}} usd/kg</td>
+					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalcostopacking+$globaltotalmateriales))/$pesonetototal,2,',','.')}} usd/kg</td>
 					
 				</tr>
 				@endif
