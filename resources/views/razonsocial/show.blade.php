@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     
-    <div class="container pb-8 pt-2">
+    <div class=" pb-8 pt-2">
     
       <div class="card">
         <div class="px-2 md:px-6 py-4">
@@ -115,48 +115,79 @@
                                   </tr>
                                   </thead>
                                   <tbody>
+                                    @php
+                                        $totalpack=0;
+                                    @endphp
                                     
                                       @foreach ($packings as $packing)
-                                        <tr>
+                                          <tr>
                                           
-                                          <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                            <p class="text-gray-900 whitespace-no-wrap"> {{$packing->variedad}}</p>
-                                          </td>
-                                          <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                            <div class="flex items-center">
-                                             
-                                                <div class="ml-3">
-                                                  <p class="text-gray-900 whitespace-no-wrap">
-                                                    {{$packing->n_productor}}
-                                                  </p>
+                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                              <p class="text-gray-900 whitespace-no-wrap"> {{$packing->variedad}}</p>
+                                            </td>
+                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                              <div class="flex items-center">
+                                              
+                                                  <div class="ml-3">
+                                                    <p class="text-gray-900 whitespace-no-wrap">
+                                                      {{$packing->n_productor}}
+                                                    </p>
+                                                  </div>
                                                 </div>
-                                              </div>
-                                          </td>
-                                          <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                            <p class="text-gray-900 whitespace-no-wrap"> {{$packing->csg}}</p>
-                                          </td>
-                                          <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                            <p class="text-gray-900 whitespace-no-wrap">
-                                              {{$packing->kg}}
-                                            </p>
-                                          </td>
-                                          <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                            <p class="text-gray-900 whitespace-no-wrap">
-                                            
-                                              {{number_format($packing->total_usd,2)}}
-                                            </p>
-                                          </td>
-              
-                                          <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                            <span
-                                                                  class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                                                  <span aria-hidden
-                                                                      class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                            <span class="relative">Activo</span>
-                                            </span>
-                                          </td>
-                                        </tr>
+                                            </td>
+                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                              <p class="text-gray-900 whitespace-no-wrap"> {{$packing->csg}}</p>
+                                            </td>
+                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                              <p class="text-gray-900 whitespace-no-wrap">
+                                                {{$packing->kg}}
+                                              </p>
+                                            </td>
+                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                              <p class="text-gray-900 whitespace-no-wrap">
+                                              
+                                                {{number_format($packing->total_usd,2)}}
+                                              </p>
+                                            </td>
+                
+                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                              <span
+                                                                    class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                                                    <span aria-hidden
+                                                                        class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                              <span class="relative">Activo</span>
+                                              </span>
+                                            </td>
+                                          </tr>
+
+                                          @php
+                                              $totalpack+=$packing->total_usd;
+                                          @endphp
                                       @endforeach
+                                      <tr>
+                                          
+                                        <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                          <p class="text-gray-900 whitespace-no-wrap">TOTAL</p>
+                                        </td>
+                                        <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                        
+                                        </td>
+                                        <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                        </td>
+                                        <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                        
+                                        </td>
+                                        <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                          <p class="text-gray-900 whitespace-no-wrap">
+                                          
+                                            {{number_format($totalpack,2)}}
+                                          </p>
+                                        </td>
+            
+                                        <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                         
+                                        </td>
+                                      </tr>
                                   
                                   </tbody>
                                 </table>
@@ -382,6 +413,8 @@
                                                 @if (preg_replace('/[\.\-\s]+/', '', strtolower($detalle->item))==preg_replace('/[\.\-\s]+/', '', strtolower($gasto->item)))
                                                   @php
                                                     $otroscostos+=floatval($detalle->cantidad);
+                                                    $totalotroscostos+=($otroscostos)*(($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl)/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol));
+                                                   
                                                     
                                                   @endphp
                                                   
@@ -638,9 +671,13 @@
                                         
                                         <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
                                         <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($pesonetototal,0,',','.')}} KGS</td>
-                                        <td> </td>
+                                        <td>{{number_format($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl,2)}} usd</td>
+                                        <td>{{number_format(($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.08,2)}} usd</td>
                                         <td>
                                           {{number_format(($totalcostopacking),2)}}
+                                        </td>
+                                        <td>
+                                          {{number_format(($totalotroscostos),2)}}
                                         </td>
                                         <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalotroscostos+$totalcostopacking+$globaltotalmateriales)),2,',','.')}} USD 
                                        

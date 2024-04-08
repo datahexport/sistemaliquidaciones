@@ -36,7 +36,7 @@ Route::middleware([
 
 Route::get('lista/filtros',[RazonController::class,'index'])->name('razonsocial.index');
 
-Route::get('productor/{razonsocial}/{temporada}',[RazonController::class,'show'])->name('razonsocial.show');
+Route::get('productor/{razonsocial}/{temporada}',[RazonController::class,'show'])->middleware('auth')->name('razonsocial.show');
 
 Route::get('razon/sync',[RazonController::class,'razonsync'])->name('razonsync');
 
@@ -50,27 +50,27 @@ Route::resource('familia', FamiliaController::class)->names('familias');
 
 Route::resource('gasto', GastoController::class)->names('gastos');
 
-Route::get('temporada/{temporada}/resumen',[TemporadaController::class,'resume'])->name('temporada.resume');
+Route::get('temporada/{temporada}/resumen',[TemporadaController::class,'resume'])->middleware('auth')->name('temporada.resume');
 
-Route::get('temporada/{temporada}/packing',[TemporadaController::class,'packing'])->name('temporada.packing');
+Route::get('temporada/{temporada}/packing',[TemporadaController::class,'packing'])->middleware('auth')->name('temporada.packing');
 
-Route::get('temporada/{temporada}/comision',[TemporadaController::class,'comision'])->name('temporada.comision');
+Route::get('temporada/{temporada}/comision',[TemporadaController::class,'comision'])->middleware('auth')->name('temporada.comision');
 
-Route::get('temporada/{temporada}/materiales',[TemporadaController::class,'materiales'])->name('temporada.materiales');
+Route::get('temporada/{temporada}/materiales',[TemporadaController::class,'materiales'])->middleware('auth')->name('temporada.materiales');
 
-Route::get('temporada/{temporada}/exportacion',[TemporadaController::class,'exportacion'])->name('temporada.exportacion');
+Route::get('temporada/{temporada}/exportacion',[TemporadaController::class,'exportacion'])->middleware('auth')->name('temporada.exportacion');
 
-Route::get('temporada/{temporada}/flete',[TemporadaController::class,'flete'])->name('temporada.flete');
+Route::get('temporada/{temporada}/flete',[TemporadaController::class,'flete'])->middleware('auth')->name('temporada.flete');
 
-Route::get('balance/{temporada}/masa',[TemporadaController::class,'balancemasa'])->name('temporada.balancemasa');
+Route::get('balance/{temporada}/masa',[TemporadaController::class,'balancemasa'])->middleware('auth')->name('temporada.balancemasa');
 
-Route::get('balance/{temporada}/fob',[TemporadaController::class,'fob'])->name('temporada.fob');
+Route::get('balance/{temporada}/fob',[TemporadaController::class,'fob'])->middleware('auth')->name('temporada.fob');
 
-Route::get('balance/{temporada}/fobnacional',[TemporadaController::class,'fobnacional'])->name('temporada.fobnacional');
+Route::get('balance/{temporada}/fobnacional',[TemporadaController::class,'fobnacional'])->middleware('auth')->name('temporada.fobnacional');
 
-Route::get('temporada/{temporada}/otrosgastos',[TemporadaController::class,'otrosgastos'])->name('temporada.otrosgastos');
+Route::get('temporada/{temporada}/otrosgastos',[TemporadaController::class,'otrosgastos'])->middleware('auth')->name('temporada.otrosgastos');
 
-Route::get('temporada/{temporada}/finanzas',[TemporadaController::class,'finanzas'])->name('temporada.finanzas');
+Route::get('temporada/{temporada}/finanzas',[TemporadaController::class,'finanzas'])->middleware('auth')->name('temporada.finanzas');
 
 Route::get('temporada/{temporada}/anticipos',[TemporadaController::class,'anticipos'])->name('temporada.anticipos');
 
