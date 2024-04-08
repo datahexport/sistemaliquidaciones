@@ -555,6 +555,7 @@
 										@php
 											$otroscostos+=floatval($detalle->cantidad);
 											$totalotroscostos+=floatval($detalle->cantidad);
+											break;
 										@endphp
 										
 									@endif
