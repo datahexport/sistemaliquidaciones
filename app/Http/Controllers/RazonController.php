@@ -8,6 +8,8 @@ use App\Models\Comision;
 use App\Models\CostoPacking;
 use App\Models\Flete;
 use App\Models\Fob;
+use App\Models\Gasto;
+use App\Models\Material;
 use App\Models\Razonsocial;
 use App\Models\Temporada;
 use App\Models\Variedad;
@@ -87,14 +89,16 @@ class RazonController extends Controller
         $fletes=Flete::where('temporada_id',$temporada->id)->get();
         $packings=CostoPacking::where('temporada_id',$temporada->id)->where('csg',$razonsocial->csg)->get();
         $comisions=Comision::where('temporada_id',$temporada->id)->where('productor',$razonsocial->name)->get();
-        $unique_calibres = $masas->pluck('n_calibre')->unique()->sort();
-        $unique_variedades = $masas->pluck('n_variedad')->unique()->sort();
+        $unique_calibres = $masas->pluck('calibre')->unique()->sort();
+        $unique_variedades = $masas->pluck('variedad')->unique()->sort();
         $variedades = Variedad::whereIn('name', $unique_variedades)->get();
 
         $unique_semanas = $masas->pluck('semana')->unique()->sort();
         $fobs = Fob::where('temporada_id',$temporada->id)->get();
+        $materialestotal=Material::where('temporada_id',$temporada->id)->get();
+        $gastos = Gasto::where('temporada_id',$temporada->id)->get();
 
-        return view('razonsocial.show',compact('variedades','unique_semanas','fobs','unique_variedades','unique_calibres','razonsocial','temporada','masas','masas2','packings','comisions','fletes'));
+        return view('razonsocial.show',compact('gastos','materialestotal','variedades','unique_semanas','fobs','unique_variedades','unique_calibres','razonsocial','temporada','masas','masas2','packings','comisions','fletes'));
     }
 
     /**
