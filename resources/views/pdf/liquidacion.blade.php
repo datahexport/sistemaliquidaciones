@@ -398,7 +398,7 @@
 						$globaltotalmateriales=0;
 
 						$totalotroscostos=0;
-						
+
 				@endphp
 				@foreach ($unique_variedades as $variedad)
 					@php
@@ -751,7 +751,7 @@
 					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalotroscostos+$totalcostopacking+$globaltotalmateriales)),2,',','.')}} USD 
 					
 					</td>
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalotroscostos+$totalcostopacking+$globaltotalmateriales))/$pesonetototal,2,',','.')}} usd/kg </td>
+					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalotroscostos+$totalcostopacking+$globaltotalmateriales))/$pesonetototal,2,',','.')}} usd/kg {{$totalotroscostos}}</td>
 					
 				</tr>
 				@endif
