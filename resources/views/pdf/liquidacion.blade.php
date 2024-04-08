@@ -576,7 +576,7 @@
 								
 								<td>4J</td>
 								<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto4j,0,',','.')}} KGS</td>
-								<td>{{number_format(($retorno4j*0.92-(($costopacking+$otroscostos)*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmateriales4j)),2,',','.')}} USD  {{$otroscostos}}
+								<td>{{number_format(($retorno4j*0.92-(($costopacking+$otroscostos)*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmateriales4j)),2,',','.')}} USD  
 									
 								</td>
 								<td>
