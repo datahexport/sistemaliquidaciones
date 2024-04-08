@@ -398,7 +398,7 @@
 						$globaltotalmateriales=0;
 
 						$totalotroscostos=0;
-
+						
 				@endphp
 				@foreach ($unique_variedades as $variedad)
 					@php
@@ -751,7 +751,7 @@
 					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalotroscostos+$totalcostopacking+$globaltotalmateriales)),2,',','.')}} USD 
 					
 					</td>
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalotroscostos+$totalcostopacking+$globaltotalmateriales))/$pesonetototal,2,',','.')}} usd/kg {{$totalotroscostos}}u</td>
+					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalotroscostos+$totalcostopacking+$globaltotalmateriales))/$pesonetototal,2,',','.')}} usd/kg </td>
 					
 				</tr>
 				@endif
@@ -836,6 +836,8 @@
 						$totalcostopacking=0;
 
 						$globaltotalmateriales=0;
+
+						$totalotroscostos=0;
 				@endphp
 				@foreach ($unique_variedades as $variedad)
 					@php
@@ -866,7 +868,6 @@
 						$totalmaterialesl=0;
 
 						$otroscostos=0;
-						$totalotroscostos=0;
 
 					@endphp
 
@@ -1191,10 +1192,10 @@
 								
 								<td>L</td>
 								<td style="border-left: 1px solid #ddd;">{{$pesonetol}} KGS</td>
-								<td>{{number_format(($retornol*0.92-($costopacking*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesl)) ,2,',','.')}} USD</td>
+								<td>{{number_format(($retornol*0.92-(($costopacking+$otroscostos)*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesl)) ,2,',','.')}} USD</td>
 						  		<td>
 									@if ($pesonetol)
-										{{number_format(($retornol*0.92-($costopacking*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesl))/$pesonetol,2,',','.')}} USD/kg
+										{{number_format(($retornol*0.92-(($costopacking+$otroscostos)*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesl))/$pesonetol,2,',','.')}} USD/kg
 									@else
 										0 USD/kg
 									@endif
