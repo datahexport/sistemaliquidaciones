@@ -1222,8 +1222,8 @@
 							
 							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
 							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; border-left: 1px solid #ddd;  ">{{$pesonetol}} KGS</td>
-							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retornol*0.92-($costopacking*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesl)),2,',','.')}} USD</td>
-							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retornol*0.92-($costopacking*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesl))/($pesonetol),2,',','.')}} USD/KG</td>
+							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retornol*0.92-(($costopacking+$otroscostos)*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesl)),2,',','.')}} USD</td>
+							<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retornol*0.92-(($costopacking+$otroscostos)*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesl))/($pesonetol),2,',','.')}} USD/KG</td>
 							
 						</tr>
 						
@@ -1231,7 +1231,7 @@
 
 						@php
 							$variedadcount+=1;
-							$retornofueradenorma+=($retornol*0.92-($costopacking*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesl));
+							$retornofueradenorma+=($retornol*0.92-(($costopacking+$otroscostos)*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesl));
 						@endphp
 					
 				
