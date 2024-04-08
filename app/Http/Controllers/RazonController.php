@@ -6,6 +6,7 @@ use App\Models\Balancemasa;
 use App\Models\Balancemasados;
 use App\Models\Comision;
 use App\Models\CostoPacking;
+use App\Models\Detalle;
 use App\Models\Flete;
 use App\Models\Fob;
 use App\Models\Gasto;
@@ -98,7 +99,9 @@ class RazonController extends Controller
         $materialestotal=Material::where('temporada_id',$temporada->id)->get();
         $gastos = Gasto::where('temporada_id',$temporada->id)->get();
 
-        return view('razonsocial.show',compact('gastos','materialestotal','variedades','unique_semanas','fobs','unique_variedades','unique_calibres','razonsocial','temporada','masas','masas2','packings','comisions','fletes'));
+        $detalles=Detalle::where('temporada_id',$temporada->id)->where('n_productor',$razonsocial->name)->get();
+
+        return view('razonsocial.show',compact('detalles','gastos','materialestotal','variedades','unique_semanas','fobs','unique_variedades','unique_calibres','razonsocial','temporada','masas','masas2','packings','comisions','fletes'));
     }
 
     /**
