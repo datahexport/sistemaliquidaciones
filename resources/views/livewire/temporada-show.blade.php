@@ -80,7 +80,7 @@
                                 Comision
                               </th>
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
-                                Total Frio Packing
+                                Frio Packing
                               </th>
                               {{-- comment
                                 <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
@@ -94,7 +94,7 @@
                                 Otros Costos
                               </th>
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
-                                Total Materiales
+                               Materiales
                               </th>
                              
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
