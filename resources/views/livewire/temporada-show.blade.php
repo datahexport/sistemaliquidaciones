@@ -223,7 +223,7 @@
                                                 {{number_format($cajasbulto)}}
                                             </div>    
                                         </td>
-                                        
+
                                         <td class="px-6 py-0 whitespace-nowrap">
                                           <div class="text-sm text-gray-900">{{number_format($pesoneto)}}</div>    
                                         </td>
@@ -240,7 +240,7 @@
                                           <div class="text-sm text-gray-900">{{number_format($ventafob,2,'.','.')}} </div>    
                                         </td>
                                         <td class="px-6 py-0 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">{{number_format($ventafob*(0.08) ,2,'.','.')}}</div>    
+                                            <div class="text-sm text-gray-900">{{number_format($ventafobexp*(0.08) ,2,'.','.')}}</div>    
                                         </td>
                                         <td class="px-6 py-0 whitespace-nowrap">
                                           <div class="text-sm text-gray-900">{{number_format($costopacking ,2,'.','.')}}</div>    
@@ -301,7 +301,7 @@
                                       <div class="text-sm text-gray-900">{{number_format($globalventafob,2,'.','.')}}</div>    
                                     </td>
                                     <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
-                                        <div class="text-sm text-gray-900">{{number_format($globalventafob*(0.08) ,2,'.','.')}}</div>    
+                                        <div class="text-sm text-gray-900">{{number_format($globalventafobexp*(0.08) ,2,'.','.')}}</div>    
                                     </td>
                                     <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
                                       <div class="text-sm text-gray-900">{{number_format($globalcostopacking ,2,'.','.')}}</div>    
