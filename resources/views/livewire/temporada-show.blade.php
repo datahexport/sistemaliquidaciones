@@ -76,26 +76,27 @@
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
                                 Total Fob
                               </th>
-                              <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
+                              {{-- comment<th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
                                 Comision
                               </th>
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
                                 Frio Packing
                               </th>
-                              {{-- comment
+                              
                                 <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
                                   Total Gastos de Exportacion
                                 </th>
                                 <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
-                                Total Flete a puerto
+                                  Total Flete a puerto
+                                </th>
+                                <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
+                                  Materiales
                                 </th>
                                --}}
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
-                                Otros Costos
+                                Costos Exportación
                               </th>
-                              <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
-                               Materiales
-                              </th>
+                             
                              
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
                               Retorno Productor
@@ -244,22 +245,24 @@
                                         <td class="px-6 py-0 whitespace-nowrap">
                                             <div class="text-sm text-gray-900">{{number_format($ventafobexp*(0.08) ,2,'.','.')}}</div>    
                                         </td>
+                                         {{-- comment
+                                        
                                         <td class="px-6 py-0 whitespace-nowrap">
                                           <div class="text-sm text-gray-900">{{number_format($costopacking ,2,'.','.')}}</div>    
                                         </td>
-                                        {{-- comment
                                           <td class="px-6 py-0 whitespace-nowrap">
                                             <div class="text-sm text-gray-900">{{number_format($gastoexportacion,2,'.','.')}}</div>    
                                           </td>
                                           <td class="px-6 py-0 whitespace-nowrap">
                                             <div class="text-sm text-gray-900">{{number_format($fletehuerto,2,'.','.')}}</div>    
                                           </td>
-                                         --}}
                                         <td class="px-6 py-0 whitespace-nowrap">
                                           <div class="text-sm text-gray-900">{{number_format($globaltotalotroscostos*($pesoneto/$masatotal),2,'.','.')}}</div>    
                                         </td>
+                                          --}}
+
                                         <td class="px-6 py-0 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">{{number_format($totalmateriales,2,'.','.')}}</div>    
+                                          <div class="text-sm text-gray-900">{{number_format($totalmateriales+$costopacking+($globaltotalotroscostos*($pesoneto/$masatotal)),2,'.','.')}}</div>    
                                         </td>
                                         <td class="px-6 py-0 whitespace-nowrap">
                                           <div class="text-sm text-gray-900">{{number_format(($ventafob-($ventafob*(0.08)+$costopacking+$gastoexportacion+$fletehuerto+$totalmateriales)),2,'.','.')}}</div>    
@@ -307,23 +310,25 @@
                                     <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
                                         <div class="text-sm text-gray-900">{{number_format($globalventafobexp*(0.08) ,2,'.','.')}}</div>    
                                     </td>
+                                   
+                                    {{-- comment 
                                     <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
                                       <div class="text-sm text-gray-900">{{number_format($globalcostopacking ,2,'.','.')}}</div>    
                                     </td>
-                                    {{-- comment
                                       <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
                                         <div class="text-sm text-gray-900">{{number_format($globalgastoexportacion,2,'.','.')}}</div>    
                                       </td>
                                       <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
                                         <div class="text-sm text-gray-900">{{number_format($globalfletehuerto)}}</div>    
                                       </td>
-                                     --}}
-                                    <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
-                                      <div class="text-sm text-gray-900">{{number_format($globaltotalotroscostos,2,'.','.')}}</div>    
-                                    </td>
-                                    <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
+                                       <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
                                       <div class="text-sm text-gray-900">{{number_format($globaltotalmateriales,2,'.','.')}}</div>    
                                     </td>
+                                     --}}
+                                    <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
+                                      <div class="text-sm text-gray-900">{{number_format($globaltotalotroscostos+$globaltotalmateriales+$globalcostopacking,2,'.','.')}}</div>    
+                                    </td>
+                                   
                                     <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
                                       <div class="text-sm text-gray-900">{{number_format(($globalventafob-($globalventafob*(0.08)+$globalcostopacking+$globalgastoexportacion+$globalfletehuerto+$globaltotalmateriales)),2,'.','.')}}</div>    
                                     </td>
