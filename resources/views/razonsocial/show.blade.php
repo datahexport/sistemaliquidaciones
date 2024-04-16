@@ -333,9 +333,8 @@
                                       
                                       <th>Ingresos</th>
                                       <th>Comision</th>
-                                      <th>Costo Packing</th>
-                                      <th>Otros Costos</th>
-                                      <th>Materiales</th>
+                                      <th>Costo</th>
+                                     
                                       <th>Retorno Neto Productor</th>
                                       
                                       <th>NPK</th>
@@ -374,6 +373,13 @@
                                           $totalretorno2j=0;
                                           $totalretornoj=0;
                                           $totalretornoxl=0;
+
+                                          $totalmargen4j=0;
+                                          $totalmargen3j=0;
+                                          $totalmargen2j=0;
+                                          $totalmargenj=0;
+                                          $totalmargenxl=0;
+
                                           $totalcostopacking=0;
                                           $globaltotalmateriales=0;
 
@@ -381,6 +387,12 @@
                               
                                           $globaltotalotroscostos=0;
                                           $totalcount=0;
+
+                                          $totalcostos4j=0;
+                                          $totalcostos3j=0;
+                                          $totalcostos2j=0;
+                                          $totalcostosj=0;
+                                          $totalcostosxl=0;
                                           
                                       @endphp
                                       @foreach ($unique_variedades as $variedad)
@@ -424,6 +436,12 @@
                                           $retorno2j=0;
                                           $retornoj=0;
                                           $retornoxl=0;
+
+                                          $margen4j=0;
+                                          $margen3j=0;
+                                          $margen2j=0;
+                                          $margenj=0;
+                                          $margenxl=0;
                               
                                           $costopacking=0;
                               
@@ -432,6 +450,12 @@
                                           $totalmateriales2j=0;
                                           $totalmaterialesj=0;
                                           $totalmaterialesxl=0;
+
+                                          $costos4j=0;
+                                          $costos3j=0;
+                                          $costos2j=0;
+                                          $costosj=0;
+                                          $costosxl=0;
                               
                                           $otroscostos=0;
                                           $totalotroscostos=0;
@@ -448,10 +472,16 @@
                                                 @php
                                                   $cantidad4j+=floatval($masa->cantidad);
                                                   $pesoneto4j+=floatval($masa->peso_prorrateado);
-                                                  if (!IS_NULL($masa->precio_fob)) {
-                                                                      $retorno4j+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
-                                                                      $totalretorno4j+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
-                                                                    }
+                                                  $margen4j+=floatval($masa->margen);
+                                                  $totalmargen4j+=floatval($masa->margen);
+
+                                                  $costos4j+=floatval($masa->costo);
+                                                  $totalcostos4j+=floatval($masa->costo);
+                                                  
+                                                  if (!IS_NULL($masa->fob)) {
+                                                      $retorno4j+=floatval($masa->fob);
+                                                      $totalretorno4j+=floatval($masa->fob);
+                                                    }
                                                   $cantidadtotal+=floatval($masa->cantidad);
                                                   $pesonetototal+=floatval($masa->peso_prorrateado);
                                                 
@@ -468,9 +498,15 @@
                                                 @php
                                                   $cantidad3j+=$masa->cantidad;
                                                   $pesoneto3j+=floatval($masa->peso_prorrateado);
-                                                  if (!IS_NULL($masa->precio_fob)) {
-                                                                      $retorno3j+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
-                                                                      $totalretorno3j+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
+                                                  $margen3j+=floatval($masa->margen);
+                                                  $totalmargen3j+=floatval($masa->margen);
+
+                                                  $costos3j+=floatval($masa->costo);
+                                                  $totalcostos3j+=floatval($masa->costo);
+
+                                                  if (!IS_NULL($masa->fob)) {
+                                                                      $retorno3j+=floatval($masa->fob);
+                                                                      $totalretorno3j+=floatval($masa->fob);
                                                                     }
                                                   $cantidadtotal+=$masa->cantidad;
                                                   $pesonetototal+=floatval($masa->peso_prorrateado);
@@ -486,9 +522,15 @@
                                                 @php
                                                   $cantidad2j+=$masa->cantidad;
                                                   $pesoneto2j+=floatval($masa->peso_prorrateado);
-                                                  if (!IS_NULL($masa->precio_fob)) {
-                                                                      $retorno2j+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
-                                                                      $totalretorno2j+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
+                                                  $margen2j+=floatval($masa->margen);
+                                                  $totalmargen2j+=floatval($masa->margen);
+
+                                                  $costos2j+=floatval($masa->costo);
+                                                  $totalcostos2j+=floatval($masa->costo);
+
+                                                  if (!IS_NULL($masa->fob)) {
+                                                                      $retorno2j+=floatval($masa->fob);
+                                                                      $totalretorno2j+=floatval($masa->fob);
                                                                     }
                                                   $cantidadtotal+=$masa->cantidad;
                                                   $pesonetototal+=floatval($masa->peso_prorrateado);
@@ -504,9 +546,15 @@
                                                 @php
                                                   $cantidadj+=$masa->cantidad;
                                                     $pesonetoj+=floatval($masa->peso_prorrateado);
-                                                    if (!IS_NULL($masa->precio_fob)) {
-                                                    $retornoj+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
-                                                    $totalretornoj+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
+                                                    $margenj+=floatval($masa->margen);
+                                                    $totalmargenj+=floatval($masa->margen);
+
+                                                    $costosj+=floatval($masa->costo);
+                                                    $totalcostosj+=floatval($masa->costo);
+
+                                                    if (!IS_NULL($masa->fob)) {
+                                                      $retornoj+=floatval($masa->fob);
+                                                      $totalretornoj+=floatval($masa->fob);
                                                     }
                                                     $cantidadtotal+=$masa->cantidad;
                                                     $pesonetototal+=floatval($masa->peso_prorrateado);
@@ -522,9 +570,14 @@
                                                 @php
                                                   $cantidadxl+=$masa->cantidad;
                                                   $pesonetoxl+=floatval($masa->peso_prorrateado);
-                                                  if (!IS_NULL($masa->precio_fob)) {
-                                                                      $retornoxl+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
-                                                                      $totalretornoxl+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
+                                                  $margenxl+=floatval($masa->margen);
+                                                  $totalmargenxl+=floatval($masa->margen);
+                                                  $costosxl+=floatval($masa->costo);
+                                                  $totalcostosxl+=floatval($masa->costo);
+
+                                                  if (!IS_NULL($masa->fob)) {
+                                                                      $retornoxl+=floatval($masa->fob);
+                                                                      $totalretornoxl+=floatval($masa->fob);
                                                                     }
                                                   $cantidadtotal+=$masa->cantidad;
                                                   $pesonetototal+=floatval($masa->peso_prorrateado);
@@ -567,8 +620,6 @@
                                                 @if (preg_replace('/[\.\-\s]+/', '', strtolower($detalle->item))==preg_replace('/[\.\-\s]+/', '', strtolower($gasto->item)))
                                                   @php
                                                     $otroscostos+=abs(floatval($detalle->cantidad));
-                                                   
-                                                    
                                                   @endphp
                                                   
                                                 @endif
@@ -595,23 +646,18 @@
                                               <td>4J</td>
                                               <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto4j,0,',','.')}} KGS</td>
                                               <td>{{number_format(($retorno4j),2,',','.')}}
-                                              <td>{{number_format(($retorno4j*0.08),2,',','.')}}
+                                              <td>{{number_format(($margen4j),2,',','.')}}
                                               </td>
+                                             
                                               <td>
-                                                {{number_format(($costopacking)*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol)),2)}}
+                                                {{number_format($costos4j,2)}}
                                               </td>
-                                              <td>
-                                                {{number_format(($totalotroscostos)*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol)),2)}}
-                                              </td>
-                                              <td>
-                                                {{number_format($totalmateriales4j,2)}}
-                                              </td>
-                                              <td>{{number_format(($retorno4j*0.92-(($costopacking+$totalotroscostos)*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmateriales4j)),2,',','.')}} USD  
+                                              <td>{{number_format(($retorno4j+$margen4j+$costos4j),2,',','.')}} USD  
                                               </td>
                                               
                                               <td>
                                                 @if ($pesoneto4j)
-                                                  {{number_format(($retorno4j*0.92-(($costopacking+$totalotroscostos)*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmateriales4j))/$pesoneto4j,2,',','.')}} USD/kg
+                                                  {{number_format(($retorno4j+$margen4j+$costos4j)/$pesoneto4j,2,',','.')}} USD/kg
                                                 @else
                                                   0 USD/kg
                                                 @endif
@@ -632,23 +678,15 @@
                                               <td>3J</td>
                                               <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto3j,0,',','.')}} KGS</td>
                                               <td>{{number_format(($retorno3j),2,',','.')}}
-                                              <td>{{number_format(($retorno3j*0.08),2,',','.')}}
+                                              <td>{{number_format(($margen3j),2,',','.')}}
                                               </td>
                                               <td>
-                                                {{number_format(($costopacking)*($pesoneto3j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol)),2)}}
+                                                {{number_format($costos3j,2)}}
                                               </td>
-                                              <td>
-                                                {{number_format(($totalotroscostos)*($pesoneto3j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol)),2)}}
-                                              </td>
-                                              <td>
-                                                {{number_format($totalmateriales3j,2)}}
-                                              </td>
-                                              <td>{{number_format(($retorno3j*0.92-(($costopacking+$totalotroscostos)*($pesoneto3j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmateriales3j)),2,',','.')}} USD
-                                              </td>
-                                             
+                                              <td>{{number_format(($retorno3j+$margen3j+$costos3j),2,',','.')}} USD  
                                               <td>
                                                 @if ($pesoneto3j)
-                                                  {{number_format(($retorno3j*0.92-(($costopacking+$totalotroscostos)*($pesoneto3j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmateriales3j))/$pesoneto3j,2,',','.')}} USD/kg
+                                                  {{number_format(($retorno3j+$margen3j+$costos3j)/$pesoneto3j,2,',','.')}} USD/kg
                                                 @else
                                                   0 USD/kg
                                                 @endif
@@ -669,23 +707,16 @@
                                               <td>2J</td>
                                               <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto2j,0,',','.')}} KGS</td>
                                               <td>{{number_format(($retorno2j),2,',','.')}}
-                                              <td>{{number_format(($retorno2j*0.08),2,',','.')}}
+                                              <td>{{number_format(($margen2j),2,',','.')}}
                                               </td>
                                               <td>
-                                                {{number_format(($costopacking)*($pesoneto2j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol)),2)}}
+                                                {{number_format($costos2j,2)}}
                                               </td>
-                                              <td>
-                                                {{number_format(($totalotroscostos)*($pesoneto2j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol)),2)}}
-                                              </td>
-                                              <td>
-                                                {{number_format($totalmateriales2j,2)}}
-                                              </td>
-                                              <td>{{number_format(($retorno2j*0.92-(($costopacking+$totalotroscostos)*($pesoneto2j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmateriales2j)),2,',','.')}} USD
-                                              </td>
+                                              <td>{{number_format(($retorno2j+$margen2j+$costos2j),2,',','.')}} USD  
                                              
                                               <td>
                                                 @if ($pesoneto2j)
-                                                  {{number_format(($retorno2j*0.92-(($costopacking+$totalotroscostos)*($pesoneto2j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmateriales2j))/$pesoneto2j,2,',','.')}} USD/kg
+                                                  {{number_format(($retorno2j+$margen2j+$costos2j)/$pesoneto2j,2,',','.')}} USD/kg
                                                 @else
                                                   0 USD/kg
                                                 @endif
@@ -707,23 +738,16 @@
                                               <td>J</td>
                                               <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;" >{{number_format($pesonetoj,0,',','.')}} KGS</td>
                                               <td>{{number_format(($retornoj),2,',','.')}}
-                                              <td>{{number_format(($retornoj*0.08),2,',','.')}}
+                                              <td>{{number_format(($margenj),2,',','.')}}
                                               </td>
                                               <td>
-                                                {{number_format(($costopacking)*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol)),2)}}
+                                                {{number_format($costosj,2)}}
                                               </td>
-                                              <td>
-                                                {{number_format(($totalotroscostos)*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol)),2)}}
-                                              </td>
-                                              <td>
-                                                {{number_format($totalmaterialesj,2)}}
-                                              </td>
-                                              <td>{{number_format(($retornoj*0.92-(($costopacking+$totalotroscostos)*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesj)),2,',','.')}} USD
-                                              </td>
+                                              <td>{{number_format(($retornoj+$margenj+$costosj),2,',','.')}} USD  
                                             
                                               <td>
                                                 @if ($pesonetoj)
-                                                  {{number_format(($retornoj*0.92-(($costopacking+$totalotroscostos)*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesj))/$pesonetoj,2,',','.')}} USD/kg
+                                                  {{number_format(($retornoj+$margenj+$costosj)/$pesonetoj,2,',','.')}} USD/kg
                                                 @else
                                                   0 USD/kg
                                                 @endif
@@ -746,23 +770,16 @@
                                               <td>XL</td>
                                               <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd; " >{{number_format($pesonetoxl,0,',','.')}} KGS</td>
                                               <td>{{number_format(($retornoxl),2,',','.')}}
-                                              <td>{{number_format(($retornoxl*0.08),2,',','.')}}
+                                              <td>{{number_format(($margenxl),2,',','.')}}
                                               </td>
                                               <td>
-                                                {{number_format(($costopacking)*($pesonetoxl/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol)),2)}}
+                                                {{number_format($costosxl,2)}}
                                               </td>
-                                              <td>
-                                                {{number_format(($totalotroscostos)*($pesonetoxl/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol)),2)}}
-                                              </td>
-                                              <td>
-                                                {{number_format($totalmaterialesxl,2)}}
-                                              </td>
-                                              <td>{{number_format(($retornoxl*0.92-(($costopacking+$totalotroscostos)*($pesonetoxl/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesxl)),2,',','.')}} USD
-                                              </td>
+                                              <td>{{number_format(($retornoxl+$margenxl+$costosxl),2,',','.')}} USD  
                                              
                                                 <td>
                                                 @if ($pesonetoxl)
-                                                  {{number_format(($retornoxl*0.92-(($costopacking+$totalotroscostos)*($pesonetoxl/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesxl))/$pesonetoxl,2,',','.')}} USD/kg
+                                                  {{number_format(($retornoxl+$margenxl+$costosxl)/$pesonetoxl,2,',','.')}} USD/kg
                                                 @else
                                                   0 USD/kg
                                                 @endif
@@ -786,27 +803,22 @@
                                               {{number_format($retorno4j+$retorno3j+$retorno2j+$retornoj+$retornoxl,2,',','.')}}
                                             </td>
                                             <td>
-                                              {{number_format(($retorno4j+$retorno3j+$retorno2j+$retornoj+$retornoxl)*0.08,2,',','.')}}
+                                              {{number_format(($margen4j+$margen3j+$margen2j+$margenj+$margenxl),2,',','.')}}
                                             </td>
+                                          
                                             <td>
-                                              {{number_format(($costopacking)*(($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl)/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol)),2)}}
+                                              {{number_format($costos4j+$costos3j+$costos2j+$costosj+$costosxl,2)}}
                                             </td>
-                                            <td>
-                                              {{number_format(($totalotroscostos),2)}}
-                                            </td>
-                                            <td>
-                                              {{number_format($totalmateriales4j+$totalmateriales3j+$totalmateriales2j+$totalmaterialesj+$totalmaterialesxl,2)}}
-                                            </td>
-                                            <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($retorno4j*0.92-(($costopacking+$totalotroscostos)*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales4j))+($retorno3j*0.92-(($costopacking+$totalotroscostos)*($pesoneto3j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales3j))+($retorno2j*0.92-(($costopacking+$totalotroscostos)*($pesoneto2j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales2j))+($retornoj*0.92-(($costopacking+$totalotroscostos)*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesj))+($retornoxl*0.92-(($costopacking+$totalotroscostos)*($pesonetoxl/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesxl))),2,',','.')}} USD 
+                                            <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno4j+$retorno3j+$retorno2j+$retornoj+$retornoxl+$margen4j+$margen3j+$margen2j+$margenj+$margenxl+$costos4j+$costos3j+$costos2j+$costosj+$costosxl),2,',','.')}} USD 
                                             
                                             
                                           </td>
-                                            <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($retorno4j*0.92-(($costopacking+$totalotroscostos)*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales4j))+($retorno3j*0.92-(($costopacking+$totalotroscostos)*($pesoneto3j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales3j))+($retorno2j*0.92-(($costopacking+$totalotroscostos)*($pesoneto2j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales2j))+($retornoj*0.92-(($costopacking+$totalotroscostos)*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesj))+($retornoxl*0.92-(($costopacking+$totalotroscostos)*($pesonetoxl/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesxl)))/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
+                                            <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno4j+$retorno3j+$retorno2j+$retornoj+$retornoxl+$margen4j+$margen3j+$margen2j+$margenj+$margenxl+$costos4j+$costos3j+$costos2j+$costosj+$costosxl)/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
                                             
                                           </tr>
                                         @endif
                                           @php
-                                            $totalcount+=(($retorno4j*0.92-(($costopacking+$totalotroscostos)*($pesoneto4j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales4j))+($retorno3j*0.92-(($costopacking+$totalotroscostos)*($pesoneto3j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales3j))+($retorno2j*0.92-(($costopacking+$totalotroscostos)*($pesoneto2j/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmateriales2j))+($retornoj*0.92-(($costopacking+$totalotroscostos)*($pesonetoj/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesj))+($retornoxl*0.92-(($costopacking+$totalotroscostos)*($pesonetoxl/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl))+$totalmaterialesxl)));
+                                            $totalcount+=($retorno4j+$retorno3j+$retorno2j+$retornoj+$retornoxl+$margen4j+$margen3j+$margen2j+$margenj+$margenxl+$costos4j+$costos3j+$costos2j+$costosj+$costosxl);
                                             $variedadcount+=1;
                                           @endphp
                                         
@@ -828,27 +840,21 @@
                                           <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
                                           <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($pesonetototal,1,',','.')}} KGS</td>
                                           <td>{{number_format($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl,2)}} usd</td>
-                                          <td>{{number_format(($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.08,2)}} usd</td>
+                                          <td>{{number_format(($totalmargen4j+$totalmargen3j+$totalmargen2j+$totalmargenj+$totalmargenxl),2)}} usd</td>
+                                         
                                           <td>
-                                            {{number_format(($totalcostopacking),2)}}
-                                          </td>
-                                          <td>
-                                            {{number_format(($globaltotalotroscostos),2)}}
-                                          </td>
-                                          <td>
-                                            {{number_format(($globaltotalmateriales),2)}}
+                                            {{number_format(($totalcostos4j+$totalcostos3j+$totalcostos2j+$totalmargenj+$totalcostosxl),2)}}
                                           </td>
                                           <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalcount,2,',','.')}} USD 
                                         
                                           </td>
-                                          <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($globaltotalotroscostos+$totalcostopacking+$globaltotalmateriales))/$pesonetototal,2,',','.')}} usd/kg </td>
+                                          <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalcount/$pesonetototal,2,',','.')}} usd/kg </td>
                                           
                                         </tr>
                                       @endif
                               
                                       @php
-                                        
-                                        $totaldentrodenorma=(($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($globaltotalotroscostos+$totalcostopacking+$globaltotalmateriales));
+                                        $totaldentrodenorma=($totalcount);
                                       @endphp
                                         
                               
@@ -868,9 +874,7 @@
                                       
                                       <th>Ingresos</th>
                                       <th>Comision</th>
-                                      <th>Costo Packing</th>
-                                      <th>Otros Costos</th>
-                                      <th>Materiales</th>
+                                      <th>Costo </th>
                                       <th>Retorno Neto Productor</th>
                                       
                                       <th>NPK</th>
@@ -910,6 +914,11 @@
                                           $totalretornoj=0;
                                           $totalretornoxl=0;
                                           $totalretornol=0;
+
+                                          $totalmargenl=0;
+
+                                          $totalcostosl=0;
+
                                           $totalcostopacking=0;
                                           $globaltotalmateriales=0;
 
@@ -964,7 +973,10 @@
                                           $retornoj=0;
                                           $retornoxl=0;
                                           $retornol=0;
+
+                                          $margenl=0;
                                           
+                                          $costosl=0;
                               
                                           $costopacking=0;
                               
@@ -1071,9 +1083,16 @@
                                               @php
                                                 $cantidadl+=$masa->cantidad;
                                                 $pesonetol+=floatval($masa->peso_prorrateado);
-                                                if (!IS_NULL($masa->precio_fob)) {
-                                                  $retornol+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
-                                                  $totalretornol+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
+
+                                                $margenl+=floatval($masa->margen);
+                                                $totalmargenl+=floatval($masa->margen);
+
+                                                $costosl+=floatval($masa->costo);
+                                                $totalcostosl+=floatval($masa->costo);
+
+                                                if (!IS_NULL($masa->fob)) {
+                                                  $retornol+=floatval($masa->fob);
+                                                  $totalretornol+=floatval($masa->fob);
                                                 }
                                                 $cantidadtotal+=$masa->cantidad;
                                                 $pesonetototal+=floatval($masa->peso_prorrateado);
@@ -1114,11 +1133,8 @@
                                                   @php
                                                     $otroscostos+=abs(floatval($detalle->cantidad));
                                                   @endphp
-                                                  
                                                 @endif
                                               @endforeach
-                                           
-                                                  
                                             @endif
                                         @endforeach
                                         @php
@@ -1141,23 +1157,18 @@
                                             <td>L</td>
                                             <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd; " >{{number_format($pesonetol,0,',','.')}} KGS</td>
                                             <td>{{number_format(($retornol),2,',','.')}}
-                                            <td>{{number_format(($retornol*0.08),2,',','.')}}
+                                            <td>{{number_format(($margenl),2,',','.')}}
                                             </td>
+                                           
                                             <td>
-                                              {{number_format(($costopacking)*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol)),2)}}
+                                              {{number_format($costosl,2)}}
                                             </td>
-                                            <td>
-                                              {{number_format(($totalotroscostos),2)}}
-                                            </td>
-                                            <td>
-                                              {{number_format($totalmaterialesl,2)}}
-                                            </td>
-                                            <td>{{number_format(($retornol*0.92-(($costopacking+$totalotroscostos)*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesl)),2,',','.')}} USD
+                                            <td>{{number_format($retornol+$margenl+$costosl,2,',','.')}} USD
                                             </td>
                                           
                                               <td>
                                               @if ($pesonetol)
-                                                {{number_format(($retornol*0.92-(($costopacking+$totalotroscostos)*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesl))/$pesonetol,2,',','.')}} USD/kg
+                                                {{number_format(($retornol+$margenl+$costosl)/$pesonetol,2,',','.')}} USD/kg
                                               @else
                                                 0 USD/kg
                                               @endif
@@ -1182,27 +1193,22 @@
                                               {{number_format($retornol,2,',','.')}}
                                             </td>
                                             <td>
-                                              {{number_format(($retornol)*0.08,2,',','.')}}
+                                              {{number_format(($margenl),2,',','.')}}
                                             </td>
+                                       
                                             <td>
-                                              {{number_format(($costopacking)*(($pesonetol)/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol)),2)}}
+                                              {{number_format($costosl,2)}}
                                             </td>
-                                            <td>
-                                              {{number_format(($totalotroscostos),2)}}
-                                            </td>
-                                            <td>
-                                              {{number_format($totalmaterialesl,2)}}
-                                            </td>
-                                            <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($retornol*0.92-(($costopacking+$totalotroscostos)*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesl))),2,',','.')}} USD 
+                                            <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retornol+$margenl+$costosl),2,',','.')}} USD 
                                             
                                             
                                           </td>
-                                            <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($retornol*0.92-(($costopacking+$totalotroscostos)*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesl)))/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol),2,',','.')}} USD/KG</td>
+                                            <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retornol+$margenl+$costosl)/($pesonetol),2,',','.')}} USD/KG</td>
                                             
                                           </tr>
                                         @endif
                                           @php
-                                            $totalfr+=(($retornol*0.92-(($costopacking+$totalotroscostos)*($pesonetol/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl+$pesonetol))+$totalmaterialesl)));
+                                            $totalfr+=(($retornol+$margenl+$costosl));
                                             $variedadcount+=1;
                                           @endphp
                                         
@@ -1225,27 +1231,22 @@
                                         <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
                                         <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($pesonetototal,0,',','.')}} KGS</td>
                                         <td>{{number_format($totalretornol,2)}} usd</td>
-                                        <td>{{number_format(($totalretornol)*0.08,2)}} usd</td>
+                                        <td>{{number_format(($totalmargenl),2)}} usd</td>
+                                       
                                         <td>
-                                          {{number_format(($totalcostopacking),2)}}
-                                        </td>
-                                        <td>
-                                          {{number_format(($globaltotalotroscostos),2)}}
-                                        </td>
-                                        <td>
-                                          {{number_format(($globaltotalmateriales),2)}}
+                                          {{number_format(($totalcostosl),2)}}
                                         </td>
                                         <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalfr,2,',','.')}} USD 
                                        
                                         </td>
-                                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretornol)*0.92-($globaltotalotroscostos+$totalcostopacking+$globaltotalmateriales))/$pesonetototal,2,',','.')}} usd/kg </td>
+                                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalfr/$pesonetototal,2,',','.')}} usd/kg </td>
                                         
                                       </tr>
                                       @endif
                               
                                       @php
                                         
-                                        $totalfueraodenorma=(($totalretornol)*0.92-($globaltotalotroscostos+$totalcostopacking+$globaltotalmateriales));
+                                        $totalfueraodenorma=$totalfr;
                                       @endphp
                                         
                               
