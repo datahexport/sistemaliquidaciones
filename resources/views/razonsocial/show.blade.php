@@ -1272,85 +1272,9 @@
                                    
                                   @endforeach
 
-                                  <h1 class="mt-6">
-                                    Listado de Variedades real
-                                  </h1>
-                                  @foreach ($variedades as $variedad)
-                                    <a href="{{Route('grafico.variedad',['razonsocial'=>$razonsocial,'temporada'=>$temporada,'variedad'=>$variedad] )}}" target="_blank">                     
-                                      {{$variedad->name}}<br>
-                                    </a>
-                                  @endforeach
-
-                                  
-
-                                  
-                       
-
                                   
                                
 
-                                  @foreach ($masas as $masa)
-                                      
-
-                                      @foreach ($fobs->where('n_variedad',$masa->n_variedad)->where('semana',$masa->semana) as $fob)
-                                        
-                                          @if (($masa->n_calibre=='4J' || $masa->n_calibre=='4JD' || $masa->n_calibre=='4JDD'))
-                                            
-                                              @if (strpos($fob->n_calibre, "4J") !== false)
-                                                @if (strpos($fob->etiqueta, $masa->n_etiqueta) !== false)
-
-                                                
-                                                {{$masa->semana}} - {{$masa->n_variedad}} - {{$masa->n_etiqueta}} - {{$masa->n_calibre}} <br>
-                                                 <b> PRECIO: {{$fob->fob_kilo_salida}} ({{$fob->fob_kilo_salida*$masa->peso_neto}}) </b> <br>
-
-                                                @endif
-
-                                              @endif
-                                          @endif
-                                          @if (($masa->n_calibre=='3J' || $masa->n_calibre=='3JD' || $masa->n_calibre=='3JDD'))
-                                            @if (strpos($fob->n_calibre, "3J") !== false)
-
-                                              @if (strpos($fob->etiqueta, $masa->n_etiqueta) !== false)
-                                              {{$masa->semana}} - {{$masa->n_variedad}} - {{$masa->n_etiqueta}} - {{$masa->n_calibre}} <br>
-                                               <b> PRECIO: {{$fob->fob_kilo_salida}} ({{$fob->fob_kilo_salida*$masa->peso_neto}}) </b> <br>
-
-                                              @endif
-                                            @endif
-                                          @endif
-                                          @if (($masa->n_calibre=='2J' || $masa->n_calibre=='2JD' || $masa->n_calibre=='2JDD'))
-                                            @if (strpos($fob->n_calibre, "2J") !== false)
-
-                                              @if (strpos($fob->etiqueta, $masa->n_etiqueta) !== false)
-                                              {{$masa->semana}} - {{$masa->n_variedad}} - {{$masa->n_etiqueta}} - {{$masa->n_calibre}} <br>
-                                               <b> PRECIO: {{$fob->fob_kilo_salida}} ({{$fob->fob_kilo_salida*$masa->peso_neto}}) </b> <br>
-
-                                              @endif
-                                            @endif
-                                          @endif
-                                          @if (($masa->n_calibre=='J' || $masa->n_calibre=='JD' || $masa->n_calibre=='JDD'))
-                                            @if (strpos($fob->n_calibre, "J") !== false)
-
-                                              @if (strpos($fob->etiqueta, $masa->n_etiqueta) !== false)
-                                              {{$masa->semana}} - {{$masa->n_variedad}} - {{$masa->n_etiqueta}} - {{$masa->n_calibre}} <br>
-                                               <b> PRECIO: {{$fob->fob_kilo_salida}} ({{$fob->fob_kilo_salida*$masa->peso_neto}}) </b> <br>
-
-                                              @endif
-                                            @endif
-                                          @endif
-                                          @if (($masa->n_calibre=='XL' || $masa->n_calibre=='XLD' || $masa->n_calibre=='XLDD'))
-                                            @if (strpos($fob->n_calibre, "XL") !== false)
-
-                                              @if (strpos($fob->etiqueta, $masa->n_etiqueta) !== false)
-                                              {{$masa->semana}} - {{$masa->n_variedad}} - {{$masa->n_etiqueta}} - {{$masa->n_calibre}} <br>
-                                               <b> PRECIO: {{$fob->fob_kilo_salida}} ({{$fob->fob_kilo_salida*$masa->peso_neto}}) </b> <br>
-
-                                              @endif
-                                            @endif
-                                          @endif
-                                          @break
-                                      @endforeach
-
-                                  @endforeach
                                   
 
                                 </div>
