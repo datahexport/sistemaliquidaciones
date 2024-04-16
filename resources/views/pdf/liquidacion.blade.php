@@ -1860,11 +1860,11 @@
 								
 									<td style=" padding-bottom: 4px; margin-top: 10px;">{{ substr($anticipo->fecha, 0, 11) }}</td>
 									<td style=" padding-bottom: 4px; margin-top: 10px;"> ANTICIPO PRODUCTOR</td>
-									<td style=" padding-bottom: 4px; margin-top: 10px;">{{number_format($anticipo->cantidad,2,',','.')}} USD</td>
+									<td style=" padding-bottom: 4px; margin-top: 10px;">{{number_format(floatval($anticipo->cantidad),2,',','.')}} USD</td>
 							
 									<td style=" padding-bottom: 4px; margin-top: 10px;"> - </td>
 									
-									<td style=" padding-bottom: 4px; margin-top: 10px;">{{number_format($anticipo->cantidad,2,',','.')}} CLP</td>
+									<td style=" padding-bottom: 4px; margin-top: 10px;">{{number_format(floatval($anticipo->cantidad),2,',','.')}} CLP</td>
 							
 								</tr>
 								@php
