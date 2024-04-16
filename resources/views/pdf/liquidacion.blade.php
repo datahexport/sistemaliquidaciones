@@ -1954,12 +1954,7 @@
 									<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10">{{number_format($resultadocomercial,2)}} USD</td>
 							
 								</tr>
-								<tr>
 								
-									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 10px;">USO CAJA COSECHERA POR KG RECEPCIONADO</td>
-									<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10">{{number_format(1000,2)}} USD</td>
-							
-								</tr>
 								<tr>
 								
 									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 10px;">ANALISIS MULTIRESIDUOS -297,46 USD</td>
