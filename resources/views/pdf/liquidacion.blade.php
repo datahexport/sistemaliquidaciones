@@ -401,6 +401,26 @@
 						
 				@endphp
 				@foreach ($unique_variedades as $variedad)
+					<tr style="background-color: white;">
+										
+							
+					
+							<td> </td>
+						
+							<td> {{$variedad}} </td>
+					
+						
+						
+						
+						<td></td>
+						<td ></td>
+						<td>
+						</td>
+						<td>
+
+						</td>
+						
+					</tr>
 					@php
 						$calibrecount=1;
 						
@@ -555,7 +575,6 @@
 										@php
 											$otroscostos+=floatval($detalle->cantidad);
 											$totalotroscostos+=floatval($detalle->cantidad);
-											break;
 										@endphp
 										
 									@endif
@@ -569,11 +588,7 @@
 						@if ($pesoneto4j>0)
 							<tr>
 								<td> </td>
-								@if ($calibrecount==1)
-									<td>{{$variedad}}</td>
-								@else
-									<td> </td>
-								@endif
+								<td> </td>
 								
 								
 								
@@ -599,11 +614,7 @@
 						@if ($pesoneto3j>0)
 							<tr>
 								<td> </td>
-								@if ($calibrecount==1)
-									<td>{{$variedad}}</td>
-								@else
-									<td> </td>
-								@endif
+								<td> </td>
 							
 								
 								
@@ -627,11 +638,7 @@
 						@if ($pesoneto2j>0)
 							<tr>
 								<td> </td>
-								@if ($calibrecount==1)
-									<td>{{$variedad}}</td>
-								@else
-									<td> </td>
-								@endif
+								<td> </td>
 							
 								
 								
@@ -655,11 +662,7 @@
 						@if ($pesonetoj>0)
 							<tr>
 								<td> </td>
-								@if ($calibrecount==1)
-									<td>{{$variedad}}</td>
-								@else
-									<td> </td>
-								@endif
+								<td> </td>
 								
 								
 								
@@ -685,11 +688,7 @@
 						@if ($pesonetoxl>0)
 							<tr>
 								<td> </td>
-								@if ($calibrecount==1)
-									<td>{{$variedad}}</td>
-								@else
-									<td> </td>
-								@endif
+								<td> </td>
 								
 								
 								
@@ -748,7 +747,7 @@
 					
 					
 					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($pesonetototal,0,',','.')}} KGS</td>
+					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($pesonetototal,1,',','.')}} KGS</td>
 					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format((($totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl)*0.92-($totalotroscostos+$totalcostopacking+$globaltotalmateriales)),2,',','.')}} USD 
 					
 					</td>
@@ -841,6 +840,26 @@
 						$totalotroscostos=0;
 				@endphp
 				@foreach ($unique_variedades as $variedad)
+					<tr style="background-color: white;">
+												
+									
+							
+							<td> </td>
+						
+							<td> {{$variedad}} </td>
+					
+						
+						
+						
+						<td></td>
+						<td ></td>
+						<td>
+						</td>
+						<td>
+
+						</td>
+						
+					</tr>
 					@php
 						$calibrecount=1;
 						
@@ -1182,11 +1201,7 @@
 								
 									<td> </td>
 							
-								@if ($calibrecount==1)
-									<td>{{$variedad}}</td>
-								@else
 									<td> </td>
-								@endif
 								
 								
 								
@@ -1254,7 +1269,7 @@
 						
 						
 						<td style=" padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
-						<td style=" padding-bottom: 4px; margin-top: 10px; font-weight: bold;border-left: 1px solid #ddd;">{{number_format($pesonetototal,0,',','.')}} KGS</td>
+						<td style=" padding-bottom: 4px; margin-top: 10px; font-weight: bold;border-left: 1px solid #ddd;">{{number_format($pesonetototal,1,',','.')}} KGS</td>
 						<td style=" padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($retornofueradenorma,2,',','.')}} USD</td>
 						<td style=" padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($retornofueradenorma/$pesonetototal,2,',','.')}} usd/kg</td>
 						

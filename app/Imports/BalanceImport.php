@@ -53,7 +53,9 @@ class BalanceImport implements ToCollection, WithStartRow
                     'exportadora' => $row[20],
                     'norma' => $row[21],
                     'semana' => $row[22],
-                    'csg' => $row[23]
+                    'csg' => $row[23],
+                    'fob' => $row[24],
+                    'fob_nacional' => $row[25]
 
                 ]);
                 

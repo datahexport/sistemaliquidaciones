@@ -1,11 +1,43 @@
 <div class="card-body">
-  @php
-      $totalfriopacking=0;
-  @endphp
+ 
+    @php
+        $totalfriopacking=0;
+
+        $masatotal=0;
+
+        $globaltotalotroscostos=0;
+        $otroscostos=0;
+        $totalotroscostos=0;
+    @endphp
+
+  @if ($gastos->count()>0 && $detallesall->count()>0)
+    @php
+        foreach ($gastos as $gasto){
+          if ($gasto->familia->name=='Costos' && $gasto->item=='Otros costos'){
+            foreach ($detallesall as $detalle){
+              if (preg_replace('/[\.\-\s]+/', '', strtolower($detalle->item))==preg_replace('/[\.\-\s]+/', '', strtolower($gasto->item))){
+                  $otroscostos+=abs(floatval($detalle->cantidad));
+              }
+            }
+          }
+        }
+
+        $globaltotalotroscostos+=$otroscostos;
+    @endphp
+  @endif
+
   @if ($CostosPackingsall->count()>0)
     @foreach ($CostosPackingsall as $packing)
         @php
             $totalfriopacking+=intval($packing->total_usd);
+        @endphp
+          
+    @endforeach
+  @endif
+  @if ($masastotal->count()>0)
+    @foreach ($masastotal as $masa)
+        @php
+            $masatotal+=floatval($masa->peso_prorrateado);
         @endphp
           
     @endforeach
@@ -36,6 +68,12 @@
                                 Cajas Base
                               </th>
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
+                                FOB <br>Exp
+                              </th>
+                              <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
+                                FOB <br>Comercial
+                              </th>
+                              <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
                                 Total Fob Liquidacion
                               </th>
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
@@ -51,8 +89,12 @@
                               Total Flete a puerto
                               </th>
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
+                                Otros Costos
+                              </th>
+                              <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
                                 Total Materiales
                               </th>
+                             
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
                               Retorno Productor
                               </th>
@@ -69,12 +111,21 @@
                               $globalcajasbulto=0;
                               $globalpesoneto=0;
                               $globaltotalmateriales=0;
+                              
                               $globalfletehuerto=0;
                               $globalgastoexportacion=0;
+
                               $globalventafob=0;
+                              $globalventafobexp=0;
+                              $globalventafobnacio=0;
+                              
                               $globalkgsp=0;
                               $globalcostopacking=0;
-                          @endphp
+                              
+                              
+                                              
+                           
+                        @endphp 
                                 @foreach ($unique_variedades as $item)
                                     <tr>
                                       <td class="px-6 py-0 whitespace-nowrap">
@@ -87,10 +138,18 @@
                                               $totalmateriales=0;
                                               $fletehuerto=0;
                                               $gastoexportacion=0;
+
                                               $ventafob=0;
+                                              $ventafobexp=0;
+                                              $ventafobnacio=0;
+                                              
                                               $kgsp=0;
                                               $costopacking=0;
+
+                                             
+                                             
                                           @endphp
+                                         
                                           @foreach ($masastotal as $masa)
                                             @php
                                               if ($masa->variedad==$item->name) {
@@ -99,9 +158,16 @@
                                                 $globalcajasbulto+=$masa->cantidad;
                                                 $globalpesoneto+=floatval($masa->peso_prorrateado);
                                                 
-                                                if (!IS_NULL($masa->precio_fob)) {
-                                                  $ventafob+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
-                                                  $globalventafob+=floatval($masa->peso_prorrateado)*floatval($masa->precio_fob);
+                                                if (!IS_NULL($masa->fob) || !IS_NULL($masa->fob_nacional)) {
+                                                  $ventafob+=floatval($masa->fob)+floatval($masa->fob_nacional);
+                                                  $globalventafob+=floatval($masa->fob)+floatval($masa->fob_nacional);
+                                                  
+                                                  $ventafobexp+=floatval($masa->fob);
+                                                  $globalventafobexp+=floatval($masa->fob);
+                                                  
+                                                  $ventafobnacio+=floatval($masa->fob_nacional);
+                                                  $globalventafobnacio+=floatval($masa->fob_nacional);
+                                                  
                                                 } else {
                                                   $kgsp+=floatval($masa->peso_prorrateado);
                                                   $globalkgsp+=floatval($masa->peso_prorrateado);
@@ -148,6 +214,9 @@
                                             }  
                                           }
 
+                                          
+                                        
+
                                           @endphp
 
                                             <div class="text-sm text-gray-900">
@@ -161,7 +230,13 @@
                                           <div class="text-sm text-gray-900">{{ number_format($pesoneto/5,0)}}</div>    
                                         </td>
                                         <td class="px-6 py-0 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">{{number_format($ventafob,2,'.','.')}} ({{number_format($kgsp)}} Kilos/SP)</div>    
+                                          <div class="text-sm text-gray-900">{{number_format($ventafobexp,2,'.','.')}} </div>    
+                                        </td>
+                                        <td class="px-6 py-0 whitespace-nowrap">
+                                          <div class="text-sm text-gray-900">{{number_format($ventafobnacio,2,'.','.')}} </div>    
+                                        </td>
+                                        <td class="px-6 py-0 whitespace-nowrap">
+                                          <div class="text-sm text-gray-900">{{number_format($ventafob,2,'.','.')}} </div>    
                                         </td>
                                         <td class="px-6 py-0 whitespace-nowrap">
                                             <div class="text-sm text-gray-900">{{number_format($ventafob*(0.08) ,2,'.','.')}}</div>    
@@ -174,6 +249,9 @@
                                         </td>
                                         <td class="px-6 py-0 whitespace-nowrap">
                                           <div class="text-sm text-gray-900">{{number_format($fletehuerto,2,'.','.')}}</div>    
+                                        </td>
+                                        <td class="px-6 py-0 whitespace-nowrap">
+                                          <div class="text-sm text-gray-900">{{number_format($globaltotalotroscostos*($pesoneto/$masatotal),2,'.','.')}}</div>    
                                         </td>
                                         <td class="px-6 py-0 whitespace-nowrap">
                                           <div class="text-sm text-gray-900">{{number_format($totalmateriales,2,'.','.')}}</div>    
@@ -213,7 +291,13 @@
                                       <div class="text-sm text-gray-900">{{ number_format($globalpesoneto/5,0)}}</div>    
                                     </td>
                                     <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
-                                      <div class="text-sm text-gray-900">{{number_format($globalventafob,2,'.','.')}} ({{number_format($globalkgsp)}} Kilos/SP)</div>    
+                                      <div class="text-sm text-gray-900">{{number_format($globalventafobexp,2,'.','.')}}</div>    
+                                    </td>
+                                    <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
+                                      <div class="text-sm text-gray-900">{{number_format($globalventafobnacio,2,'.','.')}}</div>    
+                                    </td>
+                                    <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
+                                      <div class="text-sm text-gray-900">{{number_format($globalventafob,2,'.','.')}}</div>    
                                     </td>
                                     <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
                                         <div class="text-sm text-gray-900">{{number_format($globalventafob*(0.08) ,2,'.','.')}}</div>    
@@ -226,6 +310,9 @@
                                     </td>
                                     <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
                                       <div class="text-sm text-gray-900">{{number_format($globalfletehuerto)}}</div>    
+                                    </td>
+                                    <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
+                                      <div class="text-sm text-gray-900">{{number_format($globaltotalotroscostos,2,'.','.')}}</div>    
                                     </td>
                                     <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
                                       <div class="text-sm text-gray-900">{{number_format($globaltotalmateriales,2,'.','.')}}</div>    
@@ -636,33 +723,33 @@
                 @endif
                 @if ($vista=='PACKING')
 
-                <div>
-                    <h1 class="text-xl font-semibold mb-4 text-center">
-                        Por favor selecione el archivo de "Costos de packing" que desea importar
-                    </h1>
-                    <div class="flex justify-center">
-                        
-                        <form action="{{route('temporada.importCostosPacking')}}"
-                            method="POST"
-                            class="bg-white rounded p-8 shadow"
-                            enctype="multipart/form-data">
-                            
-                            @csrf
+                  <div>
+                      <h1 class="text-xl font-semibold mb-4 text-center">
+                          Por favor selecione el archivo de "Costos de packing" que desea importar
+                      </h1>
+                      <div class="flex justify-center">
+                          
+                          <form action="{{route('temporada.importCostosPacking')}}"
+                              method="POST"
+                              class="bg-white rounded p-8 shadow"
+                              enctype="multipart/form-data">
+                              
+                              @csrf
 
-                            <input type="hidden" name="temporada" value={{$temporada->id}}>
+                              <input type="hidden" name="temporada" value={{$temporada->id}}>
 
-                            <x-validation-errors class="errors">
+                              <x-validation-errors class="errors">
 
-                            </x-validation-errors>
+                              </x-validation-errors>
 
-                            <input type="file" name="file" accept=".csv,.xlsx">
+                              <input type="file" name="file" accept=".csv,.xlsx">
 
-                            <x-button class="ml-4">
-                                Importar
-                            </x-button>
-                        </form>
-                    </div>
-                </div>
+                              <x-button class="ml-4">
+                                  Importar
+                              </x-button>
+                          </form>
+                      </div>
+                  </div>
                 
                   <table class="min-w-full leading-normal">
                     <thead>
@@ -767,12 +854,10 @@
 
                   <div>
                     <h1 class="text-xl font-semibold mb-4 ml-4">
-                        Por favor selecione el archivo de "Materiales" que desea importar {{$materialestotal->count()}}
+                        Por favor selecione el archivo de "Materiales" que desea importar 
                     </h1>
                   
-                    <h1 class="text-xl font-semibold mb-4 ml-4">
-                      Fecha de importación: {{$materialestotal->first()->created_at}}
-                    </h1>
+            
 
                     <div class="flex">
                         
@@ -1285,7 +1370,15 @@
                                 @if ($masaid==$masa->id)
                                     <input wire:model="preciomasa" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none">
                                 @else
-                                  <p class="text-gray-900 whitespace-no-wrap">{{ $masa->precio_fob }}</p>
+                                  <p class="text-gray-900 whitespace-no-wrap">
+                                  @if ($masa->fob>0)
+                                       {{ $masa->fob }}
+                                  @else
+                                       {{ $masa->fob_nacional }}
+                                  @endif
+                                   
+                                  
+                                  </p>
                                 @endif
                               </td>
                             

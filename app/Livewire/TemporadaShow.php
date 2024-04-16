@@ -109,7 +109,11 @@ class TemporadaShow extends Component
 
         $familias=Familia::where('status','active')->get();
 
-        return view('livewire.temporada-show',compact('detalles','familias','fobsallnacional','fobsall','embarques','embarquestotal','fletestotal','materialestotal','masastotal','fobs','fobsnacional','anticipos','unique_especies','unique_variedades','resumes','CostosPackings','CostosPackingsall','materiales','exportacions','razons','comisions','fletes','masasbalances','razonsall'));
+        $gastos = Gasto::where('temporada_id',$this->temporada->id)->get();
+
+        $detallesall=Detalle::where('temporada_id',$this->temporada->id)->get();
+
+        return view('livewire.temporada-show',compact('gastos','detallesall','detalles','familias','fobsallnacional','fobsall','embarques','embarquestotal','fletestotal','materialestotal','masastotal','fobs','fobsnacional','anticipos','unique_especies','unique_variedades','resumes','CostosPackings','CostosPackingsall','materiales','exportacions','razons','comisions','fletes','masasbalances','razonsall'));
     }
 
     public function set_view($vista){
