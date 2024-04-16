@@ -1785,7 +1785,7 @@
 					$totalgastos=0;
 				@endphp
 				@foreach ($gastos as $gasto)
-					@if ($gasto->familia->name=='Cuenta Corriente' && $gasto->item=='Materiales')
+					@if ($gasto->familia->name=='Cuenta Corriente' && $gasto->item=='Materiales de Cosecha')
 						@foreach ($detalles as $detalle)
 							@if (preg_replace('/[\.\-\s]+/', '', strtolower($detalle->item))==preg_replace('/[\.\-\s]+/', '', strtolower($gasto->item)))
 								
