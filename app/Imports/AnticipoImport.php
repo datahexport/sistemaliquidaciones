@@ -4,10 +4,11 @@ namespace App\Imports;
 
 use App\Models\Anticipo;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Date;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
+use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDate;
 
 class AnticipoImport implements ToCollection, WithStartRow
     {   protected $temporada;
@@ -33,8 +34,9 @@ class AnticipoImport implements ToCollection, WithStartRow
                     'grupo'=> $row[0],
                     'rut'=> preg_replace('/[\.\-\s]+/', '', $row[1]),
                     'n_productor'=> $row[2],
-                    'fecha'=>  Carbon::instance(Date::excelToDateTimeObject($row[3])),
+                    'fecha'=>  Carbon::instance(SharedDate::excelToDateTimeObject($row[3])),
                     'cantidad'=> $row[4]
+                
                 ]);
             }
         }
