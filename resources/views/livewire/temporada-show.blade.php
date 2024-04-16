@@ -98,6 +98,9 @@
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
                                 Costos Exportación
                               </th>
+                              <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
+                                Costos Nacional
+                              </th>
                              
                              
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
@@ -117,6 +120,7 @@
                               $globalpesoneto=0;
                               $globalcostos=0;
                               $globalcostoscom=0;
+                              $globalmargen=0;
 
                               $globaltotalmateriales=0;
                               
@@ -145,6 +149,7 @@
                                               $pesoneto=0;
                                               $costos=0;
                                               $costoscom=0;
+                                              $margen=0;
 
                                               $totalmateriales=0;
                                               $fletehuerto=0;
@@ -166,6 +171,9 @@
                                               if ($masa->variedad==$item->name) {
                                                 $cajasbulto+=$masa->cantidad;
                                                 $pesoneto+=floatval($masa->peso_prorrateado);
+                                                $margen+=floatval($masa->margen);
+                                                $globalmargen+=floatval($masa->margen);
+                                                
                                                 $globalcajasbulto+=$masa->cantidad;
                                                 $globalpesoneto+=floatval($masa->peso_prorrateado);
                                                 
@@ -260,7 +268,7 @@
                                           <div class="text-sm text-gray-900">{{number_format($ventafob,2,'.','.')}} </div>    
                                         </td>
                                         <td class="px-6 py-0 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">{{number_format($ventafobexp*(0.08) ,2,'.','.')}}</div>    
+                                            <div class="text-sm text-gray-900">{{number_format($margen ,2,'.','.')}}</div>    
                                         </td>
                                          {{-- comment
                                         
@@ -328,7 +336,7 @@
                                       <div class="text-sm text-gray-900">{{number_format($globalventafob,2,'.','.')}}</div>    
                                     </td>
                                     <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
-                                        <div class="text-sm text-gray-900">{{number_format($globalventafobexp*(0.08) ,2,'.','.')}}</div>    
+                                        <div class="text-sm text-gray-900">{{number_format($globalmargen ,2,'.','.')}}</div>    
                                     </td>
                                    
                                     {{-- comment 
