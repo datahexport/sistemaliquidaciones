@@ -34,7 +34,7 @@ class AnticipoImport implements ToCollection, WithStartRow
                     'grupo'=> $row[0],
                     'rut'=> preg_replace('/[\.\-\s]+/', '', $row[1]),
                     'n_productor'=> $row[2],
-                    'fecha'=>  Carbon::instance(SharedDate::excelToDateTimeObject($row[3])),
+                    'fecha'=>  $row[3],
                     'cantidad'=> $row[4]
                 
                 ]);
