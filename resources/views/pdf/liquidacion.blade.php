@@ -1981,7 +1981,7 @@
 								<tr style="background-color: #ddd;">
 								
 									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 10px; font-weight: bold; ">SUBTOTAL EGRESOS</td>
-									<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10; font-weight: bold;">{{number_format(1000,2)}} USD</td>
+									<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10; font-weight: bold;">{{number_format($materiales+$certificaciones+$multiresiduos+$resultadocomercial,2)}} USD</td>
 							
 								</tr>
 								<tr>
