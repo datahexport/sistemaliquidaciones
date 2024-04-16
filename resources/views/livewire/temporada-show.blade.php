@@ -8,6 +8,8 @@
         $globaltotalotroscostos=0;
         $otroscostos=0;
         $totalotroscostos=0;
+        
+
     @endphp
 
   @if ($gastos->count()>0 && $detallesall->count()>0)
@@ -113,6 +115,9 @@
                           @php
                               $globalcajasbulto=0;
                               $globalpesoneto=0;
+                              $globalcostos=0;
+                              $globalcostoscom=0;
+
                               $globaltotalmateriales=0;
                               
                               $globalfletehuerto=0;
@@ -138,6 +143,9 @@
                                           @php
                                               $cajasbulto=0;
                                               $pesoneto=0;
+                                              $costos=0;
+                                              $costoscom=0;
+
                                               $totalmateriales=0;
                                               $fletehuerto=0;
                                               $gastoexportacion=0;
@@ -174,6 +182,15 @@
                                                 } else {
                                                   $kgsp+=floatval($masa->peso_prorrateado);
                                                   $globalkgsp+=floatval($masa->peso_prorrateado);
+                                                }
+
+                                                if (!IS_NULL($masa->costo)) {
+                                                  $costos+=floatval($masa->costo);
+                                                  $globalcostos+=floatval($masa->costo);
+                                                }
+                                                if(!IS_NULL($masa->costo_nacional)){
+                                                  $costoscom+=floatval($masa->costo_nacional);
+                                                  $globalcostoscom+=floatval($masa->costo_nacional);
                                                 }
                                                 
                                                  
@@ -262,7 +279,10 @@
                                           --}}
 
                                         <td class="px-6 py-0 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">{{number_format($totalmateriales+$costopacking+($globaltotalotroscostos*($pesoneto/$masatotal)),2,'.','.')}}</div>    
+                                          <div class="text-sm text-gray-900">{{number_format($costos,2,'.','.')}}</div>    
+                                        </td>
+                                        <td class="px-6 py-0 whitespace-nowrap">
+                                          <div class="text-sm text-gray-900">{{number_format($costoscom,2,'.','.')}}</div>    
                                         </td>
                                         <td class="px-6 py-0 whitespace-nowrap">
                                           <div class="text-sm text-gray-900">{{number_format(($ventafob-($ventafob*(0.08)+$costopacking+$gastoexportacion+$fletehuerto+$totalmateriales)),2,'.','.')}}</div>    
@@ -326,7 +346,10 @@
                                     </td>
                                      --}}
                                     <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
-                                      <div class="text-sm text-gray-900">{{number_format($globaltotalotroscostos+$globaltotalmateriales+$globalcostopacking,2,'.','.')}}</div>    
+                                      <div class="text-sm text-gray-900">{{number_format($globalcostos,2,'.','.')}}</div>    
+                                    </td>
+                                    <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
+                                      <div class="text-sm text-gray-900">{{number_format($globalcostoscom,2,'.','.')}}</div>    
                                     </td>
                                    
                                     <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
@@ -1286,6 +1309,8 @@
                                   'exportadora',
                                   'norma',
                                   'semana',
+                                  'costo',
+                                  'margen',
                                   'precio_fob',
                               ];
 
@@ -1382,6 +1407,9 @@
                                         {{ $masa->costo_nacional }}
                                     @endif  
                                   </p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-nowrap">{{ $masa->margen }}</p>
                               </td>
                               <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                 @if ($masaid==$masa->id)
