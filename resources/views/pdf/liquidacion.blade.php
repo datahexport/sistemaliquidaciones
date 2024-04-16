@@ -872,9 +872,7 @@
 			  <th>Calibre</th>
 			  <th>Kg Embalado</th>
 			  
-			  <th>Ingresos</th>
-			  <th>Comision</th>
-			  <th>Costo </th>
+		
 			  <th>Retorno Neto Productor</th>
 			  
 			  <th>NPK</th>
@@ -1156,13 +1154,7 @@
 					
 					<td>L</td>
 					<td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd; " >{{number_format($pesonetol,0,',','.')}} KGS</td>
-					<td>{{number_format(($retornol),2,',','.')}}
-					<td>{{number_format(($margenl),2,',','.')}}
-					</td>
-				   
-					<td>
-					  {{number_format($costosl,2)}}
-					</td>
+				
 					<td>{{number_format($retornol+$margenl+$costosl,2,',','.')}} USD
 					</td>
 				  
@@ -1189,16 +1181,7 @@
 					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">Total {{$variedad}}</td>
 					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
 					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; ">{{number_format($pesonetol,0,',','.')}} KGS</td>
-					<td>
-					  {{number_format($retornol,2,',','.')}}
-					</td>
-					<td>
-					  {{number_format(($margenl),2,',','.')}}
-					</td>
-			   
-					<td>
-					  {{number_format($costosl,2)}}
-					</td>
+					
 					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retornol+$margenl+$costosl),2,',','.')}} USD 
 					
 					
@@ -1230,12 +1213,7 @@
 				
 				<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
 				<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($pesonetototal,0,',','.')}} KGS</td>
-				<td>{{number_format($totalretornol,2)}} usd</td>
-				<td>{{number_format(($totalmargenl),2)}} usd</td>
-			   
-				<td>
-				  {{number_format(($totalcostosl),2)}}
-				</td>
+				
 				<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalfr,2,',','.')}} USD 
 			   
 				</td>
@@ -1560,7 +1538,7 @@
 								</tr>
 								<tr>
 								
-									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 10px;">INGRESOS HIDROCOOLER</td>
+									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 10px;">NETO PRODUCTOR FRUTA COMERCIAL EMBALADA</td>
 									<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10">{{number_format(1000,2,',','.')}} USD</td>
 							
 								</tr>
