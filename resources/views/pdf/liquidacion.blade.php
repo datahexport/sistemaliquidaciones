@@ -2004,7 +2004,7 @@
 								<tr style="background-color: #ddd;">
 								
 									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 10px; font-weight: bold; ">SALDO A PAGAR</td>
-									<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10; font-weight: bold;">{{number_format($totaldentrodenorma+$totalfueradenorma+$totalembalada+$materiales+$certificaciones+$multiresiduos+$resultadocomercial+$totalanticipos,2)}} USD</td>
+									<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10; font-weight: bold;">{{number_format($totaldentrodenorma+$totalfueradenorma+$totalembalada+$materiales+$certificaciones+$multiresiduos+$resultadocomercial-$totalanticipos,2)}} USD</td>
 							
 								</tr>
 
