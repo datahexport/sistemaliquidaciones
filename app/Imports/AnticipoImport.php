@@ -35,7 +35,6 @@ class AnticipoImport implements ToCollection, WithStartRow
                     'n_productor'=> $row[2],
                     'fecha'=>  Carbon::instance(Date::excelToDateTimeObject($row[3])),
                     'cantidad'=> $row[4]
-                
                 ]);
             }
         }
