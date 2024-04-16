@@ -4,11 +4,10 @@ namespace App\Imports;
 
 use App\Models\Anticipo;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Date;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
-use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDate;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class AnticipoImport implements ToCollection, WithStartRow
     {   protected $temporada;
