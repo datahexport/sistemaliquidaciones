@@ -82,12 +82,14 @@
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
                                 Total Frio Packing
                               </th>
-                              <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
-                                Total Gastos de Exportacion
-                              </th>
-                              <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
-                              Total Flete a puerto
-                              </th>
+                              {{-- comment
+                                <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
+                                  Total Gastos de Exportacion
+                                </th>
+                                <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
+                                Total Flete a puerto
+                                </th>
+                               --}}
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
                                 Otros Costos
                               </th>
@@ -245,12 +247,14 @@
                                         <td class="px-6 py-0 whitespace-nowrap">
                                           <div class="text-sm text-gray-900">{{number_format($costopacking ,2,'.','.')}}</div>    
                                         </td>
-                                        <td class="px-6 py-0 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">{{number_format($gastoexportacion,2,'.','.')}}</div>    
-                                        </td>
-                                        <td class="px-6 py-0 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">{{number_format($fletehuerto,2,'.','.')}}</div>    
-                                        </td>
+                                        {{-- comment
+                                          <td class="px-6 py-0 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">{{number_format($gastoexportacion,2,'.','.')}}</div>    
+                                          </td>
+                                          <td class="px-6 py-0 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">{{number_format($fletehuerto,2,'.','.')}}</div>    
+                                          </td>
+                                         --}}
                                         <td class="px-6 py-0 whitespace-nowrap">
                                           <div class="text-sm text-gray-900">{{number_format($globaltotalotroscostos*($pesoneto/$masatotal),2,'.','.')}}</div>    
                                         </td>
@@ -306,12 +310,14 @@
                                     <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
                                       <div class="text-sm text-gray-900">{{number_format($globalcostopacking ,2,'.','.')}}</div>    
                                     </td>
-                                    <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
-                                      <div class="text-sm text-gray-900">{{number_format($globalgastoexportacion,2,'.','.')}}</div>    
-                                    </td>
-                                    <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
-                                      <div class="text-sm text-gray-900">{{number_format($globalfletehuerto)}}</div>    
-                                    </td>
+                                    {{-- comment
+                                      <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
+                                        <div class="text-sm text-gray-900">{{number_format($globalgastoexportacion,2,'.','.')}}</div>    
+                                      </td>
+                                      <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
+                                        <div class="text-sm text-gray-900">{{number_format($globalfletehuerto)}}</div>    
+                                      </td>
+                                     --}}
                                     <td class="px-6 py-0 whitespace-nowrap bg-yellow-500">
                                       <div class="text-sm text-gray-900">{{number_format($globaltotalotroscostos,2,'.','.')}}</div>    
                                     </td>
