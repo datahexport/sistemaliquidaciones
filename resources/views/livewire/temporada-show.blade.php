@@ -77,7 +77,7 @@
                                 Total Fob
                               </th>
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
-                                Total Comision
+                                Comision
                               </th>
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
                                 Total Frio Packing
