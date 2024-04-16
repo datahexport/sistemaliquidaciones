@@ -76,10 +76,10 @@
                               <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
                                 Total Fob
                               </th>
-                              {{-- comment<th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
+                              <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
                                 Comision
                               </th>
-                              <th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
+                              {{-- comment<th class="px-6 py-0 text-left text-xs font-bold text-gray-900">
                                 Frio Packing
                               </th>
                               
@@ -1280,8 +1280,6 @@
                                   'cantidad',
                                   'peso_prorrateado',
                                   'peso_caja',
-                                  'tipo_caja',
-                                  'caja_eq5',
                                   'tipo',
                                   'criterio',
                                   'color_final',
@@ -1354,12 +1352,7 @@
                               <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                   <p class="text-gray-900 whitespace-nowrap">{{ $masa->peso_caja }}</p>
                               </td>
-                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->tipo_caja }}</p>
-                              </td>
-                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                  <p class="text-gray-900 whitespace-nowrap">{{ $masa->caja_eq5 }}</p>
-                              </td>
+                             
                               <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                   <p class="text-gray-900 whitespace-nowrap">{{ $masa->tipo }}</p>
                               </td>
@@ -1377,6 +1370,18 @@
                               </td>
                               <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                   <p class="text-gray-900 whitespace-nowrap">{{ $masa->semana }}</p>
+                              </td>
+                              <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-nowrap">{{ $masa->semana }}</p>
+                            </td>
+                             <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                  <p class="text-gray-900 whitespace-nowrap">
+                                    @if ($masa->costo>0)
+                                        {{ $masa->costo }}
+                                    @else
+                                        {{ $masa->costo_nacional }}
+                                    @endif  
+                                  </p>
                               </td>
                               <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                 @if ($masaid==$masa->id)

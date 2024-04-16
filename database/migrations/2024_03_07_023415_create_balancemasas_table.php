@@ -34,8 +34,6 @@ return new class extends Migration
             $table->text('cantidad')->nullable();
             $table->text('peso_prorrateado')->nullable();
             $table->text('peso_caja')->nullable();
-            $table->text('tipo_caja')->nullable();
-            $table->text('caja_eq5')->nullable();
             $table->text('tipo')->nullable();
             $table->text('criterio')->nullable();
             $table->text('color_final')->nullable();
@@ -44,7 +42,10 @@ return new class extends Migration
             $table->text('semana')->nullable(); 
             $table->text('csg')->nullable(); 
             $table->string('fob')->nullable();
-            $table->string('fob_nacional')->nullable();  
+            $table->string('fob_nacional')->nullable();
+            $table->string('costo')->nullable();
+            $table->string('costo_nacional')->nullable();
+            $table->string('margen')->nullable();
 
             $table->timestamps();
         });

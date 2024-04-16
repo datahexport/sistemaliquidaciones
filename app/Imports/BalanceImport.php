@@ -45,17 +45,18 @@ class BalanceImport implements ToCollection, WithStartRow
                     'cantidad' => $row[12],
                     'peso_prorrateado' => $row[13],
                     'peso_caja' => $row[14],
-                    'tipo_caja' => $row[15],
-                    'caja_eq5' => $row[16],
-                    'tipo' => $row[17],
-                    'criterio' => $row[18],
-                    'color_final' => $row[19],
-                    'exportadora' => $row[20],
-                    'norma' => $row[21],
-                    'semana' => $row[22],
-                    'csg' => $row[23],
-                    'fob' => $row[24],
-                    'fob_nacional' => $row[25]
+                    'tipo' => $row[15],
+                    'criterio' => $row[16],
+                    'color_final' => $row[17],
+                    'exportadora' => $row[18],
+                    'norma' => $row[19],
+                    'semana' => $row[20],
+                    'csg' => $row[21],
+                    'fob' => $row[22],
+                    'fob_nacional' => $row[23],
+                    'costo' => $row[24],
+                    'costo_nacional' => $row[25],
+                    'margen' => $row[26]
 
                 ]);
                 
