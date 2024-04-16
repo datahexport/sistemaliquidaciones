@@ -1998,7 +1998,7 @@
 								<tr>
 								
 									<td style="text-align: left; padding-left: 0px; padding-bottom: 4px; margin-top: 10px;">ANTICIPOS OTORGADOS</td>
-									<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10">{{number_format($totalanticipos,2,',','.')}} USD</td>
+									<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10">-{{number_format($totalanticipos,2,',','.')}} USD</td>
 							
 								</tr>
 								<tr style="background-color: #ddd;">
