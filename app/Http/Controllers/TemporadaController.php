@@ -127,7 +127,7 @@ class TemporadaController extends Controller
 
     public function datauploaddesp(Temporada $temporada)
     {   $masastres=Balancemasatres::where('temporada_id',$temporada->id)->paginate(50);
-        return view('temporadas.datauploaddesp',compact('temporada'));
+        return view('temporadas.datauploaddesp',compact('temporada','masastres'));
     }
 
     public function datauploaddet(Temporada $temporada)
