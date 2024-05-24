@@ -10,7 +10,7 @@
            <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
            <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
             <main>
-                @if ($temporada->masatres->count()>0)
+                @if ($masastres->count()>0)
                     <div class="py-8">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-4">
                             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -193,7 +193,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach ($temporada->masatres as $masa)
+                                            @foreach ($masastres as $masa)
                                                 <tr>
                                                 @foreach ($columnas as $columna)
                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">

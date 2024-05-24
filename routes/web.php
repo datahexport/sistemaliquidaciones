@@ -108,7 +108,6 @@ Route::get('editcomision/{comision}/{temporada}',[TemporadaController::class,'co
 
 Route::post('updatecomision/{comision}',[TemporadaController::class,'comisionupdate'])->name('comision.update');
 
-
 Route::post('costos/exportacion/import',[TemporadaController::class,'importExportacion'])->name('temporada.importExportacion');
 
 Route::post('costos/comision/import',[TemporadaController::class,'importComision'])->name('temporada.importComision');
