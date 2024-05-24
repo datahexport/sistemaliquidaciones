@@ -66,6 +66,8 @@ Route::get('temporada/{temporada}/datauploaddesp',[TemporadaController::class,'d
 
 Route::get('temporada/{temporada}/datauploaddet',[TemporadaController::class,'datauploaddet'])->middleware('auth')->name('temporada.datauploaddet');
 
+Route::get('temporada/{temporada}/datauploadprod',[TemporadaController::class,'datauploadprod'])->middleware('auth')->name('temporada.datauploadprod');
+
 Route::get('temporada/{temporada}/materiales',[TemporadaController::class,'materiales'])->middleware('auth')->name('temporada.materiales');
 
 Route::get('temporada/{temporada}/exportacion',[TemporadaController::class,'exportacion'])->middleware('auth')->name('temporada.exportacion');
@@ -118,6 +120,8 @@ Route::post('costos/balancedos/import',[TemporadaController::class,'importBalanc
 Route::post('costos/balancetres/import',[TemporadaController::class,'importBalance3'])->name('temporada.importBalance3');
 
 Route::post('costos/balancecuatro/import',[TemporadaController::class,'importBalance4'])->name('temporada.importBalance4');
+
+Route::post('costos/proceso/import',[TemporadaController::class,'importProceso'])->name('temporada.importProceso');
 
 Route::post('costos/anticipo/import',[TemporadaController::class,'importAnticipo'])->name('temporada.importAnticipo');
 

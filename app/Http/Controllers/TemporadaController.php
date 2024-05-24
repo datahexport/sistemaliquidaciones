@@ -15,6 +15,7 @@ use App\Imports\FobImport;
 use App\Imports\GastoImport;
 use App\Imports\MaterialImport;
 use App\Imports\PackingImport;
+use App\Imports\ProduccionImport;
 use App\Imports\ResumenImport;
 use App\Models\Anticipo;
 use App\Models\Balancemasa;
@@ -32,6 +33,7 @@ use App\Models\Fob;
 use App\Models\Fobnacional;
 use App\Models\Gasto;
 use App\Models\Material;
+use App\Models\Proceso;
 use App\Models\Razonsocial;
 use App\Models\Resumen;
 use App\Models\Temporada;
@@ -131,6 +133,11 @@ class TemporadaController extends Controller
     public function datauploaddet(Temporada $temporada)
     {   
         return view('temporadas.datauploaddet',compact('temporada'));
+    }
+
+    public function datauploadprod(Temporada $temporada)
+    {   $procesos=Proceso::where('temporada_id',$temporada->id)->paginate(25);
+        return view('temporadas.datauploadprod',compact('temporada','procesos'));
     }
 
     public function materiales(Temporada $temporada)
@@ -641,6 +648,26 @@ class TemporadaController extends Controller
         }
 
         FacadesExcel::import(new Balance4Import($request->temporada),$file);
+
+        $temporada=Temporada::find($request->temporada);
+
+        return redirect()->back()->with('info','Importación realizada con exito');
+    }
+
+    public function importProceso(Request $request)
+    {    $request->validate([
+            'file'=>'required|mimes:csv,xlsx'
+        ]);
+
+        $file = $request->file('file');
+
+        $masas=Proceso::where('temporada_id',$request->temporada)->get();
+
+        foreach ($masas as $masa){
+            $masa->delete();
+        }
+
+        FacadesExcel::import(new ProduccionImport($request->temporada),$file);
 
         $temporada=Temporada::find($request->temporada);
 

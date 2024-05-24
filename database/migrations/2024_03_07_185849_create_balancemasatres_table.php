@@ -19,30 +19,71 @@ return new class extends Migration
             ->constrained()
             ->onDelete('cascade');
 
-            $table->text('dest_nombre')->nullable();
-            $table->text('fecha')->nullable();
-            $table->text('traspaso')->nullable();
-            $table->text('folio')->nullable();
+            $table->text('Temporada')->nullable();
+            $table->text('Estado')->nullable();
+            $table->text('Packing')->nullable();
+            $table->text('Folio')->nullable();
+            $table->text('N_GuiaSII_Rec')->nullable();
+            $table->text('N_lote')->nullable();
+            $table->text('Peido')->nullable();
+            $table->text('Fecha_Emb')->nullable();
+            $table->text('Cliente')->nullable();
             $table->text('CSG')->nullable();
-            $table->text('prod_nombre')->nullable();
-            $table->text('cli_nombre')->nullable();
+            $table->text('Csg_Rot')->nullable();
+            $table->text('Nombre_Huerto')->nullable();
+            $table->text('Nombre_CSG_Rot')->nullable();
+            $table->text('Nombre_Productor')->nullable();
+            $table->text('Etiqueta')->nullable();
+            $table->text('C_Envase')->nullable();
+            $table->text('Envase')->nullable();
+            $table->text('Especie')->nullable();
             $table->text('Variedad_Real')->nullable();
-            $table->text('Variedad_Rotulada')->nullable();
-            $table->text('cate_nombre')->nullable();
-            $table->text('enva_nombre')->nullable();
-            $table->text('fec_emb')->nullable();
-            $table->text('eti_nombre')->nullable();
-            $table->text('calibre')->nullable();
+            $table->text('Variedad_Rot')->nullable();
+            $table->text('Categoria')->nullable();
+            $table->text('Calidad')->nullable();
+            $table->text('Calibre')->nullable();
+            $table->text('Cajas_INICIAL')->nullable();
+            $table->text('Dif_Cajas')->nullable();
             $table->text('Cajas')->nullable();
-            $table->text('procesor')->nullable();
-            $table->text('procesor2')->nullable();
-            $table->text('kilos')->nullable();
-            $table->text('guiasii')->nullable();
-            $table->text('enva_id')->nullable();
-
-
-
-
+            $table->text('Cajas_Pallet')->nullable();
+            $table->text('Kilos_INICIAL')->nullable();
+            $table->text('Dif_Kilos_proc')->nullable();
+            $table->text('Kilos_prod')->nullable();
+            $table->text('Kilos_emb')->nullable();
+            $table->text('Proceso')->nullable();
+            $table->text('Tipo_Pallet')->nullable();
+            $table->text('Base_Pallet')->nullable();
+            $table->text('Altura')->nullable();
+            $table->text('C_Packing')->nullable();
+            $table->text('C_Variedad_real')->nullable();
+            $table->text('C_Variedad_Rot')->nullable();
+            $table->text('C_Categoria')->nullable();
+            $table->text('C_Cliente')->nullable();
+            $table->text('C_Etiqueta')->nullable();
+            $table->text('C_Especie')->nullable();
+            $table->text('C_Recibidor')->nullable();
+            $table->text('C_Mercado')->nullable();
+            $table->text('Nave')->nullable();
+            $table->text('Fecha_Salida')->nullable();
+            $table->text('Exportador')->nullable();
+            $table->text('Mercado')->nullable();
+            $table->text('Despacho')->nullable();
+            $table->text('Folio_Sag')->nullable();
+            $table->text('Fecha_despacho')->nullable();
+            $table->text('Recibidor_comprador')->nullable();
+            $table->text('Numero_Inspeccion')->nullable();
+            $table->text('Fecha_Inspeccion')->nullable();
+            $table->text('Estado_Inspeccion')->nullable();
+            $table->text('Guia_sii')->nullable();
+            $table->text('Contenedor')->nullable();
+            $table->text('Peso_Neto')->nullable();
+            $table->text('Peso_Bruto')->nullable();
+            $table->text('Fecha_Digitacion')->nullable();
+            $table->text('N_Reserva')->nullable();
+            $table->text('Fecha_Reserva')->nullable();
+            $table->text('Planta')->nullable();
+            $table->text('Planta_Despacho')->nullable();
+            
             $table->timestamps();
         });
     }

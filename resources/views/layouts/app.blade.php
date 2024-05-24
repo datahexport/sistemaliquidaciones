@@ -28,7 +28,7 @@
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">
-            @if(Route::currentRouteName() != 'users.index' &&Route::currentRouteName() != 'temporada.gastos' && Route::currentRouteName() != 'temporada.dataupload' && Route::currentRouteName() != 'temporada.datauploadliq' && Route::currentRouteName() != 'temporada.datauploaddesp' && Route::currentRouteName() != 'temporada.datauploaddet' && Route::currentRouteName() != 'dashboard' && Route::currentRouteName() != 'home' && Route::currentRouteName() != 'temporadas.show')
+            @if(Route::currentRouteName() != 'temporada.datauploadprod' && Route::currentRouteName() != 'users.index' && Route::currentRouteName() != 'temporada.gastos' && Route::currentRouteName() != 'temporada.dataupload' && Route::currentRouteName() != 'temporada.datauploadliq' && Route::currentRouteName() != 'temporada.datauploaddesp' && Route::currentRouteName() != 'temporada.datauploaddet' && Route::currentRouteName() != 'dashboard' && Route::currentRouteName() != 'home' && Route::currentRouteName() != 'temporadas.show')
                 @livewire('navigation-menu')
             @endif
             <!-- Page Heading -->

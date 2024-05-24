@@ -9,8 +9,9 @@
            </aside>
            <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
            <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
-            <main>
-                @if ($temporada->masatres->count()>0)
+              <main>
+                
+                @if ($procesos->count()>1)
                     <div class="py-8">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-4">
                             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -32,7 +33,7 @@
                                     <div class="relative flex flex-col items-center rounded-[20px] w-[700px] max-w-[95%] mx-auto bg-white bg-clip-border shadow-3xl shadow-lg  dark:!bg-navy-800 dark:text-white dark:!shadow-none p-3">
                                         <div class="mt-2 mb-2 w-full">
                                             <h4 class="px-2 text-xl font-bold text-navy-700 dark:text-white">
-                                            Base Despachos
+                                            Base Producción
                                             </h4>
                                             <p class="mt-2 px-2 text-base text-gray-600">
                                             As we live, our hearts turn colder. Cause pain is what we go through
@@ -43,7 +44,7 @@
                                             </p>
                                         </div> 
                                         <div class="">
-                                            <form action="{{route('temporada.importBalance3')}}"
+                                            <form action="{{route('temporada.importProceso')}}"
                                                 method="POST"
                                                 class="bg-white rounded px-8 shadow my-4"
                                                 enctype="multipart/form-data">
@@ -118,72 +119,31 @@
                                             <tr>
                                                 @php
                                                  $columnas = [
-                                                    'Temporada',
-                                                    'Estado',
-                                                    'Packing',
-                                                    'Folio',
-                                                    'N_GuiaSII_Rec',
-                                                    'N_lote',
-                                                    'Peido',
-                                                    'Fecha_Emb',
-                                                    'Cliente',
-                                                    'CSG',
-                                                    'Csg_Rot',
-                                                    'Nombre_Huerto',
-                                                    'Nombre_CSG_Rot',
-                                                    'Nombre_Productor',
-                                                    'Etiqueta',
-                                                    'C_Envase',
-                                                    'Envase',
-                                                    'Especie',
-                                                    'Variedad_Real',
-                                                    'Variedad_Rot',
-                                                    'Categoria',
-                                                    'Calidad',
-                                                    'Calibre',
-                                                    'Cajas_INICIAL',
-                                                    'Dif_Cajas',
-                                                    'Cajas',
-                                                    'Cajas_Pallet',
-                                                    'Kilos_INICIAL',
-                                                    'Dif_Kilos_proc',
-                                                    'Kilos_prod',
-                                                    'Kilos_emb',
-                                                    'Proceso',
-                                                    'Tipo_Pallet',
-                                                    'Base_Pallet',
-                                                    'Altura',
-                                                    'C_Packing',
-                                                    'C_Variedad_real',
-                                                    'C_Variedad_Rot',
-                                                    'C_Categoria',
-                                                    'C_Cliente',
-                                                    'C_Etiqueta',
-                                                    'C_Especie',
-                                                    'C_Recibidor',
-                                                    'C_Mercado',
-                                                    'Nave',
-                                                    'Fecha_Salida',
-                                                    'Exportador',
-                                                    'Mercado',
-                                                    'Despacho',
-                                                    'Folio_Sag',
-                                                    'Fecha_despacho',
-                                                    'Recibidor_comprador',
-                                                    'Numero_Inspeccion',
-                                                    'Fecha_Inspeccion',
-                                                    'Estado_Inspeccion',
-                                                    'Guia_sii',
-                                                    'Contenedor',
-                                                    'Peso_Neto',
-                                                    'Peso_Bruto',
-                                                    'Fecha_Digitacion',
-                                                    'N_Reserva',
-                                                    'Fecha_Reserva',
-                                                    'Planta',
-                                                    'Planta_Despacho'
-                                                    ];
-                                        
+                                                    'PROCESO',
+                                                    'TURNO',
+                                                    'PLANTA',
+                                                    'FECHA',
+                                                    'PRODUCTOR_RECEP_FACTURACION',
+                                                    'VARIEDAD',
+                                                    'ENVASES_ETIQ',
+                                                    'COLOR',
+                                                    'CALIBRE',
+                                                    'CALIBRE_REAL',
+                                                    'CANT',
+                                                    'PESO_FINAL',
+                                                    'PESO_PRORRATEADO',
+                                                    'KG_VACIADO',
+                                                    'PESO_CAJA',
+                                                    'TIPO_CAJA',
+                                                    'CAJA_EQ_5KG',
+                                                    'TIPO',
+                                                    'CRITERIO',
+                                                    'COLOR_FINAL',
+                                                    'BUSQUEDA_PROCESO',
+                                                    'EXPORTADORA',
+                                                    'NORMA',
+                                                    'SEMANA'
+                                                ];
                                                 foreach ($columnas as $columna) {
                                                     echo '<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase whitespace-no-wrap">';
                                                     echo ucfirst(str_replace('_', ' ', $columna));
@@ -193,7 +153,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach ($temporada->masatres as $masa)
+                                            @foreach ($procesos as $masa)
                                                 <tr>
                                                 @foreach ($columnas as $columna)
                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
@@ -249,7 +209,7 @@
                         <div class="relative flex flex-col items-center rounded-[20px] w-[700px] max-w-[95%] mx-auto bg-white bg-clip-border shadow-3xl shadow-lg  dark:!bg-navy-800 dark:text-white dark:!shadow-none p-3">
                             <div class="mt-2 mb-2 w-full">
                                 <h4 class="px-2 text-xl font-bold text-navy-700 dark:text-white">
-                                Base Despachos
+                                    Base Producción
                                 </h4>
                                 <p class="mt-2 px-2 text-base text-gray-600">
                                 As we live, our hearts turn colder. Cause pain is what we go through
@@ -260,26 +220,26 @@
                                 </p>
                             </div> 
                             <div class="">
-                                <form action="{{route('temporada.importBalance3')}}"
+                                <form action="{{route('temporada.importProceso')}}"
                                     method="POST"
                                     class="bg-white rounded px-8 shadow my-4"
                                     enctype="multipart/form-data">
                                     
                                     @csrf
-    
+
                                     <input type="hidden" name="temporada" value={{$temporada->id}}>
-    
+
                                     <x-validation-errors class="errors">
-    
+
                                     </x-validation-errors>
-    
+
                                     <input type="file" name="file" accept=".csv,.xlsx">
-    
+
                                     <x-button class="">
                                         Importar
                                     </x-button>
                                 </form>
-    
+
                             </div>
                             <div class="grid grid-cols-2 gap-4 px-2 w-full">
                                 <div class="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
@@ -328,7 +288,9 @@
                         <p class="font-normal text-navy-700 mt-20 mx-auto w-max">Profile Card component from <a href="https://horizon-ui.com?ref=tailwindcomponents.com" target="_blank" class="text-brand-500 font-bold">Horizon UI Tailwind React</a></p>  
                     </div>
                 @endif
-            </main>
+              
+                
+              </main>
            
            </div>
         </div>

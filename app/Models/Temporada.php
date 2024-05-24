@@ -61,6 +61,10 @@ class Temporada extends Model
         return $this->hasmany('App\Models\Balancemasacuatro');
     }
 
+    public function procesos(){
+        return $this->hasmany('App\Models\Proceso');
+    }
+
     public function exportacions(){
         return $this->hasmany('App\Models\Exportacion');
     }
