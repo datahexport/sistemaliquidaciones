@@ -657,6 +657,7 @@
               </div>
             </div>
           </div>
+          
             <div class="flex justify-between ml-4">
               @if ($vista=='MASAS')
                 <a href="{{Route('preciofob.refresh',$temporada)}}">
@@ -1289,6 +1290,7 @@
 
                     </div>
                   </div>
+
                     <table class="min-w-full leading-normal">
                       <thead>
                         <tr>

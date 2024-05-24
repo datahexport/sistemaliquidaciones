@@ -19,52 +19,28 @@ return new class extends Migration
             ->constrained()
             ->onDelete('cascade');
 
-            $table->text('id_check')->nullable();
-            $table->text('n_familia_rotulacion')->nullable();
-            $table->text('id_especie_rotulacion')->nullable();
-            $table->text('c_especie_rotulacion')->nullable();
-            $table->text('n_especie_rotulacion')->nullable();
+            $table->text('dest_nombre')->nullable();
+            $table->text('fecha')->nullable();
+            $table->text('traspaso')->nullable();
+            $table->text('folio')->nullable();
+            $table->text('CSG')->nullable();
+            $table->text('prod_nombre')->nullable();
+            $table->text('cli_nombre')->nullable();
+            $table->text('Variedad_Real')->nullable();
+            $table->text('Variedad_Rotulada')->nullable();
+            $table->text('cate_nombre')->nullable();
+            $table->text('enva_nombre')->nullable();
+            $table->text('fec_emb')->nullable();
+            $table->text('eti_nombre')->nullable();
+            $table->text('calibre')->nullable();
+            $table->text('Cajas')->nullable();
+            $table->text('procesor')->nullable();
+            $table->text('procesor2')->nullable();
+            $table->text('kilos')->nullable();
+            $table->text('guiasii')->nullable();
+            $table->text('enva_id')->nullable();
 
-            $table->text('id_variedad_rotulacion')->nullable();
-            $table->text('c_variedad_rotulacion')->nullable();
-            $table->text('n_variedad_rotulacion')->nullable();
-            $table->text('id_empresa')->nullable();
 
-            $table->text('ngd_recepcion')->nullable();
-            $table->text('fecha_documento')->nullable();
-            $table->text('fecha_documento_sh')->nullable();
-            $table->text('id_linea_proceso')->nullable();
-            $table->text('c_linea_proceso')->nullable();
-            $table->text('n_linea_proceso')->nullable();
-            $table->text('numero_gruia_recepcion')->nullable();
-            $table->text('fecha_recepcion')->nullable();
-
-            $table->text('id_turno')->nullable();
-            $table->text('n_turno')->nullable();
-            $table->text('id_tipo_proceso')->nullable();
-            $table->text('n_tipo_proceso')->nullable();
-            $table->text('id_condicion')->nullable();
-            $table->text('c_condicion')->nullable();
-            $table->text('n_condicion')->nullable();
-
-            $table->text('id_grupo_proceso')->nullable();
-            $table->text('c_grupo_proceso')->nullable();
-            $table->text('n_grupo_proceso')->nullable();
-            $table->text('peso_equivalente')->nullable();
-            $table->text('id_cliente_packing')->nullable();
-            $table->text('r_cliente_packing')->nullable();
-            $table->text('c_cliente_packing')->nullable();
-            $table->text('n_cliente_packing')->nullable();
-
-            $table->text('fecha_cosecha_sf')->nullable();
-            $table->text('fecha_produccion_sf')->nullable();
-            $table->text('ngi_recepcion')->nullable();
-            $table->text('creacion_tipo')->nullable();
-            $table->text('c_marca')->nullable();
-            $table->text('n_marca')->nullable();
-            $table->text('id_variedad_comercial')->nullable();
-            $table->text('c_variedad_comercial')->nullable();
-            $table->text('n_variedad_comercial')->nullable();
 
 
             $table->timestamps();

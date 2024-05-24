@@ -1,17 +1,29 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-
-              @livewire('temporadas-index')
-                
-            </div>
+    <div>
+        @livewire('new-nav')
+        <div class="flex overflow-hidden bg-white pt-16">
+           <aside id="sidebar" class="fixed hidden z-20 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75" aria-label="Sidebar">
+              @livewire('aside-principal')
+           </aside>
+           <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
+           <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64  h-screen">
+              <main>
+                <div class="py-12">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            
+                          @livewire('temporadas-index')
+                        
+                        </div>
+                    </div>
+                </div>
+              </main>
+           </div>
         </div>
-    </div>
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <script src="https://demo.themesberg.com/windster/app.bundle.js"></script>
+     </div>
+
+    
 </x-app-layout>

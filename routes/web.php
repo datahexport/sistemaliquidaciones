@@ -50,11 +50,21 @@ Route::resource('familia', FamiliaController::class)->names('familias');
 
 Route::resource('gasto', GastoController::class)->names('gastos');
 
+Route::resource('users', UserController::class)->names('users');
+
 Route::get('temporada/{temporada}/resumen',[TemporadaController::class,'resume'])->middleware('auth')->name('temporada.resume');
 
 Route::get('temporada/{temporada}/packing',[TemporadaController::class,'packing'])->middleware('auth')->name('temporada.packing');
 
 Route::get('temporada/{temporada}/comision',[TemporadaController::class,'comision'])->middleware('auth')->name('temporada.comision');
+
+Route::get('temporada/{temporada}/dataupload',[TemporadaController::class,'dataupload'])->middleware('auth')->name('temporada.dataupload');
+
+Route::get('temporada/{temporada}/datauploadliq',[TemporadaController::class,'datauploadliq'])->middleware('auth')->name('temporada.datauploadliq');
+
+Route::get('temporada/{temporada}/datauploaddesp',[TemporadaController::class,'datauploaddesp'])->middleware('auth')->name('temporada.datauploaddesp');
+
+Route::get('temporada/{temporada}/datauploaddet',[TemporadaController::class,'datauploaddet'])->middleware('auth')->name('temporada.datauploaddet');
 
 Route::get('temporada/{temporada}/materiales',[TemporadaController::class,'materiales'])->middleware('auth')->name('temporada.materiales');
 
@@ -126,4 +136,5 @@ Route::get('update/{temporada}',[TemporadaController::class,'variedadupdate'])->
 Route::get('updatefob/{temporada}',[TemporadaController::class,'fobupdate'])->name('preciofob.refresh');
 
 Route::get('download/razonsocial/{razonsocial}.pdf', [RazonController::class,'downloadpdf'])->name('informe.download');
+
 

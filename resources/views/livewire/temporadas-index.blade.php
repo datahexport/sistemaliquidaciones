@@ -64,15 +64,14 @@
             </div>
           <div class="lg:ml-40 ml-10 space-x-8">
             <a href="{{route('temporadas.create')}}">
-              <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Agregar Temporada</button>
+              <button class="bg-red-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Agregar Temporada</button>
             </a>
-            <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer hidden">Agregar</button>
+            <button class="bg-red-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer hidden">Agregar</button>
           </div>
         </div>
       </div>
 
-      {{$search}}
-
+     
       <div>
         <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           @foreach ($temporadas as $temporada)
@@ -129,6 +128,7 @@
     
       </div>
     </div>
+    
 
     @push('js')
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

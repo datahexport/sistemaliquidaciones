@@ -19,36 +19,40 @@ return new class extends Migration
             ->constrained()
             ->onDelete('cascade');
 
-            $table->text('orden_interno_calibre')->nullable();
-            $table->text('c_bodega_origen')->nullable();
-            $table->text('n_bodega_origen')->nullable();
-            $table->text('numero_trabajores')->nullable();
-            $table->text('hora_termino')->nullable();
-            $table->text('hora_inicio')->nullable();
-            $table->text('horas_efectivas')->nullable();
-            $table->text('c_recibidor')->nullable();
-            $table->text('r_packing_origen')->nullable();
-            $table->text('n_packing_origen')->nullable();
-            $table->text('ns_packing_origen')->nullable();
-            $table->text('c_packing_origen')->nullable();
+            $table->text('Sales_date')->nullable();
+            $table->text('Arrival_Date')->nullable();
+            $table->text('N_Pallet')->nullable();
+            $table->text('Variedad')->nullable();
+            $table->text('Etiqueta')->nullable();
+            $table->text('Calibre_y_Color')->nullable();
+            $table->text('Cajas')->nullable();
+            $table->text('Precio_Venta_Yen')->nullable();
+            $table->text('Total_Venta')->nullable();
+            $table->text('Contenedor')->nullable();
+            $table->text('PESO_TOTAL')->nullable();
+            $table->text('CAJAS_DESPACHADAS')->nullable();
+            $table->text('DIF')->nullable();
+            $table->text('PESO_CAJA')->nullable();
+            $table->text('COLOR')->nullable();
+            $table->text('SIG_COLOR')->nullable();
+            $table->text('CALIBRE')->nullable();
+            $table->text('TC')->nullable();
+            $table->text('VENTA_USD')->nullable();
+            $table->text('COMISION')->nullable();
+            $table->text('FLETE')->nullable();
+            $table->text('OTROS_GASTOS')->nullable();
+            $table->text('Apoyo_Liquidaciones')->nullable();
+            $table->text('LIQ_CLIENTE')->nullable();
+            $table->text('PROMOCION_ASOEX')->nullable();
+            $table->text('SEGURO_CARGA')->nullable();
+            $table->text('LIQ_PRODUCTOR')->nullable();
+            $table->text('RETORNO_PRODUCTOR_ESTIMADO')->nullable();
+            $table->text('NAVE')->nullable();
+            $table->text('CLIENTE')->nullable();
+            $table->text('PAIS')->nullable();
+            $table->text('MERCADO')->nullable();
+            $table->text('UNIR_CADE')->nullable();
 
-            $table->text('nota_calidad')->nullable();
-            $table->text('tratamiento')->nullable();
-            $table->text('kg_aditivos')->nullable();
-
-            $table->text('n_docaditivo')->nullable();
-            $table->text('c_aditivo')->nullable();
-            $table->text('n_aditivo')->nullable();
-            $table->text('referencias')->nullable();
-
-            $table->text('notas')->nullable();
-            $table->text('csg')->nullable();
-            $table->text('csg_productor')->nullable();
-            $table->text('estado')->nullable();
-            $table->text('id_marca_etiqueta')->nullable();
-            $table->text('c_marca_etiqueta')->nullable();
-            $table->text('n_marca_etiqueta')->nullable();
-            $table->text('loter_unitec')->nullable();
 
             $table->text('id_check')->nullable();
           

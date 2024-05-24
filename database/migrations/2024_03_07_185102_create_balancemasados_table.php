@@ -19,50 +19,44 @@ return new class extends Migration
             ->constrained()
             ->onDelete('cascade');
 
-            $table->text('id_check')->nullable();
-            $table->text('c_variedad')->nullable();
-            $table->text('n_variedad')->nullable();
-            $table->text('id_embalaje')->nullable();
-            $table->text('c_embalaje')->nullable();
-            $table->text('n_embalaje')->nullable();
-            $table->text('cp1')->nullable();
-            $table->text('cp2')->nullable();
-            $table->text('peso_std_embalaje')->nullable();
-            $table->text('peso_standard')->nullable();
-            $table->text('id_contenedor')->nullable();
-            $table->text('c_contenedor')->nullable();
-            $table->text('n_contenedor')->nullable();
+            $table->text('Contenedor')->nullable();
+            $table->text('Fecha')->nullable();
+            $table->text('Nave')->nullable();
+            $table->text('DESTINO')->nullable();
+            $table->text('Cliente')->nullable();
+            $table->text('Sales_City')->nullable();
+            $table->text('Tipo')->nullable();
+            $table->text('Total_Venta')->nullable();
+            $table->text('Flete_Maritimo_AEREO')->nullable();
+            $table->text('Impuestos')->nullable();
+            $table->text('Entrada_al_Mercado')->nullable();
+            $table->text('Costos_logisticos')->nullable();
+            $table->text('Flete_interior')->nullable();
+            $table->text('Costos_en_mercado')->nullable();
+            $table->text('Ajuste_de_Impuestos')->nullable();
+            $table->text('Costo_Extra')->nullable();
+            $table->text('REBATE')->nullable();
+            $table->text('MAERK')->nullable();
+            $table->text('Comisiones')->nullable();
+            $table->text('Comision')->nullable();
+            $table->text('Costos_Totales')->nullable();
+            $table->text('Tipo_de_Cambio')->nullable();
+            $table->text('Liq_RMB')->nullable();
+            $table->text('Liq_USD')->nullable();
+            $table->text('Nuevo_TC')->nullable();
+            $table->text('Ajuste_Dif_TC')->nullable();
+            $table->text('Liquidacion_USD')->nullable();
+            $table->text('TC_FINAL')->nullable();
+            $table->text('Cant_Cajas')->nullable();
+            $table->text('KG_CONTENEDOR')->nullable();
+            $table->text('OTROS_GASTOS')->nullable();
+            $table->text('OTROS_COSTOS_SIN_MAERSK')->nullable();
+            $table->text('Mes_Facturacion')->nullable();
+            $table->text('No_Factura')->nullable();
+            $table->text('Otros_Costos')->nullable();
+            $table->text('Liq_sin_Maersk')->nullable();
+            $table->text('Columna1')->nullable();
 
-            $table->text('id_categoria')->nullable();
-            $table->text('c_categoria')->nullable();
-            $table->text('n_vategoria')->nullable();
-            $table->text('t_categoria')->nullable();
-            $table->text('id_categoria_st')->nullable();
-            $table->text('n_categoria_st')->nullable();
-            $table->text('id_calibre')->nullable();
-            $table->text('c_calibre')->nullable();
-            $table->text('n_calibre')->nullable();
-            $table->text('id_serie')->nullable();
-            $table->text('c_serie')->nullable();
-            $table->text('n_serie')->nullable();
-
-            $table->text('id_etiqueta')->nullable();
-            $table->text('c_etiqueta')->nullable();
-            $table->text('n_etiqueta')->nullable();
-            $table->text('id_plu')->nullable();
-            $table->text('c_plu')->nullable();
-            $table->text('n_plu')->nullable();
-            $table->text('cantidad')->nullable();
-            $table->text('peso_neto')->nullable();
-            $table->text('id_productor_rotulacion')->nullable();
-            $table->text('r_productor_rotulacion')->nullable();
-            $table->text('c_productor_rotulacion')->nullable();
-            $table->text('n_productor_rotulacion')->nullable();
-
-            $table->text('ns_productor_rotulacion')->nullable();
-            $table->text('cp1_productor_rotulacion')->nullable();
-            $table->text('id_familia_rotulacion')->nullable();
-            $table->text('c_familia_rotulacion')->nullable();
             
 
             $table->timestamps();

@@ -22,13 +22,15 @@
 
         <!-- Styles -->
         @livewireStyles
+              
     </head>
     <body class="font-sans antialiased">
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
-
+            @if(Route::currentRouteName() != 'users.index' &&Route::currentRouteName() != 'temporada.gastos' && Route::currentRouteName() != 'temporada.dataupload' && Route::currentRouteName() != 'temporada.datauploadliq' && Route::currentRouteName() != 'temporada.datauploaddesp' && Route::currentRouteName() != 'temporada.datauploaddet' && Route::currentRouteName() != 'dashboard' && Route::currentRouteName() != 'home' && Route::currentRouteName() != 'temporadas.show')
+                @livewire('navigation-menu')
+            @endif
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow">

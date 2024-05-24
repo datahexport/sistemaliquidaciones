@@ -18,6 +18,9 @@ use App\Imports\PackingImport;
 use App\Imports\ResumenImport;
 use App\Models\Anticipo;
 use App\Models\Balancemasa;
+use App\Models\Balancemasacuatro;
+use App\Models\Balancemasados;
+use App\Models\Balancemasatres;
 use App\Models\Comision;
 use App\Models\CostoPacking;
 use App\Models\Detalle;
@@ -108,6 +111,26 @@ class TemporadaController extends Controller
     public function comision(Temporada $temporada)
     {   $comisions=Comision::where('temporada_id',$temporada->id)->get();
         return view('temporadas.comision',compact('temporada','comisions'));
+    }
+
+    public function dataupload(Temporada $temporada)
+    {   
+        return view('temporadas.dataupload',compact('temporada'));
+    }
+
+    public function datauploadliq(Temporada $temporada)
+    {   
+        return view('temporadas.datauploadliq',compact('temporada'));
+    }
+
+    public function datauploaddesp(Temporada $temporada)
+    {   
+        return view('temporadas.datauploaddesp',compact('temporada'));
+    }
+
+    public function datauploaddet(Temporada $temporada)
+    {   
+        return view('temporadas.datauploaddet',compact('temporada'));
     }
 
     public function materiales(Temporada $temporada)
@@ -571,11 +594,17 @@ class TemporadaController extends Controller
 
         $file = $request->file('file');
 
+        $masas=Balancemasados::where('temporada_id',$request->temporada)->get();
+
+        foreach ($masas as $masa){
+            $masa->delete();
+        }
+
         FacadesExcel::import(new Balance2Import($request->temporada),$file);
 
         $temporada=Temporada::find($request->temporada);
 
-        return redirect()->route('temporada.balancemasa',$temporada)->with('info','Importación realizada con exito');
+        return redirect()->back()->with('info','Importación realizada con exito');
     }
 
     public function importBalance3(Request $request)
@@ -585,11 +614,17 @@ class TemporadaController extends Controller
 
         $file = $request->file('file');
 
+        $masas=Balancemasatres::where('temporada_id',$request->temporada)->get();
+
+        foreach ($masas as $masa){
+            $masa->delete();
+        }
+
         FacadesExcel::import(new Balance3Import($request->temporada),$file);
 
         $temporada=Temporada::find($request->temporada);
 
-        return redirect()->route('temporada.balancemasa',$temporada)->with('info','Importación realizada con exito');
+        return redirect()->back()->with('info','Importación realizada con exito');
     }
 
     public function importBalance4(Request $request)
@@ -599,11 +634,17 @@ class TemporadaController extends Controller
 
         $file = $request->file('file');
 
+        $masas=Balancemasacuatro::where('temporada_id',$request->temporada)->get();
+
+        foreach ($masas as $masa){
+            $masa->delete();
+        }
+
         FacadesExcel::import(new Balance4Import($request->temporada),$file);
 
         $temporada=Temporada::find($request->temporada);
 
-        return redirect()->route('temporada.balancemasa',$temporada)->with('info','Importación realizada con exito');
+        return redirect()->back()->with('info','Importación realizada con exito');
     }
 
 }
