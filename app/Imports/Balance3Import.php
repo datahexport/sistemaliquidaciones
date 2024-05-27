@@ -3,9 +3,11 @@
 namespace App\Imports;
 
 use App\Models\Balancemasatres;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class Balance3Import implements ToCollection, WithStartRow
     {   protected $temporada;
@@ -73,25 +75,25 @@ class Balance3Import implements ToCollection, WithStartRow
                     'C_Recibidor' => $row[42],
                     'C_Mercado' => $row[43],
                     'Nave' => $row[44],
-                    'Fecha_Salida' => $row[45],
+                    'Fecha_Salida' => Carbon::instance(Date::excelToDateTimeObject($row[45])),
                     'Exportador' => $row[46],
                     'Mercado' => $row[47],
                     'Despacho' => $row[48],
                     'Folio_Sag' => $row[49],
-                    'Fecha_despacho' => $row[50],
+                    'Fecha_despacho' => Carbon::instance(Date::excelToDateTimeObject($row[50])),
                     'Recibidor_comprador' => $row[51],
-                    'Numero_Inspeccion' => $row[52],
-                    'Fecha_Inspeccion' => $row[53],
-                    'Estado_Inspeccion' => $row[54],
-                    'Guia_sii' => $row[55],
-                    'Contenedor' => $row[56],
-                    'Peso_Neto' => $row[57],
-                    'Peso_Bruto' => $row[58],
-                    'Fecha_Digitacion' => $row[59],
-                    'N_Reserva' => $row[60],
-                    'Fecha_Reserva' => $row[61],
-                    'Planta' => $row[62],
-                    'Planta_Despacho' => $row[63],
+                    'Numero_Inspeccion' => $row[53],
+                    'Fecha_Inspeccion' => Carbon::instance(Date::excelToDateTimeObject($row[54])),
+                    'Estado_Inspeccion' => $row[55],
+                    'Guia_sii' => $row[56],
+                    'Contenedor' => $row[57],
+                    'Peso_Neto' => $row[58],
+                    'Peso_Bruto' => $row[59],
+                    'Fecha_Digitacion' => Carbon::instance(Date::excelToDateTimeObject($row[60])),
+                    'N_Reserva' => $row[61],
+                    'Fecha_Reserva' => Carbon::instance(Date::excelToDateTimeObject($row[62])),
+                    'Planta' => $row[63],
+                    'Planta_Despacho' => $row[64],
 
 
                     
