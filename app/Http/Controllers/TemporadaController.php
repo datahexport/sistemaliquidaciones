@@ -209,6 +209,11 @@ class TemporadaController extends Controller
         return view('temporadas.gastos',compact('temporada','gastos'));
     }
 
+    public function precio_original(Temporada $temporada)
+    {  
+        return view('temporadas.precio-original',compact('temporada'));
+    }
+
   
 
     /**

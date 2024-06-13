@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('temporada_id')
-            ->nullable()
-            ->constrained()
-            ->onDelete('cascade');
+                ->nullable()
+                ->constrained()
+                ->onDelete('cascade');
 
             $table->text('Sales_date')->nullable();
             $table->text('Arrival_Date')->nullable();
@@ -53,8 +53,10 @@ return new class extends Migration
             $table->text('MERCADO')->nullable();
             $table->text('UNIR_CADE')->nullable();
 
+            $table->integer('sort');
 
-            $table->text('id_check')->nullable();
+
+            $table->text('semana')->nullable();
           
 
             $table->timestamps();

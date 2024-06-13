@@ -88,6 +88,8 @@ Route::get('temporada/{temporada}/anticipos',[TemporadaController::class,'antici
 
 Route::get('temporada/{temporada}/gastos',[TemporadaController::class,'gastos'])->name('temporada.gastos');
 
+Route::get('temporada/{temporada}/precios',[TemporadaController::class,'precio_original'])->name('temporada.precio.original');
+
 Route::post('data/import',[TemporadaController::class,'importdata'])->name('temporada.importData');
 
 Route::post('costos/packing/import',[TemporadaController::class,'importCostosPacking'])->name('temporada.importCostosPacking');

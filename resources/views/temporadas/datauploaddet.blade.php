@@ -36,6 +36,7 @@
                                             Base Detalle Liquidación
                                             </h4>
                                             <p class="mt-2 px-2 text-base text-gray-600">
+                                                1) La columnas relacionadas a fechas deben tener formato Fecha en excel.<br>
                                             As we live, our hearts turn colder. Cause pain is what we go through
                                             as we become older. We get insulted by others, lose trust for those
                                             others. We get back stabbed by friends. It becomes harder for us to
@@ -111,8 +112,10 @@
                                     </div>  
                                     <p class="font-normal text-navy-700 mt-20 mx-auto w-max">Profile Card component from <a href="https://horizon-ui.com?ref=tailwindcomponents.com" target="_blank" class="text-brand-500 font-bold">Horizon UI Tailwind React</a></p>  
                                 </div>
-                        
-                                <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                                
+                                @livewire('balancemasacuatro-table')
+                                
+                                <div class="hidden -mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                                     <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
                                         <table class="min-w-full leading-normal">
                                             <thead>
@@ -121,6 +124,7 @@
                                                  $columnas = [
                                                     'Sales_date',
                                                     'Arrival_Date',
+                                                    'semana',
                                                     'N_Pallet',
                                                     'Variedad',
                                                     'Etiqueta',
