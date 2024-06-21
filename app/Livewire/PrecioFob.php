@@ -40,9 +40,11 @@ class PrecioFob extends Component
 
         $unique_variedades = $detalle_liquidacions->pluck('Variedad')->unique()->sort();
         $unique_semanas = $detalle_liquidacions->pluck('semana')->unique()->sort();
+
         $unique_calibres = $detalle_liquidacions->pluck('CALIBRE')->unique()->sort();
+        $unique_calibres2 = ['5J','4J','3J','2J','J','XL','L','JUP'];
 
 
-        return view('livewire.precio-fob',compact('detalle_liquidacions','detalle_liquidacions2','unique_semanas','unique_variedades','unique_calibres'));
+        return view('livewire.precio-fob',compact('detalle_liquidacions','detalle_liquidacions2','unique_semanas','unique_variedades','unique_calibres','unique_calibres2'));
     }
 }

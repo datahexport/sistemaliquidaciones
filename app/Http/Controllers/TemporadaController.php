@@ -137,7 +137,9 @@ class TemporadaController extends Controller
 
     public function datauploadprod(Temporada $temporada)
     {   $procesos=Proceso::where('temporada_id',$temporada->id)->paginate(25);
-        return view('temporadas.datauploadprod',compact('temporada','procesos'));
+        $procesosall=Proceso::where('temporada_id',$temporada->id)->get();
+
+        return view('temporadas.datauploadprod',compact('temporada','procesos','procesosall'));
     }
 
     public function materiales(Temporada $temporada)

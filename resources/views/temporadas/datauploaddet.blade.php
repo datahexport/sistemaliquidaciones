@@ -16,7 +16,7 @@
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-4">
                             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
-                                <div class="flex flex-col justify-center items-center h-[100vh]">
+                                <div class="flex flex-col justify-center items-center">
                                     @if(session('info'))
                                         <div class="flex justify-center mt-12">
                                             <div class="justify-center" x-data="{notificacion: true}" x-show="notificacion">
@@ -68,9 +68,11 @@
                                         </div>
                                         <div class="grid grid-cols-2 gap-4 px-2 w-full">
                                             <div class="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-                                            <p class="text-sm text-gray-600">Education</p>
+                                            <p class="text-sm text-gray-600">Cantidad:</p>
                                             <p class="text-base font-medium text-navy-700 dark:text-white">
-                                                Stanford University
+                                                @if ($temporada->masascuatros)
+                                                    {{number_format($temporada->masascuatros->count())}}
+                                                @endif
                                             </p>
                                             </div>
                         
@@ -95,22 +97,8 @@
                                             </p>
                                             </div>
                         
-                                            <div class="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-                                            <p class="text-sm text-gray-600">Organization</p>
-                                            <p class="text-base font-medium text-navy-700 dark:text-white">
-                                                Simmmple Web LLC
-                                            </p>
-                                            </div>
-                        
-                                            <div class="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-                                            <p class="text-sm text-gray-600">Birthday</p>
-                                            <p class="text-base font-medium text-navy-700 dark:text-white">
-                                                20 July 1986
-                                            </p>
-                                            </div>
                                         </div>
                                     </div>  
-                                    <p class="font-normal text-navy-700 mt-20 mx-auto w-max">Profile Card component from <a href="https://horizon-ui.com?ref=tailwindcomponents.com" target="_blank" class="text-brand-500 font-bold">Horizon UI Tailwind React</a></p>  
                                 </div>
                                 
                                 @livewire('balancemasacuatro-table')
