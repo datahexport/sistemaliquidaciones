@@ -89,6 +89,7 @@
                                                         @endphp
                                                     @endforeach
                                                @endif
+                                               {{$kg_liquid}}
                                             </p>
                                             </div>
                         
