@@ -80,4 +80,8 @@ class Temporada extends Model
     public function detalles(){
         return $this->hasmany('App\Models\Detalle');
     }
+
+    public function precios(){
+        return $this->hasmany('App\Models\Precio');
+    }
 }

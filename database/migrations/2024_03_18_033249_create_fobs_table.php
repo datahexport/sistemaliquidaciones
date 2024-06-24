@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('n_calibre')->nullable();
             $table->string('color')->nullable();
             $table->string('categoria')->nullable();
+            $table->string('suma_fob')->nullable();
+            $table->string('cant_kg')->nullable();
             $table->string('fob_kilo_salida')->nullable();
 
             $table->timestamps();

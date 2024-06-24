@@ -1,4 +1,23 @@
 <div>
+    <div wire:loading wire:target="set_fobid">
+                    
+        <div class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
+            <div class="max-w-sm w-full sm:rounded-2xl bg-white border-2 border-gray-200 shadow-xl">
+              <div class="w-full">
+                <div class="px-6 my-6 mx-auto">
+                  <div class="mb-8">
+                    <div class="flex justify-between items-center">
+                      <h1 class="text-2xl font-extrabold mr-4">Cargando...</h1>
+                      <div><img class="h-10" src="{{asset('image/cargando.gif')}}" alt="Cargando..."></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+    </div>
+    
     @if ($detalle_liquidacions->count()>0)
                     <div class="py-8">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-4">
@@ -32,7 +51,20 @@
                                         @endforeach
                                         <div class="mb-4 flex">
                                           
-                                           
+                                            <div class="ml-4">
+                                                Combinaciones:<br>
+                                                <div class="flex">
+                                                    <button class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-500 rounded hover:bg-gray-600 focus:outline-none">
+
+                                                        <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
+                                                            {{number_format($fobsall->count(),0)}}
+                                                            
+                                                        </h1>
+                                                    </button>
+                                                 
+                                                
+                                                </div>
+                                              </div>
                                             <div class="ml-4">
                                               Variedades:<br>
                                               <select wire:model.live="filters.variedad" name="" id="" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-40">
@@ -66,7 +98,17 @@
                                                         @endforeach
                                                     </select>
                                               </div>
+                                              <div class="ml-4">
+                                                Generar Precios Fobs:<br>
+                                                    <button wire:click="precio_create" class="ml-2 focus:ring-2 focus:ring-offset-2 focus:ring-green-300 text-sm leading-none text-green-600 py-3 px-5 bg-green-600 rounded hover:bg-green-500 focus:outline-none">
 
+                                                        <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
+                                                        GENERAR
+                                                            
+                                                        </h1>
+                                                    </button>
+                                              </div>
+                                              
                                               <div class="ml-4 hidden">
                                                 Peso:<br>
                                                 <div class="flex">
@@ -110,12 +152,13 @@
                                                 </select>
                                               </div>
 
+
                                               <div class="ml-auto">
                                                 Precio:<br>
                                                 <div class="flex">
-                                                    <input wire:model="precio_usd" type="number" class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
+                                                    <input wire:model="price_name" wire:keydown.enter="add_precio" type="text" class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
                         
-                                                    <button wire:click="exportacion_store" class="ml-2 focus:ring-2 focus:ring-offset-2 focus:ring-green-300 text-sm leading-none text-green-600 py-3 px-5 bg-green-600 rounded hover:bg-green-500 focus:outline-none">
+                                                    <button wire:click="add_precio" class="ml-2 focus:ring-2 focus:ring-offset-2 focus:ring-green-300 text-sm leading-none text-green-600 py-3 px-5 bg-green-600 rounded hover:bg-green-500 focus:outline-none">
 
                                                         <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
                                                         Agregar
@@ -132,7 +175,131 @@
                             
                                          
                                           </div>
+                                          <table class="min-w-full leading-normal">
+                                            <thead>
+                                           
+                                                <tr>
+                                                    @php
+                                                        $columnas = [
+                                                            'Variedad',
+                                                            'Semana',
+                                                            'Calibre',
+                                                            '('.number_format($ventavariedad).')<br>Suma de Fob',
+                                                            '('.number_format($pesovariedad).')<br>Suma de Kg',
+                                                            
+                                                           
+                                                        ];
+                                                        $n=0;
+                                                        foreach ($columnas as $columna) {
+                                                            if ($n==3) {
+                                                                echo '<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-right text-xs font-semibold text-gray-600 uppercase whitespace-no-wrap">';
+                                                            } else {
+                                                                echo '<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase whitespace-no-wrap">';
+                                                            }
+                                                            
+                                                            echo ucfirst(str_replace('_', ' ', $columna));
+                                                            echo '</th>';
+                                                            $n+=1;
+                                                        }
+    
+                                                    @endphp
 
+                                                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase whitespace-no-wrap">
+                                                        Precio Inicial
+                                                    </th>
+                                                    @if ($temporada->precios->count()>0)
+                                                        @foreach ($temporada->precios as $precio)
+                                                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase whitespace-no-wrap">
+                                                                {{$precio->name}}
+                                                            </th>
+                                                        @endforeach
+                                                    @endif
+                                                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase whitespace-no-wrap">
+                                                        Acción
+                                                    </th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody class="text-left">
+                                                  
+                                                    @foreach ($fobs as $fob)
+                                                        <tr>
+                                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                                                <div class="flex items-center">
+                                                                
+                                                                    <div class="ml-3">
+                                                                    <p class="text-gray-900 whitespace-no-wrap">
+                                                                        {{$fob->n_variedad}}
+                                                                    </p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                                                <p class="text-gray-900 whitespace-no-wrap"> {{$fob->semana}}</p>
+                                                            </td>
+                                                        
+                                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                                                <p class="text-gray-900 whitespace-no-wrap"> {{$fob->n_calibre}}</p>
+                                                            </td>
+
+                                                            
+                                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-right">
+                                                                <p class="text-gray-900 whitespace-no-wrap"> {{number_format($fob->suma_fob,2)}}</p>
+                                                            </td>
+
+                                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-right">
+                                                                <p class="text-gray-900 whitespace-no-wrap"> {{number_format($fob->cant_kg,1)}}</p>
+                                                            </td>
+                                                        
+                                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                                                @if ($fobid==$fob->id)
+                                                                    <input wire:model="preciofob" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none">   
+                                                                    <span wire:click='save_fobid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                                                        <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                                                        <span class="relative">Guardar</span>
+                                                                        </span>
+                                                                @else
+                                                                    <p class="text-gray-900 whitespace-no-wrap text-center"> {{number_format($fob->fob_kilo_salida,2)}}</p>
+                                                                @endif
+                                                                
+                                                            </td>
+
+                                                            @if ($temporada->precios->count()>0)
+                                                                @foreach ($temporada->precios as $precio)
+                                                                    <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                                                        <p class="text-gray-900 whitespace-nowrap">{{ number_format($fob->fob_kilo_salida, 2, '.', '.') }}</p>
+                                                                    </td>
+                                                                @endforeach
+                                                            @endif
+                                                        
+                                                        
+                                
+                                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                                                @if ($fobid==$fob->id)
+
+                                                                    <span wire:click='reset_fobid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                                                    <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                                                    <span class="relative">Cancelar</span>
+                                                                    </span>
+
+                                                                @else
+                                                                    <span wire:click='set_fobid({{$fob->id}})' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                                                    <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
+                                                                    <span class="relative">Editar</span>
+                                                                    </span>
+                                                                @endif
+
+                                                                <span  class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                                                <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                                                                <span class="relative">Eliminar</span>
+                                                            </span>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                         
+                                            </tbody>
+                                        </table>
                                         <table class="min-w-full leading-normal">
                                             <thead>
                                                 <tr class="hidden">
@@ -161,8 +328,7 @@
                                                             'Calibre',
                                                             '('.number_format($ventavariedad).')<br>Suma de Fob',
                                                             '('.number_format($pesovariedad).')<br>Suma de Kg',
-                                                            'Suma de FOB/KG',
-                                                            'Acción'
+                                                            
                                                            
                                                         ];
                                                         $n=0;
@@ -177,11 +343,29 @@
                                                             echo '</th>';
                                                             $n+=1;
                                                         }
-                                                        
+    
                                                     @endphp
+
+                                                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase whitespace-no-wrap">
+                                                        Precio Inicial
+                                                    </th>
+                                                    @if ($temporada->precios->count()>0)
+                                                        @foreach ($temporada->precios as $precio)
+                                                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase whitespace-no-wrap">
+                                                                {{$precio->name}}
+                                                            </th>
+                                                        @endforeach
+                                                    @endif
+                                                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase whitespace-no-wrap">
+                                                        Acción
+                                                    </th>
+
                                                 </tr>
                                                 </thead>
                                                 <tbody class="text-left">
+                                                    @php
+                                                        $ncount=0;
+                                                    @endphp
                                                     @foreach ($unique_variedades as $variedad)
 
                                                         @foreach ($unique_semanas as $semana)
@@ -259,6 +443,9 @@
 
                                                                
                                                             @if ($venta5J > 0)
+                                                                @php
+                                                                    $ncount+=1;
+                                                                @endphp
                                                                 <tr>
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ $variedad }}</p>
@@ -278,16 +465,26 @@
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ number_format($venta5J / $peso5J, 2, '.', '.') }}</p>
                                                                     </td>
+                                                                    @if ($temporada->precios->count()>0)
+                                                                        @foreach ($temporada->precios as $precio)
+                                                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                                                                <p class="text-gray-900 whitespace-nowrap">{{ number_format($venta5J / $peso5J, 2, '.', '.') }}</p>
+                                                                            </td>
+                                                                        @endforeach
+                                                                    @endif
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <span wire:click='set_masaid({{ $detalle->id }})' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
                                                                             <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                                            <span class="relative">Editar</span>
+                                                                            <span class="relative">Editar {{$ncount}}</span>
                                                                         </span>
                                                                     </td>
                                                                 </tr>
                                                             @endif
                                                             
                                                             @if ($venta4J > 0)
+                                                                @php
+                                                                    $ncount+=1;
+                                                                @endphp
                                                                 <tr>
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ $variedad }}</p>
@@ -307,16 +504,28 @@
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ number_format($venta4J / $peso4J, 2, '.', '.') }}</p>
                                                                     </td>
+
+                                                                    @if ($temporada->precios->count()>0)
+                                                                        @foreach ($temporada->precios as $precio)
+                                                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                                                                <p class="text-gray-900 whitespace-nowrap">{{ number_format($venta4J / $peso4J, 2, '.', '.') }}</p>
+                                                                            </td>
+                                                                        @endforeach
+                                                                    @endif
+                                                                    
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <span wire:click='set_masaid({{ $detalle->id }})' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
                                                                             <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                                            <span class="relative">Editar</span>
+                                                                            <span class="relative">Editar {{$ncount}}</span>
                                                                         </span>
                                                                     </td>
                                                                 </tr>
                                                             @endif
                                                             
                                                             @if ($venta3J > 0)
+                                                                @php
+                                                                    $ncount+=1;
+                                                                @endphp
                                                                 <tr>
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ $variedad }}</p>
@@ -336,16 +545,26 @@
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ number_format($venta3J / $peso3J, 2, '.', '.') }}</p>
                                                                     </td>
+                                                                    @if ($temporada->precios->count()>0)
+                                                                        @foreach ($temporada->precios as $precio)
+                                                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                                                                <p class="text-gray-900 whitespace-nowrap">{{ number_format($venta3J / $peso3J, 2, '.', '.') }}</p>
+                                                                            </td>
+                                                                        @endforeach
+                                                                    @endif
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <span wire:click='set_masaid({{ $detalle->id }})' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
                                                                             <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                                            <span class="relative">Editar</span>
+                                                                            <span class="relative">Editar {{$ncount}}</span>
                                                                         </span>
                                                                     </td>
                                                                 </tr>
                                                             @endif
                                                             
                                                             @if ($venta2J > 0)
+                                                                @php
+                                                                    $ncount+=1;
+                                                                @endphp
                                                                 <tr>
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ $variedad }}</p>
@@ -365,16 +584,26 @@
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ number_format($venta2J / $peso2J, 2, '.', '.') }}</p>
                                                                     </td>
+                                                                    @if ($temporada->precios->count()>0)
+                                                                        @foreach ($temporada->precios as $precio)
+                                                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                                                                <p class="text-gray-900 whitespace-nowrap">{{ number_format($venta2J / $peso2J, 2, '.', '.') }}</p>
+                                                                            </td>
+                                                                        @endforeach
+                                                                    @endif
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <span wire:click='set_masaid({{ $detalle->id }})' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
                                                                             <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                                            <span class="relative">Editar</span>
+                                                                            <span class="relative">Editar {{$ncount}}</span>
                                                                         </span>
                                                                     </td>
                                                                 </tr>
                                                             @endif
                                                             
                                                             @if ($ventaJ > 0)
+                                                                @php
+                                                                    $ncount+=1;
+                                                                @endphp
                                                                 <tr>
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ $variedad }}</p>
@@ -394,16 +623,28 @@
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ number_format($ventaJ / $pesoJ, 2, '.', '.') }}</p>
                                                                     </td>
+
+                                                                    @if ($temporada->precios->count()>0)
+                                                                        @foreach ($temporada->precios as $precio)
+                                                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                                                                <p class="text-gray-900 whitespace-nowrap">{{ number_format($ventaJ / $pesoJ, 2, '.', '.') }}</p>
+                                                                            </td>
+                                                                        @endforeach
+                                                                    @endif
+
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <span wire:click='set_masaid({{ $detalle->id }})' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
                                                                             <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                                            <span class="relative">Editar</span>
+                                                                            <span class="relative">Editar {{$ncount}}</span>
                                                                         </span>
                                                                     </td>
                                                                 </tr>
                                                             @endif
                                                             
                                                             @if ($ventaXL > 0)
+                                                                @php
+                                                                    $ncount+=1;
+                                                                @endphp
                                                                 <tr>
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ $variedad }}</p>
@@ -423,16 +664,27 @@
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ number_format($ventaXL / $pesoXL, 2, '.', '.') }}</p>
                                                                     </td>
+                                                                    @if ($temporada->precios->count()>0)
+                                                                        @foreach ($temporada->precios as $precio)
+                                                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                                                                <p class="text-gray-900 whitespace-nowrap">{{ number_format($ventaXL / $pesoXL, 2, '.', '.') }}</p>
+                                                                            </td>
+                                                                        @endforeach
+                                                                    @endif
+
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <span wire:click='set_masaid({{ $detalle->id }})' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
                                                                             <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                                            <span class="relative">Editar</span>
+                                                                            <span class="relative">Editar {{$ncount}}</span>
                                                                         </span>
                                                                     </td>
                                                                 </tr>
                                                             @endif
                                                             
                                                             @if ($ventaL > 0)
+                                                                @php
+                                                                    $ncount+=1;
+                                                                @endphp
                                                                 <tr>
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ $variedad }}</p>
@@ -452,16 +704,26 @@
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ number_format($ventaL / $pesoL, 2, '.', '.') }}</p>
                                                                     </td>
+                                                                    @if ($temporada->precios->count()>0)
+                                                                        @foreach ($temporada->precios as $precio)
+                                                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                                                                <p class="text-gray-900 whitespace-nowrap">{{ number_format($ventaL / $pesoL, 2, '.', '.') }}</p>
+                                                                            </td>
+                                                                        @endforeach
+                                                                    @endif
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <span wire:click='set_masaid({{ $detalle->id }})' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
                                                                             <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                                            <span class="relative">Editar</span>
+                                                                            <span class="relative">Editar {{$ncount}}</span>
                                                                         </span>
                                                                     </td>
                                                                 </tr>
                                                             @endif
                                                             
                                                             @if ($ventaJUP > 0)
+                                                                @php
+                                                                    $ncount+=1;
+                                                                @endphp
                                                                 <tr>
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ $variedad }}</p>
@@ -481,10 +743,17 @@
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
                                                                         <p class="text-gray-900 whitespace-nowrap">{{ number_format($ventaJUP / $pesoJUP, 2, '.', '.') }}</p>
                                                                     </td>
+                                                                    @if ($temporada->precios->count()>0)
+                                                                        @foreach ($temporada->precios as $precio)
+                                                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                                                                <p class="text-gray-900 whitespace-nowrap">{{ number_format($ventaJUP / $pesoJUP, 2, '.', '.') }}</p>
+                                                                            </td>
+                                                                        @endforeach
+                                                                    @endif
                                                                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                                                         <span wire:click='set_masaid({{ $detalle->id }})' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
                                                                             <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                                            <span class="relative">Editar</span>
+                                                                            <span class="relative">Editar {{$ncount}}</span>
                                                                         </span>
                                                                     </td>
                                                                 </tr>

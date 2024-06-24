@@ -18,7 +18,9 @@ return new class extends Migration
             ->constrained()
             ->onDelete('cascade');
 
-            $table->text('name');
+            $table->string('name');
+
+            $table->string('venta')->nullable();
 
             $table->timestamps();
         });

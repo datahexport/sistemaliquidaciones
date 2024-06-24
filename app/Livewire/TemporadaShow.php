@@ -28,7 +28,7 @@ use Livewire\WithPagination;
 
 class TemporadaShow extends Component
 {   use WithPagination;
-    public $familia,$unidad, $item, $descuenta, $categoria, $masaid, $preciomasa, $temporada,$vista,$razonsocial,$type,$precio_usd, $etiqueta, $empresa, $exportacionedit_id, $valor, $ctd=25;
+    public $familia,$unidad, $fobid, $preciofob, $item, $descuenta, $categoria, $masaid, $preciomasa, $temporada,$vista,$razonsocial,$type,$precio_usd, $etiqueta, $empresa, $exportacionedit_id, $valor, $ctd=25;
 
 
     #[Url]
@@ -118,6 +118,18 @@ class TemporadaShow extends Component
 
     public function set_view($vista){
         $this->vista=$vista;
+    }
+
+    public function set_fobid($fobid){
+        $this->fobid=$fobid;
+        $this->preciofob=Fob::find($fobid)->fob_kilo_salida;
+    }
+
+    public function save_fobid(){
+        $fob=Fob::find($this->fobid);
+        $fob->update(['fob_kilo_salida'=>$this->preciofob]);    
+        $this->reset(['preciofob','fobid']);
+        
     }
 
     public function gasto_store(){
