@@ -82,10 +82,10 @@
                                                 @php
                                                     $kg_liquid=0;
                                                 @endphp
-                                                @if ($temporada->masascuatros)
+                                                @if ($temporada->masascuatros->count()>0)
                                                     @foreach ($temporada->masascuatros as $item)
                                                         @php
-                                                            $kg_liquid+=$item->;
+                                                            $kg_liquid+=$item->PESO_TOTAL;
                                                         @endphp
                                                     @endforeach
                                                @endif
