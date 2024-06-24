@@ -87,7 +87,7 @@
                                                     @foreach ($temporada->masascuatros as $item)
                                                         @php
                                                             $kg_liquid+=$item->PESO_TOTAL;
-                                                            $ingresos_liq+=$item->LIQ_PRODUCCION;
+                                                            $ingresos_liq+=$item->LIQ_PRODUCTOR;
                                                         @endphp
                                                     @endforeach
                                                @endif
