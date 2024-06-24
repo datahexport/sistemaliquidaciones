@@ -81,11 +81,13 @@
                                             <p class="text-base font-medium text-navy-700 dark:text-white">
                                                 @php
                                                     $kg_liquid=0;
+                                                    $ingresos_liq=0;
                                                 @endphp
                                                 @if ($temporada->masascuatros->count()>0)
                                                     @foreach ($temporada->masascuatros as $item)
                                                         @php
                                                             $kg_liquid+=$item->PESO_TOTAL;
+                                                            $ingresos_liq+=$item->VENTA_USD;
                                                         @endphp
                                                     @endforeach
                                                @endif
@@ -94,9 +96,9 @@
                                             </div>
                         
                                             <div class="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-                                            <p class="text-sm text-gray-600">Department</p>
+                                            <p class="text-sm text-gray-600">Venta:</p>
                                             <p class="text-base font-medium text-navy-700 dark:text-white">
-                                                Product Design
+                                                {{number_format($ingresos_liq)}}
                                             </p>
                                             </div>
                         
