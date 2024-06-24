@@ -3,9 +3,11 @@
 namespace App\Imports;
 
 use App\Models\Proceso;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class ProduccionImport implements ToCollection, WithStartRow
     {   protected $temporada;
@@ -31,7 +33,7 @@ class ProduccionImport implements ToCollection, WithStartRow
                     'PROCESO' => $row[0],
                     'TURNO' => $row[1],
                     'PLANTA' => $row[2],
-                    'FECHA' => $row[3],
+                    'FECHA' => Carbon::instance(Date::excelToDateTimeObject($row[3])),
                     'PRODUCTOR_RECEP_FACTURACION' => $row[4],
                     'VARIEDAD' => $row[5],
                     'ENVASES_ETIQ' => $row[6],
