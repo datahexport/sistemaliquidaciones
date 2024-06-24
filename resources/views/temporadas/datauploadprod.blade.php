@@ -65,6 +65,14 @@
                                             </form>
                 
                                         </div>
+                                        @php
+                                            $kilosprorrateados=0;
+                                        @endphp
+                                        @foreach ($procesosall as $item)
+                                            @php
+                                                $kilosprorrateados+=floatval($item->PESO_PRORRATEADO);
+                                            @endphp
+                                        @endforeach
                                         <div class="grid grid-cols-2 gap-4 px-2 w-full">
                                             <div class="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
                                             <p class="text-sm text-gray-600">Cantidad:</p>
@@ -74,9 +82,9 @@
                                             </div>
                         
                                             <div class="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-                                            <p class="text-sm text-gray-600">Languages</p>
+                                            <p class="text-sm text-gray-600">Kilos Prorrateados</p>
                                             <p class="text-base font-medium text-navy-700 dark:text-white">
-                                                English, Spanish, Italian
+                                                {{number_format($kilosprorrateados)}}
                                             </p>
                                             </div>
                         
