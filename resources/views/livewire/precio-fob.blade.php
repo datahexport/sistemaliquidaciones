@@ -46,7 +46,7 @@
                                         @foreach ($detalle_liquidacions2 as $detalle)
                                             @php
                                                 $pesovariedad+=$detalle->PESO_TOTAL;
-                                                $ventavariedad+=$detalle->VENTA_USD;
+                                                $ventavariedad+=$detalle->LIQ_PRODUCTOR;
                                             @endphp
                                         @endforeach
                                         <div class="mb-4 flex">
@@ -396,42 +396,42 @@
                                                                     @if ($detalle->CALIBRE == '5J')
                                                                         @php
                                                                             $peso5J += $detalle->PESO_TOTAL;
-                                                                            $venta5J += $detalle->VENTA_USD;
+                                                                            $venta5J += $detalle->LIQ_PRODUCTOR;
                                                                         @endphp
                                                                     @elseif ($detalle->CALIBRE == '4J')
                                                                         @php
                                                                             $peso4J += $detalle->PESO_TOTAL;
-                                                                            $venta4J += $detalle->VENTA_USD;
+                                                                            $venta4J += $detalle->LIQ_PRODUCTOR;
                                                                         @endphp
                                                                     @elseif ($detalle->CALIBRE == '3J')
                                                                         @php
                                                                             $peso3J += $detalle->PESO_TOTAL;
-                                                                            $venta3J += $detalle->VENTA_USD;
+                                                                            $venta3J += $detalle->LIQ_PRODUCTOR;
                                                                         @endphp
                                                                     @elseif ($detalle->CALIBRE == '2J')
                                                                         @php
                                                                             $peso2J += $detalle->PESO_TOTAL;
-                                                                            $venta2J += $detalle->VENTA_USD;
+                                                                            $venta2J += $detalle->LIQ_PRODUCTOR;
                                                                         @endphp
                                                                     @elseif ($detalle->CALIBRE == 'J')
                                                                         @php
                                                                             $pesoJ += $detalle->PESO_TOTAL;
-                                                                            $ventaJ += $detalle->VENTA_USD;
+                                                                            $ventaJ += $detalle->LIQ_PRODUCTOR;
                                                                         @endphp
                                                                     @elseif ($detalle->CALIBRE == 'XL')
                                                                         @php
                                                                             $pesoXL += $detalle->PESO_TOTAL;
-                                                                            $ventaXL += $detalle->VENTA_USD;
+                                                                            $ventaXL += $detalle->LIQ_PRODUCTOR;
                                                                         @endphp
                                                                     @elseif ($detalle->CALIBRE == 'L')
                                                                         @php
                                                                             $pesoL += $detalle->PESO_TOTAL;
-                                                                            $ventaL += $detalle->VENTA_USD;
+                                                                            $ventaL += $detalle->LIQ_PRODUCTOR;
                                                                         @endphp
                                                                     @elseif ($detalle->CALIBRE == 'JUP')
                                                                         @php
                                                                             $pesoJUP += $detalle->PESO_TOTAL;
-                                                                            $ventaJUP += $detalle->VENTA_USD;
+                                                                            $ventaJUP += $detalle->LIQ_PRODUCTOR;
                                                                         @endphp
                                                                     @endif
 

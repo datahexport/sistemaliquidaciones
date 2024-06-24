@@ -32,11 +32,11 @@ class PrecioFob extends Component
 
     public function render()
     {   $detalle_liquidacions=Balancemasacuatro::where('temporada_id', $this->temporada->id)
-                                            ->select('Variedad', 'semana', 'CALIBRE', 'PESO_TOTAL', 'VENTA_USD')
+                                            ->select('Variedad', 'semana', 'CALIBRE', 'PESO_TOTAL', 'LIQ_PRODUCTOR')
                                             ->get();
 
         $detalle_liquidacions2=Balancemasacuatro::filter($this->filters)->where('temporada_id', $this->temporada->id)
-                                            ->select('Variedad', 'semana', 'CALIBRE', 'PESO_TOTAL', 'VENTA_USD')
+                                            ->select('Variedad', 'semana', 'CALIBRE', 'PESO_TOTAL', 'LIQ_PRODUCTOR')
                                             ->get();
 
         $fobs=Fob::filter($this->filters)->where('temporada_id',$this->temporada->id)->paginate($this->ctd);
@@ -87,12 +87,12 @@ class PrecioFob extends Component
 
     public function precio_create(){
         $detalle_liquidacions=Balancemasacuatro::where('temporada_id', $this->temporada->id)
-            ->select('Variedad', 'semana', 'CALIBRE', 'PESO_TOTAL', 'VENTA_USD')
+            ->select('Variedad', 'semana', 'CALIBRE', 'PESO_TOTAL', 'LIQ_PRODUCTOR')
             ->get();
         $unique_variedades = $detalle_liquidacions->pluck('Variedad')->unique()->sort();
         $unique_semanas = $detalle_liquidacions->pluck('semana')->unique()->sort();
         $detalle_liquidacions2=Balancemasacuatro::where('temporada_id', $this->temporada->id)
-                                            ->select('Variedad', 'semana', 'CALIBRE', 'PESO_TOTAL', 'VENTA_USD')
+                                            ->select('Variedad', 'semana', 'CALIBRE', 'PESO_TOTAL', 'LIQ_PRODUCTOR')
                                             ->get();
 
 
@@ -121,28 +121,28 @@ class PrecioFob extends Component
                     if ($detalle->Variedad==$variedad && $detalle->semana==$semana){
                         if ($detalle->CALIBRE == '5J'){
                                 $peso5J += $detalle->PESO_TOTAL;
-                                $venta5J += $detalle->VENTA_USD;
+                                $venta5J += $detalle->LIQ_PRODUCTOR;
                         }elseif ($detalle->CALIBRE == '4J'){
                                 $peso4J += $detalle->PESO_TOTAL;
-                                $venta4J += $detalle->VENTA_USD;
+                                $venta4J += $detalle->LIQ_PRODUCTOR;
                         }elseif ($detalle->CALIBRE == '3J'){
                                 $peso3J += $detalle->PESO_TOTAL;
-                                $venta3J += $detalle->VENTA_USD;
+                                $venta3J += $detalle->LIQ_PRODUCTOR;
                         }elseif ($detalle->CALIBRE == '2J'){
                                 $peso2J += $detalle->PESO_TOTAL;
-                                $venta2J += $detalle->VENTA_USD;
+                                $venta2J += $detalle->LIQ_PRODUCTOR;
                         }elseif ($detalle->CALIBRE == 'J'){
                                 $pesoJ += $detalle->PESO_TOTAL;
-                                $ventaJ += $detalle->VENTA_USD;
+                                $ventaJ += $detalle->LIQ_PRODUCTOR;
                         }elseif ($detalle->CALIBRE == 'XL'){
                                 $pesoXL += $detalle->PESO_TOTAL;
-                                $ventaXL += $detalle->VENTA_USD;
+                                $ventaXL += $detalle->LIQ_PRODUCTOR;
                         }elseif ($detalle->CALIBRE == 'L'){
                                 $pesoL += $detalle->PESO_TOTAL;
-                                $ventaL += $detalle->VENTA_USD;
+                                $ventaL += $detalle->LIQ_PRODUCTOR;
                         }elseif ($detalle->CALIBRE == 'JUP'){
                                 $pesoJUP += $detalle->PESO_TOTAL;
-                                $ventaJUP += $detalle->VENTA_USD;
+                                $ventaJUP += $detalle->LIQ_PRODUCTOR;
                         }
                     }
                 }
