@@ -13,7 +13,7 @@ class Material extends Model
 
     public function scopeFilter($query,$filters){
         $query->when($filters['razonsocial'] ?? null,function($query,$serie){
-            $query->where('c_embalaje','like','%'.$serie.'%')->orwhere('descripcion','like','%'.$serie.'%');
+            $query->where('productor','like','%'.$serie.'%')->orwhere('busqueda','like','%'.$serie.'%');
         });
     }
 }

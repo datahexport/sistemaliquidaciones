@@ -22,6 +22,9 @@
 
         <!-- Styles -->
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+
+        
         @livewireStyles
               
     </head>
@@ -29,7 +32,7 @@
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">
-            @if(Route::currentRouteName() != 'temporada.datauploadprod'&& Route::currentRouteName() != 'temporada.precio.original' && Route::currentRouteName() != 'users.index' && Route::currentRouteName() != 'temporada.gastos' && Route::currentRouteName() != 'temporada.dataupload' && Route::currentRouteName() != 'temporada.datauploadliq' && Route::currentRouteName() != 'temporada.datauploaddesp' && Route::currentRouteName() != 'temporada.datauploaddet' && Route::currentRouteName() != 'dashboard' && Route::currentRouteName() != 'home' && Route::currentRouteName() != 'temporadas.show')
+            @if(Route::currentRouteName() != 'temporada.finanzas' && Route::currentRouteName() != 'temporada.saldoaliquidar2' && Route::currentRouteName() != 'temporada.saldoaliquidar' && Route::currentRouteName() != 'temporada.graficovariedad' && Route::currentRouteName() != 'temporada.grafico' && Route::currentRouteName() != 'temporada.anticipos' && Route::currentRouteName() != 'temporada.precioajustado' && Route::currentRouteName() != 'temporada.datauploadcomercial'&& Route::currentRouteName() != 'temporada.datauploadcuentacorriente' && Route::currentRouteName() != 'temporada.resume' && Route::currentRouteName() != 'temporada.costocaja' && Route::currentRouteName() != 'temporada.fobdespacho' && Route::currentRouteName() != 'temporada.datauploadprod' && Route::currentRouteName() != 'temporada.precio.original' && Route::currentRouteName() != 'users.index' && Route::currentRouteName() != 'temporada.gastos' && Route::currentRouteName() != 'temporada.dataupload' && Route::currentRouteName() != 'temporada.datauploadliq' && Route::currentRouteName() != 'temporada.datauploaddesp' && Route::currentRouteName() != 'temporada.datauploaddet' && Route::currentRouteName() != 'dashboard' && Route::currentRouteName() != 'home' && Route::currentRouteName() != 'temporadas.show')
                 @livewire('navigation-menu')
             @endif
             <!-- Page Heading -->

@@ -29,7 +29,7 @@
                     <div class="card">
                         @if ($gastos->count()>0)
                         
-                            @livewire('temporada-show', ['temporada' => $temporada, 'vista' => 'GASTOS'], key($temporada->id))
+                            @livewire('temporada-show', ['temporada' => $temporada, 'vista' => 'X MERCADO'], key($temporada->id))
                                 
                         @else
                             <h1 class="text-2xl font-bold">Temporada {{$temporada->name}}</h1>

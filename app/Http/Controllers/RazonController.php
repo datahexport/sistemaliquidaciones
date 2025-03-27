@@ -10,7 +10,9 @@ use App\Models\Detalle;
 use App\Models\Flete;
 use App\Models\Fob;
 use App\Models\Gasto;
+use App\Models\Informe;
 use App\Models\Material;
+use App\Models\Proceso;
 use App\Models\Razonsocial;
 use App\Models\Temporada;
 use App\Models\Variedad;
@@ -28,9 +30,16 @@ class RazonController extends Controller
         return view('razonsocial.index',compact('razons'));
     }
 
-    public function downloadpdf(Razonsocial $razonsocial) {
+    public function downloadpdf(Informe $informe) {
 
-        return response()->file(storage_path('app/'.$razonsocial->informe));
+        return response()->file(storage_path('app/'.$informe->informe));
+
+      
+    }
+
+    public function downloadpdf2(Informe $informe) {
+
+        return response()->file(storage_path('app/'.$informe->nota));
 
       
     }
@@ -38,17 +47,15 @@ class RazonController extends Controller
     
     public function razonsync(){
 
-        $masas=Balancemasa::all();
+        $masas=Proceso::all();
 
         foreach($masas as $masa){
-            $razon=Razonsocial::where('csg',$masa->csg)->first();
+            $razon=Razonsocial::where('name',$masa->PRODUCTOR_RECEP_FACTURACION)->first();
             if ($razon){
-
+                $razon->update(['name'=>$masa->PRODUCTOR_RECEP_FACTURACION]);
             }else{
-                if($masa->productor_recep){
-                    Razonsocial::create(['name'=>$masa->productor_recep,
-                                    'csg'=>$masa->csg,
-                                    'rut'=>$masa->rut]);
+                if($masa->PRODUCTOR_RECEP_FACTURACION){
+                    Razonsocial::create(['name'=>$masa->PRODUCTOR_RECEP_FACTURACION]);
                 }
             }
        }
@@ -82,16 +89,47 @@ class RazonController extends Controller
     public function show(Razonsocial $razonsocial,Temporada $temporada)
     {       
         $temporada=Temporada::find($temporada->id);
-        $masas=Balancemasa::where('temporada_id',$temporada->id)->where('csg',$razonsocial->csg)->get();
-       
 
+        $masas = Proceso::selectRaw('CALIBRE_REAL as calibre_real, VARIEDAD as variedad, CANT as cantidad, PESO_PRORRATEADO as peso_prorrateado, costo, fob_id , TIPO as tipo')
+            ->where('temporada_id', $temporada->id)
+            ->where('PRODUCTOR_RECEP_FACTURACION', 'like', '%' . $razonsocial->name . '%')
+            ->with('fob.tarifas') // Esto carga la relación fob con sus tarifas
+            ->get();
 
-        $masas2=Balancemasados::where('temporada_id',$temporada->id)->get();
+        $masastotal=Proceso::select([
+                'PESO_PRORRATEADO',
+                'CRITERIO',
+                'CALIBRE_REAL',
+                'SEMANA',
+                'PRODUCTOR_RECEP_FACTURACION',
+                'costo_proceso',
+                'costo_materiales',
+                'otros_costos',
+                'gastos',
+                'costo',
+                'anticipos',
+               
+                'fob_id' // Incluimos el fob_id para la relación
+            ])
+            ->with([
+                'fob' => function($query) {
+                    $query->select('id', 'fob_kilo_salida')->with([
+                        'tarifas' => function($query) {
+                            $query->select('id', 'fob_id', 'tarifa_fc', 'tarifa');
+                        }
+                    ]);
+                }
+            ])
+            ->where('temporada_id', $temporada->id)
+            ->get();
+        
         $fletes=Flete::where('temporada_id',$temporada->id)->get();
         $packings=CostoPacking::where('temporada_id',$temporada->id)->where('csg',$razonsocial->csg)->get();
         $comisions=Comision::where('temporada_id',$temporada->id)->where('productor',$razonsocial->name)->get();
         $unique_calibres = $masas->pluck('calibre')->unique()->sort();
+       
         $unique_variedades = $masas->pluck('variedad')->unique()->sort();
+        
         $variedades = Variedad::whereIn('name', $unique_variedades)->get();
 
         $unique_semanas = $masas->pluck('semana')->unique()->sort();
@@ -101,7 +139,7 @@ class RazonController extends Controller
 
         $detalles=Detalle::where('temporada_id',$temporada->id)->where('n_productor',$razonsocial->name)->get();
 
-        return view('razonsocial.show',compact('detalles','gastos','materialestotal','variedades','unique_semanas','fobs','unique_variedades','unique_calibres','razonsocial','temporada','masas','masas2','packings','comisions','fletes'));
+        return view('razonsocial.show',compact('masastotal','detalles','gastos','materialestotal','variedades','unique_semanas','fobs','unique_variedades','unique_calibres','razonsocial','temporada','masas','packings','comisions','fletes'));
     }
 
     /**

@@ -19,11 +19,14 @@ return new class extends Migration
             ->constrained()
             ->onDelete('cascade');
 
-            $table->string('c_embalaje')->nullable();
-            $table->string('descripcion')->nullable();
-            $table->string('kg')->nullable();
-            $table->string('tarifa_kg')->nullable();
-            $table->string('total_usd')->nullable();
+            $table->string('productor')->nullable();
+            $table->string('fecha')->nullable();
+            $table->string('material')->nullable();
+            $table->string('cantidad')->nullable();
+            $table->string('precio')->nullable();
+            $table->string('dolar')->nullable();
+            $table->string('orden')->nullable();
+            $table->string('busqueda')->nullable();
 
 
             $table->timestamps();

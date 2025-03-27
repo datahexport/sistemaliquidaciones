@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('status')->default(1);
 
             $table->string('name');
+
             $table->string('costos_packing')->nullable();
             $table->string('materiales')->nullable();
             $table->string('gastos_de_exportacion')->nullable();
@@ -29,6 +30,8 @@ return new class extends Migration
             $table->string('comision')->nullable();
             $table->string('balance_de_masa')->nullable();
             $table->string('finanzas')->nullable();
+
+            
             
             $table->timestamps();
         });

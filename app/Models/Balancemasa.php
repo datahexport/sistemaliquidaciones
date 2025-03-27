@@ -26,6 +26,8 @@ class Balancemasa extends Model
         })->when($filters['precioFob'] ?? null, function ($query, $precioFob) {
             if ($precioFob == 'null') {
                 $query->whereNull('precio_fob');
+            }if($precioFob == 'full') {
+                $query->where('fob_id','>',0);
             }
         })->when($filters['variedad'] ?? null, function ($query, $variedad) {
             $query->where('variedad',$variedad);

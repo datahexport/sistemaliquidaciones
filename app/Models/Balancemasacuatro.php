@@ -11,13 +11,17 @@ class Balancemasacuatro extends Model
 
     protected $guarded = ['id'];
 
+    //detalle liquidacion
+
     public function scopeFilter($query,$filters){
-        $query->when($filters['variedad'] ?? null, function ($query, $variedad) {
+        $query->when($filters['folio'] ?? null,function($query,$folio){
+                $query->where('N_Pallet',$folio);
+        })->when($filters['variedad'] ?? null,function($query,$variedad){
             $query->where('Variedad',$variedad);
-        })->when($filters['semana'] ?? null, function ($query, $variedad) {
-            $query->where('semana',$variedad);
-        })->when($filters['calibre'] ?? null, function ($query, $variedad) {
-            $query->where('CALIBRE',$variedad);
+        })->when($filters['calibre'] ?? null,function($query,$calibre){
+            $query->where('CALIBRE',$calibre);
+        })->when($filters['semana'] ?? null,function($query,$semana){
+            $query->where('semana',$semana);
         });
     }
 }

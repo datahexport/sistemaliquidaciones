@@ -44,6 +44,17 @@ return new class extends Migration
             $table->text('NORMA')->nullable();
             $table->text('SEMANA')->nullable();
 
+            $table->text('costo_proceso')->nullable();
+            $table->text('costo_materiales')->nullable();
+            $table->text('otros_costos')->nullable();
+
+            $table->text('costo')->nullable();
+
+            $table->text('gastos')->nullable();
+            $table->text('anticipos')->nullable();
+
+            $table->text('fob_id')->nullable();
+
             $table->timestamps();
         });
     }

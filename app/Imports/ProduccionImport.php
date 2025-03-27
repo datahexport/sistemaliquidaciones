@@ -35,7 +35,7 @@ class ProduccionImport implements ToCollection, WithStartRow
                     'PLANTA' => $row[2],
                     'FECHA' => Carbon::instance(Date::excelToDateTimeObject($row[3])),
                     'PRODUCTOR_RECEP_FACTURACION' => $row[4],
-                    'VARIEDAD' => $row[5],
+                    'VARIEDAD' => strtoupper($row[5]),
                     'ENVASES_ETIQ' => $row[6],
                     'COLOR' => $row[7],
                     'CALIBRE' => $row[8],

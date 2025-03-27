@@ -82,7 +82,40 @@ return new class extends Migration
             $table->text('N_Reserva')->nullable();
             $table->text('Fecha_Reserva')->nullable();
             $table->text('Planta')->nullable();
-            $table->text('Planta_Despacho')->nullable();
+            $table->string('planta_despacho')->nullable();
+            $table->string('liquidado')->nullable();
+            $table->string('liq_real')->nullable();
+            $table->string('liquidacion_ajuste')->nullable();
+            $table->string('venta')->nullable();
+            $table->string('retorno_productor')->nullable();
+            $table->string('kg_liq')->nullable();
+            $table->string('fob2')->nullable();
+            $table->string('npk')->nullable();
+            $table->string('fob_x_caja')->nullable();
+            $table->string('ajuste_kilos')->nullable();
+            $table->string('ajuste_final')->nullable();
+            $table->string('semana')->nullable();
+            $table->string('variedad_real2')->nullable();
+            $table->string('calibre_real')->nullable();
+            $table->string('productor_real')->nullable();
+            $table->string('busqueda_proceso')->nullable();
+            $table->string('observacion')->nullable();
+            $table->string('cliente_china')->nullable();
+            $table->string('transporte')->nullable();
+            $table->string('mercado2')->nullable();
+            $table->string('productor_facturacion')->nullable();
+            $table->string('csg_fact')->nullable();
+            $table->string('obs')->nullable();
+            $table->string('unir_cad')->nullable();
+            $table->string('caja_desp')->nullable();
+            $table->string('comision')->nullable();
+            $table->string('otros_costos')->nullable();
+            $table->string('materiales')->nullable();
+            $table->string('proceso2')->nullable();
+            $table->string('tipo')->nullable();
+            
+            
+            $table->text('Fob')->nullable();
             
             $table->timestamps();
         });

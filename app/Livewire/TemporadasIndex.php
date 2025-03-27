@@ -20,7 +20,7 @@ class TemporadasIndex extends Component
     public function deletetemporada(Temporada $temporada){
         $temporada->delete();
         session()->flash('delete','Temporada borrada exitosamente');
-        return $this->redirect('/dashboard', navigate:true);
+        $this->render();
     }
 
 

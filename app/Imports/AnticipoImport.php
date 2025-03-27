@@ -31,11 +31,17 @@ class AnticipoImport implements ToCollection, WithStartRow
                  Anticipo::create([ 
                     'temporada_id'=>$this->temporada,
 
-                    'grupo'=> $row[0],
-                    'rut'=> preg_replace('/[\.\-\s]+/', '', $row[1]),
-                    'n_productor'=> $row[2],
-                    'fecha'=>  Carbon::instance(SharedDate::excelToDateTimeObject($row[3])),
-                    'cantidad'=> $row[4]
+                    'productor'   => $row[0], // PRODUCTOR (nombre del productor)
+                    'cantidad_usd'=> $row[1], // CANTIDAD USD
+                    'usd'         => $row[2], // USD
+                    'tipo_cambio' => $row[3], // TIPO CAMBIO
+                    'total'       => $row[4], // TOTAL
+                    'fecha'       => Carbon::instance(SharedDate::excelToDateTimeObject($row[5])), // FECHA
+                    'orden'       => $row[6], // ORDEN
+                    'busqueda'    => $row[7] ?? null, // BUSQUEDA (nullable)
+                    'incluir'     => $row[8] == 'yes' ? 'true' : 'false', // INCLUIR? (consideramos 'yes' o 'no' en los datos)
+                    'moneda'      => $row[9], // MONEDA
+                    'detalle'     => $row[10] ?? null, // DETALLE (nullable)
                 
                 ]);
             }

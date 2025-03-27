@@ -13,7 +13,7 @@
                 <div class="py-12">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                            @livewire('temporada-show', ['temporada' => $temporada, 'vista' => 'resumes'], key($temporada->id))
+                            @livewire('temporada-show', ['temporada' => $temporada, 'vista' => 'show'], key($temporada->id))
                         </div>
                     </div>
                 </div>

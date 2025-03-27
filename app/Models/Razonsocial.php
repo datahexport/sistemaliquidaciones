@@ -16,4 +16,8 @@ class Razonsocial extends Model
             $query->where('name','like','%'.$serie.'%')->orwhere('csg','like','%'.$serie.'%');
         });
     }
+
+    public function informes(){
+        return $this->hasmany('App\Models\Informe');
+    }
 }
