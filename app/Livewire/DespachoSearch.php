@@ -23,7 +23,7 @@ class DespachoSearch extends Component
     }
 
     public function render()
-    {   $despachos=Balancemasatres::select('Kilos_prod','Fob','Folio','semana','Variedad_Real','calibre_real')->filter($this->filters)->where('temporada_id',$this->temporada->id)->paginate(50);
+    {   $despachos=Balancemasatres::filter($this->filters)->where('temporada_id',$this->temporada->id)->paginate(50);
         $despachosall=Balancemasatres::select('Kilos_prod','Fob','Folio','semana','Variedad_Real','calibre_real')->filter($this->filters)->where('temporada_id',$this->temporada->id)->get();
         $despachosall2=Balancemasatres::select('Kilos_prod','Fob','Folio','semana','Variedad_Real','calibre_real')->where('temporada_id',$this->temporada->id)->get();
 
