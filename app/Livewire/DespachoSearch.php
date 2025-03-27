@@ -23,9 +23,9 @@ class DespachoSearch extends Component
     }
 
     public function render()
-    {   $despachos=Balancemasatres::filter($this->filters)->where('temporada_id',$this->temporada->id)->paginate(50);
-        $despachosall=Balancemasatres::filter($this->filters)->where('temporada_id',$this->temporada->id)->get();
-        $despachosall2=Balancemasatres::where('temporada_id',$this->temporada->id)->get();
+    {   $despachos=Balancemasatres::select('Kilos_prod','Fob','Folio','semana','Variedad_Real','calibre_real')->filter($this->filters)->where('temporada_id',$this->temporada->id)->paginate(50);
+        $despachosall=Balancemasatres::select('Kilos_prod','Fob','Folio','semana','Variedad_Real','calibre_real')->filter($this->filters)->where('temporada_id',$this->temporada->id)->get();
+        $despachosall2=Balancemasatres::select('Kilos_prod','Fob','Folio','semana','Variedad_Real','calibre_real')->where('temporada_id',$this->temporada->id)->get();
 
         $unique_folios = $despachosall2->pluck('Folio')->unique()->sort();
         $unique_semanas = $despachosall2->pluck('semana')->unique()->sort();
