@@ -49,13 +49,18 @@
                                                 </p>
                                             </div> 
                                             <div>
-                                                <form action="{{route('temporada.importBalance3')}}" method="POST" class="bg-white rounded px-8 shadow my-4" enctype="multipart/form-data">
-                                                    @csrf
-                                                    <input type="hidden" name="temporada" value={{$temporada->id}}>
-                                                    <x-validation-errors class="errors"></x-validation-errors>
-                                                    <input type="file" name="file" accept=".csv,.xlsx">
-                                                    <x-button class="">Importar</x-button>
-                                                </form>
+                                                <form action="{{ route('temporada.importBalance3') }}" method="POST" 
+                                                class="bg-white rounded px-8 shadow my-4" 
+                                                enctype="multipart/form-data">
+                                              @csrf
+                                              <input type="hidden" name="temporada" value="{{ $temporada->id }}">
+                                              
+                                              <x-validation-errors class="errors" />
+                                          
+                                              <input type="file" name="file" accept=".csv,.xlsx" required>
+                                          
+                                              <x-button>Importar</x-button>
+                                          </form>
                                             </div>
                                             <div class="grid grid-cols-2 gap-4 px-2 w-full">
                                                 <div class="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
