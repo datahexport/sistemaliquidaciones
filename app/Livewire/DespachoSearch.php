@@ -26,45 +26,52 @@ class DespachoSearch extends Component
     {
         $query = Balancemasatres::where('temporada_id', $this->temporada->id)->filter($this->filters);
     
-        $despachos = $query
+        // Datos paginados
+        $despachos = (clone $query)
             ->select('Kilos_prod', 'Fob', 'Folio', 'semana', 'Variedad_Real', 'calibre_real')
             ->paginate(50);
     
-        // SUMAS Y CONTADORES OPTIMIZADOS
-        $pesovariedad = (clone $query)->sum('Kilos_prod');
-        $ventavariedad = (clone $query)->sum('Fob');
-        $total_registros = (clone $query)->count();
-        $sin_precio = (clone $query)->whereNull('Fob')->count();
+        // Estadísticas
+        $stats = (clone $query)->selectRaw("
+            SUM(Kilos_prod) as total_kilos,
+            SUM(Fob) as total_fob,
+            COUNT(*) as total_registros,
+            SUM(CASE WHEN Fob IS NULL THEN 1 ELSE 0 END) as sin_precio
+        ")->first();
     
-        // Únicos (más eficientes con distinct + pluck)
+        $pesovariedad = $stats->total_kilos;
+        $ventavariedad = $stats->total_fob;
+        $total_registros = $stats->total_registros;
+        $sin_precio = $stats->sin_precio;
+    
+        // Valores únicos
         $unique_folios = Balancemasatres::select('Folio')
             ->where('temporada_id', $this->temporada->id)
             ->whereNotNull('Folio')
             ->distinct()
             ->orderBy('Folio')
             ->pluck('Folio');
-            
+    
         $unique_semanas = Balancemasatres::select('semana')
             ->where('temporada_id', $this->temporada->id)
             ->whereNotNull('semana')
             ->distinct()
             ->orderBy('semana')
             ->pluck('semana');
-        
+    
         $unique_variedades = Balancemasatres::select('Variedad_Real')
             ->where('temporada_id', $this->temporada->id)
             ->whereNotNull('Variedad_Real')
             ->distinct()
             ->orderBy('Variedad_Real')
             ->pluck('Variedad_Real');
-        
+    
         $unique_calibres = Balancemasatres::select('calibre_real')
             ->where('temporada_id', $this->temporada->id)
             ->whereNotNull('calibre_real')
             ->distinct()
             ->orderBy('calibre_real')
             ->pluck('calibre_real');
-    
     
         return view('livewire.despacho-search', compact(
             'despachos',
@@ -78,6 +85,7 @@ class DespachoSearch extends Component
             'unique_calibres'
         ));
     }
+    
     
     public function destroy_all(){
         $fobs=Balancemasatres::where('temporada_id',$this->temporada->id)->get();
