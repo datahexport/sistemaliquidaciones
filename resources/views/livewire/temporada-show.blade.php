@@ -845,6 +845,9 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                       %
                                     </th>
                                     <th class="px-6 py-0 text-center text-xs font-bold text-gray-900">
+                                      Retorno Precio Unico
+                                    </th>
+                                    <th class="px-6 py-0 text-center text-xs font-bold text-gray-900">
                                     GASTOS
                                     </th>
                                     <th class="px-6 py-0 text-center text-xs font-bold text-gray-900">
@@ -875,6 +878,7 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                     $cont=1;
                                     
                                     $totalaliquidar=0;
+                                    $totalaliquidar_huaso=0;
                                     $control=true;
 
                                 @endphp
@@ -958,11 +962,7 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                                       }
                                                     }
 
-                                                    if ($item->CRITERIO=="COMERCIAL") {
-                                                      $costo2srazon += floatval($item->costo_proceso);
-                                                      $costo2totalaliquidar += floatval($item->costo_proceso);
-                                                    }
-
+                                                    
                                                     $costosrazon += floatval($item->costo_proceso+$item->costo_materiales+$item->otros_costos);
                                                     $costototalaliquidar += floatval($item->costo_proceso+$item->costo_materiales+$item->otros_costos);
 
@@ -982,7 +982,10 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                           @endforeach
                                           @php
                                               $aliquidar=$venta2srazon+$venta3srazon-$costo2srazon-$margenrazon-$gastosrazon-$anticiposrazon;
+                                              $aliquidar_huaso=$venta2srazon+$venta3srazon-$costo2srazon-$margenrazon;
+                                              
                                               $totalaliquidar+=$aliquidar;
+                                              $totalaliquidar_huaso+=$aliquidar_huaso;
                                           @endphp
 
                                           <td class="px-6 py-0 whitespace-nowrap text-right pr-6">
@@ -1052,6 +1055,15 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                           </td>
                                           <td class="px-6 py-0 whitespace-nowrap text-right pr-6">
                                             <div class="text-sm text-gray-900">
+                                              @if ($margenrazon>0) 
+                                                {{number_format($margenrazon,2,',','.')}}
+                                              @else
+                                                  0
+                                              @endif  
+                                            </div>    
+                                          </td>
+                                          <td class="px-6 py-0 whitespace-nowrap text-right pr-6">
+                                            <div class="text-sm text-gray-900">
                                               @if ($gastosrazon>0) 
                                                 {{number_format($gastosrazon,2,',','.')}}
                                               @else
@@ -1076,7 +1088,7 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                           <td class="px-6 py-0 whitespace-nowrap text-right pr-6">
                                             <div class="text-sm text-gray-900">
                                               @if ($kgrazon>0) 
-                                                {{number_format(($ventasrazon+$venta3srazon-$costo2srazon-$margenrazon)/$kgrazon,2,',','.')}}
+                                                {{number_format(($aliquidar_huaso)/$kgrazon,2,',','.')}}
                                               @else
                                                   0
                                               @endif  
@@ -1129,7 +1141,7 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                     </td>
                                     <td>
                                               @if ($pesototalaliquidar>0) 
-                                                {{number_format(($ventatotalaliquidar+$venta3totalaliquidar-$costo2totalaliquidar-$margentotalaliquidar)/$pesototalaliquidar,2,',','.')}}
+                                                {{number_format(($totalaliquidar_huaso)/$pesototalaliquidar,2,',','.')}}
                                               @else
                                                   0
                                               @endif  
