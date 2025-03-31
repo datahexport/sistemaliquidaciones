@@ -6,10 +6,12 @@ use App\Models\Proceso;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-class ProduccionImport implements ToCollection, WithStartRow
+class ProduccionImport implements ToCollection, WithStartRow, WithChunkReading, WithBatchInserts
     {   protected $temporada;
 
         public function __construct($temporada)
@@ -22,6 +24,16 @@ class ProduccionImport implements ToCollection, WithStartRow
         public function startRow(): int
         {
             return 2;
+        }
+
+        public function chunkSize(): int
+        {
+            return 500; // Puedes probar 1000 o más si tu servidor lo aguanta
+        }
+    
+        public function batchSize(): int
+        {
+            return 500;
         }
 
         public function collection($rows)
