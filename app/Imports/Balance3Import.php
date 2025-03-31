@@ -28,12 +28,12 @@ class Balance3Import implements ToCollection, WithStartRow, WithChunkReading, Wi
 
         public function chunkSize(): int
         {
-            return 300; // Puedes probar 1000 o más si tu servidor lo aguanta
+            return 500; // Puedes probar 1000 o más si tu servidor lo aguanta
         }
     
         public function batchSize(): int
         {
-            return 300;
+            return 500;
         }
 
         public function collection($rows)
