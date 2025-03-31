@@ -1,21 +1,12 @@
 <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-    @php
-        $pesovariedad=0;
-        $ventavariedad=0;
-    @endphp
-    @foreach ($despachosall as $detalle)
-        @php
-            $pesovariedad+=$detalle->Kilos_prod;
-            $ventavariedad+=$detalle->Fob;
-        @endphp
-    @endforeach
+    
     <div class="flex mt-2">
         
         <div class="ml-2">
             <h1>Registros:</h1>
             <button class=" focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-500 rounded hover:bg-gray-600 focus:outline-none">
                 <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
-                {{$despachosall->count()}}
+                    {{ $total_registros }}
                 </h1>
             </button>
         </div>
@@ -24,7 +15,7 @@
             <h1>Registros S/Precio:</h1>
             <button class=" focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-500 rounded hover:bg-gray-600 focus:outline-none">
                 <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
-                {{$despachosall->whereNull('Fob')->count()}}
+                    {{ $sin_precio }}
                 </h1>
             </button>
         </div>
