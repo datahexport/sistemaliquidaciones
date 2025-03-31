@@ -75,7 +75,13 @@ class ProduccionSearch extends Component
         
         
 
-        $procesosall2=Proceso::where('temporada_id',$this->temporada->id)->get();
+        $procesosall2=Proceso::select([
+            'TIPO',
+            'especie',
+            'VARIEDAD',
+            'CALIBRE_REAL',
+            'SEMANA'
+        ])->where('temporada_id',$this->temporada->id)->get();
 
         $unique_tipos = $procesosall2->pluck('TIPO')->unique()->sort();
 
