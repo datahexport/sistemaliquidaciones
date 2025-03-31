@@ -71,7 +71,7 @@
                                         <div class="mb-4 flex">
                                           
                                             <div class="ml-4">
-                                                Folios:<br>
+                                                Combinaciones:<br>
                                                 <div class="flex">
                                                     <button class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-500 rounded hover:bg-gray-600 focus:outline-none">
 
