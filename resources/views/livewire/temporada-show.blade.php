@@ -721,6 +721,7 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                   $n = 1;
                                 @endphp
                                 @foreach ($razons as $razon)
+                                  @if($razon)
                                       <tr class="bg-gray-100 border-b">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $n }})</td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
@@ -776,20 +777,21 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                           @endif
                                         </td>
                                         <!-- Columna del checkbox "Propio" -->
-                                    <!-- Columna del checkbox "Propio" con mensaje dinámico -->
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 text-center">
-                                      <div class="flex justify-center items-center mb-2">
-                                        <input type="checkbox" wire:change="togglePropio({{ $razon->id }})" {{ $razon->is_propio ? 'checked' : '' }}>
-                                      </div>
-                                      <!-- Mostrar mensaje si existe para esta razón social -->
-                                      @if (session()->has('status_' . $razon->id))
-                                          <span class="text-gray-600 text-center mt-2">{{ session('status_' . $razon->id) }}</span>
-                                      @endif
-                                    </td>
+                                        <!-- Columna del checkbox "Propio" con mensaje dinámico -->
+                                        <td class="text-sm text-gray-900 font-light px-6 py-4 text-center">
+                                          <div class="flex justify-center items-center mb-2">
+                                            <input type="checkbox" wire:change="togglePropio({{ $razon->id }})" {{ $razon->is_propio ? 'checked' : '' }}>
+                                          </div>
+                                          <!-- Mostrar mensaje si existe para esta razón social -->
+                                          @if (session()->has('status_' . $razon->id))
+                                              <span class="text-gray-600 text-center mt-2">{{ session('status_' . $razon->id) }}</span>
+                                          @endif
+                                        </td>
 
-                                
+                                    
 
-                                </tr>
+                                    </tr>
+                                  @endif
                                 @php
                                   $n += 1;
                                 @endphp
