@@ -212,7 +212,16 @@ class InformeUpdate extends Component
         
         $variedades = Variedad::whereIn('name', $unique_variedades)->get();
 
-        $unique_semanas = $masastotal->pluck('SEMANA')->unique()->sort();
+        $unique_semanas = $masastotal->pluck('SEMANA')
+                ->unique()
+                ->sortBy(function ($semana) {
+                    // Las semanas mayores a 25 (segundo semestre) deben ir primero
+                    // Les restamos 25 para que queden primero en el orden
+                    // Las otras las ordenamos después, sumándoles 52 para que vayan al final
+                    return $semana > 25 ? $semana - 25 : $semana + 52;
+                })
+                ->values(); // Opcional: para resetear los índices
+                
         $fobs = Fob::where('temporada_id',$this->temporada->id)->get();
         $materialestotal=Material::where('temporada_id',$this->temporada->id)->get();
         $gastos = Gasto::where('temporada_id',$this->temporada->id)->get();
