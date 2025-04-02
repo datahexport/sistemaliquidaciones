@@ -895,14 +895,6 @@
        });
    }
 
-   // Escucha el evento 'deleted' desde Livewire
-   Livewire.on('deleted', () => {
-       Swal.fire(
-           'Eliminado!',
-           'El registro ha sido eliminado.',
-           'success'
-       );
-   });
 </script>
 
     
