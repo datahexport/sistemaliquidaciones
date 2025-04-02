@@ -117,12 +117,13 @@ class TemporadaShow extends Component
                     Razonsocial::create(['name'=>$item]);
                 }
             }
-            
-            if ($razon->informes->where('temporada_id',$this->temporada->id)->first()) {
-                # nada
-            }else{
-                Informe::create(['temporada_id'=>$this->temporada->id,
-                                    'razonsocial_id'=>$razon->id]);
+            if($razon){
+                if ($razon->informes->where('temporada_id',$this->temporada->id)->first()) {
+                    # nada
+                }else{
+                    Informe::create(['temporada_id'=>$this->temporada->id,
+                                        'razonsocial_id'=>$razon->id]);
+                }
             }
         }
     }
