@@ -841,68 +841,65 @@
     </script>
 
 <script>
-   function confirmDelete() {
-       Swal.fire({
-           title: '¿Estás seguro?',
-           text: "No podrás revertir esta acción.",
-           icon: 'warning',
-           showCancelButton: true,
-           confirmButtonColor: '#d33',
-           cancelButtonColor: '#3085d6',
-           confirmButtonText: 'Sí, eliminar',
-           cancelButtonText: 'Cancelar'
-       }).then((result) => {
-           if (result.isConfirmed) {
-               // Mostrar mensaje de "Eliminando..."
-               Swal.fire({
-                   title: 'Eliminando...',
-                   allowOutsideClick: false,
-                   didOpen: () => {
-                       Swal.showLoading();
-                   }
-               });
+ function confirmDelete() {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "No podrás revertir esta acción.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Eliminando...',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
 
-               // Llama al método Livewire para eliminar
-               @this.call('precios_destroy_exportacion');
-           }
-       });
-   }
+            // Emitimos evento hacia Livewire
+            Livewire.emit('preciosDestroyExportacion');
+        }
+    });
+}
 
-   function confirmDelete2() {
-       Swal.fire({
-           title: '¿Estás seguro?',
-           text: "No podrás revertir esta acción.",
-           icon: 'warning',
-           showCancelButton: true,
-           confirmButtonColor: '#d33',
-           cancelButtonColor: '#3085d6',
-           confirmButtonText: 'Sí, eliminar',
-           cancelButtonText: 'Cancelar'
-       }).then((result) => {
-           if (result.isConfirmed) {
-               // Mostrar mensaje de "Eliminando..."
-               Swal.fire({
-                   title: 'Eliminando...',
-                   allowOutsideClick: false,
-                   didOpen: () => {
-                       Swal.showLoading();
-                   }
-               });
+function confirmDelete2() {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "No podrás revertir esta acción.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Eliminando...',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
 
-               // Llama al método Livewire para eliminar
-               @this.call('precios_destroy_comercial');
-           }
-       });
-   }
+            Livewire.emit('preciosDestroyComercial');
+        }
+    });
+}
 
-   // Escucha el evento 'deleted' desde Livewire
-   Livewire.on('deleted', () => {
-       Swal.fire(
-           'Eliminado!',
-           'El registro ha sido eliminado.',
-           'success'
-       );
-   });
+Livewire.on('deleted', () => {
+    Swal.fire(
+        '¡Eliminado!',
+        'El registro ha sido eliminado.',
+        'success'
+    );
+});
+
 </script>
 
     
