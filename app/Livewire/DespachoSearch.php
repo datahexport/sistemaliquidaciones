@@ -32,7 +32,16 @@ class DespachoSearch extends Component
         $despachosall2=Balancemasatres::select('Folio','semana','Variedad_Real','calibre_real')->where('temporada_id',$this->temporada->id)->get();
 
         $unique_folios = $despachosall2->pluck('Folio')->unique()->sort();
-        $unique_semanas = $despachosall2->pluck('semana')->unique()->sort();
+        $unique_semanas = $despachosall2->pluck('semana')
+                        ->unique()
+                        ->sortBy(function ($semana) {
+                            // Las semanas mayores a 25 (segundo semestre) deben ir primero
+                            // Les restamos 25 para que queden primero en el orden
+                            // Las otras las ordenamos después, sumándoles 52 para que vayan al final
+                            return $semana > 25 ? $semana - 25 : $semana + 52;
+                        })
+                        ->values(); // Opcional: para resetear los índices
+
         $unique_variedades = $despachosall2->pluck('Variedad_Real')->unique()->sort();
         $unique_calibres = $despachosall2->pluck('calibre_real')->unique()->sort();
 

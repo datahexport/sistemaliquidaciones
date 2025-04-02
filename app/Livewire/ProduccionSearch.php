@@ -90,7 +90,15 @@ class ProduccionSearch extends Component
 
         $unique_calibres = $procesosall2->pluck('CALIBRE_REAL')->unique()->sort();
 
-        $unique_semanas = $procesosall2->pluck('SEMANA')->unique()->sort();
+        $unique_semanas = $procesosall2->pluck('SEMANA')
+        ->unique()
+        ->sortBy(function ($semana) {
+            // Las semanas mayores a 25 (segundo semestre) deben ir primero
+            // Les restamos 25 para que queden primero en el orden
+            // Las otras las ordenamos después, sumándoles 52 para que vayan al final
+            return $semana > 25 ? $semana - 25 : $semana + 52;
+        })
+        ->values(); // Opcional: para resetear los índices
 
         $razons=Razonsocial::all();
 

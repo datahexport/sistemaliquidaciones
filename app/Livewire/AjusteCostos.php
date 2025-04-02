@@ -48,7 +48,17 @@ class AjusteCostos extends Component
         $fobsall=Ajustecosto::filter($this->filters)->where('temporada_id',$this->temporada->id)->get();
 
         $unique_variedades = $detalle_liquidacions->pluck('Variedad_Real')->unique()->sort();
-        $unique_semanas = $detalle_liquidacions->pluck('semana')->unique()->sort();
+        
+        $unique_semanas = $detalle_liquidacions->pluck('semana')
+            ->unique()
+            ->sortBy(function ($semana) {
+                // Las semanas mayores a 25 (segundo semestre) deben ir primero
+                // Les restamos 25 para que queden primero en el orden
+                // Las otras las ordenamos después, sumándoles 52 para que vayan al final
+                return $semana > 25 ? $semana - 25 : $semana + 52;
+            })
+            ->values(); // Opcional: para resetear los índices
+            
 
         $unique_calibres = $detalle_liquidacions->pluck('Calibre')->unique()->sort();
 
