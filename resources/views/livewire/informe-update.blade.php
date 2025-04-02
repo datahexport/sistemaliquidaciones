@@ -3462,9 +3462,25 @@
               </tbody>
             </table>
 
-            <h1 class="mt-6">
-              Fruta Mercado Interno
-            </h1>
+         
+            <div>
+                <label class="flex justify-between items-center cursor-pointer">
+                  <span class="ml-3 text-gray-700">Desglose por semana en fruta Fuera de Norma</span>
+                    <div class="relative">
+                        <input type="checkbox"
+                            wire:click="toggleSemana('semana_comercial')"
+                            class="sr-only"
+                            {{ $informe_edit->semana_comercial === 'si' ? 'checked' : '' }}>
+                        <div class="block w-14 h-8 rounded-full transition
+                            {{ $informe_edit->semana_comercial === 'si' ? 'bg-blue-500' : 'bg-gray-300' }}">
+                        </div>
+                        <div class="dot absolute left-1 top-1 w-6 h-6 rounded-full bg-white shadow transition
+                            {{ $informe_edit->semana_comercial === 'si' ? 'translate-x-6' : '' }}">
+                        </div>
+                    </div>
+                  
+                </label>
+            </div>
             <table id="balance" style="width:100%; border-collapse: collapse; margin-top: 20px;">
               <thead style="border-top: 2px solid black; border-bottom: 2px solid black;">
                 <tr>
