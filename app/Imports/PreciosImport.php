@@ -39,7 +39,7 @@ class PreciosImport implements ToCollection, WithStartRow
                     $fob=Fob::where('n_variedad',$row[0])->where('semana',$row[1])->where('n_calibre',$row[2])->where('temporada_id',$this->temporada->id)->first();
                    
                     if($fob){
-                        Tarifaprecio::firstOrCreate([
+                        Tarifaprecio::updateOrCreate([
                             'fob_id' => $fob->id,
                             'precio_id' => $precio->id,
                         ], [
@@ -54,7 +54,7 @@ class PreciosImport implements ToCollection, WithStartRow
                         ]);
 
                         // Crear el registro de Tarifaprecio si no existe ya para el segundo precio
-                        Tarifaprecio::firstOrCreate([
+                        Tarifaprecio::updateOrCreate([
                             'fob_id' => $fob->id,
                             'precio_id' => $precio2->id,
                         ], [
