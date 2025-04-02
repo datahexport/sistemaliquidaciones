@@ -6,9 +6,11 @@ use App\Models\Balancemasacuatro;
 use App\Models\Temporada;
 use Livewire\Attributes\Url;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class LiquidacionSearch extends Component
-{   public $temporada;
+{   use WithPagination;
+    public $temporada;
 
     #[Url(history: true)]
     public $filters=[
