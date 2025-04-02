@@ -3465,7 +3465,7 @@
          
             <div>
                 <label class="flex justify-between items-center cursor-pointer">
-                  <span class="ml-3 text-gray-700">Desglose por semana en fruta Fuera de Norma</span>
+                  <span class="ml-3 text-gray-700">Desglose por semana en fruta Mercado Interno</span>
                     <div class="relative">
                         <input type="checkbox"
                             wire:click="toggleSemana('semana_comercial')"
