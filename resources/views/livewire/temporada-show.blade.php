@@ -789,7 +789,7 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
 
                                     
 
-                                    </tr>
+                                      </tr>
                                 @php
                                   $n += 1;
                                 @endphp

@@ -114,7 +114,7 @@ class TemporadaShow extends Component
                 $razon->update(['name'=>$item]);
             }else{
                 if($item){
-                    Razonsocial::create(['name'=>$item]);
+                   $razon = Razonsocial::create(['name'=>$item]);
                 }
             }
             if($razon){
