@@ -5,9 +5,12 @@ namespace App\Livewire;
 use App\Models\Balancemasa;
 use App\Models\Temporada;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class MenuAside extends Component
-{   public $temporada;
+{   use WithPagination;
+
+    public $temporada;
 
     public function mount(Temporada $temporada){
         $this->temporada=$temporada;
