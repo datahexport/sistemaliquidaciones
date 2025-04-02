@@ -861,7 +861,21 @@
                });
 
                // Llama al método Livewire para eliminar
-               @this.call('precios_destroy_exportacion');
+               @this.call('precios_destroy_exportacion').then(() => {
+                        Swal.close(); // Cerrar la alerta de cargando cuando el proceso termine
+                        Swal.fire(
+                            'Eliminado!',
+                            'El registro ha sido eliminado.',
+                            'success'
+                        );
+                    }).catch(() => {
+                        Swal.close(); // Cerrar la alerta en caso de error
+                        Swal.fire(
+                            'Error en el proceso',
+                            'Ocurrió un problema al generar los precios FOB. Inténtalo nuevamente.',
+                            'error'
+                        );
+                    });
            }
        });
    }
