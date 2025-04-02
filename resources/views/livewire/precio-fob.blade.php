@@ -838,9 +838,7 @@
             }
         });
     }
-    </script>
 
-<script>
    function confirmDelete() {
        Swal.fire({
            title: '¿Estás seguro?',
