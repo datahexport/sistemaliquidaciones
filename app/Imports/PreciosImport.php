@@ -38,35 +38,36 @@ class PreciosImport implements ToCollection, WithStartRow
             foreach($rows as $row){
                     $fob=Fob::where('n_variedad',$row[0])->where('semana',$row[1])->where('n_calibre',$row[2])->where('temporada_id',$this->temporada->id)->first();
                    
-                    Tarifaprecio::firstOrCreate([
-                        'fob_id' => $fob->id,
-                        'precio_id' => $precio->id,
-                    ], [
-                        'suma_fob' => $row[6],
-                        'suma_fob_fc' => $row[3],
-                        'cant_kg' => $row[4],
-                        'tarifa' => $row[8],
-                        'tarifa_fc' => $row[5],
-                        'costo_proceso' => $row[15],
-                        'costo_materiales' => $row[16],
-                        'otros_costos' => $row[17],
-                    ]);
+                    if($fob){
+                        Tarifaprecio::firstOrCreate([
+                            'fob_id' => $fob->id,
+                            'precio_id' => $precio->id,
+                        ], [
+                            'suma_fob' => $row[6],
+                            'suma_fob_fc' => $row[3],
+                            'cant_kg' => $row[4],
+                            'tarifa' => $row[8],
+                            'tarifa_fc' => $row[5],
+                            'costo_proceso' => $row[15],
+                            'costo_materiales' => $row[16],
+                            'otros_costos' => $row[17],
+                        ]);
 
-                    // Crear el registro de Tarifaprecio si no existe ya para el segundo precio
-                    Tarifaprecio::firstOrCreate([
-                        'fob_id' => $fob->id,
-                        'precio_id' => $precio2->id,
-                    ], [
-                        'suma_fob' => $row[12],
-                        'suma_fob_fc' => $row[13],
-                        'cant_kg' => $row[14],
-                        'tarifa' => $row[10],
-                        'tarifa_fc' => $row[11],
-                        'costo_proceso' => $row[15],
-                        'costo_materiales' => $row[16],
-                        'otros_costos' => $row[17],
-                    ]);
-
+                        // Crear el registro de Tarifaprecio si no existe ya para el segundo precio
+                        Tarifaprecio::firstOrCreate([
+                            'fob_id' => $fob->id,
+                            'precio_id' => $precio2->id,
+                        ], [
+                            'suma_fob' => $row[12],
+                            'suma_fob_fc' => $row[13],
+                            'cant_kg' => $row[14],
+                            'tarifa' => $row[10],
+                            'tarifa_fc' => $row[11],
+                            'costo_proceso' => $row[15],
+                            'costo_materiales' => $row[16],
+                            'otros_costos' => $row[17],
+                        ]);
+                    }
                  
                 
             }
