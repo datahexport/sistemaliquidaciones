@@ -212,7 +212,7 @@ class InformeUpdate extends Component
         
         $variedades = Variedad::whereIn('name', $unique_variedades)->get();
 
-        $unique_semanas = $masas->pluck('semana')->unique()->sort();
+        $unique_semanas = $masastotal->pluck('SEMANA')->unique()->sort();
         $fobs = Fob::where('temporada_id',$this->temporada->id)->get();
         $materialestotal=Material::where('temporada_id',$this->temporada->id)->get();
         $gastos = Gasto::where('temporada_id',$this->temporada->id)->get();
@@ -242,7 +242,17 @@ class InformeUpdate extends Component
         $this->dispatch('mostrar-mensaje', ['tipo' => 'success', 'mensaje' => 'Informe creado correctamente.']);
     }
     
-    
+    public function toggleSemana($campo)
+    {
+        if (isset($this->informe_edit[$campo]) && $this->informe_edit[$campo] === 'si') {
+            $this->informe_edit[$campo] = null;
+        } else {
+            $this->informe_edit[$campo] = 'si';
+        }
+
+        $this->informe_edit->save();
+    }
+
 
     public function eliminarInforme($id)
     {

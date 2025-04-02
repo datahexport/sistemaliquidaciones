@@ -58,6 +58,8 @@ Route::resource('users', UserController::class)->names('users');
 
 Route::get('temporada/{temporada}/resumen',[TemporadaController::class,'resume'])->middleware('auth')->name('temporada.resume');
 
+Route::get('temporada/{temporada}/clientes',[TemporadaController::class,'clientes'])->middleware('auth')->name('temporada.clientes');
+
 Route::get('temporada/{temporada}/grafico',[TemporadaController::class,'grafico'])->middleware('auth')->name('temporada.grafico');
 
 Route::get('temporada/{temporada}/saldoaliquidar',[TemporadaController::class,'saldoaliquidar'])->middleware('auth')->name('temporada.saldoaliquidar');

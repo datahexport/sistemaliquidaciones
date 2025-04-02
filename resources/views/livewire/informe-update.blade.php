@@ -435,10 +435,31 @@
             </div>
         @endif
             
-            <h1 class="mt-6 text-xl font-bold text-right">
+            <h1 class="hidden mt-6 text-xl font-bold text-right">
              0  Modificaciones
             </h1>
 
+            <div>
+              <label class="flex justify-between items-center cursor-pointer">
+                <span class="ml-3 text-gray-700">Desglose por semana en fruta Dentro de Norma</span>
+                  <div class="relative">
+                      <input type="checkbox"
+                          wire:click="toggleSemana('semana_dentrodenorma')"
+                          class="sr-only"
+                          {{ $informe_edit->semana_dentrodenorma === 'si' ? 'checked' : '' }}>
+                      <div class="block w-14 h-8 rounded-full transition
+                          {{ $informe_edit->semana_dentrodenorma === 'si' ? 'bg-blue-500' : 'bg-gray-300' }}">
+                      </div>
+                      <div class="dot absolute left-1 top-1 w-6 h-6 rounded-full bg-white shadow transition
+                          {{ $informe_edit->semana_dentrodenorma === 'si' ? 'translate-x-6' : '' }}">
+                      </div>
+                  </div>
+                  
+              </label>
+          </div>
+      
+       
+          
           @if ($informe_edit)
               
             <table id="balance" style="width:100%; border-collapse: collapse; margin-top: 20px;">
@@ -446,6 +467,9 @@
                 <tr>
                 <th>Norma</th>
                 <th>Variedad</th>
+                @if ($informe_edit->semana_dentrodenorma=='si')
+                  <th>Semana</th>
+                @endif
                 <th>Calibre</th>
                 <th>Kg Embalado</th>
                 
@@ -459,6 +483,1241 @@
 
                 </tr>
               </thead>
+              @if ($informe_edit->semana_dentrodenorma=='si')
+                <tbody>
+                  <tr style="background-color: #ddd;">
+                          
+                      <td> DENTRO DE NORMA </td>
+                  
+                  
+                      <td> </td>
+                      <td> </td>
+                    
+                    <td></td>
+                    
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td ></td>
+                    <td></td>
+                    <td ></td>
+                    <td>
+                    </td>
+                    <td>
+          
+                    </td>
+                    <td>
+          
+                    </td>
+                    
+                  </tr>
+                  @php
+                    $variedadcount=1;
+                    $cantidadtotal=0;
+                    $pesonetototal=0;
+                    $retornototal=0;
+                    
+                    $totalretorno5j=0;
+                    $totalretorno4j=0;
+                      $totalretorno3j=0;
+                      $totalretorno2j=0;
+                      $totalretornoj=0;
+                      $totalretornoxl=0;
+
+                      $totalmargen5j=0;
+                      $totalmargen4j=0;
+                      $totalmargen3j=0;
+                      $totalmargen2j=0;
+                      $totalmargenj=0;
+                      $totalmargenxl=0;
+
+                      $totalcostopacking=0;
+                      $globaltotalmateriales=0;
+
+                      $totalpesonetol=0;
+          
+                      $globaltotalotroscostos=0;
+                      $totalcount=0;
+
+                      $totalcostos5j=0;
+                      $totalcostos4j=0;
+                      $totalcostos3j=0;
+                      $totalcostos2j=0;
+                      $totalcostosj=0;
+                      $totalcostosxl=0;
+                      
+                  @endphp
+                 
+                    @foreach ($unique_variedades as $variedad)
+                      <tr style="background-color: white;">
+        
+
+
+                        <td> </td>
+                      
+                        <td> {{$variedad}} </td>
+                    
+                      
+                      
+                      
+                        <td></td>
+                        <td ></td>
+                        <td>
+                        </td>
+                        <td>
+            
+                        </td>
+                        <td>
+            
+                        </td>
+                        
+                      </tr>
+                      @foreach ($unique_semanas as $semana)
+                        @if ($semana)
+                            
+                          @php
+                            $calibrecount=1;
+                            
+                            
+                            $cantidad5j=0;
+                            $cantidad4j=0;
+                            $cantidad3j=0;
+                            $cantidad2j=0;
+                            $cantidadj=0;
+                            $cantidadxl=0;
+                            
+                            $pesoneto5j=0;
+                            $pesoneto4j=0;
+                            $pesoneto3j=0;
+                            $pesoneto2j=0;
+                            $pesonetoj=0;
+                            $pesonetoxl=0;
+                            $pesonetol=0;
+                
+                            
+                            $retorno5j=0;
+                            $retorno4j=0;
+                            $retorno3j=0;
+                            $retorno2j=0;
+                            $retornoj=0;
+                            $retornoxl=0;
+
+                            $retorno_neto5j=0;
+                            $retorno_neto4j=0;
+                            $retorno_neto3j=0;
+                            $retorno_neto2j=0;
+                            $retorno_netoj=0;
+                            $retorno_netoxl=0;
+
+                            $margen5j=0;
+                            $margen4j=0;
+                            $margen3j=0;
+                            $margen2j=0;
+                            $margenj=0;
+                            $margenxl=0;
+                
+                            $costopacking=0;
+                
+                            $totalmateriales4j=0;
+                            $totalmateriales3j=0;
+                            $totalmateriales2j=0;
+                            $totalmaterialesj=0;
+                            $totalmaterialesxl=0;
+
+                            $costos5j=0;
+                            $costos4j=0;
+                            $costos3j=0;
+                            $costos2j=0;
+                            $costosj=0;
+                            $costosxl=0;
+                
+                            $otroscostos=0;
+                            $totalotroscostos=0;
+                            
+                            
+                            $masatotal=0;
+                
+                          @endphp
+                
+                          @foreach ($masas->where('tipo','EXPORTACIÓN') as $masa)
+                            
+                            @php      
+                                      $tarifafinal=0;
+                                      if (!IS_NULL($masa->fob)) {
+                                                  if ($masa->fob->tarifas->count()>0) {
+                                                      $tarifafinal=$masa->fob->tarifas->reverse()->first()->tarifa_fc;
+                                                  }
+                                      }
+                                              
+                            @endphp 
+                                              @if (($masa->calibre_real=='5J') && $masa->variedad==$variedad)
+                                                  @php
+                                                    $cantidad5j+=floatval($masa->cantidad);
+                                                    $pesoneto5j+=floatval($masa->peso_prorrateado);
+                                                  
+                                                    
+                        
+                                                  
+                                                    
+                                                    if (!IS_NULL($masa->fob)) {
+                                                        $retorno5j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                        $totalretorno5j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                        $margen5j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                        $totalmargen5j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                      }
+                                                    $cantidadtotal+=floatval($masa->cantidad);
+                                                    $pesonetototal+=floatval($masa->peso_prorrateado);
+                        
+                                                        $costos4j+=floatval($masa->costo);
+                                                        $totalcostos4j+=floatval($masa->costo);
+                                                        
+                                            
+                                                  @endphp	
+                                              @endif
+                              @if (($masa->calibre_real=='4J') && $masa->variedad==$variedad)
+                                  @php
+                                    $cantidad4j+=floatval($masa->cantidad);
+                                    $pesoneto4j+=floatval($masa->peso_prorrateado);
+                                  
+                                    
+
+                                  
+                                    
+                                    if (!IS_NULL($masa->fob)) {
+                                        $retorno4j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                        $totalretorno4j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                        $margen4j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                        $totalmargen4j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                      }
+                                    $cantidadtotal+=floatval($masa->cantidad);
+                                    $pesonetototal+=floatval($masa->peso_prorrateado);
+
+                                        $costos4j+=floatval($masa->costo);
+                                        $totalcostos4j+=floatval($masa->costo);
+                                        
+                            
+                                  @endphp	
+                              @endif
+                              @if (($masa->calibre_real=='3J') && $masa->variedad==$variedad)
+                                  @php
+                                    $cantidad3j+=$masa->cantidad;
+                                    $pesoneto3j+=floatval($masa->peso_prorrateado);
+                                
+
+                                    $costos3j+=floatval($masa->costo);
+                                    $totalcostos3j+=floatval($masa->costo);
+
+                                    if (!IS_NULL($masa->fob)) {
+                                      //dd($masa->fob);
+                                                        $retorno3j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                        $totalretorno3j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                        $margen3j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                        $totalmargen3j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                      }
+                                    $cantidadtotal+=$masa->cantidad;
+                                    $pesonetototal+=floatval($masa->peso_prorrateado);
+
+                                        
+
+                                  @endphp	
+                              @endif
+                              @if (($masa->calibre_real=='2J') && $masa->variedad==$variedad)
+                                  @php
+                                    $cantidad2j+=$masa->cantidad;
+                                    $pesoneto2j+=floatval($masa->peso_prorrateado);
+                                  
+
+                                    $costos2j+=floatval($masa->costo);
+                                    $totalcostos2j+=floatval($masa->costo);
+
+                                    if (!IS_NULL($masa->fob)) {
+                                                    $retorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                    $totalretorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                    $margen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                    $totalmargen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                      }
+                                    $cantidadtotal+=$masa->cantidad;
+                                    $pesonetototal+=floatval($masa->peso_prorrateado);
+
+                                  
+
+                                  @endphp	
+                              @endif
+                              @if (($masa->calibre_real=='J') && $masa->variedad==$variedad)
+                                  @php
+                                    $cantidadj+=$masa->cantidad;
+                                      $pesonetoj+=floatval($masa->peso_prorrateado);
+                                    
+
+                                      $costosj+=floatval($masa->costo);
+                                      $totalcostosj+=floatval($masa->costo);
+
+                                      if (!IS_NULL($masa->fob)) {
+                                                        $retornoj+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                        $totalretornoj+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                        $margenj+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                        $totalmargenj+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                      }
+                                      $cantidadtotal+=$masa->cantidad;
+                                      $pesonetototal+=floatval($masa->peso_prorrateado);
+
+                                  
+
+                                  @endphp	
+                              @endif
+                              @if (($masa->calibre_real=='XL') && $masa->variedad==$variedad)
+                                  @php
+                                    $cantidadxl+=$masa->cantidad;
+                                    $pesonetoxl+=floatval($masa->peso_prorrateado);
+                                  
+                                    $costosxl+=floatval($masa->costo);
+                                    $totalcostosxl+=floatval($masa->costo);
+
+                                    if (!IS_NULL($masa->fob)) {
+                                                    $retornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                    $totalretornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                    $margenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                    $totalmargenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                      }
+                                    $cantidadtotal+=$masa->cantidad;
+                                    $pesonetototal+=floatval($masa->peso_prorrateado);
+
+
+                                  @endphp	
+                              @endif
+                              @if (($masa->calibre_real=='L') && $masa->variedad==$variedad)
+                                  @php
+                                  
+                                    $pesonetol+=floatval($masa->peso_prorrateado);
+                                    $totalpesonetol+=floatval($masa->peso_prorrateado);
+                                    
+                                  @endphp	
+                              @endif
+                              
+                              @if ($masa->calibre_real=='4J' || $masa->calibre_real=='3J'|| $masa->calibre_real=='2J' || $masa->calibre_real=='J' || $masa->calibre_real=='XL' || $masa->calibre_real=='L')
+                                    @php
+                                          $masatotal+=$masa->peso_prorrateado;
+                                    @endphp
+                              @endif
+                            
+                          @endforeach
+                
+
+                      
+
+                
+                          @if ($cantidad4j+$cantidad3j+$cantidad2j+$cantidadj+$cantidadxl>0)
+                            
+                            @if ($pesoneto5j>0)
+                              <tr>
+                                <td> </td>
+                                <td> </td>
+                                
+                                
+                                
+                                
+                                <td>5J</td>
+                                <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto5j,2,',','.')}} KGS</td>
+                                <td>{{number_format(($retorno5j),2,',','.')}}
+                                <td>{{number_format(($margen5j),2,',','.')}}
+                                </td>
+                              
+                                <td>
+                                  {{number_format($costos5j,2)}}
+                                </td>
+                                
+                                <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "5J")
+                                      @if ($type_mod=="npk")
+                                        {{$retorno}} <br>
+                                      @else
+                                        <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                        <input
+                                            id="retorno"
+                                            type="number" 
+                                            step="0.01"
+                                            class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                            wire:model.live="retorno"
+                                            
+                                        >
+                                      @endif
+                                    
+                                      
+                                    @else
+
+                                      @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','5J')->count()>0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','5J')->first()->retorno, 2, ',', '.') }} USD
+                                        </p>
+                                          @php
+                                              $retorno_neto5j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','5J')->first()->retorno;
+                                          @endphp
+                                      @else
+                                        {{ number_format(($retorno5j - ($margen5j + $costos5j)), 2, ',', '.') }} USD <br>
+                                        @php
+                                            $retorno_neto5j=($retorno5j - ($margen5j + $costos5j));
+                                        @endphp
+                                      @endif
+                                      
+                                    @endif
+
+                                    @if ($categoria_mod=="DENTRO DE NORMA" && $variedad_mod==$variedad && $calibre_mod=="5J" && $type_mod=="retorno")
+                                      <button wire:click="saveOrUpdateModification" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                        <span class="relative">Guardar</span>
+                                      </button>
+                                    @else
+                                      <span wire:click="set_modification('DENTRO DE NORMA', '{{ $variedad }}', '5J','{{($retorno5j-($margen5j+$costos5j))}}','{{($retorno5j-($margen5j+$costos5j))/$pesoneto5j}}','{{$pesoneto5j}}','retorno')" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full text-xs"></span>
+                                        <span class="relative">Editar</span>
+                                        </span>
+                                    @endif
+                                      
+                                </td>
+                                <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "4J")
+                                      @if ($type_mod=="retorno")
+                                        {{$npk}} <br>
+                                      @else
+                                        <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                        <input
+                                            id="npk"
+                                            type="number"
+                                            step="0.01"
+                                            class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                            wire:model.live="npk"
+                                        >
+                                      @endif
+                                        
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->count()>0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->npk, 2, ',', '.') }} USD/kg
+                                        </p>
+
+                                      @else
+                                        @if ($pesoneto4j)
+                                            <p class="whitespace-nowrap">
+                                              {{ number_format(($retorno4j - ($margen4j + $costos4j)) / $pesoneto4j, 2, ',', '.') }} USD/kg
+                                            </p>
+                                        @else
+                                            0 USD/kg
+                                        @endif
+                                      @endif
+                                        
+                                    @endif
+
+                                    @if ($categoria_mod=="DENTRO DE NORMA" && $variedad_mod==$variedad && $calibre_mod=="4J" && $type_mod=="npk")
+                                      <button wire:click="saveOrUpdateModification" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                        <span class="relative">Guardar</span>
+                                      </button>
+                                    @else
+                                      <span wire:click="set_modification('DENTRO DE NORMA', '{{ $variedad }}', '4J','{{($retorno4j-($margen4j+$costos4j))}}','{{($retorno4j-($margen4j+$costos4j))/$pesoneto4j}}','{{$pesoneto4j}}','npk')" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full text-xs"></span>
+                                        <span class="relative">Editar</span>
+                                        </span>
+                                    @endif
+                                      
+                                </td>
+                              
+                                
+                                <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
+
+                                
+                                  @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->count()>0)
+                                    @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno>$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno_inicial)
+                                      <p class="text-green-500 font-bold"> +{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno-$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno_inicial}} usd
+                                      </p>
+                                    @else
+                                      <p class="text-red-500 font-bold"> {{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno-$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno_inicial}} usd
+                                      </p>
+                                    @endif
+                                  <button title="Eliminar" class="cursorpointer text-xs text-red-500" wire:click="delete_modificacion('{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->id}}')" >(Eliminar)</button>
+                                  @endif
+                                  {{-- comment
+                                        <input wire:model="preciofob" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none">   
+                                        <span wire:click='save_fobid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span class="relative">Guardar</span>
+                                            </span>
+                                    --}}
+
+                                </td>
+                              </tr>
+                              @php
+                                $calibrecount+=1;
+                              @endphp
+                            @endif
+                            @if ($pesoneto4j>0)
+                              <tr>
+                                <td> </td>
+                                <td> </td>
+                                
+                                
+                                
+                                
+                                <td>4J</td>
+                                <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto4j,2,',','.')}} KGS</td>
+                                <td>{{number_format(($retorno4j),2,',','.')}}
+                                <td>{{number_format(($margen4j),2,',','.')}}
+                                </td>
+                              
+                                <td>
+                                  {{number_format($costos4j,2)}}
+                                </td>
+                                
+                                <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "4J")
+                                      @if ($type_mod=="npk")
+                                        {{$retorno}} <br>
+                                      @else
+                                        <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                        <input
+                                            id="retorno"
+                                            type="number" 
+                                            step="0.01"
+                                            class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                            wire:model.live="retorno"
+                                            
+                                        >
+                                      @endif
+                                    
+                                      
+                                    @else
+
+                                      @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->count()>0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno, 2, ',', '.') }} USD
+                                        </p>
+                                          @php
+                                              $retorno_neto4j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno;
+                                          @endphp
+                                      @else
+                                        {{ number_format(($retorno4j - ($margen4j + $costos4j)), 2, ',', '.') }} USD <br>
+                                        @php
+                                            $retorno_neto4j=($retorno4j - ($margen4j + $costos4j));
+                                        @endphp
+                                      @endif
+                                      
+                                    @endif
+
+                                    @if ($categoria_mod=="DENTRO DE NORMA" && $variedad_mod==$variedad && $calibre_mod=="4J" && $type_mod=="retorno")
+                                      <button wire:click="saveOrUpdateModification" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                        <span class="relative">Guardar</span>
+                                      </button>
+                                    @else
+                                      <span wire:click="set_modification('DENTRO DE NORMA', '{{ $variedad }}', '4J','{{($retorno4j-($margen4j+$costos4j))}}','{{($retorno4j-($margen4j+$costos4j))/$pesoneto4j}}','{{$pesoneto4j}}','retorno')" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full text-xs"></span>
+                                        <span class="relative">Editar</span>
+                                        </span>
+                                    @endif
+                                      
+                                </td>
+                                <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "4J")
+                                      @if ($type_mod=="retorno")
+                                        {{$npk}} <br>
+                                      @else
+                                        <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                        <input
+                                            id="npk"
+                                            type="number"
+                                            step="0.01"
+                                            class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                            wire:model.live="npk"
+                                        >
+                                      @endif
+                                        
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->count()>0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->npk, 2, ',', '.') }} USD/kg
+                                        </p>
+
+                                      @else
+                                        @if ($pesoneto4j)
+                                            <p class="whitespace-nowrap">
+                                              {{ number_format(($retorno4j - ($margen4j + $costos4j)) / $pesoneto4j, 2, ',', '.') }} USD/kg
+                                            </p>
+                                        @else
+                                            0 USD/kg
+                                        @endif
+                                      @endif
+                                        
+                                    @endif
+
+                                    @if ($categoria_mod=="DENTRO DE NORMA" && $variedad_mod==$variedad && $calibre_mod=="4J" && $type_mod=="npk")
+                                      <button wire:click="saveOrUpdateModification" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                        <span class="relative">Guardar</span>
+                                      </button>
+                                    @else
+                                      <span wire:click="set_modification('DENTRO DE NORMA', '{{ $variedad }}', '4J','{{($retorno4j-($margen4j+$costos4j))}}','{{($retorno4j-($margen4j+$costos4j))/$pesoneto4j}}','{{$pesoneto4j}}','npk')" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full text-xs"></span>
+                                        <span class="relative">Editar</span>
+                                        </span>
+                                    @endif
+                                      
+                                </td>
+                              
+                                
+                                <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
+
+                                
+                                  @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->count()>0)
+                                    @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno>$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno_inicial)
+                                      <p class="text-green-500 font-bold"> +{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno-$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno_inicial}} usd
+                                      </p>
+                                    @else
+                                      <p class="text-red-500 font-bold"> {{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno-$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno_inicial}} usd
+                                      </p>
+                                    @endif
+                                  <button title="Eliminar" class="cursorpointer text-xs text-red-500" wire:click="delete_modificacion('{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->id}}')" >(Eliminar)</button>
+                                  @endif
+                                  {{-- comment
+                                        <input wire:model="preciofob" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none">   
+                                        <span wire:click='save_fobid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span class="relative">Guardar</span>
+                                            </span>
+                                    --}}
+
+                                </td>
+                              </tr>
+                              @php
+                                $calibrecount+=1;
+                              @endphp
+                            @endif
+                            @if ($pesoneto3j>0)
+                              <tr>
+                                <td> </td>
+                                <td> </td>
+                              
+                                
+                                
+                                <td>3J</td>
+                                <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto3j,2,',','.')}} KGS</td>
+                                <td>{{number_format(($retorno3j),2,',','.')}}
+                                <td>{{number_format(($margen3j),2,',','.')}}
+                                </td>
+                                <td>
+                                  {{number_format($costos3j,2)}}
+                                </td>
+                                <td>
+                                  @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "3J")
+                                    @if ($type_mod=="npk")
+                                      {{$retorno}} <br>
+                                    @else
+                                      <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                      <input
+                                          id="retorno"
+                                          type="number" 
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="retorno"
+                                          
+                                      >
+                                    @endif
+                                  
+                                    
+                                  @else
+
+                                    @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->count()>0)
+                                      <p class="text-red-500 font-bold whitespace-nowrap">
+                                        {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno, 2, ',', '.') }} USD
+                                      </p>
+                                          @php
+                                              $retorno_neto3j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno;
+                                          @endphp
+                                    @else
+                                      {{ number_format(($retorno3j - ($margen3j + $costos3j)), 2, ',', '.') }} USD <br>
+                                        @php
+                                            $retorno_neto3j=($retorno3j - ($margen3j + $costos3j));
+                                        @endphp
+                                    @endif
+                                    
+                                  @endif
+
+                                  @if ($categoria_mod=="DENTRO DE NORMA" && $variedad_mod==$variedad && $calibre_mod=="3J" && $type_mod=="retorno")
+                                    <button wire:click="saveOrUpdateModification" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                      <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                      <span class="relative">Guardar</span>
+                                    </button>
+                                  @else
+                                    <span wire:click="set_modification('DENTRO DE NORMA', '{{ $variedad }}', '3J','{{($retorno3j-($margen3j+$costos3j))}}','{{($retorno3j-($margen3j+$costos3j))/$pesoneto3j}}','{{$pesoneto3j}}','retorno')" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                      <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full text-xs"></span>
+                                      <span class="relative">Editar</span>
+                                      </span>
+                                  @endif
+                                    
+                                </td>
+                                <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "3J")
+                                      @if ($type_mod=="retorno")
+                                        {{$npk}} <br>
+                                      @else
+                                        <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                        <input
+                                            id="npk"
+                                            type="number"
+                                            step="0.01"
+                                            class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                            wire:model.live="npk"
+                                        >
+                                      @endif
+                                        
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->count()>0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->npk, 2, ',', '.') }} USD/kg
+                                        </p>
+
+                                      @else
+                                        @if ($pesoneto3j)
+                                            <p class="whitespace-nowrap">
+                                              {{ number_format(($retorno3j - ($margen3j + $costos3j)) / $pesoneto3j, 2, ',', '.') }} USD/kg
+                                            </p>
+                                        @else
+                                            0 USD/kg
+                                        @endif
+                                      @endif
+                                        
+                                    @endif
+
+                                    @if ($categoria_mod=="DENTRO DE NORMA" && $variedad_mod==$variedad && $calibre_mod=="3J" && $type_mod=="npk")
+                                      <button wire:click="saveOrUpdateModification" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                        <span class="relative">Guardar</span>
+                                      </button>
+                                    @else
+                                      <span wire:click="set_modification('DENTRO DE NORMA', '{{ $variedad }}', '3J','{{($retorno3j-($margen3j+$costos3j))}}','{{($retorno3j-($margen3j+$costos3j))/$pesoneto3j}}','{{$pesoneto3j}}','npk')" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full text-xs"></span>
+                                        <span class="relative">Editar</span>
+                                        </span>
+                                    @endif
+                                      
+                                </td>
+                              
+                                <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
+
+                                
+                                  @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->count()>0)
+                                    @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno>$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno_inicial)
+                                        <p class="text-green-500 font-bold"> +{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno-$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno_inicial}} usd
+                                      </p>
+                                    @else
+                                      <p class="text-red-500 font-bold"> {{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno-$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno_inicial}} usd
+                                      </p>
+                                    @endif
+                                    <button title="Eliminar" class="cursorpointer text-xs text-red-500" wire:click="delete_modificacion('{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->id}}')" >(Eliminar)</button>
+                                  @endif
+                                  {{-- comment
+                                        <input wire:model="preciofob" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none">   
+                                        <span wire:click='save_fobid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span class="relative">Guardar</span>
+                                            </span>
+                                    --}}
+
+                                </td>
+                                  
+                              </tr>
+                              @php
+                                $calibrecount+=1;
+                              @endphp
+                            @endif
+                            @if ($pesoneto2j>0)
+                              <tr>
+                                <td> </td>
+                                <td> </td>
+                              
+                                
+                                
+                                <td>2J</td>
+                                <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto2j,2,',','.')}} KGS</td>
+                                <td>{{number_format(($retorno2j),2,',','.')}}
+                                <td>{{number_format(($margen2j),2,',','.')}}
+                                </td>
+                                <td>
+                                  {{number_format($costos2j,2)}}
+                                </td>
+                                <td>
+                                  @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "2J")
+                                    @if ($type_mod=="npk")
+                                      {{$retorno}} <br>
+                                    @else
+                                      <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                      <input
+                                          id="retorno"
+                                          type="number" 
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="retorno"
+                                          
+                                      >
+                                    @endif
+                                  
+                                    
+                                  @else
+
+                                    @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->count()>0)
+                                      <p class="text-red-500 font-bold whitespace-nowrap">
+                                        {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno, 2, ',', '.') }} USD
+                                      </p>
+                                      @php
+                                          $retorno_neto2j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno;
+                                      @endphp
+                                    @else
+                                    
+                                      {{ number_format(($retorno2j - ($margen2j + $costos2j)), 2, ',', '.') }} USD <br>
+                                      @php
+                                          $retorno_neto2j=($retorno2j - ($margen2j + $costos2j));
+                                      @endphp
+                                    @endif
+                                    
+                                  @endif
+
+                                  @if ($categoria_mod=="DENTRO DE NORMA" && $variedad_mod==$variedad && $calibre_mod=="2J" && $type_mod=="retorno")
+                                    <button wire:click="saveOrUpdateModification" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                      <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                      <span class="relative">Guardar</span>
+                                    </button>
+                                  @else
+                                    <span wire:click="set_modification('DENTRO DE NORMA', '{{ $variedad }}', '2J','{{($retorno2j-($margen2j+$costos2j))}}','{{($retorno2j-($margen2j+$costos2j))/$pesoneto2j}}','{{$pesoneto2j}}','retorno')" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                      <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full text-xs"></span>
+                                      <span class="relative">Editar</span>
+                                      </span>
+                                  @endif
+                                    
+                                </td>
+                                <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "2J")
+                                      @if ($type_mod=="retorno")
+                                        {{$npk}} <br>
+                                      @else
+                                        <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                        <input
+                                            id="npk"
+                                            type="number"
+                                            step="0.01"
+                                            class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                            wire:model.live="npk"
+                                        >
+                                      @endif
+                                        
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->count()>0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->npk, 2, ',', '.') }} USD/kg
+                                        </p>
+
+                                      @else
+                                        @if ($pesoneto2j)
+                                            <p class="whitespace-nowrap">
+                                              {{ number_format(($retorno2j - ($margen2j + $costos2j)) / $pesoneto2j, 2, ',', '.') }} USD/kg
+                                            </p>
+                                        @else
+                                            0 USD/kg
+                                        @endif
+                                      @endif
+                                        
+                                    @endif
+
+                                    @if ($categoria_mod=="DENTRO DE NORMA" && $variedad_mod==$variedad && $calibre_mod=="2J" && $type_mod=="npk")
+                                      <button wire:click="saveOrUpdateModification" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                        <span class="relative">Guardar</span>
+                                      </button>
+                                    @else
+                                      <span wire:click="set_modification('DENTRO DE NORMA', '{{ $variedad }}', '2J','{{($retorno2j-($margen2j+$costos2j))}}','{{($retorno2j-($margen2j+$costos2j))/$pesoneto2j}}','{{$pesoneto2j}}','npk')" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full text-xs"></span>
+                                        <span class="relative">Editar</span>
+                                        </span>
+                                    @endif
+                                      
+                                </td>
+                              
+                                <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
+
+                                
+                                  @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->count()>0)
+                                    @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno>$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno_inicial)
+                                        <p class="text-green-500 font-bold"> +{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno-$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno_inicial}} usd
+                                      </p>
+                                    @else
+                                      <p class="text-red-500 font-bold"> {{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno-$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno_inicial}} usd
+                                      </p>
+                                    @endif
+                                    <button title="Eliminar" class="cursorpointer text-xs text-red-500" wire:click="delete_modificacion('{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->id}}')" >(Eliminar)</button>
+                                  @endif
+                                  {{-- comment
+                                        <input wire:model="preciofob" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none">   
+                                        <span wire:click='save_fobid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span class="relative">Guardar</span>
+                                            </span>
+                                    --}}
+
+                                </td>
+                                
+                              </tr>
+                              @php
+                                $calibrecount+=1;
+                              @endphp
+                            @endif
+                            @if ($pesonetoj>0)
+                              <tr>
+                                <td> </td>
+                                <td> </td>
+                                
+                                
+                                
+                                
+                                <td>J</td>
+                                <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;" >{{number_format($pesonetoj,2,',','.')}} KGS</td>
+                                <td>{{number_format(($retornoj),2,',','.')}}
+                                <td>{{number_format(($margenj),2,',','.')}}
+                                </td>
+                                <td>
+                                  {{number_format($costosj,2)}}
+                                </td>
+                                <td>
+                                  @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "J")
+                                    @if ($type_mod=="npk")
+                                      {{$retorno}} <br>
+                                    @else
+                                      <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                      <input
+                                          id="retorno"
+                                          type="number" 
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="retorno"
+                                          
+                                      >
+                                    @endif
+                                  
+                                    
+                                  @else
+
+                                    @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->count()>0)
+                                      <p class="text-red-500 font-bold whitespace-nowrap">
+                                        {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno, 2, ',', '.') }} USD
+                                      </p>
+                                        @php
+                                            $retorno_netoj=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno;
+                                        @endphp
+                                    @else
+                                      {{ number_format(($retornoj - ($margenj + $costosj)), 2, ',', '.') }} USD <br>
+                                      @php
+                                          $retorno_netoj=($retornoj - ($margenj + $costosj));
+                                      @endphp
+                                    @endif
+                                    
+                                  @endif
+
+                                  @if ($categoria_mod=="DENTRO DE NORMA" && $variedad_mod==$variedad && $calibre_mod=="J" && $type_mod=="retorno")
+                                    <button wire:click="saveOrUpdateModification" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                      <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                      <span class="relative">Guardar</span>
+                                    </button>
+                                  @else
+                                    <span wire:click="set_modification('DENTRO DE NORMA', '{{ $variedad }}', 'J','{{($retornoj-($margenj+$costosj))}}','{{($retornoj-($margenj+$costosj))/$pesonetoj}}','{{$pesonetoj}}','retorno')" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                      <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full text-xs"></span>
+                                      <span class="relative">Editar</span>
+                                      </span>
+                                  @endif
+                                    
+                                </td>
+                                <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "J")
+                                      @if ($type_mod=="retorno")
+                                        {{$npk}} <br>
+                                      @else
+                                        <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                        <input
+                                            id="npk"
+                                            type="number"
+                                            step="0.01"
+                                            class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                            wire:model.live="npk"
+                                        >
+                                      @endif
+                                        
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->count()>0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->npk, 2, ',', '.') }} USD/kg
+                                        </p>
+
+                                      @else
+                                        @if ($pesonetoj)
+                                            <p class="whitespace-nowrap">
+                                              {{ number_format(($retornoj - ($margenj + $costosj)) / $pesonetoj, 2, ',', '.') }} USD/kg
+                                            </p>
+                                        @else
+                                            0 USD/kg
+                                        @endif
+                                      @endif
+                                        
+                                    @endif
+
+                                    @if ($categoria_mod=="DENTRO DE NORMA" && $variedad_mod==$variedad && $calibre_mod=="J" && $type_mod=="npk")
+                                      <button wire:click="saveOrUpdateModification" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                        <span class="relative">Guardar</span>
+                                      </button>
+                                    @else
+                                      <span wire:click="set_modification('DENTRO DE NORMA', '{{ $variedad }}', 'J','{{($retornoj-($margenj+$costosj))}}','{{($retornoj-($margenj+$costosj))/$pesonetoj}}','{{$pesonetoj}}','npk')" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full text-xs"></span>
+                                        <span class="relative">Editar</span>
+                                        </span>
+                                    @endif
+                                      
+                                </td>
+                              
+                                <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
+
+                                
+                                  @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->count()>0)
+                                    @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno>$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno_inicial)
+                                        <p class="text-green-500 font-bold"> +{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno-$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno_inicial}} usd
+                                      </p>
+                                    @else
+                                      <p class="text-red-500 font-bold"> {{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno-$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno_inicial}} usd
+                                      </p>
+                                    @endif
+                                  <button title="Eliminar" class="cursorpointer text-xs text-red-500" wire:click="delete_modificacion('{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->id}}')" >(Eliminar)</button>
+                                  @endif
+                                  {{-- comment
+                                        <input wire:model="preciofob" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none">   
+                                        <span wire:click='save_fobid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span class="relative">Guardar</span>
+                                            </span>
+                                    --}}
+
+                                </td>
+                  
+                                
+                              </tr>
+                              @php
+                                $calibrecount+=1;
+                              @endphp
+                            @endif
+                            @if ($pesonetoxl>0)
+                              <tr>
+                                <td> </td>
+                                <td> </td>
+                                
+                                
+                                
+                                
+                                <td>XL</td>
+                                <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd; " >{{number_format($pesonetoxl,2,',','.')}} KGS</td>
+                                <td>{{number_format(($retornoxl),2,',','.')}}
+                                <td>{{number_format(($margenxl),2,',','.')}}
+                                </td>
+                                <td>
+                                  {{number_format($costosxl,2)}}
+                                </td>
+                                <td>
+                                  @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "XL")
+                                    @if ($type_mod=="npk")
+                                      {{$retorno}} <br>
+                                    @else
+                                      <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                      <input
+                                          id="retorno"
+                                          type="number" 
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="retorno"
+                                          
+                                      >
+                                    @endif
+                                  
+                                    
+                                  @else
+
+                                    @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->count()>0)
+                                      <p class="text-red-500 font-bold whitespace-nowrap">
+                                        {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno, 2, ',', '.') }} USD
+                                      </p>
+                                      @php
+                                          $retorno_netoxl=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno;
+                                      @endphp
+                                    @else
+                                      {{ number_format(($retornoxl - ($margenxl + $costosxl)), 2, ',', '.') }} USD <br>
+                                      @php
+                                          $retorno_netoxl=($retornoxl - ($margenxl + $costosxl));
+                                      @endphp
+                                    @endif
+                                    
+                                  @endif
+
+                                  @if ($categoria_mod=="DENTRO DE NORMA" && $variedad_mod==$variedad && $calibre_mod=="XL" && $type_mod=="retorno")
+                                    <button wire:click="saveOrUpdateModification" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                      <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                      <span class="relative">Guardar</span>
+                                    </button>
+                                  @else
+                                    <span wire:click="set_modification('DENTRO DE NORMA', '{{ $variedad }}', 'XL','{{($retornoxl-($margenxl+$costosxl))}}','{{($retornoxl-($margenxl+$costosxl))/$pesonetoxl}}','{{$pesonetoxl}}','retorno')" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                      <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full text-xs"></span>
+                                      <span class="relative">Editar</span>
+                                      </span>
+                                  @endif
+                                    
+                                </td>
+                                <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "XL")
+                                      @if ($type_mod=="retorno")
+                                        {{$npk}} <br>
+                                      @else
+                                        <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                        <input
+                                            id="npk"
+                                            type="number"
+                                            step="0.01"
+                                            class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                            wire:model.live="npk"
+                                        >
+                                      @endif
+                                        
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->count()>0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->npk, 2, ',', '.') }} USD/kg
+                                        </p>
+
+                                      @else
+                                        @if ($pesonetoxl)
+                                            <p class="whitespace-nowrap">
+                                              {{ number_format(($retornoxl - ($margenxl + $costosxl)) / $pesonetoxl, 2, ',', '.') }} USD/kg
+                                            </p>
+                                        @else
+                                            0 USD/kg
+                                        @endif
+                                      @endif
+                                        
+                                    @endif
+
+                                    @if ($categoria_mod=="DENTRO DE NORMA" && $variedad_mod==$variedad && $calibre_mod=="XL" && $type_mod=="npk")
+                                      <button wire:click="saveOrUpdateModification" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                        <span class="relative">Guardar</span>
+                                      </button>
+                                    @else
+                                      <span wire:click="set_modification('DENTRO DE NORMA', '{{ $variedad }}', 'XL','{{($retornoxl-($margenxl+$costosxl))}}','{{($retornoxl-($margenxl+$costosxl))/$pesonetoxl}}','{{$pesonetoxl}}','npk')" class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full text-xs"></span>
+                                        <span class="relative">Editar</span>
+                                        </span>
+                                    @endif
+                                      
+                                </td>
+                              
+                                <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
+
+                                
+                                  @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->count()>0)
+                                    @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno>$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno_inicial)
+                                        <p class="text-green-500 font-bold"> +{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno-$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno_inicial}} usd
+                                      </p>
+                                    @else
+                                      <p class="text-red-500 font-bold"> {{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno-$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno_inicial}} usd
+                                      </p>
+                                    @endif
+                                    <button title="Eliminar" class="cursorpointer text-xs text-red-500" wire:click="delete_modificacion('{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->id}}')" >(Eliminar)</button>
+                                  @endif
+                                  {{-- comment
+                                        <input wire:model="preciofob" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none">   
+                                        <span wire:click='save_fobid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span class="relative">Guardar</span>
+                                            </span>
+                                    --}}
+
+                                </td>
+                                
+                              </tr>
+                              @php
+                                $calibrecount+=1;
+                              @endphp
+                            @endif
+                          @endif
+                          
+                          @if ($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl>0)
+                            
+                            <tr>
+                              <td></td>
+                              <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">Total Semana: {{$semana}}</td>
+                              <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
+                              <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; ">{{number_format($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl,2,',','.')}} KGS</td>
+                              <td>
+                                {{number_format($retorno4j+$retorno3j+$retorno2j+$retornoj+$retornoxl,2,',','.')}}
+                              </td>
+                              <td>
+                                {{number_format(($margen4j+$margen3j+$margen2j+$margenj+$margenxl),2,',','.')}}
+                              </td>
+                            
+                              <td>
+                                {{number_format($costos4j+$costos3j+$costos2j+$costosj+$costosxl,2)}}
+                              </td>
+                              <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl),2,',','.')}} USD 
+                              
+                              
+                            </td>
+                              <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl)/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
+                              
+                            </tr>
+                          @endif 
+                            @php
+                              $totalcount+=($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl);
+                              $variedadcount+=1;
+                            @endphp
+                        @endif
+                      @endforeach
+            
+                    @endforeach
+                  
+                  @if ($pesonetototal>0)
+                    <tr style="background-color: #ddd;">
+                          
+                      
+                    
+                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">Total Dentro de Norma</td>
+                      
+                      
+                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
+                    
+                      
+                      
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($pesonetototal,1,',','.')}} KGS</td>
+                      <td>{{number_format($totalretorno5j+$totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl,2)}} usd</td>
+                      <td>{{number_format(($totalmargen5j+$totalmargen4j+$totalmargen3j+$totalmargen2j+$totalmargenj+$totalmargenxl),2)}} usd</td>
+                    
+                      <td>
+                        {{number_format(($totalcostos5j+$totalcostos4j+$totalcostos3j+$totalcostos2j+$totalcostosj+$totalcostosxl),2)}}
+                      </td>
+                      
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalcount,2,',','.')}} USD 
+                    
+                      </td>
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalcount/$pesonetototal,2,',','.')}} usd/kg </td>
+                      
+                    </tr>
+                  @endif
+          
+                  @php
+                    $totaldentrodenorma=($totalcount);
+                  @endphp
+                    
+          
+                </tbody>
+              @else
               <tbody>
                 <tr style="background-color: #ddd;">
                         
@@ -490,7 +1749,7 @@
                   $cantidadtotal=0;
                   $pesonetototal=0;
                   $retornototal=0;
-                   
+                  
                   $totalretorno5j=0;
                   $totalretorno4j=0;
                     $totalretorno3j=0;
@@ -624,10 +1883,10 @@
                                           @php
                                             $cantidad5j+=floatval($masa->cantidad);
                                             $pesoneto5j+=floatval($masa->peso_prorrateado);
-                                           
+                                          
                                             
                 
-                                           
+                                          
                                             
                                             if (!IS_NULL($masa->fob)) {
                                                 $retorno5j+=floatval($masa->peso_prorrateado*$tarifafinal);
@@ -640,7 +1899,7 @@
                 
                                                 $costos4j+=floatval($masa->costo);
                                                 $totalcostos4j+=floatval($masa->costo);
-                                                 
+                                                
                                     
                                           @endphp	
                                       @endif
@@ -648,10 +1907,10 @@
                           @php
                             $cantidad4j+=floatval($masa->cantidad);
                             $pesoneto4j+=floatval($masa->peso_prorrateado);
-                           
+                          
                             
 
-                           
+                          
                             
                             if (!IS_NULL($masa->fob)) {
                                 $retorno4j+=floatval($masa->peso_prorrateado*$tarifafinal);
@@ -664,7 +1923,7 @@
 
                                 $costos4j+=floatval($masa->costo);
                                 $totalcostos4j+=floatval($masa->costo);
-                                 
+                                
                     
                           @endphp	
                       @endif
@@ -672,7 +1931,7 @@
                           @php
                             $cantidad3j+=$masa->cantidad;
                             $pesoneto3j+=floatval($masa->peso_prorrateado);
-                         
+                        
 
                             $costos3j+=floatval($masa->costo);
                             $totalcostos3j+=floatval($masa->costo);
@@ -695,16 +1954,16 @@
                           @php
                             $cantidad2j+=$masa->cantidad;
                             $pesoneto2j+=floatval($masa->peso_prorrateado);
-                           
+                          
 
                             $costos2j+=floatval($masa->costo);
                             $totalcostos2j+=floatval($masa->costo);
 
                             if (!IS_NULL($masa->fob)) {
-                                             $retorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
-                                             $totalretorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
-                                             $margen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-                                             $totalmargen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                            $retorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                            $totalretorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                            $margen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                            $totalmargen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
                                               }
                             $cantidadtotal+=$masa->cantidad;
                             $pesonetototal+=floatval($masa->peso_prorrateado);
@@ -717,7 +1976,7 @@
                           @php
                             $cantidadj+=$masa->cantidad;
                               $pesonetoj+=floatval($masa->peso_prorrateado);
-                             
+                            
 
                               $costosj+=floatval($masa->costo);
                               $totalcostosj+=floatval($masa->costo);
@@ -731,7 +1990,7 @@
                               $cantidadtotal+=$masa->cantidad;
                               $pesonetototal+=floatval($masa->peso_prorrateado);
 
-                           
+                          
 
                           @endphp	
                       @endif
@@ -744,10 +2003,10 @@
                             $totalcostosxl+=floatval($masa->costo);
 
                             if (!IS_NULL($masa->fob)) {
-                                             $retornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
-                                             $totalretornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
-                                             $margenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-                                             $totalmargenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                            $retornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                            $totalretornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                            $margenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                            $totalmargenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
                                               }
                             $cantidadtotal+=$masa->cantidad;
                             $pesonetototal+=floatval($masa->peso_prorrateado);
@@ -773,7 +2032,7 @@
                   @endforeach
         
 
-               
+              
 
         
                   @if ($cantidad4j+$cantidad3j+$cantidad2j+$cantidadj+$cantidadxl>0)
@@ -791,7 +2050,7 @@
                         <td>{{number_format(($retorno5j),2,',','.')}}
                         <td>{{number_format(($margen5j),2,',','.')}}
                         </td>
-                       
+                      
                         <td>
                           {{number_format($costos5j,2)}}
                         </td>
@@ -891,21 +2150,21 @@
                               
                         </td>
                       
-                         
+                        
                         <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
 
-                         
+                        
                           @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->count()>0)
                             @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno>$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno_inicial)
-                               <p class="text-green-500 font-bold"> +{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno-$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno_inicial}} usd
+                              <p class="text-green-500 font-bold"> +{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno-$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno_inicial}} usd
                               </p>
                             @else
                               <p class="text-red-500 font-bold"> {{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno-$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno_inicial}} usd
                               </p>
                             @endif
-                           <button title="Eliminar" class="cursorpointer text-xs text-red-500" wire:click="delete_modificacion('{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->id}}')" >(Eliminar)</button>
+                          <button title="Eliminar" class="cursorpointer text-xs text-red-500" wire:click="delete_modificacion('{{$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->id}}')" >(Eliminar)</button>
                           @endif
-                           {{-- comment
+                          {{-- comment
                                 <input wire:model="preciofob" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none">   
                                 <span wire:click='save_fobid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
                                     <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
@@ -1667,7 +2926,7 @@
                     <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($pesonetototal,1,',','.')}} KGS</td>
                     <td>{{number_format($totalretorno5j+$totalretorno4j+$totalretorno3j+$totalretorno2j+$totalretornoj+$totalretornoxl,2)}} usd</td>
                     <td>{{number_format(($totalmargen5j+$totalmargen4j+$totalmargen3j+$totalmargen2j+$totalmargenj+$totalmargenxl),2)}} usd</td>
-                   
+                  
                     <td>
                       {{number_format(($totalcostos5j+$totalcostos4j+$totalcostos3j+$totalcostos2j+$totalcostosj+$totalcostosxl),2)}}
                     </td>
@@ -1686,11 +2945,28 @@
                   
         
               </tbody>
+              @endif
             </table>
 
-            <h1 class="mt-6">
-              Fruta fuera de norma
-            </h1>
+              <!-- Fuera de norma -->
+            <div>
+              <label class="flex justify-between items-center cursor-pointer">
+                <span class="ml-3 text-gray-700">Desglose por semana en fruta Fuera de Norma</span>
+                  <div class="relative">
+                      <input type="checkbox"
+                          wire:click="toggleSemana('semana_fueradenorma')"
+                          class="sr-only"
+                          {{ $informe_edit->semana_fueradenorma === 'si' ? 'checked' : '' }}>
+                      <div class="block w-14 h-8 rounded-full transition
+                          {{ $informe_edit->semana_fueradenorma === 'si' ? 'bg-blue-500' : 'bg-gray-300' }}">
+                      </div>
+                      <div class="dot absolute left-1 top-1 w-6 h-6 rounded-full bg-white shadow transition
+                          {{ $informe_edit->semana_fueradenorma === 'si' ? 'translate-x-6' : '' }}">
+                      </div>
+                  </div>
+                 
+              </label>
+          </div>
             <table id="balance" style="width:100%; border-collapse: collapse; margin-top: 20px;">
               <thead style="border-top: 2px solid black; border-bottom: 2px solid black;">
                 <tr>

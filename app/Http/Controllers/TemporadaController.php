@@ -125,6 +125,10 @@ class TemporadaController extends Controller
         return view('temporadas.resume',compact('temporada','resumes'));
     }
 
+    public function clientes(Temporada $temporada)
+    {   return view('temporadas.clientes',compact('temporada'));
+    }
+
     public function grafico(Temporada $temporada)
     {   return view('temporadas.grafico',compact('temporada'));
     }

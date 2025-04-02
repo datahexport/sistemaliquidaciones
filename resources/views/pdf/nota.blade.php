@@ -387,549 +387,615 @@
 				</thead>
 			</table>
 
-		<table id="balance" style="width:100%; border-collapse: collapse; margin-top: 20px; display: none;">
-			<thead style="border-top: 2px solid black; border-bottom: 2px solid black;">
-			  <tr>
-				<th>NORMA</th>
-				<th>VARIEDAD</th>
-				<th>CALIBRE</th>
-				<th>KG EMBALADO</th>
-				<th>RETORNO NETO PRODUCTOR</th>
-				<th>NPK</th>
-				
-			  </tr>
-			</thead>
-			<tbody>
-			  <tr style="background-color: #ddd;">
-					  
-				  <td> DENTRO DE NORMA </td>
-			  
-			  
-				  <td> </td>
-				
-				<td></td>
-				
-				
-				<td ></td>
-				<td></td>
-				<td ></td>
-				<td>
-				</td>
-				<td>
-	  
-				</td>
-				
-			  </tr>
-			  @php
-				$variedadcount=1;
-				$cantidadtotal=0;
-				$pesonetototal=0;
-				$retornototal=0;
-				  $totalretorno4j=0;
-				  $totalretorno3j=0;
-				  $totalretorno2j=0;
-				  $totalretornoj=0;
-				  $totalretornoxl=0;
+			<table id="balance" style="width:100%; border-collapse: collapse; margin-top: 20px; display: none;">
 
-				  $totalmargen4j=0;
-				  $totalmargen3j=0;
-				  $totalmargen2j=0;
-				  $totalmargenj=0;
-				  $totalmargenxl=0;
-
-				  $totalcostopacking=0;
-				  $globaltotalmateriales=0;
-
-				  $totalpesonetol=0;
-	  
-				  $globaltotalotroscostos=0;
-				  $totalcount=0;
-
-				  $totalcostos4j=0;
-				  $totalcostos3j=0;
-				  $totalcostos2j=0;
-				  $totalcostosj=0;
-				  $totalcostosxl=0;
-				  
-			  @endphp
-			  @foreach ($unique_variedades as $variedad)
-				<tr style="background-color: white;">
-  
-
-
-				  <td> </td>
-				
-				  <td> {{$variedad}} </td>
-			  
-				
-				
-				
-				 
-				  <td>
-	  
-				  </td>
-				  
-				</tr>
-				@php
-				  $calibrecount=1;
-				  
-				  $cantidad4j=0;
-				  $cantidad3j=0;
-				  $cantidad2j=0;
-				  $cantidadj=0;
-				  $cantidadxl=0;
-				  $pesoneto4j=0;
-				  $pesoneto3j=0;
-				  $pesoneto2j=0;
-				  $pesonetoj=0;
-				  $pesonetoxl=0;
-				  $pesonetol=0;
-	  
-				  $retorno4j=0;
-				  $retorno3j=0;
-				  $retorno2j=0;
-				  $retornoj=0;
-				  $retornoxl=0;
-
-				  	$retorno_neto4j=0;
-					$retorno_neto3j=0;
-					$retorno_neto2j=0;
-					$retorno_netoj=0;
-					$retorno_netoxl=0;
-
-				  $margen4j=0;
-				  $margen3j=0;
-				  $margen2j=0;
-				  $margenj=0;
-				  $margenxl=0;
-	  
-				  $costopacking=0;
-	  
-				  $totalmateriales4j=0;
-				  $totalmateriales3j=0;
-				  $totalmateriales2j=0;
-				  $totalmaterialesj=0;
-				  $totalmaterialesxl=0;
-
-				  $costos4j=0;
-				  $costos3j=0;
-				  $costos2j=0;
-				  $costosj=0;
-				  $costosxl=0;
-	  
-				  $otroscostos=0;
-				  $totalotroscostos=0;
-				  
-				  
-				  $masatotal=0;
-	  
-				@endphp
-	  
-				@foreach ($masas as $masa)
-				  
-				  @php      
-							$tarifafinal=0;
-							if (!IS_NULL($masa->fob)) {
-										if ($masa->fob->tarifas->count()>0) {
-											$tarifafinal=$masa->fob->tarifas->reverse()->first()->tarifa_fc;
-										}
-							}
-									
-				  @endphp 
-					@if (($masa->calibre_real=='4J') && $masa->variedad==$variedad)
-						@php
-						  $cantidad4j+=floatval($masa->cantidad);
-						  $pesoneto4j+=floatval($masa->peso_prorrateado);
-						 
-						  
-
-						 
-						  
-						  if (!IS_NULL($masa->fob)) {
-							  $retorno4j+=floatval($masa->peso_prorrateado*$tarifafinal);
-							  $totalretorno4j+=floatval($masa->peso_prorrateado*$tarifafinal);
-							  $margen4j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-							  $totalmargen4j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-							}
-						  $cantidadtotal+=floatval($masa->cantidad);
-						  $pesonetototal+=floatval($masa->peso_prorrateado);
-
-							  $costos4j+=floatval($masa->costo);
-							  $totalcostos4j+=floatval($masa->costo);
-							   
-				  
-						@endphp	
-					@endif
-					@if (($masa->calibre_real=='3J') && $masa->variedad==$variedad)
-						@php
-						  $cantidad3j+=$masa->cantidad;
-						  $pesoneto3j+=floatval($masa->peso_prorrateado);
-					   
-
-						  $costos3j+=floatval($masa->costo);
-						  $totalcostos3j+=floatval($masa->costo);
-
-						  if (!IS_NULL($masa->fob)) {
-							//dd($masa->fob);
-											  $retorno3j+=floatval($masa->peso_prorrateado*$tarifafinal);
-											  $totalretorno3j+=floatval($masa->peso_prorrateado*$tarifafinal);
-											  $margen3j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-											  $totalmargen3j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-											}
-						  $cantidadtotal+=$masa->cantidad;
-						  $pesonetototal+=floatval($masa->peso_prorrateado);
-
-							  
-
-						@endphp	
-					@endif
-					@if (($masa->calibre_real=='2J') && $masa->variedad==$variedad)
-						@php
-						  $cantidad2j+=$masa->cantidad;
-						  $pesoneto2j+=floatval($masa->peso_prorrateado);
-						 
-
-						  $costos2j+=floatval($masa->costo);
-						  $totalcostos2j+=floatval($masa->costo);
-
-						  if (!IS_NULL($masa->fob)) {
-										   $retorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
-										   $totalretorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
-										   $margen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-										   $totalmargen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-											}
-						  $cantidadtotal+=$masa->cantidad;
-						  $pesonetototal+=floatval($masa->peso_prorrateado);
-
-						
-
-						@endphp	
-					@endif
-					@if (($masa->calibre_real=='J') && $masa->variedad==$variedad)
-						@php
-						  $cantidadj+=$masa->cantidad;
-							$pesonetoj+=floatval($masa->peso_prorrateado);
-						   
-
-							$costosj+=floatval($masa->costo);
-							$totalcostosj+=floatval($masa->costo);
-
-							if (!IS_NULL($masa->fob)) {
-											  $retornoj+=floatval($masa->peso_prorrateado*$tarifafinal);
-											  $totalretornoj+=floatval($masa->peso_prorrateado*$tarifafinal);
-											  $margenj+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-											  $totalmargenj+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-							}
-							$cantidadtotal+=$masa->cantidad;
-							$pesonetototal+=floatval($masa->peso_prorrateado);
-
-						 
-
-						@endphp	
-					@endif
-					@if (($masa->calibre_real=='XL') && $masa->variedad==$variedad)
-						@php
-						  $cantidadxl+=$masa->cantidad;
-						  $pesonetoxl+=floatval($masa->peso_prorrateado);
-						
-						  $costosxl+=floatval($masa->costo);
-						  $totalcostosxl+=floatval($masa->costo);
-
-						  if (!IS_NULL($masa->fob)) {
-										   $retornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
-										   $totalretornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
-										   $margenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-										   $totalmargenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-											}
-						  $cantidadtotal+=$masa->cantidad;
-						  $pesonetototal+=floatval($masa->peso_prorrateado);
-
-
-						@endphp	
-					@endif
-					@if (($masa->calibre_real=='L') && $masa->variedad==$variedad)
-						@php
-						
-						  $pesonetol+=floatval($masa->peso_prorrateado);
-						  $totalpesonetol+=floatval($masa->peso_prorrateado);
-						  
-						@endphp	
-					@endif
-					
-					@if ($masa->calibre_real=='4J' || $masa->calibre_real=='3J'|| $masa->calibre_real=='2J' || $masa->calibre_real=='J' || $masa->calibre_real=='XL')
-						  @php
-								$masatotal+=$masa->peso_prorrateado;
-						  @endphp
-					@endif
-				  
-				@endforeach
-	  
-
-			 
-
-	  
-				@if ($cantidad4j+$cantidad3j+$cantidad2j+$cantidadj+$cantidadxl>0)
-				  
-				  @if ($pesoneto4j>0)
-					<tr>
-					  <td> </td>
-					  <td> </td>
-					  
-					  
-					  
-					  
-					  <td>4J</td>
-					  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto4j,0,',','.')}} KG</td>
-					 
-					  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >
-							@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->count()>0)
-                                  {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno, 2, ',', '.') }} USD
-                                  @php
-                                      $retorno_neto4j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno;
-                                  @endphp
-                            @elseif ($pesoneto4j)
-                                {{ number_format(($retorno4j - ($margen4j + $costos4j)), 2, ',', '.') }} USD <br>
-                                @php
-                                    $retorno_neto4j=($retorno4j - ($margen4j + $costos4j));
-                                @endphp
-                            @endif
-					  </td>
-					  
-					  <td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
-						@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->count()>0)
-								{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno/$pesoneto4j, 2, ',', '.') }} USD
-								
-						@elseif ($pesoneto4j)
-							{{ number_format(($retorno4j - ($margen4j + $costos4j))/$pesoneto4j, 2, ',', '.') }} USD <br>
-							
-						@endif
-					  </td>
-					  
-					</tr>
-					@php
-					  $calibrecount+=1;
-					@endphp
-				  @endif
-				  @if ($pesoneto3j>0)
-					<tr>
-					  <td> </td>
-					  <td> </td>
-					
-					  
-					  
-					  <td>3J</td>
-					  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto3j,0,',','.')}} KG</td>
-					 
-					  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >
-							@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->count()>0)
-								{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno, 2, ',', '.') }} USD
-								@php
-									$retorno_neto3j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno;
-								@endphp
-							@elseif ($pesoneto3j)
-								{{ number_format(($retorno3j - ($margen3j + $costos3j)), 2, ',', '.') }} USD <br>
-								@php
-									$retorno_neto3j=($retorno3j - ($margen3j + $costos3j));
-								@endphp
-							@endif
-					</td>
-					
-					<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
-						@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->count()>0)
-								{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno/$pesoneto3j, 2, ',', '.') }} USD
-								
-						@elseif ($pesoneto3j)
-							{{ number_format(($retorno3j - ($margen3j + $costos3j))/$pesoneto3j, 2, ',', '.') }} USD <br>
-							
-						@endif
-					</td>
-
-					  
-					</tr>
-					@php
-					  $calibrecount+=1;
-					@endphp
-				  @endif
-				  @if ($pesoneto2j>0)
-					<tr>
-					  <td> </td>
-					  <td> </td>
-					
-					  
-					  
-					  <td>2J</td>
-					  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto2j,0,',','.')}} KG</td>
-					 
-					  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >
-								@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->count()>0)
-									{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno, 2, ',', '.') }} USD
-									@php
-										$retorno_neto2j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno;
-									@endphp
-								@elseif ($pesoneto2j)
-									{{ number_format(($retorno2j - ($margen2j + $costos2j)), 2, ',', '.') }} USD <br>
-									@php
-										$retorno_neto2j=($retorno2j - ($margen2j + $costos2j));
-									@endphp
-								@endif
-						</td>
-						
-						<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
-							@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->count()>0)
-									{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno/$pesoneto2j, 2, ',', '.') }} USD
-									
-							@elseif ($pesoneto2j)
-								{{ number_format(($retorno2j - ($margen2j + $costos2j))/$pesoneto2j, 2, ',', '.') }} USD <br>
-								
-							@endif
-						</td>
-
-					  
-					</tr>
-					@php
-					  $calibrecount+=1;
-					@endphp
-				  @endif
-				  @if ($pesonetoj>0)
-					<tr>
-					  <td> </td>
-					  <td> </td>
-					  
-					  
-					  
-					  
-					  <td>J</td>
-					  <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;" >{{number_format($pesonetoj,0,',','.')}} KG</td>
-					 
-					  	<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >
-								@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->count()>0)
-									{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno, 2, ',', '.') }} USD
-									@php
-										$retorno_netoj=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno;
-									@endphp
-								@elseif ($pesonetoj)
-									{{ number_format(($retornoj - ($margenj + $costosj)), 2, ',', '.') }} USD <br>
-									@php
-										$retorno_netoj=($retornoj - ($margenj + $costosj));
-									@endphp
-								@endif
-						</td>
-						
-						<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
-							@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->count()>0)
-									{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno/$pesonetoj, 2, ',', '.') }} USD
-									
-							@elseif ($pesonetoj)
-								{{ number_format(($retornoj - ($margenj + $costosj))/$pesonetoj, 2, ',', '.') }} USD <br>
-								
-							@endif
-						</td>
-
-		
-					  
-					</tr>
-					@php
-					  $calibrecount+=1;
-					@endphp
-				  @endif
-				  @if ($pesonetoxl>0)
-					<tr>
-					  <td> </td>
-					  <td> </td>
-					  
-					  
-					  
-					  
-					  <td>XL</td>
-					  <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd; " >{{number_format($pesonetoxl,0,',','.')}} KG</td>
-					
-					  	<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >
-								@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->count()>0)
-									{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno, 2, ',', '.') }} USD
-									@php
-										$retorno_netoxl=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno;
-									@endphp
-								@elseif ($pesonetoxl)
-									{{ number_format(($retornoxl - ($margenxl + $costosxl)), 2, ',', '.') }} USD <br>
-									@php
-										$retorno_netoxl=($retornoxl - ($margenxl + $costosxl));
-									@endphp
-								@endif
-						</td>
-						
-						<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
-							@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->count()>0)
-									{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno/$pesonetoxl, 2, ',', '.') }} USD
-									
-							@elseif ($pesonetoxl)
-								{{ number_format(($retornoxl - ($margenxl + $costosxl))/$pesonetoxl, 2, ',', '.') }} USD <br>
-								
-							@endif
-						</td>
-
-					  
-					</tr>
-					@php
-					  $calibrecount+=1;
-					@endphp
-				  @endif
-				@endif
-				
-				@if ($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl>0)
-				  
+				<thead style="border-top: 2px solid black; border-bottom: 2px solid black;">
 				  <tr>
-					<td></td>
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">TOTAL {{$variedad}}</td>
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
-					<td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;font-weight: bold;">{{number_format($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl,2,',','.')}} KG</td>
-					
-					<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd; font-weight: bold;" >{{number_format(($retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl),2,',','.')}} USD 
-					
-					
-				  </td>
-					<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd; font-weight: bold;">{{number_format(($retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl)/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD</td>
+					<th>NORMA</th>
+					<th>VARIEDAD</th>
+					<th>CALIBRE</th>
+					<th>KG EMBALADO</th>
+					<th>RETORNO NETO PRODUCTOR</th>
+					<th>NPK</th>
 					
 				  </tr>
-				@endif
+				</thead>
+				<tbody>
+				  <tr style="background-color: #ddd;">
+						  
+					  <td> DENTRO DE NORMA </td>
+				  
+				  
+					  <td> </td>
+					
+					<td></td>
+					
+					
+					<td ></td>
+					<td></td>
+					<td ></td>
+					<td>
+					</td>
+					<td>
+		  
+					</td>
+					
+				  </tr>
 				  @php
-					$totalcount+=($retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl);
-					$variedadcount+=1;
-				  @endphp
-				
-	  
-			  @endforeach
-			
-			  @if ($pesonetototal>0)
-				<tr style="background-color: #ddd;">
+					$variedadcount=1;
+					$cantidadtotal=0;
+					$pesonetototal=0;
+					$retornototal=0;
+					  $totalretorno5j=0;
+					  $totalretorno4j=0;
+					  $totalretorno3j=0;
+					  $totalretorno2j=0;
+					  $totalretornoj=0;
+					  $totalretornoxl=0;
+	
+					  $totalmargen5j=0;
+					  $totalmargen4j=0;
+					  $totalmargen3j=0;
+					  $totalmargen2j=0;
+					  $totalmargenj=0;
+					  $totalmargenxl=0;
+	
+					  $totalcostopacking=0;
+					  $globaltotalmateriales=0;
+	
+					  $totalpesonetol=0;
+		  
+					  $globaltotalotroscostos=0;
+					  $totalcount=0;
+	
+					  $totalcostos4j=0;
+					  $totalcostos5j=0;
+					  $totalcostos3j=0;
+					  $totalcostos2j=0;
+					  $totalcostosj=0;
+					  $totalcostosxl=0;
 					  
-				  
-				
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">TOTAL DENTRO DE NORMA</td>
-				  
-				  
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
-				
-				  
-				  
-				  <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
-				  <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;font-weight: bold;" >{{number_format($pesonetototal,1,',','.')}} KG</td>
-				
-				  
-				  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;  font-weight: bold;">{{number_format($totalcount,2,',','.')}} USD 
-				
-				  </td>
-				  <td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd; font-weight: bold;">{{number_format($totalcount/$pesonetototal,2,',','.')}} USD </td>
-				  
-				</tr>
-			  @endif
+				  @endphp
+				  @foreach ($unique_variedades as $variedad)
+					<tr style="background-color: white;">
 	  
-			  @php
-				$totaldentrodenorma=($totalcount);
-			  @endphp
+	
+	
+					  <td> </td>
+					
+					  <td> {{$variedad}} </td>
+				  
+					
+					
+					
+					 
+					  <td>
+		  
+					  </td>
+					  
+					</tr>
+					@php
+					  $calibrecount=1;
+					  
+					  $cantidad4j=0;
+					  $cantidad5j=0;
+					  $cantidad3j=0;
+					  $cantidad2j=0;
+					  $cantidadj=0;
+					  $cantidadxl=0;
+	
+					  $pesoneto4j=0;
+					  $pesoneto5j=0;
+					  $pesoneto3j=0;
+					  $pesoneto2j=0;
+					  $pesonetoj=0;
+					  $pesonetoxl=0;
+					  $pesonetol=0;
+		  
+					  $retorno5j=0;
+					  $retorno4j=0;
+					  $retorno3j=0;
+					  $retorno2j=0;
+					  $retornoj=0;
+					  $retornoxl=0;
+	
+						  $retorno_neto5j=0;
+						$retorno_neto4j=0;
+						$retorno_neto3j=0;
+						$retorno_neto2j=0;
+						$retorno_netoj=0;
+						$retorno_netoxl=0;
+	
+					  $margen5j=0;
+					  $margen4j=0;
+					  $margen3j=0;
+					  $margen2j=0;
+					  $margenj=0;
+					  $margenxl=0;
+		  
+					  $costopacking=0;
+		  
+					  $totalmateriales5j=0;
+					  $totalmateriales4j=0;
+					  $totalmateriales3j=0;
+					  $totalmateriales2j=0;
+					  $totalmaterialesj=0;
+					  $totalmaterialesxl=0;
+	
+					  $costos5j=0;
+					  $costos4j=0;
+					  $costos3j=0;
+					  $costos2j=0;
+					  $costosj=0;
+					  $costosxl=0;
+		  
+					  $otroscostos=0;
+					  $totalotroscostos=0;
+					  
+					  
+					  $masatotal=0;
+		  
+					@endphp
+		  
+					@foreach ($masas as $masa)
+					  
+					  @php      
+								$tarifafinal=0;
+								if (!IS_NULL($masa->fob)) {
+											if ($masa->fob->tarifas->count()>0) {
+												$tarifafinal=$masa->fob->tarifas->reverse()->first()->tarifa_fc;
+											}
+								}
+										
+					  @endphp 
+					  @if (($masa->calibre_real=='5J') && $masa->variedad==$variedad)
+						@php
+							$cantidad5j += floatval($masa->cantidad);
+							$pesoneto5j += floatval($masa->peso_prorrateado);
+							
+							if (!IS_NULL($masa->fob)) {
+								$retorno5j += floatval($masa->peso_prorrateado * $tarifafinal);
+								$totalretorno5j += floatval($masa->peso_prorrateado * $tarifafinal);
+								$margen5j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+								$totalmargen5j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+							}
+					
+							$cantidadtotal += floatval($masa->cantidad);
+							$pesonetototal += floatval($masa->peso_prorrateado);
+					
+							$costos5j += floatval($masa->costo);
+							$totalcostos5j += floatval($masa->costo);
+						@endphp	
+					@endif
+				  
+						@if (($masa->calibre_real=='4J') && $masa->variedad==$variedad)
+							@php
+							  $cantidad4j+=floatval($masa->cantidad);
+							  $pesoneto4j+=floatval($masa->peso_prorrateado);
+							 
+							  
+	
+							 
+							  
+							  if (!IS_NULL($masa->fob)) {
+								  $retorno4j+=floatval($masa->peso_prorrateado*$tarifafinal);
+								  $totalretorno4j+=floatval($masa->peso_prorrateado*$tarifafinal);
+								  $margen4j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+								  $totalmargen4j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+								}
+							  $cantidadtotal+=floatval($masa->cantidad);
+							  $pesonetototal+=floatval($masa->peso_prorrateado);
+	
+								  $costos4j+=floatval($masa->costo);
+								  $totalcostos4j+=floatval($masa->costo);
+								   
+					  
+							@endphp	
+						@endif
+						@if (($masa->calibre_real=='3J') && $masa->variedad==$variedad)
+							@php
+							  $cantidad3j+=$masa->cantidad;
+							  $pesoneto3j+=floatval($masa->peso_prorrateado);
+						   
+	
+							  $costos3j+=floatval($masa->costo);
+							  $totalcostos3j+=floatval($masa->costo);
+	
+							  if (!IS_NULL($masa->fob)) {
+								//dd($masa->fob);
+												  $retorno3j+=floatval($masa->peso_prorrateado*$tarifafinal);
+												  $totalretorno3j+=floatval($masa->peso_prorrateado*$tarifafinal);
+												  $margen3j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+												  $totalmargen3j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+												}
+							  $cantidadtotal+=$masa->cantidad;
+							  $pesonetototal+=floatval($masa->peso_prorrateado);
+	
+								  
+	
+							@endphp	
+						@endif
+						@if (($masa->calibre_real=='2J') && $masa->variedad==$variedad)
+							@php
+							  $cantidad2j+=$masa->cantidad;
+							  $pesoneto2j+=floatval($masa->peso_prorrateado);
+							 
+	
+							  $costos2j+=floatval($masa->costo);
+							  $totalcostos2j+=floatval($masa->costo);
+	
+							  if (!IS_NULL($masa->fob)) {
+											   $retorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
+											   $totalretorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
+											   $margen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+											   $totalmargen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+												}
+							  $cantidadtotal+=$masa->cantidad;
+							  $pesonetototal+=floatval($masa->peso_prorrateado);
+	
+							
+	
+							@endphp	
+						@endif
+						@if (($masa->calibre_real=='J') && $masa->variedad==$variedad)
+							@php
+							  $cantidadj+=$masa->cantidad;
+								$pesonetoj+=floatval($masa->peso_prorrateado);
+							   
+	
+								$costosj+=floatval($masa->costo);
+								$totalcostosj+=floatval($masa->costo);
+	
+								if (!IS_NULL($masa->fob)) {
+												  $retornoj+=floatval($masa->peso_prorrateado*$tarifafinal);
+												  $totalretornoj+=floatval($masa->peso_prorrateado*$tarifafinal);
+												  $margenj+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+												  $totalmargenj+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+								}
+								$cantidadtotal+=$masa->cantidad;
+								$pesonetototal+=floatval($masa->peso_prorrateado);
+	
+							 
+	
+							@endphp	
+						@endif
+						@if (($masa->calibre_real=='XL') && $masa->variedad==$variedad)
+							@php
+							  $cantidadxl+=$masa->cantidad;
+							  $pesonetoxl+=floatval($masa->peso_prorrateado);
+							
+							  $costosxl+=floatval($masa->costo);
+							  $totalcostosxl+=floatval($masa->costo);
+	
+							  if (!IS_NULL($masa->fob)) {
+											   $retornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
+											   $totalretornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
+											   $margenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+											   $totalmargenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+												}
+							  $cantidadtotal+=$masa->cantidad;
+							  $pesonetototal+=floatval($masa->peso_prorrateado);
+	
+	
+							@endphp	
+						@endif
+						@if (($masa->calibre_real=='L') && $masa->variedad==$variedad)
+							@php
+							
+							  $pesonetol+=floatval($masa->peso_prorrateado);
+							  $totalpesonetol+=floatval($masa->peso_prorrateado);
+							  
+							@endphp	
+						@endif
+						
+						@if ($masa->calibre_real=='5J' || $masa->calibre_real=='4J' || $masa->calibre_real=='3J'|| $masa->calibre_real=='2J' || $masa->calibre_real=='J' || $masa->calibre_real=='XL')
+							  @php
+									$masatotal+=$masa->peso_prorrateado;
+							  @endphp
+						@endif
+					  
+					@endforeach
+		  
+	
+				 
+	
+		  
+					@if ($cantidad5j+$cantidad4j+$cantidad3j+$cantidad2j+$cantidadj+$cantidadxl>0)
+						@if ($pesoneto5j > 0)
+							<tr>
+								<td> </td>
+								<td> </td>
+							
+								<td>5J</td>
+								<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;">{{ number_format($pesoneto5j, 0, ',', '.') }} KG</td>
+							
+								<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;">
+									@if ($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '5J')->count() > 0)
+										{{ number_format($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '5J')->first()->retorno, 2, ',', '.') }} USD
+										@php
+											$retorno_neto5j = $informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '5J')->first()->retorno;
+										@endphp
+									@elseif ($pesoneto5j)
+										{{ number_format(($retorno5j - ($margen5j + $costos5j)), 2, ',', '.') }} USD <br>
+										@php
+											$retorno_neto5j = ($retorno5j - ($margen5j + $costos5j));
+										@endphp
+									@endif
+								</td>
+							
+								<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
+									@if ($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '5J')->count() > 0)
+										{{ number_format($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '5J')->first()->retorno / $pesoneto5j, 2, ',', '.') }} USD
+									@elseif ($pesoneto5j)
+										{{ number_format(($retorno5j - ($margen5j + $costos5j)) / $pesoneto5j, 2, ',', '.') }} USD <br>
+									@endif
+								</td>
+							</tr>
+								@php
+								$calibrecount += 1;
+								@endphp
+						@endif
 				
-	  
-			</tbody>
-		  </table>
+					  @if ($pesoneto4j>0)
+						<tr>
+						  <td> </td>
+						  <td> </td>
+						  
+						  
+						  
+						  
+						  <td>4J</td>
+						  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto4j,0,',','.')}} KG</td>
+						 
+						  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >
+								@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->count()>0)
+									  {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno, 2, ',', '.') }} USD
+									  @php
+										  $retorno_neto4j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno;
+									  @endphp
+								@elseif ($pesoneto4j)
+									{{ number_format(($retorno4j - ($margen4j + $costos4j)), 2, ',', '.') }} USD <br>
+									@php
+										$retorno_neto4j=($retorno4j - ($margen4j + $costos4j));
+									@endphp
+								@endif
+						  </td>
+						  
+						  <td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
+							@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->count()>0)
+									{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno/$pesoneto4j, 2, ',', '.') }} USD
+									
+							@elseif ($pesoneto4j)
+								{{ number_format(($retorno4j - ($margen4j + $costos4j))/$pesoneto4j, 2, ',', '.') }} USD <br>
+								
+							@endif
+						  </td>
+						  
+						</tr>
+						@php
+						  $calibrecount+=1;
+						@endphp
+					  @endif
+					  @if ($pesoneto3j>0)
+						<tr>
+						  <td> </td>
+						  <td> </td>
+						
+						  
+						  
+						  <td>3J</td>
+						  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto3j,0,',','.')}} KG</td>
+						 
+						  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >
+								@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->count()>0)
+									{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno, 2, ',', '.') }} USD
+									@php
+										$retorno_neto3j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno;
+									@endphp
+								@elseif ($pesoneto3j)
+									{{ number_format(($retorno3j - ($margen3j + $costos3j)), 2, ',', '.') }} USD <br>
+									@php
+										$retorno_neto3j=($retorno3j - ($margen3j + $costos3j));
+									@endphp
+								@endif
+						</td>
+						
+						<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
+							@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->count()>0)
+									{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno/$pesoneto3j, 2, ',', '.') }} USD
+									
+							@elseif ($pesoneto3j)
+								{{ number_format(($retorno3j - ($margen3j + $costos3j))/$pesoneto3j, 2, ',', '.') }} USD <br>
+								
+							@endif
+						</td>
+	
+						  
+						</tr>
+						@php
+						  $calibrecount+=1;
+						@endphp
+					  @endif
+					  @if ($pesoneto2j>0)
+						<tr>
+						  <td> </td>
+						  <td> </td>
+						
+						  
+						  
+						  <td>2J</td>
+						  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto2j,0,',','.')}} KG</td>
+						 
+						  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >
+									@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->count()>0)
+										{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno, 2, ',', '.') }} USD
+										@php
+											$retorno_neto2j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno;
+										@endphp
+									@elseif ($pesoneto2j)
+										{{ number_format(($retorno2j - ($margen2j + $costos2j)), 2, ',', '.') }} USD <br>
+										@php
+											$retorno_neto2j=($retorno2j - ($margen2j + $costos2j));
+										@endphp
+									@endif
+							</td>
+							
+							<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
+								@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->count()>0)
+										{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno/$pesoneto2j, 2, ',', '.') }} USD
+										
+								@elseif ($pesoneto2j)
+									{{ number_format(($retorno2j - ($margen2j + $costos2j))/$pesoneto2j, 2, ',', '.') }} USD <br>
+									
+								@endif
+							</td>
+	
+						  
+						</tr>
+						@php
+						  $calibrecount+=1;
+						@endphp
+					  @endif
+					  @if ($pesonetoj>0)
+						<tr>
+						  <td> </td>
+						  <td> </td>
+						  
+						  
+						  
+						  
+						  <td>J</td>
+						  <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;" >{{number_format($pesonetoj,0,',','.')}} KG</td>
+						 
+							  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >
+									@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->count()>0)
+										{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno, 2, ',', '.') }} USD
+										@php
+											$retorno_netoj=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno;
+										@endphp
+									@elseif ($pesonetoj)
+										{{ number_format(($retornoj - ($margenj + $costosj)), 2, ',', '.') }} USD <br>
+										@php
+											$retorno_netoj=($retornoj - ($margenj + $costosj));
+										@endphp
+									@endif
+							</td>
+							
+							<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
+								@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->count()>0)
+										{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno/$pesonetoj, 2, ',', '.') }} USD
+										
+								@elseif ($pesonetoj)
+									{{ number_format(($retornoj - ($margenj + $costosj))/$pesonetoj, 2, ',', '.') }} USD <br>
+									
+								@endif
+							</td>
+	
+			
+						  
+						</tr>
+						@php
+						  $calibrecount+=1;
+						@endphp
+					  @endif
+					  @if ($pesonetoxl>0)
+						<tr>
+						  <td> </td>
+						  <td> </td>
+						  
+						  
+						  
+						  
+						  <td>XL</td>
+						  <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd; " >{{number_format($pesonetoxl,0,',','.')}} KG</td>
+						
+							  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >
+									@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->count()>0)
+										{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno, 2, ',', '.') }} USD
+										@php
+											$retorno_netoxl=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno;
+										@endphp
+									@elseif ($pesonetoxl)
+										{{ number_format(($retornoxl - ($margenxl + $costosxl)), 2, ',', '.') }} USD <br>
+										@php
+											$retorno_netoxl=($retornoxl - ($margenxl + $costosxl));
+										@endphp
+									@endif
+							</td>
+							
+							<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
+								@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->count()>0)
+										{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno/$pesonetoxl, 2, ',', '.') }} USD
+										
+								@elseif ($pesonetoxl)
+									{{ number_format(($retornoxl - ($margenxl + $costosxl))/$pesonetoxl, 2, ',', '.') }} USD <br>
+									
+								@endif
+							</td>
+	
+						  
+						</tr>
+						@php
+						  $calibrecount+=1;
+						@endphp
+					  @endif
+					@endif
+					
+					@if ($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl>0)
+					  
+					  <tr>
+						<td></td>
+						<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">TOTAL {{$variedad}}</td>
+						<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
+						<td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;font-weight: bold;">{{number_format($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl,2,',','.')}} KG</td>
+						
+						<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd; font-weight: bold;" >{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl),2,',','.')}} USD 
+						
+						
+					  </td>
+						<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd; font-weight: bold;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl)/($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD</td>
+						
+					  </tr>
+					@endif
+					  @php
+						$totalcount+=($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl);
+						$variedadcount+=1;
+					  @endphp
+					
+		  
+				  @endforeach
+				
+				  @if ($pesonetototal>0)
+					<tr style="background-color: #ddd;">
+						  
+					  
+					
+						<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">TOTAL DENTRO DE NORMA</td>
+					  
+					  
+						<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
+					
+					  
+					  
+					  <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
+					  <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;font-weight: bold;" >{{number_format($pesonetototal,1,',','.')}} KG</td>
+					
+					  
+					  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;  font-weight: bold;">{{number_format($totalcount,2,',','.')}} USD 
+					
+					  </td>
+					  <td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd; font-weight: bold;">{{number_format($totalcount/$pesonetototal,2,',','.')}} USD </td>
+					  
+					</tr>
+				  @endif
+		  
+				  @php
+					$totaldentrodenorma=($totalcount);
+				  @endphp
+					
+		  
+				</tbody>
+			</table>
 
 	
 		<table style="width:100%;border-collapse: collapse; margin-bottom: 30px; margin-top: 30px; display: none;">

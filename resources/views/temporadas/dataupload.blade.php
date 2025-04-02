@@ -32,7 +32,7 @@
                       <div class="mt-16 grid border divide-x divide-y rounded-xl overflow-hidden sm:grid-cols-2 lg:divide-y-0 lg:grid-cols-4 xl:grid-cols-4">
                         <div class="relative group bg-white transition hover:z-[1] hover:shadow-2xl hidden">
                            <div class="relative p-8 space-y-8">
-                               <img src="https://images.vexels.com/media/users/3/261301/isolated/preview/c7683a822fb4f6d5fb21e9493caf35a3-lana-ar-silhueta-de-transporte-de-barco.png" class="w-10" width="512" height="512" alt="burger illustration">
+                               <img src="https://cdn-icons-png.flaticon.com/512/1440/1440373.png" class="w-10" width="512" height="512" alt="burger illustration">
                                
                                <div class="space-y-2">
                                     <a href="{{route('temporada.datauploadliq',$temporada)}}">
@@ -48,7 +48,7 @@
                        </div>
                        <div class="relative group bg-white transition hover:z-[1] hover:shadow-2xl">
                             <div class="relative p-8 space-y-8">
-                                <img src="https://tailus.io/sources/blocks/stacked/preview/images/avatars/package-delivery.png" class="w-10" width="512" height="512" alt="burger illustration">
+                                <img src="https://cdn-icons-png.flaticon.com/512/1440/1440373.png" class="w-10" width="512" height="512" alt="burger illustration">
                                 
                                 <div class="space-y-2">
                                 <a href="{{route('temporada.datauploaddet',$temporada)}}">
@@ -64,7 +64,7 @@
                         </div>
                           <div class="relative group bg-white transition hover:z-[1] hover:shadow-2xl">
                               <div class="relative p-8 space-y-8">
-                                  <img src="https://tailus.io/sources/blocks/stacked/preview/images/avatars/trowel.png" class="w-10" width="512" height="512" alt="burger illustration">
+                                  <img src="https://cdn-icons-png.flaticon.com/512/1440/1440373.png" class="w-10" width="512" height="512" alt="burger illustration">
                                   
                                   <div class="space-y-2">
                                         <a href="{{route('temporada.datauploaddesp',$temporada)}}">
@@ -81,7 +81,7 @@
                          
                           <div class="relative group bg-white transition hover:z-[1] hover:shadow-2xl">
                                 <div class="relative p-8 space-y-8">
-                                    <img src="https://tailus.io/sources/blocks/stacked/preview/images/avatars/package-delivery.png" class="w-10" width="512" height="512" alt="burger illustration">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/1440/1440373.png" class="w-10" width="512" height="512" alt="burger illustration">
                                     
                                     <div class="space-y-2">
                                     <a href="{{route('temporada.datauploaddet',$temporada)}}">
