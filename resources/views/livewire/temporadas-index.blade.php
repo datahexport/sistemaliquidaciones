@@ -130,7 +130,6 @@
     </div>
     
 
-    @push('js')
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script>
         document.addEventListener('livewire:initialized',function(){
@@ -147,8 +146,7 @@
             }).then((result) => {
               if (result.isConfirmed) {
 
-                  Livewire.dispatchTo('temporadas-index', 'confirmDelete', { temporada: temporadaId })
-                
+                @this.call('confirmDelete', {{ $temporada->id }});
                   
               }
             });
@@ -156,5 +154,5 @@
           });
         });
       </script>
-    @endpush
+   
 </div>

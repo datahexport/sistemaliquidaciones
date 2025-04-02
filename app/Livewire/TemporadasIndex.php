@@ -17,7 +17,7 @@ class TemporadasIndex extends Component
     }
 
     #[On('confirmDelete')]
-    public function deletetemporada(Temporada $temporada){
+    public function confirmDelete(Temporada $temporada){
         $temporada->delete();
         session()->flash('delete','Temporada borrada exitosamente');
         $this->render();

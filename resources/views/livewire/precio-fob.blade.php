@@ -1,7 +1,7 @@
 <div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <div wire:loading wire:target="set_fobid">
+    <div wire:loading wire:target="set_fobid, archivo, procesando">
                     
         <div class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
             <div class="max-w-sm w-full sm:rounded-2xl bg-white border-2 border-gray-200 shadow-xl">
@@ -19,6 +19,23 @@
           </div>
           
     </div>
+        @if ($procesando==true)
+            <div class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
+                <div class="max-w-sm w-full sm:rounded-2xl bg-white border-2 border-gray-200 shadow-xl">
+                <div class="w-full">
+                    <div class="px-6 my-6 mx-auto">
+                    <div class="mb-8">
+                        <div class="flex justify-between items-center">
+                        <h1 class="text-2xl font-extrabold mr-4">Cargando...</h1>
+                        <div><img class="h-10" src="{{asset('image/cargando.gif')}}" alt="Cargando..."></div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        @endif
+
 
     <style>
         .table-container {
@@ -321,6 +338,21 @@
                                                         </h1>
                                                     </button>
                                                 </div>
+                                                <div>
+                                                    @if (session()->has('mensaje'))
+                                                        <div class="alert alert-success">{{ session('mensaje') }}</div>
+                                                    @endif
+                                                
+                                                    <input type="file" id="inputArchivo" wire:model="archivo" style="display: none;">
+                                                
+                                                    <button onclick="document.getElementById('inputArchivo').click()" class="mt-2 focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-sm leading-none text-white ml-2 py-3 px-5 bg-blue-600 rounded hover:bg-blue-500 focus:outline-none">
+                                                        Importar Excel
+                                                    </button>
+                                                
+                                                    @error('archivo') <span class="error">{{ $message }}</span> @enderror
+                                                </div>
+                                                
+                                                
                                             </div>
                                             @endif
                                             

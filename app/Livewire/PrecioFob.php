@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Exports\PrecioOriginalExport;
+use App\Imports\PreciosImport;
 use App\Models\Balancemasacuatro;
 use App\Models\Balancemasatres;
 use App\Models\Fob;
@@ -13,6 +14,7 @@ use App\Models\Temporada;
 use App\Models\Ventacomercial;
 use Livewire\Component;
 use Livewire\Attributes\Url;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -31,6 +33,24 @@ class PrecioFob extends Component
     ];
 
     
+    use WithFileUploads;
+
+    public $archivo, $procesando;
+
+    public function updatedArchivo()
+    {
+        $this->procesando = true;
+
+        $this->validate([
+            'archivo' => 'required|file|mimes:xlsx,xls,csv',
+        ]);
+
+        Excel::import(new PreciosImport($this->temporada), $this->archivo);
+
+        $this->procesando = false;
+
+        session()->flash('mensaje', '¡Archivo importado con éxito!');
+    }
 
 
    

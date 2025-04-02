@@ -78,14 +78,15 @@ class PrecioOriginalExport implements FromCollection, WithCustomStartCell, WithM
                 round($fob->fob_kilo_salida,2),
                 round($fob->tarifas->first()->suma_fob,2),
                 round($fob->tarifas->first()->cant_kg,2),
-                round($fob->tarifas->first()->tarifa,2),
+                $fob->tarifas->first()->tarifa,
                 round(($fob->tarifas->first()->costo_proceso+$fob->tarifas->first()->costo_materiales+$fob->tarifas->first()->otros_costos),2),
-                round($fob->tarifas->reverse()->first()->tarifa,2),
-                round($fob->tarifas->reverse()->first()->tarifa_fc,2),
+                $fob->tarifas->reverse()->first()->tarifa,
+                $fob->tarifas->reverse()->first()->tarifa_fc,
                 round($fob->tarifas->reverse()->first()->suma_fob,2),
                 round($fob->tarifas->reverse()->first()->suma_fob_fc,2),
                 round($fob->tarifas->reverse()->first()->cant_kg,2),
                 round($fob->tarifas->reverse()->first()->costo_proceso,2),
+                round($fob->tarifas->reverse()->first()->costo_materiales,2),
                 round($fob->tarifas->reverse()->first()->otros_costos,2)
                 
             ];
