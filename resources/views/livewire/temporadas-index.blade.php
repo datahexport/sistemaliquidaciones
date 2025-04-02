@@ -131,28 +131,32 @@
     
 
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <script>
-        document.addEventListener('livewire:initialized',function(){
-          Livewire.on('deletetemporada', temporadaId => {
-            
-            Swal.fire({
-            title: "¿Eliminar temporada?",
-            text: "No podras revertir esta acción!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Si, eliminarla!"
-            }).then((result) => {
-              if (result.isConfirmed) {
+      @if ($temporada)
+          
+        <script>
+          document.addEventListener('livewire:initialized',function(){
+            Livewire.on('deletetemporada', temporadaId => {
+              
+              Swal.fire({
+              title: "¿Eliminar temporada?",
+              text: "No podras revertir esta acción!",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Si, eliminarla!"
+              }).then((result) => {
+                if (result.isConfirmed) {
 
-                @this.call('confirmDelete', {{ $temporada->id }});
-                  
-              }
+                  @this.call('confirmDelete', {{ $temporada->id }});
+                    
+                }
+              });
+              
             });
-            
           });
-        });
-      </script>
+        </script>
+      
+      @endif
    
 </div>
