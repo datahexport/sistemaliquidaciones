@@ -15,11 +15,12 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DataUploadCuentacorriente extends Component
 {  
-
+    use WithPagination;
     use WithFileUploads;
 
     #[Url(history: true)]
