@@ -313,7 +313,7 @@
 
                                             @if ($fobs->count()>0)
                                                 
-                                            <div class="ml-auto">
+                                            <div class="ml-auto pl-2">
                                                 Precio:<br>
                                                 <div class="flex">
                                                     @if ($temporada->precios->count()==0)
@@ -345,7 +345,7 @@
                                                 
                                                     <input type="file" id="inputArchivo" wire:model="archivo" style="display: none;">
                                                 
-                                                    <button onclick="document.getElementById('inputArchivo').click()" class="mt-2 focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-sm leading-none text-white ml-2 py-3 px-5 bg-blue-600 rounded hover:bg-blue-500 focus:outline-none">
+                                                    <button onclick="document.getElementById('inputArchivo').click()" class="mt-2 focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-sm leading-none text-white py-3 px-5 bg-blue-600 rounded hover:bg-blue-500 focus:outline-none">
                                                         Importar Excel
                                                     </button>
                                                 
