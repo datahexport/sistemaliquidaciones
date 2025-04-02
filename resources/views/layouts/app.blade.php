@@ -50,9 +50,9 @@
             </main>
         </div>
 
-        @stack('modals')
-
         @livewireScripts
+
+        @stack('modals')
         
         @stack('js')
     </body>
