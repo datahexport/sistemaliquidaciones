@@ -131,7 +131,7 @@
     
 
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      @if ($temporada)
+      @if ($temporadas->count()>0)
           
         <script>
           document.addEventListener('livewire:initialized',function(){
