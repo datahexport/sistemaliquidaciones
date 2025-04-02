@@ -806,7 +806,7 @@
                       
 
                 
-                          @if ($cantidad4j+$cantidad3j+$cantidad2j+$cantidadj+$cantidadxl>0)
+                          @if ($cantidad5j+$cantidad4j+$cantidad3j+$cantidad2j+$cantidadj+$cantidadxl>0)
                             
                             @if ($pesoneto5j>0)
                               <tr>
@@ -1654,22 +1654,22 @@
                               <td></td>
                               <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">Total Semana: {{$semana}}</td>
                               <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
-                              <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; ">{{number_format($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl,2,',','.')}} KGS</td>
+                              <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; ">{{number_format($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl,2,',','.')}} KGS</td>
                               <td>
-                                {{number_format($retorno4j+$retorno3j+$retorno2j+$retornoj+$retornoxl,2,',','.')}}
+                                {{number_format($retorno5j+$retorno4j+$retorno3j+$retorno2j+$retornoj+$retornoxl,2,',','.')}}
                               </td>
                               <td>
-                                {{number_format(($margen4j+$margen3j+$margen2j+$margenj+$margenxl),2,',','.')}}
+                                {{number_format(($margen5j+$margen4j+$margen3j+$margen2j+$margenj+$margenxl),2,',','.')}}
                               </td>
                             
                               <td>
-                                {{number_format($costos4j+$costos3j+$costos2j+$costosj+$costosxl,2)}}
+                                {{number_format($costos5j+$costos4j+$costos3j+$costos2j+$costosj+$costosxl,2)}}
                               </td>
-                              <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl),2,',','.')}} USD 
+                              <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl),2,',','.')}} USD 
                               
                               
                             </td>
-                              <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl)/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
+                              <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl)/($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
                               
                             </tr>
                           @endif 
@@ -2035,7 +2035,7 @@
               
 
         
-                  @if ($cantidad4j+$cantidad3j+$cantidad2j+$cantidadj+$cantidadxl>0)
+                  @if ($cantidad5j+$cantidad4j+$cantidad3j+$cantidad2j+$cantidadj+$cantidadxl>0)
                     
                     @if ($pesoneto5j>0)
                       <tr>
@@ -2883,22 +2883,22 @@
                       <td></td>
                       <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">Total {{$variedad}}</td>
                       <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
-                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; ">{{number_format($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl,2,',','.')}} KGS</td>
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; ">{{number_format($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl,2,',','.')}} KGS</td>
                       <td>
-                        {{number_format($retorno4j+$retorno3j+$retorno2j+$retornoj+$retornoxl,2,',','.')}}
+                        {{number_format($retorno5j+$retorno4j+$retorno3j+$retorno2j+$retornoj+$retornoxl,2,',','.')}}
                       </td>
                       <td>
-                        {{number_format(($margen4j+$margen3j+$margen2j+$margenj+$margenxl),2,',','.')}}
+                        {{number_format(($margen5j+$margen4j+$margen3j+$margen2j+$margenj+$margenxl),2,',','.')}}
                       </td>
                     
                       <td>
-                        {{number_format($costos4j+$costos3j+$costos2j+$costosj+$costosxl,2)}}
+                        {{number_format($costos5j+$costos4j+$costos3j+$costos2j+$costosj+$costosxl,2)}}
                       </td>
-                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl),2,',','.')}} USD 
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl),2,',','.')}} USD 
                       
                       
                     </td>
-                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl)/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl)/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
                       
                     </tr>
                   @endif 
