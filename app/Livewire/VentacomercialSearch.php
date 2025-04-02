@@ -6,6 +6,7 @@ use App\Models\Temporada;
 use App\Models\Ventacomercial;
 use Livewire\Attributes\Url;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class VentacomercialSearch extends Component
 {   use WithPagination;
