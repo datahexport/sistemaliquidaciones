@@ -31,11 +31,7 @@ class PrecioFob extends Component
     ];
 
     
-    protected $listeners = [
-        'preciosDestroyExportacion' => 'precios_destroy_exportacion',
-        'preciosDestroyComercial' => 'precios_destroy_comercial',
-    ];
-    
+
 
    
 
@@ -879,8 +875,7 @@ class PrecioFob extends Component
         }
 
         
-        $this->emit('deleted');
-
+  
         return redirect()->route('temporada.precio.original',$this->temporada);
         
     }
@@ -902,7 +897,6 @@ class PrecioFob extends Component
             $fob->delete();
         }
         
-        $this->emit('deleted');
   
         return redirect()->route('temporada.precio.original',$this->temporada);
         
