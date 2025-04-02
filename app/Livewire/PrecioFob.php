@@ -72,6 +72,16 @@ class PrecioFob extends Component
         $this->tarifa=Tarifaprecio::find($tarifaid)->tarifa;
     }
 
+    public function setback_tarifaid($tarifaid){
+        /*
+            $this->tarifaid=$tarifaid;
+            $this->tarifa=Tarifaprecio::find($tarifaid)->tarifa;
+        */
+        $tarifa=Tarifaprecio::find($tarifaid);
+        $fob=$tarifa->fob;
+        $tarifa->update(['tarifa'=> $fob->tarifas->first()->tarifa]);
+    }
+
     public function save_tarifaid(){
         $tarifa=Tarifaprecio::find($this->tarifaid);
         $this->tarifa=floatval(str_replace(',', '.', $this->tarifa));

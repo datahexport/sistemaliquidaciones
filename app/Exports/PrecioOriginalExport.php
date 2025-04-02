@@ -44,7 +44,15 @@ class PrecioOriginalExport implements FromCollection, WithCustomStartCell, WithM
                 'Suma Fob P.Promedio',
                 'Suma KG P.Promedio',
                 'Tarifa P.Promedio',
-                'Suma Costos'
+                'Suma Costos',
+                'Tarifa',
+                'tarifa_fc',
+                'suma_fob',
+                'suma_fob_fc',
+                'cant_kg',
+                'costo_proceso',
+                'costo_materiales',
+                'otros_costos'
 
             ];
         }else{
@@ -72,7 +80,14 @@ class PrecioOriginalExport implements FromCollection, WithCustomStartCell, WithM
                 round($fob->tarifas->first()->cant_kg,2),
                 round($fob->tarifas->first()->tarifa,2),
                 round(($fob->tarifas->first()->costo_proceso+$fob->tarifas->first()->costo_materiales+$fob->tarifas->first()->otros_costos),2),
-
+                round($fob->tarifas->reverse()->first()->tarifa,2),
+                round($fob->tarifas->reverse()->first()->tarifa_fc,2),
+                round($fob->tarifas->reverse()->first()->suma_fob,2),
+                round($fob->tarifas->reverse()->first()->suma_fob_fc,2),
+                round($fob->tarifas->reverse()->first()->cant_kg,2),
+                round($fob->tarifas->reverse()->first()->costo_proceso,2),
+                round($fob->tarifas->reverse()->first()->otros_costos,2)
+                
             ];
         }else{
             return [

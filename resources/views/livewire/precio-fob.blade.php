@@ -674,6 +674,15 @@
                                                         <td class="px-5 py-2 border-b border-gray-200 @if($control==true)bg-gray-200 @else bg-white @endif text-sm text-center">
                                                             {{number_format(floatval($item->suma_fob_fc),2, ',', '.')}}
                                                         </td>
+                                                        <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                                                
+                                                                <span  class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                                                <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                                                                <span wire:click.prevent="setback_tarifaid({{ $item->id }})" 
+                                                                    wire:key="item-{{ $item->id }}"  class="relative">Eliminar</span>
+                                                            </span>
+                                                            </span>
+                                                        </td>
                                             
                                                 @endif
 
@@ -687,22 +696,7 @@
                                     
                                     
             
-                                        <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                            @if ($fobid==$fob->id)
-
-                                                <button wire:click='reset_fobid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                <span class="relative">Cancelar</span>
-                                                </button>
-
-                                            @endif
-
-                                            <span  class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                                            <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                            <span class="relative">Eliminar</span>
-                                        </span>
-                                            </span>
-                                        </td>
+                                        
                                     </tr>
                                 @endforeach
                                      
