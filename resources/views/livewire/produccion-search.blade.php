@@ -832,7 +832,9 @@
                                         
                                             <p class="text-gray-900 whitespace-no-wrap">
                                                 @if ($masa->fob)
-                                                    {{ number_format((($masa->fob->tarifas->reverse()->first()->tarifa_fc*floatval($masa->PESO_PRORRATEADO))*0.92-$masa->costo),2)}}
+                                                    @if ($item->fob->tarifas->count()>0) 
+                                                        {{ number_format((($masa->fob->tarifas->reverse()->first()->tarifa_fc*floatval($masa->PESO_PRORRATEADO))*0.92-$masa->costo),2)}}
+                                                    @endif
                                                 @endif
                                             </p>
                                         
