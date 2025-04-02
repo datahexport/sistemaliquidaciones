@@ -31,7 +31,7 @@ class PrecioFob extends Component
     ];
 
     
-
+    protected $listeners = ['precios_destroy_exportacion'];
 
    
 
