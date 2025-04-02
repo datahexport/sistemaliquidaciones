@@ -317,13 +317,28 @@
                                                 Precio:<br>
                                                 <div class="flex">
                                                     @if ($temporada->precios->count()==0)
-                                                    @endif
+                                                   
 
                                                     <button onclick="confirmCreatePrices()" class="focus:ring-2 focus:ring-offset-2 focus:ring-green-300 text-sm leading-none text-green-600 py-3 px-5 bg-green-600 rounded hover:bg-green-500 focus:outline-none">
                                                         <h1 style="font-size: 1rem; white-space: nowrap;" class="text-center text-white font-bold inline w-full">
                                                             Crear Precios
                                                         </h1>
                                                     </button>
+                                                    @else
+                                                        <div>
+                                                            @if (session()->has('mensaje'))
+                                                                <div class="alert alert-success">{{ session('mensaje') }}</div>
+                                                            @endif
+                                                        
+                                                            <input type="file" id="inputArchivo" wire:model="archivo" style="display: none;">
+                                                        
+                                                            <button onclick="document.getElementById('inputArchivo').click()" class="mt-2 focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-sm leading-none text-white py-3 px-5 bg-blue-600 rounded hover:bg-blue-500 focus:outline-none">
+                                                                Importar Excel
+                                                            </button>
+                                                        
+                                                            @error('archivo') <span class="error">{{ $message }}</span> @enderror
+                                                        </div>
+                                                    @endif
                                                     
                                                     
                                                 </div>
@@ -338,19 +353,7 @@
                                                         </h1>
                                                     </button>
                                                 </div>
-                                                <div>
-                                                    @if (session()->has('mensaje'))
-                                                        <div class="alert alert-success">{{ session('mensaje') }}</div>
-                                                    @endif
-                                                
-                                                    <input type="file" id="inputArchivo" wire:model="archivo" style="display: none;">
-                                                
-                                                    <button onclick="document.getElementById('inputArchivo').click()" class="mt-2 focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-sm leading-none text-white py-3 px-5 bg-blue-600 rounded hover:bg-blue-500 focus:outline-none">
-                                                        Importar Excel
-                                                    </button>
-                                                
-                                                    @error('archivo') <span class="error">{{ $message }}</span> @enderror
-                                                </div>
+                                               
                                                 
                                                 
                                             </div>
