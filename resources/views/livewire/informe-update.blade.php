@@ -2898,7 +2898,7 @@
                       
                       
                     </td>
-                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl)/($pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl)/($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
                       
                     </tr>
                   @endif 
