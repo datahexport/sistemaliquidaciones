@@ -67,6 +67,8 @@ class PreciosImport implements ToCollection, WithStartRow
                             'costo_materiales' => $row[16],
                             'otros_costos' => $row[17],
                         ]);
+                    }else{
+                        dd($row);
                     }
                  
                 
