@@ -863,6 +863,8 @@ class PrecioFob extends Component
         $procesos = Proceso::where('temporada_id', $this->temporada->id)
                         ->whereIn('fob_id', $fobIds)
                         ->get();
+        
+                        dd($procesos);
 
         foreach($procesos as $proceso){
                 $proceso->update(['fob_id'=>null]);
