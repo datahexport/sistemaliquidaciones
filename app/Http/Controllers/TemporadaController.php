@@ -526,7 +526,7 @@ class TemporadaController extends Controller
             if ($variedad){
 
             }else{
-                if($masa->variedad){
+                if($masa->VARIEDAD){
                     Variedad::create(['name'=>$masa->VARIEDAD,
                                     'temporada_id'=>$temporada->id]);
                 }
