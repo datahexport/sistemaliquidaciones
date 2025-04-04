@@ -68,10 +68,17 @@ class PrecioFob extends Component
                                             ->select('Variedad_Real', 'semana', 'Calibre', 'Kilos_prod', 'Fob')
                                             ->get();
 
-        $fobs=Fob::filter($this->filters)->where('temporada_id',$this->temporada->id)->paginate($this->ctd);
-        $fobsall=Fob::filter($this->filters)->where('temporada_id',$this->temporada->id)->get();
+        $fobs=Fob::filter($this->filters)->where('temporada_id',$this->temporada->id)->get();
+        $fobsall=Fob::where('temporada_id',$this->temporada->id)->get();
 
-        $unique_variedades = $detalle_liquidacions->pluck('Variedad_Real')->unique()->sort();
+        $unique_variedades = $fobsall->pluck('n_variedad')
+            ->map(fn($v) => trim($v))
+            ->unique()
+            ->sort(function ($a, $b) {
+                return strnatcasecmp($a, $b); // orden natural, sin distinguir mayúsculas
+            })
+            ->values();
+        //    dd($unique_variedades);
         $unique_semanas = $detalle_liquidacions->pluck('semana')
             ->unique()
             ->sortBy(function ($semana) {
@@ -108,7 +115,10 @@ class PrecioFob extends Component
         */
         $tarifa=Tarifaprecio::find($tarifaid);
         $fob=$tarifa->fob;
-        $tarifa->update(['tarifa'=> $fob->tarifas->first()->tarifa]);
+        $tarifa->update(['tarifa'=> $fob->tarifas->first()->tarifa,
+                        'tarifa_fc'=> $fob->tarifas->first()->tarifa_fc,
+                        'suma_fob'=> $fob->tarifas->first()->suma_fob,
+                        'suma_fob_fc'=> $fob->tarifas->first()->suma_fob_fc]);
     }
 
     public function save_tarifaid(){
