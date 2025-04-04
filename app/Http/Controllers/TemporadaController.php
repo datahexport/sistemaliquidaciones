@@ -520,14 +520,14 @@ class TemporadaController extends Controller
     }
 
     public function variedadupdate(Temporada $temporada)
-    {   $masas=Balancemasa::where('temporada_id',$temporada->id)->get();
+    {   $masas=Proceso::where('temporada_id',$temporada->id)->get();
         foreach($masas as $masa){
-            $variedad=Variedad::where('name',$masa->variedad)->where('temporada_id',$temporada->id)->first();
+            $variedad=Variedad::where('name',$masa->VARIEDAD)->where('temporada_id',$temporada->id)->first();
             if ($variedad){
 
             }else{
                 if($masa->variedad){
-                    Variedad::create(['name'=>$masa->variedad,
+                    Variedad::create(['name'=>$masa->VARIEDAD,
                                     'temporada_id'=>$temporada->id]);
                 }
             }
