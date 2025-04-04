@@ -808,7 +808,14 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                     <div>
                       <div id="container" style="width: 100%; height: 400px;"></div>
                     </div>
-                  
+                    <div class="flex ">
+                      <a href="{{Route('variedades.refresh',$temporada)}}" class="mr-2">
+                        <x-button>
+                          Actualizar Variedades
+                        </x-button>
+                      </a>
+                     
+                    </div>
 
                   @endif
 
