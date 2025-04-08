@@ -216,7 +216,7 @@
               </li>
 
                <li>
-                  <a href="{{route('temporada.gastos',$temporada)}}" class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 @if(Route::currentRouteName() == 'temporada.gastos') bg-red-500 text-white @else hover:bg-gray-100  @endif group">
+                  <a href="{{route('temporada.gastos',$temporada)}}" class="hidden text-base text-gray-900 font-normal rounded-lg flex items-center p-2 @if(Route::currentRouteName() == 'temporada.gastos') bg-red-500 text-white @else hover:bg-gray-100  @endif group">
                       <svg class="w-6 h-6 @if(Route::currentRouteName() == 'temporada.gastos') bg-red-500 text-white @else  text-gray-500 group-hover:text-gray-900 @endif  transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                           <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                       </svg>

@@ -18,7 +18,7 @@ use App\Models\Variedad;
 use Livewire\Component;
 
 class InformeUpdate extends Component
-{   public $temporada, $razonsocial, $informe_edit, $categoria_mod,$variedad_mod, $calibre_mod , $type_mod, $kg_mod, $retorno, $retorno_inicial, $npk;
+{   public $temporada, $razonsocial, $informe_edit, $semana_mod, $categoria_mod,$variedad_mod, $calibre_mod , $type_mod, $kg_mod, $retorno, $retorno_inicial, $npk;
 
     protected $listeners = ['mostrar-mensaje' => 'mostrarMensaje'];
     
@@ -55,10 +55,11 @@ class InformeUpdate extends Component
         }
     }
 
-    public function set_modification($categoria, $variedad, $calibre, $retorno, $npk, $peso, $type_mod){
+    public function set_modification($categoria, $variedad, $calibre, $retorno, $npk, $peso, $type_mod, $semana){
         $this->categoria_mod=$categoria;
         $this->variedad_mod=$variedad;
         $this->calibre_mod=$calibre;
+        $this->semana_mod=$semana;
        
         $this->kg_mod=$peso;
         $this->type_mod=$type_mod;
@@ -68,6 +69,7 @@ class InformeUpdate extends Component
             ->where('categoria', $categoria)
             ->where('variedad', $variedad)
             ->where('calibre', $calibre)
+            ->where('semana',$semana)
             ->first();
 
         if ($modificacion) {
@@ -111,6 +113,7 @@ class InformeUpdate extends Component
             ->where('informe_id', $this->informe_edit->id)
             ->where('variedad', $this->variedad_mod)
             ->where('calibre', $this->calibre_mod)
+            ->where('semana', $this->semana_mod)
             ->first();
 
         if ($modificacion) {
@@ -120,6 +123,7 @@ class InformeUpdate extends Component
                 'npk' => $this->npk,
                 'peso' => $this->kg_mod,
                 'type_mod' => $this->type_mod,
+                'semana' => $this->semana_mod,
             ]);
 
             session()->flash('success', 'Modificación actualizada exitosamente.');
@@ -132,6 +136,7 @@ class InformeUpdate extends Component
                 'calibre' => $this->calibre_mod,
                 'retorno' => $this->retorno,
                 'retorno_inicial' => $this->retorno_inicial,
+                'semana' => $this->semana_mod,
                 'npk' => $this->npk
             ]);
 
@@ -149,7 +154,7 @@ class InformeUpdate extends Component
         
 
         // Limpiar las variables
-        $this->reset(['categoria_mod', 'variedad_mod', 'calibre_mod', 'retorno', 'npk', 'kg_mod', 'type_mod']);
+        $this->reset(['categoria_mod', 'variedad_mod', 'calibre_mod', 'retorno', 'npk', 'kg_mod', 'type_mod','semana_mod']);
     }
 
 

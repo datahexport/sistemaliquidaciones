@@ -108,6 +108,7 @@
 
                                             $pesovariedad_prom=0;
                                             $ventavariedad_prom=0;
+                                            $ventavariedad_prom_fc=0;
 
                                             $costo_procesos_prom=0;
                                             $costo_materiales_prom=0;
@@ -115,6 +116,7 @@
 
                                             $pesovariedad_ajust=0;
                                             $ventavariedad_ajust=0;
+                                            $ventavariedad_ajust_fc=0;
 
                                             $ventavariedad_ajust2=0;
 
@@ -126,7 +128,7 @@
 
 
                                         @endphp
-                                        @foreach ($fobsall as $fob)
+                                        @foreach ($fobs as $fob)
                                             @php
                                                 $pesovariedad+=floatval($fob->cant_kg);
                                                 $ventavariedad+=floatval($fob->suma_fob);
@@ -143,7 +145,9 @@
                                                             $ingresocontrol=$item->suma_fob;
 
                                                             $pesovariedad_prom+=floatval($item->cant_kg);
+
                                                             $ventavariedad_prom+=floatval($item->suma_fob);
+                                                            $ventavariedad_prom_fc+=floatval($item->suma_fob_fc);
 
                                                             $costo_procesos_prom+=floatval($item->costo_proceso);
                                                             $costo_materiales_prom+=floatval($item->costo_materiales);
@@ -152,6 +156,7 @@
                                                         } elseif ($item->precio->name=="Precio Ajustado") {
                                                             $pesovariedad_ajust+=floatval($item->cant_kg);
                                                             $ventavariedad_ajust+=floatval($item->suma_fob);
+                                                            $ventavariedad_ajust_fc+=floatval($item->suma_fob_fc);
 
                                                             $costo_procesos_ajust+=floatval($item->costo_proceso);
                                                             $costo_materiales_ajust+=floatval($item->costo_materiales);
@@ -211,7 +216,7 @@
                                                 <select wire:model.live="filters.variedad" name="" id="" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-40">
                                                     <option value="">Todos</option>
                                                     @foreach ($unique_variedades as $item)
-                                                    <option value="{{$item}}">{{$item}}</option>
+                                                        <option value="{{$item}}">{{$item}}</option>
                                                     @endforeach
                                                 
                                                 </select>
@@ -473,7 +478,7 @@
                                             </th>
                                             <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase whitespace-no-wrap">
                                                 @if ($ncontrol2==0)
-                                                    <p class="whitespace-nowrap">RETORNO PRECIO ÚNICO</p>
+                                                    <p class="whitespace-nowrap">SUMA RETORNO PRECIO ÚNICO</p>
                                                     {{number_format($ventavariedad_prom,2)}}<br>
                                                 @else
                                                     NPK NUEVO<br>
@@ -511,7 +516,7 @@
                                             @if ($ncontrol2==0)
                                                 <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase whitespace-no-wrap">
                                                     Suma Fob Precio Unico:<br>
-                                                    {{number_format($otros_costos_prom,2)}}
+                                                    {{number_format($ventavariedad_prom_fc,2)}}
                                                 </th>
                                             @endif
                                             @php
@@ -527,13 +532,14 @@
                             </thead>
                             <tbody class="text-left">
                               @foreach ($unique_variedades as $variedad)
-                                @if ($fobs->where('n_variedad',$variedad)->count()>0)
+                                
+                                @if ($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad))->count()>0)
                                         
                                     @foreach ($unique_semanas as $semana)
-                                        @if ($fobs->where('n_variedad',$variedad)->where('semana',$semana)->count()>0)
-                                            @foreach ($fobs->where('n_variedad',$variedad)->where('semana',$semana) as $fob)
-                                                <tr>
-                                                    <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm sticky-column">
+                                        @if ($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad) && $item->semana === $semana)->count()>0)
+                                            @foreach ($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad) && $item->semana === $semana) as $fob)
+                                                <tr class="@if($fob->n_calibre=="JUP") bg-red-200 @endif">
+                                                    <td class="px-5 py-2 border-b border-gray-200 @if($fob->n_calibre=="JUP") bg-red-200 @else bg-white @endif text-sm sticky-column">
                                                         <div class="flex items-center">
                                                             <div class="ml-3">
                                                                 <p class="text-gray-900 whitespace-no-wrap">
@@ -542,16 +548,16 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm sticky-column">
+                                                    <td class="px-5 py-2 border-b border-gray-200 @if($fob->n_calibre=="JUP") bg-red-200 @else bg-white @endif text-sm sticky-column">
                                                         <p class="text-gray-900 whitespace-no-wrap"> {{$fob->semana}}</p>
                                                     </td>
-                                                    <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm sticky-column">
+                                                    <td class="px-5 py-2 border-b border-gray-200 @if($fob->n_calibre=="JUP") bg-red-200 @else bg-white @endif text-sm sticky-column">
                                                         <p class="text-gray-900 whitespace-no-wrap"> {{$fob->n_calibre}}</p>
                                                     </td>
                                                     
                                                   
 
-                                                    <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-right">
+                                                    <td class="px-5 py-2 border-b border-gray-200 @if($fob->n_calibre=="JUP") bg-red-200 @else bg-white @endif text-sm text-right">
                                                         <p class="text-gray-900 whitespace-no-wrap"> {{number_format(floatval($fob->cant_kg),1)}}</p>
                                                     </td>
 
@@ -574,7 +580,7 @@
                                                             @endphp
                                                                 @if ($ncontrol==0)
                                                             
-                                                                        <td class="px-5 py-2 border-b border-gray-200 @if(floatval($item->tarifa)<=0) bg-red-200 @else bg-gray-200 @endif text-sm text-center">
+                                                                        <td class="px-5 py-2 border-b border-gray-200 @if(floatval($item->tarifa)<=0) bg-red-200 @else @if($fob->n_calibre=="JUP") bg-red-200 @else bg-gray-200 @endif @endif text-sm text-center">
                                                                                 
                                                                             
                                                                             @if ($tarifaid==$item->id)
@@ -603,21 +609,18 @@
                                                                             
                                                                         </td>
                                                                     
-                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($control==true)bg-gray-200 @else bg-white @endif text-sm text-center">
+                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($fob->n_calibre=="JUP") bg-red-200 @else bg-gray-200 @endif text-sm text-center">
                                                                             {{number_format(floatval($item->costo_proceso+$item->costo_materiales+$item->otros_costos),2)}}
                                                                         </td>
 
-                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($control==true)bg-gray-200 @else bg-white @endif text-sm text-center">
+                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($fob->n_calibre=="JUP") bg-red-200 @else bg-gray-200 @endif text-sm text-center">
                                                                             {{number_format(floatval($item->suma_fob),2)}}
                                                                             
                                                                             
                                                                             
                                                                         </td>
-                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($control==true)bg-gray-200 @else bg-white @endif text-sm text-center">
+                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($fob->n_calibre=="JUP") bg-red-200 @else bg-gray-200 @endif text-sm text-center">
                                                                             {{number_format(floatval($item->suma_fob_fc),2)}}
-                                                                            
-                                                                            
-                                                                            
                                                                         </td>
                                                                     
                                                                     
@@ -656,7 +659,7 @@
                                                                             @endif
                                                                             
                                                                         </td>
-                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($control==true)bg-gray-200 @else bg-white @endif text-sm text-center">
+                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($fob->n_calibre=="JUP") bg-red-200 @else bg-white @endif text-sm text-center">
                                                                             @if ($item->tarifa==$tarifacontrol)
                                                                         
                                                                             
@@ -671,7 +674,7 @@
                                                                             @endif
                                                                             
                                                                         </td>
-                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($control==true)bg-gray-200 @else bg-white @endif text-sm text-center">
+                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($fob->n_calibre=="JUP") bg-red-200 @else bg-white @endif text-sm text-center">
                                                                             @if ($item->tarifa==$tarifacontrol)
                                                                                 {{number_format(floatval($item->suma_fob),2, ',', '.')}}
                                                                             @else
@@ -679,14 +682,14 @@
                                                                             @endif
                                                                         </td>
                                                                     
-                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($control==true)bg-gray-200 @else bg-white @endif text-sm text-center">
+                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($fob->n_calibre=="JUP") bg-red-200 @else bg-white @endif text-sm text-center">
                                                                             {{number_format(floatval($item->tarifa),2, ',', '.')}}
                                                                         </td>
 
-                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($control==true)bg-gray-200 @else bg-white @endif text-sm text-center">
+                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($fob->n_calibre=="JUP") bg-red-200 @else bg-white @endif text-sm text-center">
                                                                             {{number_format(floatval($item->tarifa_fc),2, ',', '.')}}
                                                                         </td>
-                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($control==true)bg-gray-200 @else bg-white @endif text-sm text-center">
+                                                                        <td class="px-5 py-2 border-b border-gray-200 @if($fob->n_calibre=="JUP") bg-red-200 @else bg-white @endif text-sm text-center">
                                                                             {{number_format(floatval($item->suma_fob_fc),2, ',', '.')}}
                                                                         </td>
                                                                         <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
@@ -715,8 +718,8 @@
                                                     
                                                 </tr>
                                             @endforeach
-                                                <tr class="bg-red-200">
-                                                    <td class="bg-red-200 px-5 py-2 border-b border-gray-200 text-sm sticky-column">
+                                                <tr class="bg-gray-200">
+                                                    <td class="bg-gray-200 px-5 py-2 border-b border-gray-200 text-sm sticky-column">
                                                         <div class="flex items-center">
                                                             <div class="ml-3">
                                                                 <p class="text-gray-900 whitespace-no-wrap">
@@ -725,178 +728,85 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td colspan="2" class="bg-red-200 px-5 py-2 border-b border-gray-200 text-sm sticky-column">
+                                                    <td colspan="2" class="bg-gray-200 px-5 py-2 border-b border-gray-200 text-sm sticky-column">
                                                         <p class="text-gray-900 whitespace-no-wrap text-center"> Total {{$fob->semana}}</p>
                                                     </td>
 
                                                     <td class="px-5 py-2 border-b border-gray-200 text-sm text-right">
-                                                        <p class="text-gray-900 whitespace-no-wrap"> {{number_format(floatval($fobs->where('n_variedad',$variedad)->where('semana',$semana)->sum('cant_kg')),1)}}</p>
+                                                        <p class="text-gray-900 whitespace-no-wrap"> {{number_format(floatval($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad) && $item->semana === $semana)->sum('cant_kg')),1)}}</p>
                                                     </td>
                                                   
-                                                
-                                                    <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                        @if ($fobid==$fob->id)
-                                                            <input wire:model="preciofob" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none">   
-                                                            <span wire:click='save_fobid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                                <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                                <span class="relative">Guardar</span>
-                                                                </span>
-                                                        @else
-                                                            <p class="text-gray-900 whitespace-no-wrap text-center"> {{number_format($fob->fob_kilo_salida,2, '.', '.')}}</p>
-                                                            @if ($fobid==$fob->id)
-                                                            
-
-                                                            @else
-                                                                <span wire:click='set_fobid({{$fob->id}})' class="hidden cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                                <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                                <span class="relative">Editar</span>
-                                                                </span>
-                                                            @endif
-                                                        @endif
+                                                    @php
+                                                        $conteonpk=0;
+                                                        $conteonpk2=0;
+                                                        $conteofob=0;
+                                                        $conteofob2=0;
+                                                        $conteocostos_semana=0;
+                                                        $redondeado=0;
+                                                        $retornoesperado=0;
+                                                    @endphp
+                                                    @foreach ($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad) && $item->semana === $semana) as $item)
+                                                        @php
+                                                            $conteonpk+=$item->tarifas->first()->suma_fob;
+                                                            $conteonpk2+=$item->tarifas->reverse()->first()->suma_fob;
+                                                            $conteofob+=$item->tarifas->first()->suma_fob_fc;
+                                                            $conteofob2+=$item->tarifas->reverse()->first()->suma_fob_fc;
+                                                            $conteocostos_semana+=$item->tarifas->first()->costo_proceso+$item->tarifas->first()->costo_materiales+$item->tarifas->first()->otros_costos;
                                                         
+                                                            $resultado =floatval(($item->tarifas->reverse()->first()->tarifa) * $item->tarifas->reverse()->first()->cant_kg) - floatval(($item->tarifas->first()->tarifa) * $item->tarifas->first()->cant_kg);
+                                                            // Redondea hacia abajo a la décima más cercana
+                                                            $redondeado += round($resultado, 1);
+                                                            
+                                                        @endphp
+                                                    @endforeach
+                                                    <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
+                                                        <p class="text-gray-900 whitespace-no-wrap"> 
+                                                            {{number_format($conteonpk/floatval($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad) && $item->semana === $semana)->sum('cant_kg')),2)}}
+                                                        </p>
                                                     </td>
 
-                                                    @if ($fob->tarifas->count()>0)
-                                                        @php
-                                                            $control=true;
-                                                            $ncontrol=0;
-                                                            $tarifacontrol=0;
-                                                            $ingresocontrol=0;
-                                                        @endphp
-                                                        @foreach ($fob->tarifas as $item)
-                                                        @php
-                                                            if ($tarifacontrol==0) {
-                                                                    $tarifacontrol=$item->tarifa;
-                                                                    $ingresocontrol=$item->suma_fob;
-                                                                }
-                                                        @endphp
-                                                            @if ($ncontrol==0)
-                                                
+                                                    
+                                                           
                                                                     <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
                                                                             
-                                                                            {{number_format(floatval($item->suma_fob),2)}}
+                                                                            {{number_format(floatval($conteocostos_semana),2)}}
                                                                         
                                                                     </td>
                                                                     <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                                        {{number_format(floatval($item->cant_kg),1)}}
+                                                                        {{number_format(floatval($conteonpk),2)}}
                                                                     </td>
                                                                     <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                                        @if ($tarifaid==$item->id)
-                                                                            <input wire:model="tarifa" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none">   
-                                                                            <button wire:click='save_tarifaid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                                                <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                                                <span class="relative">Guardar</span>
-                                                                            </button>
-                                                                        @else
-                                                                        
-                                                                            @if ($fob->n_variedad=='COMERCIAL')
-                                                                            
-                                                                                <p class="text-gray-900 whitespace-nowrap">{{ number_format($item->tarifa, 2, '.', '.') }}</p>
-                                                                        
-                                                                            @else
-                                                                                
-                                                                                <p class="text-gray-900 whitespace-nowrap">{{ number_format($item->tarifa, 2, '.', '.') }}</p>
-                                                                        
-                                                                            @endif
-                                                                        
-                                                                            <span wire:click='set_tarifaid({{$item->id}})' class="hidden cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                                                <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                                                <span class="relative">Editar</span>
-                                                                                </span>
-                                                                        @endif
-                                                                        
+                                                                               <p class="text-gray-900 whitespace-nowrap">{{ number_format($conteofob, 2, '.', '.') }}</p>
+                                                                    </td>
+                                                                   
+                                                                    <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
+                                                                     
                                                                     </td>
                                                                     <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                                        {{number_format(floatval($item->costo_proceso+$item->costo_materiales+$item->otros_costos),2)}}
-                                                                    </td>
-                                                                  
-            
-                                                                
-                                                            @else
-                                                                    <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                                        @if ($tarifaid==$item->id)
-                                                                            <input wire:model="tarifa" wire:keydown.enter="save_tarifaid()" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-6 px-2 rounded-lg focus:outline-none">   
-                                                                            <button wire:click='save_tarifaid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                                                <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                                                <span class="relative">Guardar</span>
-                                                                            </button>
-                                                                        @else
-                                                                            @if ($item->tarifa==$tarifacontrol)
-                                                                            
-                                                                        
-                                                                                {{-- comment   <p class="text-gray-900 whitespace-nowrap">{{ number_format($item->tarifa, 3, '.', '.') }}</p>
-                                                                            --}}
-                                                                                <span wire:click.prevent="set_tarifaid({{ $item->id }})" 
-                                                                                    wire:key="item-{{ $item->id }}" 
-                                                                                    class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                                                    <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                                                    <span class="relative">Agregar</span>
-                                                                                    </span>
-                                                                            @else
-                                                                            
-                                                                                <p class="text-gray-900 whitespace-nowrap">{{ number_format($item->tarifa, 3, ',', '.') }}</p>
-                                                                            
-                                                                                <span wire:click='set_tarifaid({{$item->id}})' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                                                    <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                                                    <span class="relative">Editar</span>
-                                                                                    </span>
-                                                                            
-                                                                            @endif
-                                                                        @endif
-                                                                        
-                                                                    </td>
-                                                                    <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                                        @if ($item->tarifa==$tarifacontrol)
-                                                                    
-                                                                        
-                                                                        @else
-                                                                            @php
-                                                                                $resultado = floatval(($item->tarifa) * $item->cant_kg - $ingresocontrol);
-                                                                                // Redondea hacia abajo a la décima más cercana
-                                                                                $redondeado = round($resultado, 1);
-                                                                            @endphp
-                                                                            
                                                                             {{ number_format($redondeado, 2, ',', '.') }}
-                                                                        @endif
-                                                                        
                                                                     </td>
                                                                     <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                                        @if ($item->tarifa==$tarifacontrol)
-                                                                            {{number_format(floatval($item->suma_fob),2, ',', '.')}}
-                                                                        @else
-                                                                            {{number_format(floatval(($item->tarifa)*$item->cant_kg),2, ',', '.')}}
-                                                                        @endif
+                                                                        {{number_format(floatval($conteonpk2),2)}}
                                                                     </td>
                                                                 
                                                                     <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                                        {{number_format(floatval($item->tarifa),2, ',', '.')}}
+                                                                        {{number_format(floatval($conteonpk2/floatval($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad) && $item->semana === $semana)->sum('cant_kg'))),2, ',', '.')}}
                                                                     </td>
             
                                                                     <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                                        {{number_format(floatval($item->tarifa_fc),2, ',', '.')}}
+                                                                        {{number_format(floatval($conteofob/floatval($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad) && $item->semana === $semana)->sum('cant_kg'))),2, ',', '.')}}
                                                                     </td>
                                                                     <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                                        {{number_format(floatval($item->suma_fob_fc),2, ',', '.')}}
+                                                                        {{number_format(floatval($conteofob2),2, ',', '.')}}
                                                                     </td>
                                                                     <td class="px-5 py-2 border-b border-gray-200 text-sm">
-                                                                            
-                                                                            <span  class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                                                                            <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                                                            <span wire:click.prevent="setback_tarifaid({{ $item->id }})" 
-                                                                                wire:key="item-{{ $item->id }}"  class="relative">Eliminar</span>
-                                                                        </span>
-                                                                        </span>
+                                                                       
                                                                     </td>
                                                         
-                                                            @endif
+                                                           
 
-                                                            @php
-                                                                $control=!$control;
-                                                                $ncontrol+=1;
-                                                            
-                                                            @endphp
-                                                        @endforeach
-                                                    @endif
+                                                          
+                                                        
                                                 
                                                 
                         
@@ -904,190 +814,95 @@
                                                 </tr>
                                         @endif
                                     @endforeach
-                                    <tr class="bg-gray-200">
-                                        <td class="bg-gray-200 px-5 py-2 border-b border-gray-200 text-sm sticky-column">
+                                    <tr class="bg-gray-300">
+                                        <td class="bg-gray-300 px-5 py-2 border-b border-gray-200 text-sm sticky-column">
                                             <div class="flex items-center">
                                                 <div class="ml-3">
                                                     <p class="text-gray-900 whitespace-no-wrap">
-                                                        {{$fob->n_variedad}}
+                                                        Total {{$fob->n_variedad}}
                                                     </p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td colspan="2" class="bg-gray-200 px-5 py-2 border-b border-gray-200 text-sm sticky-column">
-                                            <p class="text-gray-900 whitespace-no-wrap text-center"> Total {{$variedad}}</p>
+                                        <td colspan="2" class="bg-gray-300 px-5 py-2 border-b border-gray-200 text-sm sticky-column">
+                                           
                                         </td>
-                                        
+
                                         <td class="px-5 py-2 border-b border-gray-200 text-sm text-right">
-                                            <p class="text-gray-900 whitespace-no-wrap"> {{number_format(floatval($fobs->where('n_variedad',$variedad)->sum('cant_kg')),1)}}</p>
+                                            <p class="text-gray-900 whitespace-no-wrap"> {{number_format(floatval($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad))->sum('cant_kg')),1)}}</p>
                                         </td>
-                                        
                                       
-                                        
-                                    
-                                        <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                            @if ($fobid==$fob->id)
-                                                <input wire:model="preciofob" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none">   
-                                                <span wire:click='save_fobid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                    <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                    <span class="relative">Guardar</span>
-                                                    </span>
-                                            @else
-                                                <p class="text-gray-900 whitespace-no-wrap text-center"> {{number_format($fob->fob_kilo_salida,2, '.', '.')}}</p>
-                                                @if ($fobid==$fob->id)
-                                                
-
-                                                @else
-                                                    <span wire:click='set_fobid({{$fob->id}})' class="hidden cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                    <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                    <span class="relative">Editar</span>
-                                                    </span>
-                                                @endif
-                                            @endif
+                                        @php
+                                            $conteonpk=0;
+                                            $conteonpk2=0;
+                                            $conteofob=0;
+                                            $conteofob2=0;
+                                            $conteocostos_semana=0;
+                                            $redondeado=0;
+                                            $retornoesperado=0;
+                                        @endphp
+                                        @foreach ($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad)) as $item)
+                                            @php
+                                                $conteonpk+=$item->tarifas->first()->suma_fob;
+                                                $conteonpk2+=$item->tarifas->reverse()->first()->suma_fob;
+                                                $conteofob+=$item->tarifas->first()->suma_fob_fc;
+                                                $conteofob2+=$item->tarifas->reverse()->first()->suma_fob_fc;
+                                                $conteocostos_semana+=$item->tarifas->first()->costo_proceso+$item->tarifas->first()->costo_materiales+$item->tarifas->first()->otros_costos;
                                             
+                                                $resultado =floatval(($item->tarifas->reverse()->first()->tarifa) * $item->tarifas->reverse()->first()->cant_kg) - floatval(($item->tarifas->first()->tarifa) * $item->tarifas->first()->cant_kg);
+                                                // Redondea hacia abajo a la décima más cercana
+                                                $redondeado += round($resultado, 1);
+                                                
+                                            @endphp
+                                        @endforeach
+                                        <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
+                                            <p class="text-gray-900 whitespace-no-wrap"> 
+                                                {{number_format($conteonpk/floatval($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad))->sum('cant_kg')),2)}}
+                                            </p>
                                         </td>
 
-                                        @if ($fob->tarifas->count()>0)
-                                            @php
-                                                $control=true;
-                                                $ncontrol=0;
-                                                $tarifacontrol=0;
-                                                $ingresocontrol=0;
-                                            @endphp
-                                            @foreach ($fob->tarifas as $item)
-                                            @php
-                                                if ($tarifacontrol==0) {
-                                                        $tarifacontrol=$item->tarifa;
-                                                        $ingresocontrol=$item->suma_fob;
-                                                    }
-                                            @endphp
-                                                @if ($ncontrol==0)
-                                            
+                                        
+                                               
                                                         <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
                                                                 
-                                                                {{number_format(floatval($item->suma_fob),2)}}
+                                                                {{number_format(floatval($conteocostos_semana),2)}}
                                                             
                                                         </td>
                                                         <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                            {{number_format(floatval($item->cant_kg),1)}}
+                                                            {{number_format(floatval($conteonpk),2)}}
                                                         </td>
                                                         <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                            @if ($tarifaid==$item->id)
-                                                                <input wire:model="tarifa" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none">   
-                                                                <button wire:click='save_tarifaid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                                    <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                                    <span class="relative">Guardar</span>
-                                                                </button>
-                                                            @else
-                                                            
-                                                                @if ($fob->n_variedad=='COMERCIAL')
-                                                                
-                                                                    <p class="text-gray-900 whitespace-nowrap">{{ number_format($item->tarifa, 2, '.', '.') }}</p>
-                                                            
-                                                                @else
-                                                                    
-                                                                    <p class="text-gray-900 whitespace-nowrap">{{ number_format($item->tarifa, 2, '.', '.') }}</p>
-                                                            
-                                                                @endif
-                                                            
-                                                                <span wire:click='set_tarifaid({{$item->id}})' class="hidden cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                                    <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                                    <span class="relative">Editar</span>
-                                                                    </span>
-                                                            @endif
-                                                            
+                                                                   <p class="text-gray-900 whitespace-nowrap">{{ number_format($conteofob, 2, '.', '.') }}</p>
+                                                        </td>
+                                                       
+                                                        <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
+                                                         
                                                         </td>
                                                         <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                            {{number_format(floatval($item->costo_proceso+$item->costo_materiales+$item->otros_costos),2)}}
-                                                        </td>
-                                                    
-
-                                                    
-                                                @else
-                                                        <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                            @if ($tarifaid==$item->id)
-                                                                <input wire:model="tarifa" wire:keydown.enter="save_tarifaid()" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-6 px-2 rounded-lg focus:outline-none">   
-                                                                <button wire:click='save_tarifaid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                                    <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                                    <span class="relative">Guardar</span>
-                                                                </button>
-                                                            @else
-                                                                @if ($item->tarifa==$tarifacontrol)
-                                                                
-                                                            
-                                                                    {{-- comment   <p class="text-gray-900 whitespace-nowrap">{{ number_format($item->tarifa, 3, '.', '.') }}</p>
-                                                                --}}
-                                                                    <span wire:click.prevent="set_tarifaid({{ $item->id }})" 
-                                                                        wire:key="item-{{ $item->id }}" 
-                                                                        class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                                        <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                                        <span class="relative">Agregar</span>
-                                                                        </span>
-                                                                @else
-                                                                
-                                                                    <p class="text-gray-900 whitespace-nowrap">{{ number_format($item->tarifa, 3, ',', '.') }}</p>
-                                                                
-                                                                    <span wire:click='set_tarifaid({{$item->id}})' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
-                                                                        <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                                                        <span class="relative">Editar</span>
-                                                                        </span>
-                                                                
-                                                                @endif
-                                                            @endif
-                                                            
-                                                        </td>
-                                                        <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                            @if ($item->tarifa==$tarifacontrol)
-                                                        
-                                                            
-                                                            @else
-                                                                @php
-                                                                    $resultado = floatval(($item->tarifa) * $item->cant_kg - $ingresocontrol);
-                                                                    // Redondea hacia abajo a la décima más cercana
-                                                                    $redondeado = round($resultado, 1);
-                                                                @endphp
-                                                                
                                                                 {{ number_format($redondeado, 2, ',', '.') }}
-                                                            @endif
-                                                            
                                                         </td>
                                                         <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                            @if ($item->tarifa==$tarifacontrol)
-                                                                {{number_format(floatval($item->suma_fob),2, ',', '.')}}
-                                                            @else
-                                                                {{number_format(floatval(($item->tarifa)*$item->cant_kg),2, ',', '.')}}
-                                                            @endif
+                                                            {{number_format(floatval($conteonpk2),2)}}
                                                         </td>
                                                     
                                                         <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                            {{number_format(floatval($item->tarifa),2, ',', '.')}}
+                                                            {{number_format(floatval($conteonpk2/floatval($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad))->sum('cant_kg'))),2, ',', '.')}}
                                                         </td>
 
                                                         <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                            {{number_format(floatval($item->tarifa_fc),2, ',', '.')}}
+                                                            {{number_format(floatval($conteofob/floatval($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad))->sum('cant_kg'))),2, ',', '.')}}
                                                         </td>
                                                         <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
-                                                            {{number_format(floatval($item->suma_fob_fc),2, ',', '.')}}
+                                                            {{number_format(floatval($conteofob2),2, ',', '.')}}
                                                         </td>
                                                         <td class="px-5 py-2 border-b border-gray-200 text-sm">
-                                                                
-                                                                <span  class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                                                                <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                                                <span wire:click.prevent="setback_tarifaid({{ $item->id }})" 
-                                                                    wire:key="item-{{ $item->id }}"  class="relative">Eliminar</span>
-                                                            </span>
-                                                            </span>
+                                                           
                                                         </td>
                                             
-                                                @endif
+                                               
 
-                                                @php
-                                                    $control=!$control;
-                                                    $ncontrol+=1;
-                                                
-                                                @endphp
-                                            @endforeach
-                                        @endif
+                                              
+                                            
                                     
                                     
             

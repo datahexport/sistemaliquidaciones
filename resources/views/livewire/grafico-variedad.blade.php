@@ -31,7 +31,7 @@
     </div>
 
     <div>
-        <div id="container" style="width: 100%; height: 400px;"></div>
+        <div wire:ignore id="container" style="width: 100%; height: 400px;"></div>
     </div>
 
     <div class="flex flex-col mb-2">
@@ -53,49 +53,107 @@
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($unique_semanas as $semana)
-                        @php
-                            $array=[];
-                            $sumas = [
-                                '4J' => ['suma' => 0, 'peso' => 0],
-                                '3J' => ['suma' => 0, 'peso' => 0],
-                                '2J' => ['suma' => 0, 'peso' => 0],
-                                'J' => ['suma' => 0, 'peso' => 0],
-                                'XL' => ['suma' => 0, 'peso' => 0],
-                                'L' => ['suma' => 0, 'peso' => 0],
-                            ];
-
-
-                        @endphp
+                       
                         @if ($semana)
                           <tr>
                             <td class="px-6 py-0 whitespace-nowrap">
                               <div class="text-sm text-gray-900">{{$semana}}</div>    
                             </td>
-                            @foreach ($masastotal->where('SEMANA',$semana) as $item)
-                                    @php
-                                      if ($item->fob) {
-                                        $tarifafinal=0;
-                                        $tarifafinal2=0;
-                                        if ($item->fob->tarifas->count()>0) {
-                                            $tarifafinal=$item->fob->tarifas->reverse()->first()->tarifa;
-                                            $tarifafinal2=$item->fob->tarifas->reverse()->first()->tarifa;
-                                        }
-                                        $tarifaAplicada = ($item->CRITERIO == "COMERCIAL") ? $tarifafinal2 : $tarifafinal;
-                                        $peso = floatval($item->PESO_PRORRATEADO);
+                            
+                            @foreach ($unique_calibres as $calibre)
+                              @if ($fobsall->where('n_calibre',$calibre)->where('semana',$semana)->count()>0)
+                                
+                                  
 
-                                        switch ($item->CALIBRE_REAL) {
+                                <td class="px-6 py-0 whitespace-nowrap">
+                                  @if ($tarifaid==$fobsall->where('n_calibre',$calibre)->where('semana',$semana)->first()->tarifas->reverse()->first()->id)
+                                      <input wire:model="tarifa" class="w-32 shadow-sm  border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none">   
+                                      <button wire:click='save_tarifaid()' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                          <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                          <span class="relative">Guardar</span>
+                                      </button>
+                                  @else
+                                      @if ($fobsall->where('n_calibre',$calibre)->where('semana',$semana)->first()->tarifas->reverse()->first()->tarifa!=$fobsall->where('n_calibre',$calibre)->where('semana',$semana)->first()->tarifas->first()->tarifa)
+                                      {{number_format($fobsall->where('n_calibre',$calibre)->where('semana',$semana)->first()->tarifas->reverse()->first()->tarifa,2)}} <span  class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                            <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full text-xs"></span>
+                                            <span wire:click.prevent="setback_tarifaid({{ $fobsall->where('n_calibre',$calibre)->where('semana',$semana)->first()->tarifas->reverse()->first()->id }})" 
+                                                wire:key="item-{{ $fobsall->where('n_calibre',$calibre)->where('semana',$semana)->first()->tarifas->reverse()->first()->id }}"  class="relative">Eliminar</span>
+                                            </span>
+                                        </span>
+                                      @else
+                                        <div class="text-sm text-gray-900">
+                                          {{number_format($fobsall->where('n_calibre',$calibre)->where('semana',$semana)->first()->tarifas->reverse()->first()->tarifa,2)}}
+                                          <span wire:click='set_tarifaid({{$fobsall->where('n_calibre',$calibre)->where('semana',$semana)->first()->tarifas->reverse()->first()->id}})' class="cursor-pointer relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
+                                            <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full text-xs"></span>
+                                            <span class="relative">Editar</span>
+                                          </span>
+                                        </div> 
+                                      @endif
+                                  @endif
+                                      
+                                </td>
+                               
+                              @else
+                                <td class="px-6 py-0 whitespace-nowrap">
+                                  <div class="text-sm text-red-900">
+                                   -
+                                  </div>    
+                                </td>
+                                
+                              @endif
+                              
+                            @endforeach
+                            
+                          </tr>
+                        
+                        @endif  
+                        
+                        
+                    @endforeach
+                  </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+                    @foreach ($unique_semanas as $semana)
+                        @php
+                            $array=[];
+                            $sumas = [
+                                '5J' => ['tarifa' => 0, 'peso' => 0],
+                                '4J' => ['tarifa' => 0, 'peso' => 0],
+                                '3J' => ['tarifa' => 0, 'peso' => 0],
+                                '2J' => ['tarifa' => 0, 'peso' => 0],
+                                'J' => ['tarifa' => 0, 'peso' => 0],
+                                'XL' => ['tarifa' => 0, 'peso' => 0],
+                                'L' => ['tarifa' => 0, 'peso' => 0],
+                                'JUP' => ['tarifa' => 0, 'peso' => 0],
+                                'COMERCIAL' => ['tarifa' => 0, 'peso' => 0],
+                                'PRE-CALIBRE' => ['tarifa' => 0, 'peso' => 0],
+                            ];
+
+
+                        @endphp
+                        @if ($semana)
+                         
+                            @foreach ($fobsall->where('semana',$semana) as $item)
+                                    @php
+                                     
+                                        switch ($item->n_calibre) {
+                                            case '5J':
                                             case '4J':
                                             case '3J':
                                             case '2J':
                                             case 'J':
                                             case 'XL':
                                             case 'L':
-                                                $sumas[$item->CALIBRE_REAL]['suma'] += $tarifaAplicada * $peso;
-                                                $sumas[$item->CALIBRE_REAL]['peso'] += $peso;
+                                                $sumas[$item->n_calibre]['tarifa'] += $item->tarifas->reverse()->first()->tarifa;
+                                                $sumas[$item->n_calibre]['peso'] += 10;
                                                 break;
                                         }
 
-                                      }
+                                      
                                     @endphp
                               
                             @endforeach
@@ -107,7 +165,7 @@
                              
                                 @php
                                     if ($sumas[$calibre]['peso'] >0) {
-                                      $array[]=round($sumas[$calibre]['suma'] / $sumas[$calibre]['peso'], 2);
+                                      $array[]=round($sumas[$calibre]['tarifa'], 2);
                                     } else {
                                       $array[]=null;
                                     }
@@ -115,20 +173,10 @@
                                     
                                 @endphp
 
-                              <td class="px-6 py-0 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">
-                                  @if ($sumas[$calibre]['peso'] >0) 
-                                  
-                                    {{number_format($sumas[$calibre]['suma']/$sumas[$calibre]['peso'],2)}}
-                                  @else
-                                      0
-                                  @endif  
-                                </div>    
-                              </td>
 
                             @endforeach
                             
-                          </tr>
+                          
                           @php
                               $series[]=['name' =>$semana,
                                         'data'=> $array];
@@ -137,14 +185,6 @@
                         
                         
                     @endforeach
-                   
-                    
-                  </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <script>
         var series = <?php echo json_encode($series) ?>;

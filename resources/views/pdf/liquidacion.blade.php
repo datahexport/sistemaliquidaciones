@@ -400,613 +400,1994 @@
 			</table>
 
 		<table id="balance" style="width:100%; border-collapse: collapse; margin-top: 20px;">
-			<thead style="border-top: 2px solid black; border-bottom: 2px solid black;">
-			  <tr>
-				<th>NORMA</th>
-				<th>VARIEDAD</th>
-				<th>CALIBRE</th>
-				<th>KG EMBALADO</th>
-				<th>RETORNO NETO PRODUCTOR</th>
-				<th>NPK</th>
-				
-			  </tr>
-			</thead>
-			<tbody>
-			  <tr style="background-color: #ddd;">
-					  
-				  <td> DENTRO DE NORMA </td>
-			  
-			  
-				  <td> </td>
-				
-				<td></td>
-				
-				
-				<td ></td>
-				<td></td>
-				<td ></td>
-				<td>
-				</td>
-				<td>
-	  
-				</td>
-				
-			  </tr>
-			  @php
-				$variedadcount=1;
-				$cantidadtotal=0;
-				$pesonetototal=0;
-				$retornototal=0;
-				  $totalretorno5j=0;
-				  $totalretorno4j=0;
-				  $totalretorno3j=0;
-				  $totalretorno2j=0;
-				  $totalretornoj=0;
-				  $totalretornoxl=0;
+              <thead style="border-top: 2px solid black; border-bottom: 2px solid black;">
+                <tr>
+                  <th>Norma</th>
+                  <th>Variedad</th>
+                  @if ($informe_edit->semana_dentrodenorma=='si')
+                    <th>Semana</th>
+                    <th></th>
+                    <th></th>
+                  @endif
+                  <th>Calibre</th>
+                  <th>Kg Embalado</th>
+                  
+                  
+                
+                  <th>Retorno Neto Productor</th>
+                  <th>NPK</th>
 
-				  $totalmargen5j=0;
-				  $totalmargen4j=0;
-				  $totalmargen3j=0;
-				  $totalmargen2j=0;
-				  $totalmargenj=0;
-				  $totalmargenxl=0;
+                  </tr>
+              </thead>
+              @if ($informe_edit->semana_dentrodenorma=='si')
+                <tbody>
+                    <tr style="background-color: #ddd;">
+                            
+                        <td> DENTRO DE NORMA </td>
+                    
+                    
+                    
+                      
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td ></td>
+                      <td></td>
+                      <td ></td>
+                      <td>
+                      </td>
+                      <td>
+            
+                      </td>
+                      <td>
+            
+                      </td>
+                      
+                    </tr>
+                    @php
+                      $semanacounter=1;
+                      $variedadcount=1;
+                      $cantidadtotal=0;
+                      $pesonetototal=0;
+                      $retornototal=0;
+                      
+                      $totalretorno5j=0;
+                      $totalretorno4j=0;
+                        $totalretorno3j=0;
+                        $totalretorno2j=0;
+                        $totalretornoj=0;
+                        $totalretornoxl=0;
 
-				  $totalcostopacking=0;
-				  $globaltotalmateriales=0;
+                        $totalmargen5j=0;
+                        $totalmargen4j=0;
+                        $totalmargen3j=0;
+                        $totalmargen2j=0;
+                        $totalmargenj=0;
+                        $totalmargenxl=0;
 
-				  $totalpesonetol=0;
-	  
-				  $globaltotalotroscostos=0;
-				  $totalcount=0;
+                        $totalcostopacking=0;
+                        $globaltotalmateriales=0;
 
-				  $totalcostos4j=0;
-				  $totalcostos5j=0;
-				  $totalcostos3j=0;
-				  $totalcostos2j=0;
-				  $totalcostosj=0;
-				  $totalcostosxl=0;
-				  
-			  @endphp
-			  @foreach ($unique_variedades as $variedad)
-				<tr style="background-color: white;">
-  
+                        $totalpesonetol=0;
+            
+                        $globaltotalotroscostos=0;
+                        $totalcount=0;
 
-
-				  <td> </td>
-				
-				  <td> {{$variedad}} </td>
-			  
-				
-				
-				
-				 
-				  <td>
-	  
-				  </td>
-				  
-				</tr>
-				@php
-				  $calibrecount=1;
-				  
-				  $cantidad4j=0;
-				  $cantidad5j=0;
-				  $cantidad3j=0;
-				  $cantidad2j=0;
-				  $cantidadj=0;
-				  $cantidadxl=0;
-
-				  $pesoneto4j=0;
-				  $pesoneto5j=0;
-				  $pesoneto3j=0;
-				  $pesoneto2j=0;
-				  $pesonetoj=0;
-				  $pesonetoxl=0;
-				  $pesonetol=0;
-	  
-				  $retorno5j=0;
-				  $retorno4j=0;
-				  $retorno3j=0;
-				  $retorno2j=0;
-				  $retornoj=0;
-				  $retornoxl=0;
-
-				  	$retorno_neto5j=0;
-					$retorno_neto4j=0;
-					$retorno_neto3j=0;
-					$retorno_neto2j=0;
-					$retorno_netoj=0;
-					$retorno_netoxl=0;
-
-				  $margen5j=0;
-				  $margen4j=0;
-				  $margen3j=0;
-				  $margen2j=0;
-				  $margenj=0;
-				  $margenxl=0;
-	  
-				  $costopacking=0;
-	  
-				  $totalmateriales5j=0;
-				  $totalmateriales4j=0;
-				  $totalmateriales3j=0;
-				  $totalmateriales2j=0;
-				  $totalmaterialesj=0;
-				  $totalmaterialesxl=0;
-
-				  $costos5j=0;
-				  $costos4j=0;
-				  $costos3j=0;
-				  $costos2j=0;
-				  $costosj=0;
-				  $costosxl=0;
-	  
-				  $otroscostos=0;
-				  $totalotroscostos=0;
-				  
-				  
-				  $masatotal=0;
-	  
-				@endphp
-	  
-				@foreach ($masas as $masa)
-				  
-				  @php      
-							$tarifafinal=0;
-							if (!IS_NULL($masa->fob)) {
-										if ($masa->fob->tarifas->count()>0) {
-											$tarifafinal=$masa->fob->tarifas->reverse()->first()->tarifa_fc;
-										}
-							}
-									
-				  @endphp 
-				  @if (($masa->calibre_real=='5J') && $masa->variedad==$variedad)
-					@php
-						$cantidad5j += floatval($masa->cantidad);
-						$pesoneto5j += floatval($masa->peso_prorrateado);
-						
-						if (!IS_NULL($masa->fob)) {
-							$retorno5j += floatval($masa->peso_prorrateado * $tarifafinal);
-							$totalretorno5j += floatval($masa->peso_prorrateado * $tarifafinal);
-							$margen5j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
-							$totalmargen5j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
-						}
-				
-						$cantidadtotal += floatval($masa->cantidad);
-						$pesonetototal += floatval($masa->peso_prorrateado);
-				
-						$costos5j += floatval($masa->costo);
-						$totalcostos5j += floatval($masa->costo);
-					@endphp	
-				@endif
-			  
-					@if (($masa->calibre_real=='4J') && $masa->variedad==$variedad)
-						@php
-						  $cantidad4j+=floatval($masa->cantidad);
-						  $pesoneto4j+=floatval($masa->peso_prorrateado);
-						 
-						  
-
-						 
-						  
-						  if (!IS_NULL($masa->fob)) {
-							  $retorno4j+=floatval($masa->peso_prorrateado*$tarifafinal);
-							  $totalretorno4j+=floatval($masa->peso_prorrateado*$tarifafinal);
-							  $margen4j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-							  $totalmargen4j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-							}
-						  $cantidadtotal+=floatval($masa->cantidad);
-						  $pesonetototal+=floatval($masa->peso_prorrateado);
-
-							  $costos4j+=floatval($masa->costo);
-							  $totalcostos4j+=floatval($masa->costo);
-							   
-				  
-						@endphp	
-					@endif
-					@if (($masa->calibre_real=='3J') && $masa->variedad==$variedad)
-						@php
-						  $cantidad3j+=$masa->cantidad;
-						  $pesoneto3j+=floatval($masa->peso_prorrateado);
-					   
-
-						  $costos3j+=floatval($masa->costo);
-						  $totalcostos3j+=floatval($masa->costo);
-
-						  if (!IS_NULL($masa->fob)) {
-							//dd($masa->fob);
-											  $retorno3j+=floatval($masa->peso_prorrateado*$tarifafinal);
-											  $totalretorno3j+=floatval($masa->peso_prorrateado*$tarifafinal);
-											  $margen3j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-											  $totalmargen3j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-											}
-						  $cantidadtotal+=$masa->cantidad;
-						  $pesonetototal+=floatval($masa->peso_prorrateado);
-
-							  
-
-						@endphp	
-					@endif
-					@if (($masa->calibre_real=='2J') && $masa->variedad==$variedad)
-						@php
-						  $cantidad2j+=$masa->cantidad;
-						  $pesoneto2j+=floatval($masa->peso_prorrateado);
-						 
-
-						  $costos2j+=floatval($masa->costo);
-						  $totalcostos2j+=floatval($masa->costo);
-
-						  if (!IS_NULL($masa->fob)) {
-										   $retorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
-										   $totalretorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
-										   $margen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-										   $totalmargen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-											}
-						  $cantidadtotal+=$masa->cantidad;
-						  $pesonetototal+=floatval($masa->peso_prorrateado);
-
-						
-
-						@endphp	
-					@endif
-					@if (($masa->calibre_real=='J') && $masa->variedad==$variedad)
-						@php
-						  $cantidadj+=$masa->cantidad;
-							$pesonetoj+=floatval($masa->peso_prorrateado);
-						   
-
-							$costosj+=floatval($masa->costo);
-							$totalcostosj+=floatval($masa->costo);
-
-							if (!IS_NULL($masa->fob)) {
-											  $retornoj+=floatval($masa->peso_prorrateado*$tarifafinal);
-											  $totalretornoj+=floatval($masa->peso_prorrateado*$tarifafinal);
-											  $margenj+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-											  $totalmargenj+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-							}
-							$cantidadtotal+=$masa->cantidad;
-							$pesonetototal+=floatval($masa->peso_prorrateado);
-
-						 
-
-						@endphp	
-					@endif
-					@if (($masa->calibre_real=='XL') && $masa->variedad==$variedad)
-						@php
-						  $cantidadxl+=$masa->cantidad;
-						  $pesonetoxl+=floatval($masa->peso_prorrateado);
-						
-						  $costosxl+=floatval($masa->costo);
-						  $totalcostosxl+=floatval($masa->costo);
-
-						  if (!IS_NULL($masa->fob)) {
-										   $retornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
-										   $totalretornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
-										   $margenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-										   $totalmargenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-											}
-						  $cantidadtotal+=$masa->cantidad;
-						  $pesonetototal+=floatval($masa->peso_prorrateado);
+                        $totalcostos5j=0;
+                        $totalcostos4j=0;
+                        $totalcostos3j=0;
+                        $totalcostos2j=0;
+                        $totalcostosj=0;
+                        $totalcostosxl=0;
+                        
+                    @endphp
+                  
+                      @foreach ($unique_variedades as $variedad)
+                        <tr style="background-color: white;">
+          
 
 
-						@endphp	
-					@endif
-					@if (($masa->calibre_real=='L') && $masa->variedad==$variedad)
-						@php
-						
-						  $pesonetol+=floatval($masa->peso_prorrateado);
-						  $totalpesonetol+=floatval($masa->peso_prorrateado);
-						  
-						@endphp	
-					@endif
-					
-					@if ($masa->calibre_real=='5J' || $masa->calibre_real=='4J' || $masa->calibre_real=='3J'|| $masa->calibre_real=='2J' || $masa->calibre_real=='J' || $masa->calibre_real=='XL')
-						  @php
-								$masatotal+=$masa->peso_prorrateado;
-						  @endphp
-					@endif
-				  
-				@endforeach
-	  
+                          <td> </td>
+                        
+                          <td style="font-weight: bold; text-align: center;"> {{$variedad}} </td>
+                      
+                        
+                        
+                          <td ></td>
+                          <td>
+                          </td>
+                          <td>
+              
+                          </td>
+                          <td>
+              
+                          </td>
+                          
+                        </tr>
+                        @php
+                              $calibrecount=1;
+                              
+                              
+                              $cantidad5j=0;
+                              $cantidad4j=0;
+                              $cantidad3j=0;
+                              $cantidad2j=0;
+                              $cantidadj=0;
+                              $cantidadxl=0;
+                              
+                              $pesoneto5j=0;
+                              $pesoneto4j=0;
+                              $pesoneto3j=0;
+                              $pesoneto2j=0;
+                              $pesonetoj=0;
+                              $pesonetoxl=0;
+                              $pesonetol=0;
+                  
+                              
+                              $retorno5j=0;
+                              $retorno4j=0;
+                              $retorno3j=0;
+                              $retorno2j=0;
+                              $retornoj=0;
+                              $retornoxl=0;
 
-			 
+                              $retorno_neto5j=0;
+                              $retorno_neto4j=0;
+                              $retorno_neto3j=0;
+                              $retorno_neto2j=0;
+                              $retorno_netoj=0;
+                              $retorno_netoxl=0;
 
-	  
-				@if ($cantidad5j+$cantidad4j+$cantidad3j+$cantidad2j+$cantidadj+$cantidadxl>0)
-					@if ($pesoneto5j > 0)
-						<tr>
-							<td> </td>
-							<td> </td>
-						
-							<td>5J</td>
-							<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;">{{ number_format($pesoneto5j, 0, ',', '.') }} KG</td>
-						
-							<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;">
-								@if ($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '5J')->count() > 0)
-									{{ number_format($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '5J')->first()->retorno, 2, ',', '.') }} USD
-									@php
-										$retorno_neto5j = $informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '5J')->first()->retorno;
-									@endphp
-								@elseif ($pesoneto5j)
-									{{ number_format(($retorno5j - ($margen5j + $costos5j)), 2, ',', '.') }} USD <br>
-									@php
-										$retorno_neto5j = ($retorno5j - ($margen5j + $costos5j));
-									@endphp
-								@endif
-							</td>
-						
-							<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
-								@if ($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '5J')->count() > 0)
-									{{ number_format($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '5J')->first()->retorno / $pesoneto5j, 2, ',', '.') }} USD
-								@elseif ($pesoneto5j)
-									{{ number_format(($retorno5j - ($margen5j + $costos5j)) / $pesoneto5j, 2, ',', '.') }} USD <br>
-								@endif
-							</td>
-						</tr>
-							@php
-							$calibrecount += 1;
-							@endphp
-					@endif
-			
-				  @if ($pesoneto4j>0)
-					<tr>
-					  <td> </td>
-					  <td> </td>
-					  
-					  
-					  
-					  
-					  <td>4J</td>
-					  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto4j,0,',','.')}} KG</td>
-					 
-					  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >
-							@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->count()>0)
-                                  {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno, 2, ',', '.') }} USD
+                              $margen5j=0;
+                              $margen4j=0;
+                              $margen3j=0;
+                              $margen2j=0;
+                              $margenj=0;
+                              $margenxl=0;
+                  
+                              $costopacking=0;
+                  
+                              $totalmateriales4j=0;
+                              $totalmateriales3j=0;
+                              $totalmateriales2j=0;
+                              $totalmaterialesj=0;
+                              $totalmaterialesxl=0;
+
+                              $costos5j=0;
+                              $costos4j=0;
+                              $costos3j=0;
+                              $costos2j=0;
+                              $costosj=0;
+                              $costosxl=0;
+                  
+                              $otroscostos=0;
+                              $totalotroscostos=0;
+                              
+                              
+                              $masatotal=0;
+                  
+                        @endphp
+                        @foreach ($unique_semanas as $semana)
+                          @if ($semana)
+                            
+                            @php
+                              $calibrecount=1;
+                              
+                              
+                              $cantidad5j_semana=0;
+                              $cantidad4j_semana=0;
+                              $cantidad3j_semana=0;
+                              $cantidad2j_semana=0;
+                              $cantidadj_semana=0;
+                              $cantidadxl_semana=0;
+                              
+                              $pesoneto5j_semana=0;
+                              $pesoneto4j_semana=0;
+                              $pesoneto3j_semana=0;
+                              $pesoneto2j_semana=0;
+                              $pesonetoj_semana=0;
+                              $pesonetoxl_semana=0;
+                              $pesonetol_semana=0;
+                  
+                              
+                              $retorno5j_semana=0;
+                              $retorno4j_semana=0;
+                              $retorno3j_semana=0;
+                              $retorno2j_semana=0;
+                              $retornoj_semana=0;
+                              $retornoxl_semana=0;
+
+                              $retorno_neto5j_semana=0;
+                              $retorno_neto4j_semana=0;
+                              $retorno_neto3j_semana=0;
+                              $retorno_neto2j_semana=0;
+                              $retorno_netoj_semana=0;
+                              $retorno_netoxl_semana=0;
+
+                              $margen5j_semana=0;
+                              $margen4j_semana=0;
+                              $margen3j_semana=0;
+                              $margen2j_semana=0;
+                              $margenj_semana=0;
+                              $margenxl_semana=0;
+                  
+                              $costopacking=0;
+                  
+                              $totalmateriales4j_semana=0;
+                              $totalmateriales3j_semana=0;
+                              $totalmateriales2j_semana=0;
+                              $totalmaterialesj_semana=0;
+                              $totalmaterialesxl_semana=0;
+
+                              $costos5j_semana=0;
+                              $costos4j_semana=0;
+                              $costos3j_semana=0;
+                              $costos2j_semana=0;
+                              $costosj_semana=0;
+                              $costosxl_semana=0;
+                  
+                              $otroscostos_semana=0;
+                              $totalotroscostos_semana=0;
+                              
+                              
+                              $masatotal_semana=0;
+                  
+                            @endphp
+                  
+                            @foreach ($masas->where('tipo','EXPORTACIÓN')->where('semana',$semana) as $masa)
+                              @php
+                                  $tarifafinal = 0;
+                                  if (!is_null($masa->fob)) {
+                                      if ($masa->fob->tarifas->count() > 0) {
+                                          $tarifafinal = $masa->fob->tarifas->reverse()->first()->tarifa_fc;
+                                          $tarifafinal2 = $masa->fob->tarifas->reverse()->first()->tarifa;
+                                      }
+                                  }
+                              @endphp
+                          
+                              @if (($masa->calibre_real == '5J') && $masa->variedad == $variedad)
+                                @php
+                                  // Versión semanal
+                                  $cantidad5j_semana += floatval($masa->cantidad);
+                                  $pesoneto5j_semana += floatval($masa->peso_prorrateado);
+                              
+                                  if (!is_null($masa->fob)) {
+                                      $retorno5j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
+                                      $retorno_neto5j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
+                                      $margen5j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                  }
+                              
+                                  $costos5j_semana += floatval($masa->costo);
+                              
+                                  // Versión total (sin _semana)
+                                  $cantidad5j += floatval($masa->cantidad);
+                                  $pesoneto5j += floatval($masa->peso_prorrateado);
+                              
+                                  if (!is_null($masa->fob)) {
+                                      $retorno5j += floatval($masa->peso_prorrateado * $tarifafinal);
+                                      $margen5j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                  }
+                              
+                                  $costos5j += floatval($masa->costo);
+                                @endphp
+                              @endif
+                        
+                          
+                              @if (($masa->calibre_real == '4J') && $masa->variedad == $variedad)
+                                @php
+                                    // Semana
+                                    $cantidad4j_semana += floatval($masa->cantidad);
+                                    $pesoneto4j_semana += floatval($masa->peso_prorrateado);
+                                    if (!is_null($masa->fob)) {
+                                        $retorno4j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
+                                        $retorno_neto4j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
+                                        $margen4j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                    }
+                                    $costos4j_semana += floatval($masa->costo);
+                                    $totalmateriales4j_semana += floatval($masa->costo);
+                              
+                                    // Total
+                                    $cantidad4j += floatval($masa->cantidad);
+                                    $pesoneto4j += floatval($masa->peso_prorrateado);
+                                    if (!is_null($masa->fob)) {
+                                        $retorno4j += floatval($masa->peso_prorrateado * $tarifafinal);
+                                        $margen4j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                    }
+                                    $costos4j += floatval($masa->costo);
+                                    $totalmateriales4j += floatval($masa->costo);
+                                @endphp
+                              @endif
+                              
+                              @if (($masa->calibre_real == '3J') && $masa->variedad == $variedad)
+                                @php
+                                    $cantidad3j_semana += floatval($masa->cantidad);
+                                    $pesoneto3j_semana += floatval($masa->peso_prorrateado);
+                                    if (!is_null($masa->fob)) {
+                                        $retorno3j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
+                                        $retorno_neto3j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
+                                        $margen3j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                    }
+                                    $costos3j_semana += floatval($masa->costo);
+                                    $totalmateriales3j_semana += floatval($masa->costo);
+                              
+                                    $cantidad3j += floatval($masa->cantidad);
+                                    $pesoneto3j += floatval($masa->peso_prorrateado);
+                                    if (!is_null($masa->fob)) {
+                                        $retorno3j += floatval($masa->peso_prorrateado * $tarifafinal);
+                                        $margen3j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                    }
+                                    $costos3j += floatval($masa->costo);
+                                    $totalmateriales3j += floatval($masa->costo);
+                                @endphp
+                              @endif
+                              
+                              @if (($masa->calibre_real == '2J') && $masa->variedad == $variedad)
+                                @php
+                                    $cantidad2j_semana += floatval($masa->cantidad);
+                                    $pesoneto2j_semana += floatval($masa->peso_prorrateado);
+                                    if (!is_null($masa->fob)) {
+                                        $retorno2j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
+                                        $retorno_neto2j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
+                                        $margen2j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                    }
+                                    $costos2j_semana += floatval($masa->costo);
+                                    $totalmateriales2j_semana += floatval($masa->costo);
+                              
+                                    $cantidad2j += floatval($masa->cantidad);
+                                    $pesoneto2j += floatval($masa->peso_prorrateado);
+                                    if (!is_null($masa->fob)) {
+                                        $retorno2j += floatval($masa->peso_prorrateado * $tarifafinal);
+                                        $margen2j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                    }
+                                    $costos2j += floatval($masa->costo);
+                                    $totalmateriales2j += floatval($masa->costo);
+                                @endphp
+                              @endif
+                              
+                              @if (($masa->calibre_real == 'J') && $masa->variedad == $variedad)
+                                @php
+                                    $cantidadj_semana += floatval($masa->cantidad);
+                                    $pesonetoj_semana += floatval($masa->peso_prorrateado);
+                                    if (!is_null($masa->fob)) {
+                                        $retornoj_semana += floatval($masa->peso_prorrateado * $tarifafinal);
+                                        $retorno_netoj_semana += floatval($masa->peso_prorrateado * $tarifafinal);
+                                        $margenj_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                    }
+                                    $costosj_semana += floatval($masa->costo);
+                                    $totalmaterialesj_semana += floatval($masa->costo);
+                              
+                                    $cantidadj += floatval($masa->cantidad);
+                                    $pesonetoj += floatval($masa->peso_prorrateado);
+                                    if (!is_null($masa->fob)) {
+                                        $retornoj += floatval($masa->peso_prorrateado * $tarifafinal);
+                                        $margenj += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                    }
+                                    $costosj += floatval($masa->costo);
+                                    $totalmaterialesj += floatval($masa->costo);
+                                @endphp
+                              @endif
+                              
+                              @if (($masa->calibre_real == 'XL') && $masa->variedad == $variedad)
+                                @php
+                                    $cantidadxl_semana += floatval($masa->cantidad);
+                                    $pesonetoxl_semana += floatval($masa->peso_prorrateado);
+                                    if (!is_null($masa->fob)) {
+                                        $retornoxl_semana += floatval($masa->peso_prorrateado * $tarifafinal);
+                                        $retorno_netoxl_semana += floatval($masa->peso_prorrateado * $tarifafinal);
+                                        $margenxl_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                    }
+                                    $costosxl_semana += floatval($masa->costo);
+                                    $totalmaterialesxl_semana += floatval($masa->costo);
+                              
+                                    $cantidadxl += floatval($masa->cantidad);
+                                    $pesonetoxl += floatval($masa->peso_prorrateado);
+                                    if (!is_null($masa->fob)) {
+                                        $retornoxl += floatval($masa->peso_prorrateado * $tarifafinal);
+                                        $margenxl += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                    }
+                                    $costosxl += floatval($masa->costo);
+                                    $totalmaterialesxl += floatval($masa->costo);
+                                @endphp
+                              @endif
+                              
+                          
+                              @if (($masa->calibre_real == 'L') && $masa->variedad == $variedad)
                                   @php
-                                      $retorno_neto4j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno;
+                                      $pesonetol_semana += floatval($masa->peso_prorrateado);
                                   @endphp
-                            @elseif ($pesoneto4j)
+                              @endif
+                          
+                              @if (in_array($masa->calibre_real, ['5J','4J', '3J', '2J', 'J', 'XL']) && $masa->variedad == $variedad)
+                                  @php
+                                      $masatotal_semana += floatval($masa->peso_prorrateado);
+                                     
+                                  @endphp
+                              @endif
+                            @endforeach
+                            @php
+                                 $pesonetototal+=$masatotal_semana;
+
+                                 $totalretorno5j+=$retorno5j_semana;
+                                 $totalretorno4j+=$retorno4j_semana;
+                                 $totalretorno3j+=$retorno3j_semana;
+                                 $totalretorno2j+=$retorno2j_semana;
+                                 $totalretornoj+=$retornoj_semana;
+                                 $totalretornoxl+=$retornoxl_semana;
+
+                                  $totalmargen5j += $margen5j_semana;
+                                  $totalmargen4j += $margen4j_semana;
+                                  $totalmargen3j += $margen3j_semana;
+                                  $totalmargen2j += $margen2j_semana;
+                                  $totalmargenj  += $margenj_semana;
+                                  $totalmargenxl += $margenxl_semana;
+
+                                  $totalcostos5j += $costos5j_semana;
+                                  $totalcostos4j += $costos4j_semana;
+                                  $totalcostos3j += $costos3j_semana;
+                                  $totalcostos2j += $costos2j_semana;
+                                  $totalcostosj  += $costosj_semana;
+                                  $totalcostosxl += $costosxl_semana;
+
+
+                                 
+                            @endphp
+                            @if ($cantidad5j_semana+$cantidad4j_semana+$cantidad3j_semana+$cantidad2j_semana+$cantidadj_semana+$cantidadxl_semana>0)
+
+                              <tr style="background-color: white;">
+              
+
+
+                                <td> </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td> {{$semana}} </td>
+                            
+                              
+                              
+                              
+                                
+                               
+                                <td>
+                    
+                                </td>
+                                
+                              </tr>
+                              
+                              @if ($pesoneto5j_semana > 0)
+                                <tr>
+                                  <td> </td>
+                                  <td> </td>
+                                  <td> </td>
+                                  <td> </td>
+                                  <td> </td>
+                                  <td>5J</td>
+                                  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;">
+                                    {{ number_format($pesoneto5j_semana, 2, ',', '.') }} KGS
+                                  </td>
+                                 
+                                  {{-- npk --}}
+                                  <td style="white-space: nowrap;" >
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "5J" && $semana_mod == $semana)
+                                      @if ($type_mod == "npk")
+                                        {{ $retorno }}
+                                      @else
+                                        <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                        <input
+                                          id="retorno"
+                                          type="number" 
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="retorno"
+                                        >
+                                      @endif
+                                      @php
+                                        $retorno_neto5j_semana = $retorno;
+                                      @endphp
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','5J')->where('semana',$semana)->count() > 0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{ number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','5J')->where('semana',$semana)->first()->retorno, 2, ',', '.') }} USD
+                                        </p>
+                                        @php
+                                          $retorno_neto5j_semana = $informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','5J')->where('semana',$semana)->first()->retorno;
+                                        @endphp
+                                      @else
+                                        {{ number_format(($retorno5j_semana - ($margen5j_semana + $costos5j_semana)), 2, ',', '.') }} USD <br>
+                                        @php
+                                          $retorno_neto5j_semana = $retorno5j_semana - ($margen5j_semana + $costos5j_semana);
+                                        @endphp
+                                      @endif
+                                    @endif
+                                      @php
+                                           $retorno_neto5j+= $retorno_neto5j_semana;
+                                      @endphp
+                                    
+                                  </td>
+                                  {{-- retorno --}}
+                                  <td style="white-space: nowrap;" >
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "5J" && $semana_mod == $semana)
+                                      @if ($type_mod == "retorno")
+                                        {{ $npk }}
+                                      @else
+                                        <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                        <input
+                                          id="npk"
+                                          type="number"
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="npk"
+                                        >
+                                      @endif
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '5J')->where('semana',$semana)->count() > 0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{ number_format($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '5J')->where('semana',$semana)->first()->npk, 2, ',', '.') }} USD/kg
+                                        </p>
+                                      @else
+                                        @if ($pesoneto5j_semana)
+                                          <p class="whitespace-nowrap">
+                                            {{ number_format(($retorno5j_semana - ($margen5j_semana + $costos5j_semana)) / $pesoneto5j_semana, 2, ',', '.') }} USD/kg
+                                          </p>
+                                        @else
+                                          0 USD/kg
+                                        @endif
+                                      @endif
+                                    @endif
+                                  
+                                  </td>
+								  
+                                 
+
+                                </tr>
+                                @php
+                                  $calibrecount += 1;
+                                @endphp
+                              @endif
+
+                              @if ($pesoneto4j_semana > 0)
+                                <tr>
+                                  <td> </td>
+                                  <td> </td>
+                                  <td> </td>
+                                  {{-- total semana --}}
+                                  <td> </td>
+                                  {{-- semana --}}
+                                  <td> </td>
+
+                                  <td>4J</td>
+                                  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;">
+                                    {{ number_format($pesoneto4j_semana, 2, ',', '.') }} KGS
+                                  </td>
+                                 
+                                  {{-- npk --}}
+								  <td style="white-space: nowrap;" >
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "4J" && $semana_mod == $semana)
+                                      @if ($type_mod == "npk")
+                                        {{ $retorno }}
+                                      @else
+                                        <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                        <input
+                                          id="retorno"
+                                          type="number" 
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="retorno"
+                                        >
+                                      @endif
+                                      @php
+                                        $retorno_neto4j_semana = $retorno;
+                                      @endphp
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->where('semana',$semana)->count() > 0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{ number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->where('semana',$semana)->first()->retorno, 2, ',', '.') }} USD
+                                        </p>
+                                        @php
+                                          $retorno_neto4j_semana = $informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->where('semana',$semana)->first()->retorno;
+                                        @endphp
+                                      @else
+                                        {{ number_format(($retorno4j_semana - ($margen4j_semana + $costos4j_semana)), 2, ',', '.') }} USD <br>
+                                        @php
+                                          $retorno_neto4j_semana = $retorno4j_semana - ($margen4j_semana + $costos4j_semana);
+                                        @endphp
+                                      @endif
+                                    @endif
+                                    @php
+                                      $retorno_neto4j += $retorno_neto4j_semana;
+                                    @endphp
+                                    
+                                  </td>
+
+                                  {{-- retorno --}}
+								  <td style="white-space: nowrap;" >
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "4J" && $semana_mod == $semana)
+                                      @if ($type_mod == "retorno")
+                                        {{ $npk }}
+                                      @else
+                                        <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                        <input
+                                          id="npk"
+                                          type="number"
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="npk"
+                                        >
+                                      @endif
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '4J')->where('semana',$semana)->count() > 0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{ number_format($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '4J')->where('semana',$semana)->first()->npk, 2, ',', '.') }} USD/kg
+                                        </p>
+                                      @else
+                                        @if ($pesoneto4j_semana)
+                                          <p class="whitespace-nowrap">
+                                            {{ number_format(($retorno4j_semana - ($margen4j_semana + $costos4j_semana)) / $pesoneto4j_semana, 2, ',', '.') }} USD/kg
+                                          </p>
+                                        @else
+                                          0 USD/kg
+                                        @endif
+                                      @endif
+                                    @endif
+
+                                   
+								</td>
+
+                                  
+                                </tr>
+
+                                @php
+                                  $calibrecount += 1;
+                                @endphp
+                              @endif
+
+                              @if ($pesoneto3j_semana > 0)
+                                <tr>
+                                  <td> </td>
+                                  <td> </td>
+                                  <td> </td>
+                                  {{-- total semana --}}
+                                  <td> </td>
+                                  {{-- semana --}}
+                                  <td> </td>
+
+                                  <td>3J</td>
+                                  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;">{{ number_format($pesoneto3j_semana, 2, ',', '.') }} KGS</td>
+                                  
+
+                                  {{-- npk --}}
+                                  <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "3J" && $semana_mod == $semana)
+                                      @if ($type_mod == "npk")
+                                        {{ $retorno }}
+                                      @else
+                                        <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                        <input
+                                          id="retorno"
+                                          type="number" 
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="retorno"
+                                        >
+                                      @endif
+                                      @php
+                                        $retorno_neto3j_semana = $retorno;
+                                      @endphp
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->where('semana',$semana)->count() > 0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{ number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->where('semana',$semana)->first()->retorno, 2, ',', '.') }} USD
+                                        </p>
+                                        @php
+                                          $retorno_neto3j_semana = $informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->where('semana',$semana)->first()->retorno;
+                                        @endphp
+                                      @else
+                                        {{ number_format(($retorno3j_semana - ($margen3j_semana + $costos3j_semana)), 2, ',', '.') }} USD <br>
+                                        @php
+                                          $retorno_neto3j_semana = $retorno3j_semana - ($margen3j_semana + $costos3j_semana);
+                                        @endphp
+                                      @endif
+                                    @endif
+                                    @php
+                                      $retorno_neto3j += $retorno_neto3j_semana;
+                                    @endphp
+                                   
+                                  </td>
+
+                                  {{-- retorno --}}
+                                  <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "3J" && $semana_mod == $semana)
+                                      @if ($type_mod == "retorno")
+                                        {{ $npk }}
+                                      @else
+                                        <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                        <input
+                                          id="npk"
+                                          type="number"
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="npk"
+                                        >
+                                      @endif
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '3J')->where('semana',$semana)->count() > 0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{ number_format($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '3J')->where('semana',$semana)->first()->npk, 2, ',', '.') }} USD/kg
+                                        </p>
+                                      @else
+                                        @if ($pesoneto3j_semana)
+                                          <p class="whitespace-nowrap">
+                                            {{ number_format(($retorno3j_semana - ($margen3j_semana + $costos3j_semana)) / $pesoneto3j_semana, 2, ',', '.') }} USD/kg
+                                          </p>
+                                        @else
+                                          0 USD/kg
+                                        @endif
+                                      @endif
+                                    @endif
+
+                                  
+                                  </td>
+
+                                  
+                                </tr>
+
+                                @php
+                                  $calibrecount += 1;
+                                @endphp
+                              @endif
+
+                              @if ($pesoneto2j_semana > 0)
+                                <tr>
+                                  <td> </td>
+                                  <td> </td>
+                                  <td> </td>
+                                  {{-- total semana --}}
+                                  <td> </td>
+                                  {{-- semana --}}
+                                  <td> </td>
+
+                                  <td>2J</td>
+                                  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;">{{ number_format($pesoneto2j_semana, 2, ',', '.') }} KGS</td>
+                                 
+
+                                  {{-- npk --}}
+                                  <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "2J" && $semana_mod == $semana)
+                                      @if ($type_mod == "npk")
+                                        {{ $retorno }}
+                                      @else
+                                        <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                        <input
+                                          id="retorno"
+                                          type="number" 
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="retorno"
+                                        >
+                                      @endif
+                                      @php
+                                        $retorno_neto2j_semana = $retorno;
+                                      @endphp
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->where('semana',$semana)->count() > 0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{ number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->where('semana',$semana)->first()->retorno, 2, ',', '.') }} USD
+                                        </p>
+                                        @php
+                                          $retorno_neto2j_semana = $informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->where('semana',$semana)->first()->retorno;
+                                        @endphp
+                                      @else
+                                        {{ number_format(($retorno2j_semana - ($margen2j_semana + $costos2j_semana)), 2, ',', '.') }} USD <br>
+                                        @php
+                                          $retorno_neto2j_semana = $retorno2j_semana - ($margen2j_semana + $costos2j_semana);
+                                        @endphp
+                                      @endif
+                                    @endif
+                                    @php
+                                      $retorno_neto2j += $retorno_neto2j_semana;
+                                    @endphp
+                                    
+                                  </td>
+
+                                  {{-- retorno --}}
+                                  <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "2J" && $semana_mod == $semana)
+                                      @if ($type_mod == "retorno")
+                                        {{ $npk }}
+                                      @else
+                                        <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                        <input
+                                          id="npk"
+                                          type="number"
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="npk"
+                                        >
+                                      @endif
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '2J')->where('semana',$semana)->count() > 0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{ number_format($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', '2J')->where('semana',$semana)->first()->npk, 2, ',', '.') }} USD/kg
+                                        </p>
+                                      @else
+                                        @if ($pesoneto2j_semana)
+                                          <p class="whitespace-nowrap">
+                                            {{ number_format(($retorno2j_semana - ($margen2j_semana + $costos2j_semana)) / $pesoneto2j_semana, 2, ',', '.') }} USD/kg
+                                          </p>
+                                        @else
+                                          0 USD/kg
+                                        @endif
+                                      @endif
+                                    @endif
+
+                                 
+								</td>
+
+
+                                </tr>
+
+                                @php
+                                  $calibrecount += 1;
+                                @endphp
+                              @endif
+
+                              @if ($pesonetoj_semana > 0)
+                                <tr>
+                                  <td> </td>
+                                  <td> </td>
+                                  <td> </td>
+                                  {{-- total semana --}}
+                                  <td> </td>
+                                  {{-- semana --}}
+                                  <td> </td>
+
+                                  <td>J</td>
+                                  <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;">{{ number_format($pesonetoj_semana, 2, ',', '.') }} KGS</td>
+                                
+
+                                 {{-- npk --}}
+                                  <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "J" && $semana_mod == $semana)
+                                      @if ($type_mod == "npk")
+                                        {{ $retorno }}
+                                      @else
+                                        <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                        <input
+                                          id="retorno"
+                                          type="number" 
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="retorno"
+                                        >
+                                      @endif
+                                      @php
+                                        $retorno_netoj_semana = $retorno;
+                                      @endphp
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->where('semana',$semana)->count() > 0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{ number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->where('semana',$semana)->first()->retorno, 2, ',', '.') }} USD
+                                        </p>
+                                        @php
+                                          $retorno_netoj_semana = $informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->where('semana',$semana)->first()->retorno;
+                                        @endphp
+                                      @else
+                                        {{ number_format(($retornoj_semana - ($margenj_semana + $costosj_semana)), 2, ',', '.') }} USD <br>
+                                        @php
+                                          $retorno_netoj_semana = $retornoj_semana - ($margenj_semana + $costosj_semana);
+                                        @endphp
+                                      @endif
+                                    @endif
+                                    @php
+                                      $retorno_netoj += $retorno_netoj_semana;
+                                    @endphp
+                                   
+                                  </td>
+
+                                  {{-- retorno --}}
+                                  <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "J" && $semana_mod == $semana)
+                                      @if ($type_mod == "retorno")
+                                        {{ $npk }}
+                                      @else
+                                        <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                        <input
+                                          id="npk"
+                                          type="number"
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="npk"
+                                        >
+                                      @endif
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', 'J')->where('semana',$semana)->count() > 0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{ number_format($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', 'J')->where('semana',$semana)->first()->npk, 2, ',', '.') }} USD/kg
+                                        </p>
+                                      @else
+                                        @if ($pesonetoj_semana)
+                                          <p class="whitespace-nowrap">
+                                            {{ number_format(($retornoj_semana - ($margenj_semana + $costosj_semana)) / $pesonetoj_semana, 2, ',', '.') }} USD/kg
+                                          </p>
+                                        @else
+                                          0 USD/kg
+                                        @endif
+                                      @endif
+                                    @endif
+
+                                   
+                                  </td>
+
+                                 
+
+                                </tr>
+
+                                @php
+                                  $calibrecount += 1;
+                                @endphp
+                              @endif
+
+                              @if ($pesonetoxl_semana > 0)
+                                <tr>
+                                  <td> </td>
+                                  <td> </td>
+                                  <td> </td>
+                                  {{-- total semana --}}
+                                  <td> </td>
+                                  {{-- semana --}}
+                                  <td> </td>
+                              
+                                  <td>XL</td>
+                                  <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;">{{ number_format($pesonetoxl_semana, 2, ',', '.') }} KGS</td>
+                                  
+                                  {{-- npk --}}
+                                  <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "XL" && $semana_mod == $semana)
+                                      @if ($type_mod == "npk")
+                                        {{ $retorno }}
+                                      @else
+                                        <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                        <input
+                                          id="retorno"
+                                          type="number" 
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="retorno"
+                                        >
+                                      @endif
+                                      @php
+                                        $retorno_netoxl_semana = $retorno;
+                                      @endphp
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->where('semana',$semana)->count() > 0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{ number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->where('semana',$semana)->first()->retorno, 2, ',', '.') }} USD
+                                        </p>
+                                        @php
+                                          $retorno_netoxl_semana = $informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->where('semana',$semana)->first()->retorno;
+                                        @endphp
+                                      @else
+                                        {{ number_format(($retornoxl_semana - ($margenxl_semana + $costosxl_semana)), 2, ',', '.') }} USD <br>
+                                        @php
+                                          $retorno_netoxl_semana = $retornoxl_semana - ($margenxl_semana + $costosxl_semana);
+                                        @endphp
+                                      @endif
+                                    @endif
+                                    @php
+                                      $retorno_netoxl += $retorno_netoxl_semana;
+                                    @endphp
+                                   
+                                  </td>
+
+                                  {{-- retorno --}}
+                                  <td>
+                                    @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "XL" && $semana_mod == $semana)
+                                      @if ($type_mod == "retorno")
+                                        {{ $npk }}
+                                      @else
+                                        <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                        <input
+                                          id="npk"
+                                          type="number"
+                                          step="0.01"
+                                          class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                          wire:model.live="npk"
+                                        >
+                                      @endif
+                                    @else
+                                      @if ($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', 'XL')->where('semana',$semana)->count() > 0)
+                                        <p class="text-red-500 font-bold whitespace-nowrap">
+                                          {{ number_format($informe_edit->modificaciones->where('categoria', 'DENTRO DE NORMA')->where('variedad', $variedad)->where('calibre', 'XL')->where('semana',$semana)->first()->npk, 2, ',', '.') }} USD/kg
+                                        </p>
+                                      @else
+                                        @if ($pesonetoxl_semana)
+                                          <p class="whitespace-nowrap">
+                                            {{ number_format(($retornoxl_semana - ($margenxl_semana + $costosxl_semana)) / $pesonetoxl_semana, 2, ',', '.') }} USD/kg
+                                          </p>
+                                        @else
+                                          0 USD/kg
+                                        @endif
+                                      @endif
+                                    @endif
+
+                                    
+                                  </td>
+
+                                </tr>
+                              
+                                @php
+                                  $calibrecount += 1;
+                                @endphp
+                              @endif
+                            
+                            @endif
+                            
+                            @if ($pesoneto5j_semana+$pesoneto4j_semana+$pesoneto3j_semana+$pesoneto2j_semana+$pesonetoj_semana+$pesonetoxl_semana>0)
+                              
+                              <tr>
+                                <td></td>
+                                <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
+                                <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
+                                <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">Total {{ $semana }}:</td>
+                                <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
+                                <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
+                                <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">
+                                  {{ number_format($pesoneto5j_semana + $pesoneto4j_semana + $pesoneto3j_semana + $pesoneto2j_semana + $pesonetoj_semana + $pesonetoxl_semana, 2, ',', '.') }} KGS
+                                </td>
+                                
+                                <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">
+                                  {{ number_format($retorno_neto5j_semana + $retorno_neto4j_semana + $retorno_neto3j_semana + $retorno_neto2j_semana + $retorno_netoj_semana + $retorno_netoxl_semana, 2, ',', '.') }} USD
+                                </td>
+                                <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">
+                                  {{ number_format(
+                                    ($retorno_neto5j_semana + $retorno_neto4j_semana + $retorno_neto3j_semana + $retorno_neto2j_semana + $retorno_netoj_semana + $retorno_netoxl_semana)
+                                    /
+                                    ($pesoneto5j_semana + $pesoneto4j_semana + $pesoneto3j_semana + $pesoneto2j_semana + $pesonetoj_semana + $pesonetoxl_semana),
+                                    2, ',', '.'
+                                  ) }} USD/KG
+                                </td>
+                              </tr>
+                            
+                            @endif 
+                            @php
+                              $variedadcount+=1;
+                              $semanacounter+=1;
+                            @endphp
+                          @endif
+                        @endforeach
+            
+                      @if ($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl>0)
+
+                        <tr>
+                          <td></td>
+                          <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; text-align: center;">
+                            Total {{$variedad}}:
+                          </td>
+                          
+                          <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
+                          <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
+                          <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
+                          <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
+                          <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; ">{{number_format($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl,2,',','.')}} KGS</td>
+                         
+                          <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl),2,',','.')}} USD
+                          
+                          
+                          </td>
+                        
+                          <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl)/($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
+                          
+                        </tr>
+                        @php
+                             $totalcount+=($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl);
+                        @endphp
+                      @endif
+
+                    @endforeach
+                  
+                  @if ($pesonetototal>0)
+                    <tr style="background-color: #ddd;">
+                          
+                      
+                    
+                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;" colspan="4" >Total Dentro de Norma</td>
+                      
+                      
+                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
+                    
+                      
+                      
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($pesonetototal,1,',','.')}} KGS</td>
+                      
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalcount,2,',','.')}} USD 
+                    
+                      </td>
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalcount/$pesonetototal,2,',','.')}} usd/kg </td>
+                      
+                    </tr>
+                  @endif
+          
+                  @php
+                    $totaldentrodenorma=($totalcount);
+                  @endphp
+                    
+          
+                </tbody>
+              @else
+                <tbody>
+                  <tr style="background-color: #ddd;">
+                          
+                      <td> DENTRO DE NORMA </td>
+                  
+                  
+                    <td></td>
+                    <td></td>
+                    <td ></td>
+                    <td></td>
+                    <td ></td>
+                    <td>
+                    </td>
+                    <td>
+          
+                    </td>
+                    
+                  </tr>
+                  @php
+                    $variedadcount=1;
+                    $cantidadtotal=0;
+                    $pesonetototal=0;
+                    $retornototal=0;
+                    
+                    $totalretorno5j=0;
+                    $totalretorno4j=0;
+                      $totalretorno3j=0;
+                      $totalretorno2j=0;
+                      $totalretornoj=0;
+                      $totalretornoxl=0;
+
+                      $totalmargen5j=0;
+                      $totalmargen4j=0;
+                      $totalmargen3j=0;
+                      $totalmargen2j=0;
+                      $totalmargenj=0;
+                      $totalmargenxl=0;
+
+                      $totalcostopacking=0;
+                      $globaltotalmateriales=0;
+
+                      $totalpesonetol=0;
+          
+                      $globaltotalotroscostos=0;
+                      $totalcount=0;
+
+                      $totalcostos5j=0;
+                      $totalcostos4j=0;
+                      $totalcostos3j=0;
+                      $totalcostos2j=0;
+                      $totalcostosj=0;
+                      $totalcostosxl=0;
+                      
+                  @endphp
+                  @foreach ($unique_variedades as $variedad)
+                    <tr style="background-color: white;">
+      
+
+
+                      <td> </td>
+                    
+                      <td> {{$variedad}} </td>
+                  
+                    
+                    
+                    
+                  
+                      </td>
+                      <td>
+          
+                      </td>
+                      <td>
+          
+                      </td>
+                      
+                    </tr>
+                    @php
+                      $calibrecount=1;
+                      
+                      
+                      $cantidad5j=0;
+                      $cantidad4j=0;
+                      $cantidad3j=0;
+                      $cantidad2j=0;
+                      $cantidadj=0;
+                      $cantidadxl=0;
+                      
+                      $pesoneto5j=0;
+                      $pesoneto4j=0;
+                      $pesoneto3j=0;
+                      $pesoneto2j=0;
+                      $pesonetoj=0;
+                      $pesonetoxl=0;
+                      $pesonetol=0;
+          
+                      
+                      $retorno5j=0;
+                      $retorno4j=0;
+                      $retorno3j=0;
+                      $retorno2j=0;
+                      $retornoj=0;
+                      $retornoxl=0;
+
+                      $retorno_neto5j=0;
+                      $retorno_neto4j=0;
+                      $retorno_neto3j=0;
+                      $retorno_neto2j=0;
+                      $retorno_netoj=0;
+                      $retorno_netoxl=0;
+
+                      $margen5j=0;
+                      $margen4j=0;
+                      $margen3j=0;
+                      $margen2j=0;
+                      $margenj=0;
+                      $margenxl=0;
+          
+                      $costopacking=0;
+          
+                      $totalmateriales4j=0;
+                      $totalmateriales3j=0;
+                      $totalmateriales2j=0;
+                      $totalmaterialesj=0;
+                      $totalmaterialesxl=0;
+
+                      $costos5j=0;
+                      $costos4j=0;
+                      $costos3j=0;
+                      $costos2j=0;
+                      $costosj=0;
+                      $costosxl=0;
+          
+                      $otroscostos=0;
+                      $totalotroscostos=0;
+                      
+                      
+                      $masatotal=0;
+          
+                    @endphp
+          
+                    @foreach ($masas->where('tipo','EXPORTACIÓN') as $masa)
+                      
+                      @php      
+                                $tarifafinal=0;
+                                if (!IS_NULL($masa->fob)) {
+                                            if ($masa->fob->tarifas->count()>0) {
+                                                $tarifafinal=$masa->fob->tarifas->reverse()->first()->tarifa_fc;
+                                            }
+                                }
+                                        
+                      @endphp 
+                                        @if (($masa->calibre_real=='5J') && $masa->variedad==$variedad)
+                                            @php
+                                              $cantidad5j+=floatval($masa->cantidad);
+                                              $pesoneto5j+=floatval($masa->peso_prorrateado);
+                                            
+                                              
+                  
+                                            
+                                              
+                                              if (!IS_NULL($masa->fob)) {
+                                                  $retorno5j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                  $totalretorno5j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                  $margen5j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                  $totalmargen5j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                }
+                                              $cantidadtotal+=floatval($masa->cantidad);
+                                              $pesonetototal+=floatval($masa->peso_prorrateado);
+                  
+                                                  $costos4j+=floatval($masa->costo);
+                                                  $totalcostos4j+=floatval($masa->costo);
+                                                  
+                                      
+                                            @endphp	
+                                        @endif
+                        @if (($masa->calibre_real=='4J') && $masa->variedad==$variedad)
+                            @php
+                              $cantidad4j+=floatval($masa->cantidad);
+                              $pesoneto4j+=floatval($masa->peso_prorrateado);
+                            
+                              
+
+                            
+                              
+                              if (!IS_NULL($masa->fob)) {
+                                  $retorno4j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                  $totalretorno4j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                  $margen4j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                  $totalmargen4j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                }
+                              $cantidadtotal+=floatval($masa->cantidad);
+                              $pesonetototal+=floatval($masa->peso_prorrateado);
+
+                                  $costos4j+=floatval($masa->costo);
+                                  $totalcostos4j+=floatval($masa->costo);
+                                  
+                      
+                            @endphp	
+                        @endif
+                        @if (($masa->calibre_real=='3J') && $masa->variedad==$variedad)
+                            @php
+                              $cantidad3j+=$masa->cantidad;
+                              $pesoneto3j+=floatval($masa->peso_prorrateado);
+                          
+
+                              $costos3j+=floatval($masa->costo);
+                              $totalcostos3j+=floatval($masa->costo);
+
+                              if (!IS_NULL($masa->fob)) {
+                                //dd($masa->fob);
+                                                  $retorno3j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                  $totalretorno3j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                  $margen3j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                  $totalmargen3j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                }
+                              $cantidadtotal+=$masa->cantidad;
+                              $pesonetototal+=floatval($masa->peso_prorrateado);
+
+                                  
+
+                            @endphp	
+                        @endif
+                        @if (($masa->calibre_real=='2J') && $masa->variedad==$variedad)
+                            @php
+                              $cantidad2j+=$masa->cantidad;
+                              $pesoneto2j+=floatval($masa->peso_prorrateado);
+                            
+
+                              $costos2j+=floatval($masa->costo);
+                              $totalcostos2j+=floatval($masa->costo);
+
+                              if (!IS_NULL($masa->fob)) {
+                                              $retorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                              $totalretorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                              $margen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                              $totalmargen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                }
+                              $cantidadtotal+=$masa->cantidad;
+                              $pesonetototal+=floatval($masa->peso_prorrateado);
+
+                            
+
+                            @endphp	
+                        @endif
+                        @if (($masa->calibre_real=='J') && $masa->variedad==$variedad)
+                            @php
+                              $cantidadj+=$masa->cantidad;
+                                $pesonetoj+=floatval($masa->peso_prorrateado);
+                              
+
+                                $costosj+=floatval($masa->costo);
+                                $totalcostosj+=floatval($masa->costo);
+
+                                if (!IS_NULL($masa->fob)) {
+                                                  $retornoj+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                  $totalretornoj+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                                  $margenj+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                  $totalmargenj+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                }
+                                $cantidadtotal+=$masa->cantidad;
+                                $pesonetototal+=floatval($masa->peso_prorrateado);
+
+                            
+
+                            @endphp	
+                        @endif
+                        @if (($masa->calibre_real=='XL') && $masa->variedad==$variedad)
+                            @php
+                              $cantidadxl+=$masa->cantidad;
+                              $pesonetoxl+=floatval($masa->peso_prorrateado);
+                            
+                              $costosxl+=floatval($masa->costo);
+                              $totalcostosxl+=floatval($masa->costo);
+
+                              if (!IS_NULL($masa->fob)) {
+                                              $retornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                              $totalretornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
+                                              $margenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                              $totalmargenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                }
+                              $cantidadtotal+=$masa->cantidad;
+                              $pesonetototal+=floatval($masa->peso_prorrateado);
+
+
+                            @endphp	
+                        @endif
+                        @if (($masa->calibre_real=='L') && $masa->variedad==$variedad)
+                            @php
+                            
+                              $pesonetol+=floatval($masa->peso_prorrateado);
+                              $totalpesonetol+=floatval($masa->peso_prorrateado);
+                              
+                            @endphp	
+                        @endif
+                        
+                        @if ($masa->calibre_real=='4J' || $masa->calibre_real=='3J'|| $masa->calibre_real=='2J' || $masa->calibre_real=='J' || $masa->calibre_real=='XL' || $masa->calibre_real=='L')
+                              @php
+                                    $masatotal+=$masa->peso_prorrateado;
+                              @endphp
+                        @endif
+                      
+                    @endforeach
+          
+
+                
+
+          
+                    @if ($cantidad5j+$cantidad4j+$cantidad3j+$cantidad2j+$cantidadj+$cantidadxl>0)
+                      
+                      @if ($pesoneto5j>0)
+                        <tr>
+                          <td> </td>
+                          <td> </td>
+                      
+                          <td>5J</td>
+                          <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd; white-space: nowrap; " >{{number_format($pesoneto5j,2,',','.')}} KGS</td>
+                          
+                      
+						  <td style="white-space: nowrap;" >
+                              @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "5J" && $semana_mod == "no")
+                                @if ($type_mod=="npk")
+                                  {{$retorno}}
+                                @else
+                                  <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                  <input
+                                      id="retorno"
+                                      type="number" 
+                                      step="0.01"
+                                      class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                      wire:model.live="retorno"
+                                  >
+                                @endif
+                                @php
+                                    $retorno_neto5j=($retorno);
+                                @endphp
+                              @else
+                      
+                                @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','5J')->where('semana','no')->count()>0)
+                                  <p class="text-red-500 font-bold whitespace-nowrap">
+                                    {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','5J')->where('semana','no')->first()->retorno, 2, ',', '.') }} USD
+                                  </p>
+                                    @php
+                                        $retorno_neto5j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','5J')->where('semana','no')->first()->retorno;
+                                    @endphp
+                                @else
+                                  {{ number_format(($retorno5j - ($margen5j + $costos5j)), 2, ',', '.') }} USD <br>
+                                  @php
+                                      $retorno_neto5j=($retorno5j - ($margen5j + $costos5j));
+                                  @endphp
+                                @endif
+                      
+                              @endif
+                      
+                      
+                          </td>
+						  <td style="white-space: nowrap;" >
+                              @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "5J" && $semana_mod == "no")
+                                @if ($type_mod=="retorno")
+                                  {{$npk}}
+                                @else
+                                  <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                  <input
+                                      id="npk"
+                                      type="number"
+                                      step="0.01"
+                                      class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                      wire:model.live="npk"
+                                  >
+                                @endif
+                      
+                              @else
+                                @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','5J')->where('semana','no')->count()>0)
+                                  <p class="text-red-500 font-bold whitespace-nowrap">
+                                    {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','5J')->where('semana','no')->first()->npk, 2, ',', '.') }} USD/kg
+                                  </p>
+                      
+                                @else
+                                  @if ($pesoneto5j)
+                                      <p class="whitespace-nowrap">
+                                        {{ number_format(($retorno5j - ($margen5j + $costos5j)) / $pesoneto5j, 2, ',', '.') }} USD/kg
+                                      </p>
+                                  @else
+                                      0 USD/kg
+                                  @endif
+                                @endif
+                      
+                              @endif
+                      
+                      
+                          </td>
+                      
+                          
+                        </tr>
+                        @php
+                          $calibrecount+=1;
+                        @endphp
+                      @endif
+                      @if ($pesoneto4j>0)
+                        <tr>
+                          <td> </td>
+                          <td> </td>
+                          
+                          
+                          
+                          
+                          <td>4J</td>
+                          <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd; white-space: nowrap;" >{{number_format($pesoneto4j,2,',','.')}} KGS</td>
+                          
+						  <td style="white-space: nowrap;" >
+                            @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "4J" && $semana_mod == "no")
+                              @if ($type_mod=="npk")
+                                {{$retorno}}
+                              @else
+                                <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                <input
+                                    id="retorno"
+                                    type="number" 
+                                    step="0.01"
+                                    class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                    wire:model.live="retorno"
+                                >
+                              @endif
+                              @php
+                                  $retorno_neto4j=($retorno);
+                              @endphp
+                            @else
+                              @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->where('semana','no')->count()>0)
+                                <p class="text-red-500 font-bold whitespace-nowrap">
+                                  {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->where('semana','no')->first()->retorno, 2, ',', '.') }} USD
+                                </p>
+                                  @php
+                                      $retorno_neto4j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->where('semana','no')->first()->retorno;
+                                  @endphp
+                              @else
                                 {{ number_format(($retorno4j - ($margen4j + $costos4j)), 2, ',', '.') }} USD <br>
                                 @php
                                     $retorno_neto4j=($retorno4j - ($margen4j + $costos4j));
                                 @endphp
+                              @endif
                             @endif
-					  </td>
-					  
-					  <td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
-						@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->count()>0)
-								{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->first()->retorno/$pesoneto4j, 2, ',', '.') }} USD
-								
-						@elseif ($pesoneto4j)
-							{{ number_format(($retorno4j - ($margen4j + $costos4j))/$pesoneto4j, 2, ',', '.') }} USD <br>
-							
-						@endif
-					  </td>
-					  
-					</tr>
-					@php
-					  $calibrecount+=1;
-					@endphp
-				  @endif
-				  @if ($pesoneto3j>0)
-					<tr>
-					  <td> </td>
-					  <td> </td>
-					
-					  
-					  
-					  <td>3J</td>
-					  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto3j,0,',','.')}} KG</td>
-					 
-					  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >
-							@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->count()>0)
-								{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno, 2, ',', '.') }} USD
-								@php
-									$retorno_neto3j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno;
-								@endphp
-							@elseif ($pesoneto3j)
-								{{ number_format(($retorno3j - ($margen3j + $costos3j)), 2, ',', '.') }} USD <br>
-								@php
-									$retorno_neto3j=($retorno3j - ($margen3j + $costos3j));
-								@endphp
-							@endif
-					</td>
-					
-					<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
-						@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->count()>0)
-								{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->first()->retorno/$pesoneto3j, 2, ',', '.') }} USD
-								
-						@elseif ($pesoneto3j)
-							{{ number_format(($retorno3j - ($margen3j + $costos3j))/$pesoneto3j, 2, ',', '.') }} USD <br>
-							
-						@endif
-					</td>
+                          
+                            
+                          </td>
+						  <td style="white-space: nowrap;" >
+                            @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "4J" && $semana_mod == "no")
+                              @if ($type_mod=="retorno")
+                                {{$npk}}
+                              @else
+                                <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                <input
+                                    id="npk"
+                                    type="number"
+                                    step="0.01"
+                                    class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                    wire:model.live="npk"
+                                >
+                              @endif
+                            @else
+                              @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->where('semana','no')->count()>0)
+                                <p class="text-red-500 font-bold whitespace-nowrap">
+                                  {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','4J')->where('semana','no')->first()->npk, 2, ',', '.') }} USD/kg
+                                </p>
+                              @else
+                                @if ($pesoneto4j)
+                                    <p class="whitespace-nowrap">
+                                      {{ number_format(($retorno4j - ($margen4j + $costos4j)) / $pesoneto4j, 2, ',', '.') }} USD/kg
+                                    </p>
+                                @else
+                                    0 USD/kg
+                                @endif
+                              @endif
+                            @endif
+                          
+                          </td>
+                         
+                        </tr>
+                        @php
+                          $calibrecount+=1;
+                        @endphp
+                      @endif
+                      @if ($pesoneto3j>0)
+                        <tr>
+                          <td> </td>
+                          <td> </td>
+                        
+                          
+                          
+                          <td>3J</td>
+                          <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd; white-space: nowrap;" >{{number_format($pesoneto3j,2,',','.')}} KGS</td>
+                          
+                          <td>
+                            @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "3J" && $semana_mod == "no")
+                              @if ($type_mod=="npk")
+                                {{$retorno}}
+                              @else
+                                <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                <input
+                                    id="retorno"
+                                    type="number" 
+                                    step="0.01"
+                                    class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                    wire:model.live="retorno"
+                                >
+                              @endif
+                              @php
+                                  $retorno_neto3j=($retorno);
+                              @endphp
+                            @else
+                              @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->where('semana','no')->count()>0)
+                                <p class="text-red-500 font-bold whitespace-nowrap">
+                                  {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->where('semana','no')->first()->retorno, 2, ',', '.') }} USD
+                                </p>
+                                  @php
+                                      $retorno_neto3j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->where('semana','no')->first()->retorno;
+                                  @endphp
+                              @else
+                                {{ number_format(($retorno3j - ($margen3j + $costos3j)), 2, ',', '.') }} USD <br>
+                                @php
+                                    $retorno_neto3j=($retorno3j - ($margen3j + $costos3j));
+                                @endphp
+                              @endif
+                            @endif
 
-					  
-					</tr>
-					@php
-					  $calibrecount+=1;
-					@endphp
-				  @endif
-				  @if ($pesoneto2j>0)
-					<tr>
-					  <td> </td>
-					  <td> </td>
-					
-					  
-					  
-					  <td>2J</td>
-					  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >{{number_format($pesoneto2j,0,',','.')}} KG</td>
-					 
-					  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >
-								@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->count()>0)
-									{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno, 2, ',', '.') }} USD
-									@php
-										$retorno_neto2j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno;
-									@endphp
-								@elseif ($pesoneto2j)
-									{{ number_format(($retorno2j - ($margen2j + $costos2j)), 2, ',', '.') }} USD <br>
-									@php
-										$retorno_neto2j=($retorno2j - ($margen2j + $costos2j));
-									@endphp
-								@endif
-						</td>
-						
-						<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
-							@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->count()>0)
-									{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->first()->retorno/$pesoneto2j, 2, ',', '.') }} USD
-									
-							@elseif ($pesoneto2j)
-								{{ number_format(($retorno2j - ($margen2j + $costos2j))/$pesoneto2j, 2, ',', '.') }} USD <br>
-								
-							@endif
-						</td>
+                            
+                          </td>
+                          <td>
+                            @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "3J" && $semana_mod == "no")
+                              @if ($type_mod=="retorno")
+                                {{$npk}}
+                              @else
+                                <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                <input
+                                    id="npk"
+                                    type="number"
+                                    step="0.01"
+                                    class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                    wire:model.live="npk"
+                                >
+                              @endif
+                            @else
+                              @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->where('semana','no')->count()>0)
+                                <p class="text-red-500 font-bold whitespace-nowrap">
+                                  {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','3J')->where('semana','no')->first()->npk, 2, ',', '.') }} USD/kg
+                                </p>
+                              @else
+                                @if ($pesoneto3j)
+                                    <p class="whitespace-nowrap">
+                                      {{ number_format(($retorno3j - ($margen3j + $costos3j)) / $pesoneto3j, 2, ',', '.') }} USD/kg
+                                    </p>
+                                @else
+                                    0 USD/kg
+                                @endif
+                              @endif
+                            @endif
 
-					  
-					</tr>
-					@php
-					  $calibrecount+=1;
-					@endphp
-				  @endif
-				  @if ($pesonetoj>0)
-					<tr>
-					  <td> </td>
-					  <td> </td>
-					  
-					  
-					  
-					  
-					  <td>J</td>
-					  <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;" >{{number_format($pesonetoj,0,',','.')}} KG</td>
-					 
-					  	<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >
-								@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->count()>0)
-									{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno, 2, ',', '.') }} USD
-									@php
-										$retorno_netoj=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno;
-									@endphp
-								@elseif ($pesonetoj)
-									{{ number_format(($retornoj - ($margenj + $costosj)), 2, ',', '.') }} USD <br>
-									@php
-										$retorno_netoj=($retornoj - ($margenj + $costosj));
-									@endphp
-								@endif
-						</td>
-						
-						<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
-							@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->count()>0)
-									{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->first()->retorno/$pesonetoj, 2, ',', '.') }} USD
-									
-							@elseif ($pesonetoj)
-								{{ number_format(($retornoj - ($margenj + $costosj))/$pesonetoj, 2, ',', '.') }} USD <br>
-								
-							@endif
-						</td>
-
-		
-					  
-					</tr>
-					@php
-					  $calibrecount+=1;
-					@endphp
-				  @endif
-				  @if ($pesonetoxl>0)
-					<tr>
-					  <td> </td>
-					  <td> </td>
-					  
-					  
-					  
-					  
-					  <td>XL</td>
-					  <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd; " >{{number_format($pesonetoxl,0,',','.')}} KG</td>
-					
-					  	<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;" >
-								@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->count()>0)
-									{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno, 2, ',', '.') }} USD
-									@php
-										$retorno_netoxl=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno;
-									@endphp
-								@elseif ($pesonetoxl)
-									{{ number_format(($retornoxl - ($margenxl + $costosxl)), 2, ',', '.') }} USD <br>
-									@php
-										$retorno_netoxl=($retornoxl - ($margenxl + $costosxl));
-									@endphp
-								@endif
-						</td>
-						
-						<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd;">
-							@if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->count()>0)
-									{{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->first()->retorno/$pesonetoxl, 2, ',', '.') }} USD
-									
-							@elseif ($pesonetoxl)
-								{{ number_format(($retornoxl - ($margenxl + $costosxl))/$pesonetoxl, 2, ',', '.') }} USD <br>
-								
-							@endif
-						</td>
-
-					  
-					</tr>
-					@php
-					  $calibrecount+=1;
-					@endphp
-				  @endif
-				@endif
-				
-				@if ($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl>0)
-				  
-				  <tr>
-					<td></td>
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">TOTAL {{$variedad}}</td>
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
-					<td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;font-weight: bold;">{{number_format($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl,2,',','.')}} KG</td>
-					
-					<td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd; font-weight: bold;" >{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl),2,',','.')}} USD 
-					
-					
-				  </td>
-					<td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd; font-weight: bold;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl)/($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD</td>
-					
-				  </tr>
-				@endif
-				  @php
-					$totalcount+=($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl);
-					$variedadcount+=1;
-				  @endphp
-				
-	  
-			  @endforeach
-			
-			  @if ($pesonetototal>0)
-				<tr style="background-color: #ddd;">
-					  
-				  
-				
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">TOTAL DENTRO DE NORMA</td>
-				  
-				  
-					<td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
-				
-				  
-				  
-				  <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
-				  <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd;font-weight: bold;" >{{number_format($pesonetototal,1,',','.')}} KG</td>
-				
-				  
-				  <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd;  font-weight: bold;">{{number_format($totalcount,2,',','.')}} USD 
-				
-				  </td>
-				  <td style="text-align:right; padding-right:20px;border-left: 1px solid #ddd; font-weight: bold;">{{number_format($totalcount/$pesonetototal,2,',','.')}} USD </td>
-				  
-				</tr>
-			  @endif
-	  
-			  @php
-				$totaldentrodenorma=($totalcount);
-			  @endphp
-				
-	  
-			</tbody>
-		</table>
+                          </td>
+                          
+                            
+                        </tr>
+                        @php
+                          $calibrecount+=1;
+                        @endphp
+                      @endif
+                      @if ($pesoneto2j>0)
+                        <tr>
+                          <td> </td>
+                          <td> </td>
+                        
+                          
+                          
+                          <td>2J</td>
+                          <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd; white-space: nowrap;" >{{number_format($pesoneto2j,2,',','.')}} KGS</td>
+                         
+                          
+                          <td>
+                            @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "2J" && $semana_mod == "no")
+                              @if ($type_mod=="npk")
+                                {{$retorno}}
+                              @else
+                                <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                <input
+                                    id="retorno"
+                                    type="number" 
+                                    step="0.01"
+                                    class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                    wire:model.live="retorno"
+                                >
+                              @endif
+                              @php
+                                  $retorno_neto2j=($retorno);
+                              @endphp
+                            @else
+                              @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->where('semana','no')->count()>0)
+                                <p class="text-red-500 font-bold whitespace-nowrap">
+                                  {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->where('semana','no')->first()->retorno, 2, ',', '.') }} USD
+                                </p>
+                                  @php
+                                      $retorno_neto2j=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->where('semana','no')->first()->retorno;
+                                  @endphp
+                              @else
+                                {{ number_format(($retorno2j - ($margen2j + $costos2j)), 2, ',', '.') }} USD <br>
+                                @php
+                                    $retorno_neto2j=($retorno2j - ($margen2j + $costos2j));
+                                @endphp
+                              @endif
+                            @endif
+                          
+                            
+                          </td>
+                          <td>
+                            @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "2J" && $semana_mod == "no")
+                              @if ($type_mod=="retorno")
+                                {{$npk}}
+                              @else
+                                <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                <input
+                                    id="npk"
+                                    type="number"
+                                    step="0.01"
+                                    class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                    wire:model.live="npk"
+                                >
+                              @endif
+                            @else
+                              @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->where('semana','no')->count()>0)
+                                <p class="text-red-500 font-bold whitespace-nowrap">
+                                  {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','2J')->where('semana','no')->first()->npk, 2, ',', '.') }} USD/kg
+                                </p>
+                              @else
+                                @if ($pesoneto2j)
+                                    <p class="whitespace-nowrap">
+                                      {{ number_format(($retorno2j - ($margen2j + $costos2j)) / $pesoneto2j, 2, ',', '.') }} USD/kg
+                                    </p>
+                                @else
+                                    0 USD/kg
+                                @endif
+                              @endif
+                            @endif
+                          
+                          </td>
+                          
+                        </tr>
+                        @php
+                          $calibrecount+=1;
+                        @endphp
+                      @endif
+                      @if ($pesonetoj>0)
+                        <tr>
+                          <td> </td>
+                          <td> </td>
+                          
+                          
+                          
+                          
+                          <td>J</td>
+                          <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd; white-space: nowrap;" >{{number_format($pesonetoj,2,',','.')}} KGS</td>
+                         
+                          
+                          <td>
+                            @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "J" && $semana_mod == "no")
+                              @if ($type_mod=="npk")
+                                {{$retorno}}
+                              @else
+                                <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                <input
+                                    id="retorno"
+                                    type="number" 
+                                    step="0.01"
+                                    class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                    wire:model.live="retorno"
+                                >
+                              @endif
+                              @php
+                                  $retorno_netoj=($retorno);
+                              @endphp
+                            @else
+                              @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->where('semana','no')->count()>0)
+                                <p class="text-red-500 font-bold whitespace-nowrap">
+                                  {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->where('semana','no')->first()->retorno, 2, ',', '.') }} USD
+                                </p>
+                                  @php
+                                      $retorno_netoj=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->where('semana','no')->first()->retorno;
+                                  @endphp
+                              @else
+                                {{ number_format(($retornoj - ($margenj + $costosj)), 2, ',', '.') }} USD <br>
+                                @php
+                                    $retorno_netoj=($retornoj - ($margenj + $costosj));
+                                @endphp
+                              @endif
+                            @endif
+                          
+                          </td>
+                          <td>
+                            @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "J" && $semana_mod == "no")
+                              @if ($type_mod=="retorno")
+                                {{$npk}}
+                              @else
+                                <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                <input
+                                    id="npk"
+                                    type="number"
+                                    step="0.01"
+                                    class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                    wire:model.live="npk"
+                                >
+                              @endif
+                            @else
+                              @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->where('semana','no')->count()>0)
+                                <p class="text-red-500 font-bold whitespace-nowrap">
+                                  {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','J')->where('semana','no')->first()->npk, 2, ',', '.') }} USD/kg
+                                </p>
+                              @else
+                                @if ($pesonetoj)
+                                    <p class="whitespace-nowrap">
+                                      {{ number_format(($retornoj - ($margenj + $costosj)) / $pesonetoj, 2, ',', '.') }} USD/kg
+                                    </p>
+                                @else
+                                    0 USD/kg
+                                @endif
+                              @endif
+                            @endif
+                          
+                            
+                          </td>
+                         
+                          
+                        </tr>
+                        @php
+                          $calibrecount+=1;
+                        @endphp
+                      @endif
+                      @if ($pesonetoxl>0)
+                        <tr>
+                          <td> </td>
+                          <td> </td>
+                          
+                          
+                          
+                          
+                          <td>XL</td>
+                          <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd; white-space: nowrap;" >{{number_format($pesonetoxl,2,',','.')}} KGS</td>
+                          
+                          <td>
+                            @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "XL" && $semana_mod == "no")
+                              @if ($type_mod=="npk")
+                                {{$retorno}}
+                              @else
+                                <label for="retorno" class="hidden text-sm font-medium text-gray-700">Retorno</label>
+                                <input
+                                    id="retorno"
+                                    type="number" 
+                                    step="0.01"
+                                    class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                    wire:model.live="retorno"
+                                >
+                              @endif
+                              @php
+                                  $retorno_netoxl=($retorno);
+                              @endphp
+                            @else
+                              @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->where('semana','no')->count()>0)
+                                <p class="text-red-500 font-bold whitespace-nowrap">
+                                  {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->where('semana','no')->first()->retorno, 2, ',', '.') }} USD
+                                </p>
+                                  @php
+                                      $retorno_netoxl=$informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->where('semana','no')->first()->retorno;
+                                  @endphp
+                              @else
+                                {{ number_format(($retornoxl - ($margenxl + $costosxl)), 2, ',', '.') }} USD <br>
+                                @php
+                                    $retorno_netoxl=($retornoxl - ($margenxl + $costosxl));
+                                @endphp
+                              @endif
+                            @endif
+                          
+                          </td>
+                          <td>
+                            @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "XL" && $semana_mod == "no")
+                              @if ($type_mod=="retorno")
+                                {{$npk}}
+                              @else
+                                <label for="npk" class="hidden text-sm font-medium text-gray-700">NPK</label>
+                                <input
+                                    id="npk"
+                                    type="number"
+                                    step="0.01"
+                                    class="w-32 shadow-sm border-2 border-gray-300 bg-white h-10 px-2 rounded-lg focus:outline-none"
+                                    wire:model.live="npk"
+                                >
+                              @endif
+                            @else
+                              @if ($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->where('semana','no')->count()>0)
+                                <p class="text-red-500 font-bold whitespace-nowrap">
+                                  {{number_format($informe_edit->modificaciones->where('categoria','DENTRO DE NORMA')->where('variedad',$variedad)->where('calibre','XL')->where('semana','no')->first()->npk, 2, ',', '.') }} USD/kg
+                                </p>
+                              @else
+                                @if ($pesonetoxl)
+                                    <p class="whitespace-nowrap">
+                                      {{ number_format(($retornoxl - ($margenxl + $costosxl)) / $pesonetoxl, 2, ',', '.') }} USD/kg
+                                    </p>
+                                @else
+                                    0 USD/kg
+                                @endif
+                              @endif
+                            @endif
+                          
+                          
+                          </td>
+                          
+                          
+                          
+                        </tr>
+                        @php
+                          $calibrecount+=1;
+                        @endphp
+                      @endif
+                    @endif
+                    
+                    @if ($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl>0)
+                      
+                      <tr>
+                        <td></td>
+                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">Total {{$variedad}}</td>
+                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
+                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; ">{{number_format($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl,2,',','.')}} KGS</td>
+                        
+                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl),2,',','.')}} USD
+                        
+                        
+                      </td>
+                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl)/($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
+                        
+                      </tr>
+                    @endif 
+                      @php
+                        $totalcount+=($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl);
+                        $variedadcount+=1;
+                      @endphp
+                    
+          
+                  @endforeach
+                
+                  @if ($pesonetototal>0)
+                    <tr style="background-color: #ddd;">
+                          
+                      
+                    
+                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">Total Dentro de Norma</td>
+                      
+                      
+                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
+                    
+                      
+                      
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($pesonetototal,1,',','.')}} KGS</td>
+                      
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalcount,2,',','.')}} USD 
+                    
+                      </td>
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalcount/$pesonetototal,2,',','.')}} usd/kg </td>
+                      
+                    </tr>
+                  @endif
+          
+                  @php
+                    $totaldentrodenorma=($totalcount);
+                  @endphp
+                    
+          
+                </tbody>
+              @endif
+            </table>
 
 		<div class="page-break"></div>
 

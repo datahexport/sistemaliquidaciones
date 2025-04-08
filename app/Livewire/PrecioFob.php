@@ -74,10 +74,12 @@ class PrecioFob extends Component
         $unique_variedades = $fobsall->pluck('n_variedad')
             ->map(fn($v) => trim($v))
             ->unique()
-            ->sort(function ($a, $b) {
-                return strnatcasecmp($a, $b); // orden natural, sin distinguir mayúsculas
-            })
+            ->sortBy(function ($item) {
+                // Si es COMERCIAL (en mayúsculas), le damos un valor alto para que quede al final
+                return strtoupper($item) === 'COMERCIAL' ? 'zzz' : $item;
+            }, SORT_NATURAL | SORT_FLAG_CASE)
             ->values();
+    
         //    dd($unique_variedades);
         $unique_semanas = $detalle_liquidacions->pluck('semana')
             ->unique()

@@ -3154,8 +3154,15 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
     @endphp
 
         @if ($vista=="grafico")
-            
-          <div class="flex flex-col mb-2">
+        <div class="flex items-center justify-center bg-gray-100 p-6">
+          <h1 class="text-3xl font-extrabold text-center text-gray-800">
+            Seleccione una variedad para gestionar NPKs
+          </h1>
+        </div>
+        
+
+        
+          <div class="hidden flex flex-col mb-2">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">

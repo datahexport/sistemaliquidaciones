@@ -83,6 +83,7 @@ class TemporadaShow extends Component
                 'CRITERIO',
                 'CALIBRE_REAL',
                 'SEMANA',
+                'VARIEDAD',
                 'PRODUCTOR_RECEP_FACTURACION',
                 'costo_proceso',
                 'costo_materiales',
@@ -105,7 +106,21 @@ class TemporadaShow extends Component
             ->where('temporada_id', $this->temporada->id)
             ->filter($this->filters)
             ->get();
-
+        
+        $variedades=Variedad::where('temporada_id',$temporada->id)->get();
+        if(IS_NULL($variedades)){
+            foreach($masastotal as $masa){
+                $variedad=Variedad::where('name',$masa->VARIEDAD)->where('temporada_id',$temporada->id)->first();
+                if ($variedad){
+    
+                }else{
+                    if($masa->VARIEDAD){
+                        Variedad::create(['name'=>$masa->VARIEDAD,
+                                        'temporada_id'=>$temporada->id]);
+                    }
+                }
+           }
+        }
 
         $unique_productores = $masastotal->pluck('PRODUCTOR_RECEP_FACTURACION')->unique();
         foreach($unique_productores as $item){
@@ -514,7 +529,7 @@ class TemporadaShow extends Component
         
         $masas=Balancemasa::where('temporada_id',$temporada->id)->where('productor_recep',$razonsocial->name)->get();
 
-        $masas = Proceso::selectRaw('CALIBRE_REAL as calibre_real, VARIEDAD as variedad, CANT as cantidad, PESO_PRORRATEADO as peso_prorrateado, costo , costo_proceso , CRITERIO , NORMA, fob_id , TIPO as tipo')
+        $masas = Proceso::selectRaw('CALIBRE_REAL as calibre_real, VARIEDAD as variedad, CANT as cantidad, PESO_PRORRATEADO as peso_prorrateado, costo , costo_proceso , CRITERIO , NORMA, fob_id , TIPO as tipo, SEMANA as semana')
             ->where('temporada_id', $temporada->id)
             ->where('PRODUCTOR_RECEP_FACTURACION', 'like', '%' . $razonsocial->name . '%')
             ->with('fob.tarifas') // Esto carga la relación fob con sus tarifas
@@ -532,6 +547,7 @@ class TemporadaShow extends Component
 
         $unique_calibres = $masas->pluck('calibre')->unique()->sort();
         $unique_semanas = $masas->pluck('semana')->unique()->sort();
+        //dd($unique_semanas);
         $unique_categorias = $masas->pluck('tipo')->unique()->sort();
         $fobs = Fob::where('temporada_id',$temporada->id)->get();
         
@@ -542,7 +558,7 @@ class TemporadaShow extends Component
 
         $exportacions=Exportacion::where('temporada_id',$temporada->id)->get();
         $materialestotal=Material::where('temporada_id',$temporada->id)->get();
-        
+        $categoria_mod=null;
 
         $variedades = Variedad::whereIn('name', $unique_variedades)->get();
         $graficos=[];
@@ -566,7 +582,8 @@ class TemporadaShow extends Component
                                                     'materials'=>$materials,
                                                     'exportacions'=>$exportacions,
                                                     'materialestotal'=>$materialestotal,
-                                                    'informe_edit'=>$informe]);
+                                                    'informe_edit'=>$informe,
+                                                    'categoria_mod'=>$categoria_mod]);
 
         $pdfContent = $pdf->output();
         $filename = 'Liquidacion '.$razonsocial->name.'.pdf';
