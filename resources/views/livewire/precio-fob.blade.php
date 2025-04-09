@@ -759,19 +759,22 @@
                                                         $redondeado=0;
                                                         $retornoesperado=0;
                                                     @endphp
+
                                                     @foreach ($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad) && $item->semana === $semana) as $item)
-                                                        @php
-                                                            $conteonpk+=$item->tarifas->first()->suma_fob;
-                                                            $conteonpk2+=$item->tarifas->reverse()->first()->suma_fob;
-                                                            $conteofob+=$item->tarifas->first()->suma_fob_fc;
-                                                            $conteofob2+=$item->tarifas->reverse()->first()->suma_fob_fc;
-                                                            $conteocostos_semana+=$item->tarifas->first()->costo_proceso+$item->tarifas->first()->costo_materiales+$item->tarifas->first()->otros_costos;
-                                                        
-                                                            $resultado =floatval(($item->tarifas->reverse()->first()->tarifa) * $item->tarifas->reverse()->first()->cant_kg) - floatval(($item->tarifas->first()->tarifa) * $item->tarifas->first()->cant_kg);
-                                                            // Redondea hacia abajo a la décima más cercana
-                                                            $redondeado += round($resultado, 1);
+                                                        @if ($item->parifas)
+                                                            @php
+                                                                $conteonpk+=$item->tarifas->first()->suma_fob;
+                                                                $conteonpk2+=$item->tarifas->reverse()->first()->suma_fob;
+                                                                $conteofob+=$item->tarifas->first()->suma_fob_fc;
+                                                                $conteofob2+=$item->tarifas->reverse()->first()->suma_fob_fc;
+                                                                $conteocostos_semana+=$item->tarifas->first()->costo_proceso+$item->tarifas->first()->costo_materiales+$item->tarifas->first()->otros_costos;
                                                             
-                                                        @endphp
+                                                                $resultado =floatval(($item->tarifas->reverse()->first()->tarifa) * $item->tarifas->reverse()->first()->cant_kg) - floatval(($item->tarifas->first()->tarifa) * $item->tarifas->first()->cant_kg);
+                                                                // Redondea hacia abajo a la décima más cercana
+                                                                $redondeado += round($resultado, 1);
+                                                                
+                                                            @endphp
+                                                        @endif
                                                     @endforeach
                                                     <td class="px-5 py-2 border-b border-gray-200 text-sm text-center">
                                                         <p class="text-gray-900 whitespace-no-wrap"> 
