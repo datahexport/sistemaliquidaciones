@@ -761,7 +761,7 @@
                                                     @endphp
 
                                                     @foreach ($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad) && $item->semana === $semana) as $item)
-                                                        @if ($item->parifas)
+                                                        @if ($item->tarifas->count()>0)
                                                             @php
                                                                 $conteonpk+=$item->tarifas->first()->suma_fob;
                                                                 $conteonpk2+=$item->tarifas->reverse()->first()->suma_fob;
@@ -859,7 +859,7 @@
                                             $retornoesperado=0;
                                         @endphp
                                         @foreach ($fobs->filter(fn($item) => trim($item->n_variedad) === trim($variedad)) as $item)
-                                            @if ($item->tarifas)
+                                            @if ($item->tarifas->count()>0)
                                                 @php
                                                     $conteonpk+=$item->tarifas->first()->suma_fob;
                                                     $conteonpk2+=$item->tarifas->reverse()->first()->suma_fob;
