@@ -412,7 +412,9 @@
                                                 </th>
 
                                             @endif
-                                            
+                                            @php
+                                                 $ncount+=1;
+                                            @endphp
                                         @endforeach
                                     @endif
                     
