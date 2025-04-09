@@ -824,6 +824,7 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                       <div class="-my-2 overflow-x-auto">
                         <div class="py-2 align-middle inline-block min-w-full">
                           <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-yellow-400">
                                   <tr>
@@ -1157,6 +1158,7 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                   
                                 </tbody>
                             </table>
+                            
                           </div>
                         </div>
                       </div>

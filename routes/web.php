@@ -104,27 +104,27 @@ Route::get('temporada/{temporada}/otrosgastos',[TemporadaController::class,'otro
 
 Route::get('temporada/{temporada}/finanzas',[TemporadaController::class,'finanzas'])->middleware('auth')->name('temporada.finanzas');
 
-Route::get('temporada/{temporada}/anticipos',[TemporadaController::class,'anticipos'])->name('temporada.anticipos');
+Route::get('temporada/{temporada}/anticipos',[TemporadaController::class,'anticipos'])->middleware('auth')->name('temporada.anticipos');
 
-Route::get('temporada/{temporada}/mercados',[TemporadaController::class,'gastos'])->name('temporada.gastos');
+Route::get('temporada/{temporada}/mercados',[TemporadaController::class,'gastos'])->middleware('auth')->name('temporada.gastos');
 
-Route::get('temporada/{temporada}/precios',[TemporadaController::class,'precio_original'])->name('temporada.precio.original');
+Route::get('temporada/{temporada}/precios',[TemporadaController::class,'precio_original'])->middleware('auth')->name('temporada.precio.original');
 
-Route::get('temporada/{temporada}/fobdespacho',[TemporadaController::class,'fobdespacho'])->name('temporada.fobdespacho');
+Route::get('temporada/{temporada}/fobdespacho',[TemporadaController::class,'fobdespacho'])->middleware('auth')->name('temporada.fobdespacho');
 
 Route::get('temporada/{temporada}/costoajustado',[TemporadaController::class,'precioajustado'])->name('temporada.precioajustado');
 
-Route::post('data/import',[TemporadaController::class,'importdata'])->name('temporada.importData');
+Route::post('data/import',[TemporadaController::class,'importdata'])->middleware('auth')->name('temporada.importData');
 
-Route::post('costos/packing/import',[TemporadaController::class,'importCostosPacking'])->name('temporada.importCostosPacking');
+Route::post('costos/packing/import',[TemporadaController::class,'importCostosPacking'])->middleware('auth')->name('temporada.importCostosPacking');
 
-Route::post('costos/materiales/import',[TemporadaController::class,'importMateriales'])->name('temporada.importMateriales');
+Route::post('costos/materiales/import',[TemporadaController::class,'importMateriales'])->middleware('auth')->name('temporada.importMateriales');
 
-Route::post('costos/ventacomercial/import',[TemporadaController::class,'importVentacomercial'])->name('temporada.importVentacomercial');
+Route::post('costos/ventacomercial/import',[TemporadaController::class,'importVentacomercial'])->middleware('auth')->name('temporada.importVentacomercial');
 
-Route::post('costos/productores/import',[TemporadaController::class,'importProductores'])->name('temporada.importProductores');
+Route::post('costos/productores/import',[TemporadaController::class,'importProductores'])->middleware('auth')->name('temporada.importProductores');
 
-Route::get('edit/{exportacion}/{temporada}',[TemporadaController::class,'exportacionedit'])->name('exportacion.edit');
+Route::get('edit/{exportacion}/{temporada}',[TemporadaController::class,'exportacionedit'])->middleware('auth')->name('exportacion.edit');
 
 Route::get('edit/gasto/{gasto}/{temporada}',[TemporadaController::class,'gastoedit'])->name('gasto.edit');
 
@@ -172,7 +172,7 @@ Route::get('updatefob2/{temporada}',[TemporadaController::class,'fobupdate2'])->
 
 Route::get('updatefob3/{temporada}',[TemporadaController::class,'fobupdate3'])->name('preciofob.refresh3');
 
-Route::get('updatefobdespacho/{temporada}',[TemporadaController::class,'fobupdatedespacho'])->name('fobupdatedespacho.refresh');
+Route::get('updatefobdespacho/{temporada}',[TemporadaController::class,'fobupdatedespacho'])->middleware('auth')->name('fobupdatedespacho.refresh');
 
 Route::get('download/{informe}.pdf', [RazonController::class,'downloadpdf'])->name('informe.download');
 

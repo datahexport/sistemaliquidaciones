@@ -387,18 +387,32 @@
                                     <th colspan="3" class="px-5 py-3 border-gray-200 text-center text-xs font-semibold text-gray-600 uppercase whitespace-no-wrap fixed-column">
                                     
                                     </th>
-                                    <th colspan="1" class="px-5 py-1 border-r-2 border-gray-200 bg-red-500 text-white text-center text-xs font-semibold uppercase whitespace-no-wrap">
-                                    PRECIO ORIGINAL
-                                    </th>
+                                    
                                     @if ($temporada->precios->count()>0)
+                                        @php
+                                            $ncount=0;
+                                        @endphp
+                                        
                                         @foreach ($temporada->precios as $precio)
-                                            <th colspan="7" class="px-5 py-1 border-r-2 border-gray-200 bg-red-500 text-white text-xs font-semibold uppercase whitespace-no-wrap">
-                                                
-                                                {{$precio->name}}
-                                                <button wire:click='subprecio_destroy({{$precio->id}})' class="text-font  text-white font-bold ml-10">
-                                                    (Eliminar)
-                                                </button>
-                                            </th>
+                                            @if ($ncount==0)
+                                                <th colspan="5" class="px-5 py-1 border-r-2 border-gray-200 bg-red-500 text-white text-xs font-semibold uppercase whitespace-no-wrap">
+                                                    
+                                                    {{$precio->name}}
+                                                    <button wire:click='subprecio_destroy({{$precio->id}})' class="text-font  text-white font-bold ml-10">
+                                                        (Eliminar)
+                                                    </button>
+                                                </th>
+                                            @else
+                                                <th colspan="7" class="px-5 py-1 border-r-2 border-gray-200 bg-red-500 text-white text-xs font-semibold uppercase whitespace-no-wrap">
+                                                    
+                                                    {{$precio->name}}
+                                                    <button wire:click='subprecio_destroy({{$precio->id}})' class="text-font  text-white font-bold ml-10">
+                                                        (Eliminar)
+                                                    </button>
+                                                </th>
+
+                                            @endif
+                                            
                                         @endforeach
                                     @endif
                     
