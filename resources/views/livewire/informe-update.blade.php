@@ -4200,7 +4200,7 @@
                   <tbody>
                       <tr style="background-color: #ddd;">
                               
-                          <td> MERCADO INTERNO </td>
+                          <td class="whitespace-nowrap" > MERCADO INTERNO </td>
                       
                       
                           <td> </td>
@@ -4210,18 +4210,16 @@
                         
                         <td></td>
                         <td></td>
+
+                        
                         <td></td>
-                        <td ></td>
                         <td></td>
-                        <td ></td>
-                        <td>
-                        </td>
-                        <td>
-              
-                        </td>
-                        <td>
-              
-                        </td>
+                        <td></td>
+                        <td></td>
+                        
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         
                       </tr>
                       @php
