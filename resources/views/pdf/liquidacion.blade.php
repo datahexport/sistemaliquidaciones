@@ -1769,15 +1769,15 @@
                     @if ($cantidad5j+$cantidad4j+$cantidad3j+$cantidad2j+$cantidadj+$cantidadxl>0)
                       
                       @if ($pesoneto5j>0)
-                        <tr>
-                          <td> </td>
-                          <td> </td>
-                      
-                          <td>5J</td>
-                          <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd; white-space: nowrap; " >{{number_format($pesoneto5j,2,',','.')}} KGS</td>
+                            <tr>
+                              <td> </td>
+                              <td> </td>
                           
-                      
-                  <td style="white-space: nowrap;" >
+                              <td>5J</td>
+                              <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd; white-space: nowrap; " >{{number_format($pesoneto5j,2,',','.')}} KGS</td>
+                              
+                          
+                              <td style="white-space: nowrap; text-align:right; padding-right:40px;" >
                                   @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "5J" && $semana_mod == "no")
                                     @if ($type_mod=="npk")
                                       {{$retorno}}
@@ -1812,7 +1812,7 @@
                           
                           
                               </td>
-                              <td style="white-space: nowrap;" >
+                              <td style="white-space: nowrap; text-align:right; padding-right:20px;" >
                                   @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "5J" && $semana_mod == "no")
                                     @if ($type_mod=="retorno")
                                       {{$npk}}
@@ -1849,9 +1849,9 @@
                             @php
                               $calibrecount+=1;
                             @endphp
-                          @endif
-                          @if ($pesoneto4j>0)
-                            <tr>
+                      @endif
+                      @if ($pesoneto4j>0)
+                        <tr>
                               <td> </td>
                               <td> </td>
                               
@@ -1861,7 +1861,7 @@
                               <td>4J</td>
                               <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd; white-space: nowrap;" >{{number_format($pesoneto4j,2,',','.')}} KGS</td>
                               
-                            <td style="white-space: nowrap;" >
+                          <td style="white-space: nowrap; text-align:right; padding-right:40px;" >
                                 @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "4J" && $semana_mod == "no")
                                   @if ($type_mod=="npk")
                                     {{$retorno}}
@@ -1893,8 +1893,8 @@
                                 @endif
                               
                                 
-                              </td>
-                          <td style="white-space: nowrap;" >
+                          </td>
+                          <td style="white-space: nowrap; text-align:right; padding-right:20px;" >
                             @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "4J" && $semana_mod == "no")
                               @if ($type_mod=="retorno")
                                 {{$npk}}
@@ -1937,7 +1937,7 @@
                           <td>3J</td>
                           <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd; white-space: nowrap;" >{{number_format($pesoneto3j,2,',','.')}} KGS</td>
                           
-                          <td>
+                          <td style="white-space: nowrap; text-align:right; padding-right:40px;">
                             @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "3J" && $semana_mod == "no")
                               @if ($type_mod=="npk")
                                 {{$retorno}}
@@ -1970,7 +1970,7 @@
 
                             
                           </td>
-                          <td>
+                          <td style="white-space: nowrap; text-align:right; padding-right:20px;">
                             @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "3J" && $semana_mod == "no")
                               @if ($type_mod=="retorno")
                                 {{$npk}}
@@ -2015,7 +2015,7 @@
                           <td style="text-align:right; padding-right:30px;border-left: 1px solid #ddd; white-space: nowrap;" >{{number_format($pesoneto2j,2,',','.')}} KGS</td>
                          
                           
-                          <td>
+                          <td style="white-space: nowrap; text-align:right; padding-right:40px;">
                             @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "2J" && $semana_mod == "no")
                               @if ($type_mod=="npk")
                                 {{$retorno}}
@@ -2048,7 +2048,7 @@
                           
                             
                           </td>
-                          <td>
+                          <td style="white-space: nowrap; text-align:right; padding-right:20px;">
                             @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "2J" && $semana_mod == "no")
                               @if ($type_mod=="retorno")
                                 {{$npk}}
@@ -2093,7 +2093,7 @@
                           <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd; white-space: nowrap;" >{{number_format($pesonetoj,2,',','.')}} KGS</td>
                          
                           
-                          <td>
+                          <td style="white-space: nowrap; text-align:right; padding-right:40px;">
                             @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "J" && $semana_mod == "no")
                               @if ($type_mod=="npk")
                                 {{$retorno}}
@@ -2125,7 +2125,7 @@
                             @endif
                           
                           </td>
-                          <td>
+                          <td style="white-space: nowrap; text-align:right; padding-right:20px;">
                             @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "J" && $semana_mod == "no")
                               @if ($type_mod=="retorno")
                                 {{$npk}}
@@ -2171,7 +2171,7 @@
                           <td>XL</td>
                           <td style="text-align:right; padding-right:30px; border-left: 1px solid #ddd; white-space: nowrap;" >{{number_format($pesonetoxl,2,',','.')}} KGS</td>
                           
-                          <td>
+                          <td style="white-space: nowrap; text-align:right; padding-right:40px;">
                             @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "XL" && $semana_mod == "no")
                               @if ($type_mod=="npk")
                                 {{$retorno}}
@@ -2205,7 +2205,7 @@
                             @endif
                           
                           </td>
-                          <td>
+                          <td style="white-space: nowrap; text-align:right; padding-right:20px;">
                             @if ($categoria_mod == "DENTRO DE NORMA" && $variedad_mod == $variedad && $calibre_mod == "XL" && $semana_mod == "no")
                               @if ($type_mod=="retorno")
                                 {{$npk}}
@@ -2251,11 +2251,11 @@
                         <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"> </td>
                         <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; ">{{number_format($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl,2,',','.')}} KGS</td>
                         
-                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl),2,',','.')}} USD
+                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;white-space: nowrap; text-align:right; padding-right:40px;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl),2,',','.')}} USD
                         
                         
-                      </td>
-                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl)/($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
+                        </td>
+                        <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; white-space: nowrap; text-align:right; padding-right:20px;">{{number_format(($retorno_neto5j+$retorno_neto4j+$retorno_neto3j+$retorno_neto2j+$retorno_netoj+$retorno_netoxl)/($pesoneto5j+$pesoneto4j+$pesoneto3j+$pesoneto2j+$pesonetoj+$pesonetoxl),2,',','.')}} USD/KG</td>
                         
                       </tr>
                     @endif 
@@ -2282,10 +2282,10 @@
                       <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;"></td>
                       <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($pesonetototal,1,',','.')}} KGS</td>
                       
-                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalcount,2,',','.')}} USD 
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; white-space: nowrap; text-align:right; padding-right:40px;">{{number_format($totalcount,2,',','.')}} USD 
                     
                       </td>
-                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold;">{{number_format($totalcount/$pesonetototal,2,',','.')}} usd/kg </td>
+                      <td style="padding-bottom: 4px; margin-top: 10px; font-weight: bold; white-space: nowrap; text-align:right; padding-right:20px;">{{number_format($totalcount/$pesonetototal,2,',','.')}} usd/kg </td>
                       
                     </tr>
                   @endif
