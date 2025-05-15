@@ -7,6 +7,24 @@
       background-color: white; /* o el color que desees para fondo */
       z-index: 10; /* para que quede sobre el contenido */
     }
+    .swal2-confirm, .swal2-cancel {
+      all: unset;
+      padding: 0.5rem 1rem;
+      background-color: #3085d6;
+      color: white;
+      border-radius: 0.375rem;
+      cursor: pointer;
+  }
+
+  .swal2-confirm {
+      background-color: #d33;
+      margin-right: 5px;
+  }
+
+  .swal2-cancel {
+      background-color: #3085d6;
+  }
+
   </style>
   
     @php
@@ -79,6 +97,27 @@
         $n=0
     @endphp
 
+    <div wire:loading wire:target="toggleSemana, set_informe_edit, set_modification, saveOrUpdateModification, retorno, npk, set_informe_oficial, delete_modificacion">
+                              
+        <div class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
+          <div class="max-w-sm w-full sm:rounded-2xl bg-white border-2 border-gray-200 shadow-xl">
+            <div class="w-full">
+              <div class="px-6 my-6 mx-auto">
+                <div class="mb-8">
+                  <div class="flex justify-between items-center">
+                    <h1 class="text-2xl font-extrabold mr-4" wire:loading wire:target="toggleSemana, set_informe_edit, set_modification, saveOrUpdateModification, retorno, npk, set_informe_oficial">Cargando...</h1>
+                    <h1 class="text-2xl font-extrabold mr-4" wire:loading wire:target="delete_modificacion">Eliminando...</h1>
+                    <div><img class="h-10" src="{{asset('image/cargando.gif')}}" alt="Cargando..."></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
     @foreach ($razonsocial->informes->where('temporada_id',$temporada->id)->reverse() as $informe)
 
       @php
@@ -117,25 +156,7 @@
             $name=$razonsocial->name;
       @endphp
 
-      <div wire:loading wire:target="toggleSemana, set_informe_edit, set_modification, saveOrUpdateModification, retorno, npk, set_informe_oficial, delete_modificacion">
-                              
-        <div class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
-          <div class="max-w-sm w-full sm:rounded-2xl bg-white border-2 border-gray-200 shadow-xl">
-            <div class="w-full">
-              <div class="px-6 my-6 mx-auto">
-                <div class="mb-8">
-                  <div class="flex justify-between items-center">
-                    <h1 class="text-2xl font-extrabold mr-4" wire:loading wire:target="toggleSemana, set_informe_edit, set_modification, saveOrUpdateModification, retorno, npk, set_informe_oficial">Cargando...</h1>
-                    <h1 class="text-2xl font-extrabold mr-4" wire:loading wire:target="delete_modificacion">Eliminando...</h1>
-                    <div><img class="h-10" src="{{asset('image/cargando.gif')}}" alt="Cargando..."></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
+      
      
       @foreach ($masastotal->filter(function($item) use ($name) {
                     return trim($item->PRODUCTOR_RECEP_FACTURACION) === trim($name);
@@ -249,40 +270,42 @@
                             class="bg-blue-900 p-1 mr-2 rounded-lg text-xs text-white">
                       Editar
                     </button>
-                    
-                    <button class="bg-red-500 p-1 rounded-lg text-xs text-white"
-                            x-data 
-                            @click="
-                                Swal.fire({
-                                    title: '¿Estás seguro?',
-                                    text: 'Esta acción no se puede deshacer.',
-                                    icon: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonText: 'Sí, eliminar',
-                                    cancelButtonText: 'Cancelar',
-                                    confirmButtonColor: '#d33',
-                                    cancelButtonColor: '#3085d6'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        $wire.eliminarInforme({{ $informe->id }});
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: 'Eliminado',
-                                            text: 'El informe ha sido eliminado.',
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        });
-                                    }
-                                })
-                            ">
-                      Eliminar
-                    </button>
+                    @if($razonsocial->informes->where('temporada_id',$temporada->id)->count()>1) 
+                      <button class="bg-red-500 p-1 rounded-lg text-xs text-white"
+                              x-data 
+                              @click="
+                                  Swal.fire({
+                                      title: '¿Estás seguro?',
+                                      text: 'Esta acción no se puede deshacer.',
+                                      icon: 'warning',
+                                      showCancelButton: true,
+                                      confirmButtonText: 'Sí, eliminar',
+                                      cancelButtonText: 'Cancelar',
+                                      confirmButtonColor: '#d33',
+                                      cancelButtonColor: '#3085d6'
+                                  }).then((result) => {
+                                      if (result.isConfirmed) {
+                                          $wire.eliminarInforme({{ $informe->id }});
+                                          Swal.fire({
+                                              icon: 'success',
+                                              title: 'Eliminado',
+                                              text: 'El informe ha sido eliminado.',
+                                              showConfirmButton: false,
+                                              timer: 1500,
+                                              
+                                          });
+                                      }
+                                  })
+                              ">
+                        Eliminar
+                      </button>
+                    @endif
                   @endif
                 </div>
                 <div x-show="isEditing" class="flex space-x-2 mt-2">
                   <button @click="
                       isEditing = false; 
-                      $wire.guardarCambios({ id: {{ $informe->id }}, total_liquidado: totalLiquidado, diferencia_tipodecambio: diferenciaTipoCambio }).then(() => {
+                      $wire.guardarCambios({ id: {{ $informe->id }}, diferencia_tipodecambio: diferenciaTipoCambio }).then(() => {
                           Swal.fire({
                               icon: 'success',
                               title: 'Actualizado',
@@ -315,12 +338,7 @@
              
                <!-- Campos en modo edición -->
                <div x-show="isEditing" class="space-x-2 my-auto flex ml-6">
-                 <div>
-                   <label class="text-sm font-medium text-gray-700 dark:text-gray-200">Total Liquidado:</label>
-                   <input x-model="totalLiquidado" 
-                          type="text" 
-                          class="border rounded-md px-2 py-1" />
-                 </div>
+                
                  <div>
                    <label class="text-sm font-medium text-gray-700 dark:text-gray-200">Diferencia Tipo de Cambio:</label>
                    <input x-model="diferenciaTipoCambio" 
@@ -338,22 +356,24 @@
                     </h2>
                     <h2 class="text-md font-medium text-gray-700 dark:text-gray-200">Liquidado<br>Informe</h2>
                   </div>
-                 <div class="flex flex-col items-center mx-5 space-y-1 mr-2">
-                   <h2 class="text-lg font-medium text-gray-700 sm:text-2xl dark:text-gray-200">
+               
+                  
                     @if (!IS_NULL($informe->total_liquidado))
-                      {{  number_format(floatval($informe->total_liquidado)+$aliquidar,2,',','.') }}
-                    @else
-                      -
+                      <div class="flex flex-col items-center mx-5 space-y-1 mr-2">
+                        <h2 class="text-lg font-medium text-gray-700 sm:text-2xl dark:text-gray-200">
+                          {{  number_format(floatval($informe->total_liquidado)+$aliquidar,2,',','.') }}
+                          </h2>
+                        <h2 class="text-md font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap text-center">Liquidado<br>
+                          Con Modificaciones
+                        </h2>
+                      </div>
                     @endif
                     
-                   </h2>
-                   <h2 class="text-md font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap text-center">Liquidado<br>
-                    Agregar Modificaciones
-                  </h2>
-                 </div>
+                 
+                   
                  <div class="flex flex-col items-center mx-5 space-y-1 mr-2">
                    <h2 class="text-lg font-medium text-gray-700 sm:text-2xl dark:text-gray-200">
-                     {{ $informe->diferencia_tipodecambio ?? '-' }}
+                     {{ number_format($informe->diferencia_tipodecambio,0,',','.') ?? '-' }}
                    </h2>
                    <h2 class="text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
                      Dif. Tipo de Cambio

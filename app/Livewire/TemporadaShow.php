@@ -277,26 +277,24 @@ class TemporadaShow extends Component
         
 
         $facturas = Factura::selectRaw('productor,
-        tipo_docto,
-        AVG(tc) as promedio_tc,
-        SUM(monto_neto) as total_monto_neto,
-        SUM(iva) as total_iva,
-        SUM(total) as total_total,
-        SUM(neto) as total_neto,
-        SUM(iva2) as total_iva2,
-        SUM(total2) as total_total2,
-        SUM(saldo) as total_saldo,
-        SUM(cantidad) as total_cantidad,
-        SUM(usd_kg) as total_usd_kg,
-        SUM(dolares) as total_dolares,
-        SUM(valor) as total_valor,
-        SUM(total_liq) as total_total_liq,
-        SUM(anticipo) as total_anticipo,
-        SUM(a_pagar) as total_a_pagar,
-        SUM(nd) as total_nd
-    ')
-    ->groupBy('productor', 'tipo_docto')
-    ->get();
+                                            tipo_docto,
+                                            tc as promedio_tc,
+                                            monto_neto as total_monto_neto,
+                                            iva as total_iva,
+                                            total as total_total,
+                                            neto as total_neto,
+                                            iva2 as total_iva2,
+                                            total2 as total_total2,
+                                            saldo as total_saldo,
+                                            cantidad as total_cantidad,
+                                            usd_kg as total_usd_kg,
+                                            dolares as total_dolares,
+                                            valor as total_valor,
+                                            total_liq as total_total_liq,
+                                            anticipo as total_anticipo,
+                                            a_pagar as total_a_pagar,
+                                            nd as total_nd')->get();
+
 
 
 
@@ -444,7 +442,8 @@ class TemporadaShow extends Component
 
                  
             }
-                
+             
+            
             if($this->difcambio=$razonExiste->informes->where('temporada_id',$this->temporada->id)->reverse()->first()->total_liquidado){
                 $this->total_liquidado=$razonExiste->informes->where('temporada_id',$this->temporada->id)->reverse()->first()->total_liquidado;
             }else{
@@ -467,9 +466,10 @@ class TemporadaShow extends Component
                                     'razonsocial_id'=>$razonExiste->id]);
         }
 
-        $razonExiste->informes->where('temporada_id',$this->temporada->id)->reverse()->first()->update(['diferencia_tipodecambio'=>$this->difcambio,
-                                                                                                'total_liquidado'=>$this->total_liquidado]);
-
+        foreach($razonExiste->informes->where('temporada_id',$this->temporada->id) as $informe){
+            $informe->update(['diferencia_tipodecambio'=>$this->difcambio]);
+        }
+       
         $this->informedit=null;
         $this->difcambio=null;
         //$this->reset(['informedit','difcambio']);
@@ -604,12 +604,13 @@ class TemporadaShow extends Component
 
         $masas=Balancemasa::where('temporada_id',$temporada->id)->where('productor_recep',$razonsocial->name)->get();
 
-        $masas = Proceso::selectRaw('CALIBRE_REAL as calibre_real, VARIEDAD as variedad, CANT as cantidad, PESO_PRORRATEADO as peso_prorrateado, costo , costo_proceso , CRITERIO , NORMA, fob_id , TIPO as tipo')
+        $masas = Proceso::selectRaw('CALIBRE_REAL as calibre_real, VARIEDAD as variedad, CANT as cantidad, PESO_PRORRATEADO as peso_prorrateado, costo , costo_proceso , CRITERIO , NORMA, fob_id , TIPO as tipo, SEMANA as semana')
             ->where('temporada_id', $temporada->id)
             ->where('PRODUCTOR_RECEP_FACTURACION', 'like', '%' . $razonsocial->name . '%')
             ->with('fob.tarifas') // Esto carga la relación fob con sus tarifas
             ->get();
             
+        $categoria_mod=null;
 
         $unique_variedades = $masas->pluck('variedad')->unique()->sort();
 
@@ -633,6 +634,7 @@ class TemporadaShow extends Component
         $exportacions=Exportacion::where('temporada_id',$temporada->id)->get();
         $materialestotal=Material::where('temporada_id',$temporada->id)->get();
         $facturas=Factura::where('temporada_id',$temporada->id)->where('productor',$razonsocial->name)->get();
+        
         
 
         $variedades = Variedad::whereIn('name', $unique_variedades)->get();
@@ -659,7 +661,8 @@ class TemporadaShow extends Component
                                                     'materialestotal'=>$materialestotal,
                                                     'facturas'=>$facturas,
                                                     'temporada'=>$temporada,
-                                                    'informe_edit'=>$informe]);
+                                                    'informe_edit'=>$informe,
+                                                    'categoria_mod'=>$categoria_mod]);
 
         $pdfContent = $pdf->output();
         $filename = 'Nota '.$razonsocial->name.'.pdf';

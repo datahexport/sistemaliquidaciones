@@ -22,6 +22,15 @@
                                 <strong class="text-xs text-red-600">{{$message}}</strong>
                             @enderror
                         </div>
+
+                        <div class="mb-4">
+                            {!! Form::label('tc', 'Tarifa de cambio:') !!}
+                            {!! Form::text('tc', null , ['class' => 'form-input block w-full mt-1'.($errors->has('tc')?' border-red-600':'')]) !!}
+    
+                            @error('tc')
+                                <strong class="text-xs text-red-600">{{$message}}</strong>
+                            @enderror
+                        </div>
     
                   
 

@@ -3005,13 +3005,10 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                       @endphp
 
                                       <td class="border border-gray-300 px-4 py-2 whitespace-nowrap">
-                                        @if ($informedit==$name)
-                                            <input wire:model.live="total_liquidado" type="text">
-                                        @else
-
+                                       
                                           @if ($razonExiste)
-                                              @if($razonExiste->informes->where('temporada_id',$temporada->id)->reverse()->first()->total_liquidado!=($venta2srazon+$venta3srazon-$costo2srazon-$margenrazon-$gastosrazon))
-                                               <p class="font-bold text-red-500">{{$razonExiste->informes->where('temporada_id',$temporada->id)->reverse()->first()->total_liquidado}} </p> 
+                                              @if($razonExiste->informes->where('temporada_id',$temporada->id)->reverse()->first()->total_liquidado)
+                                               <p class="font-bold text-red-500">{{number_format($razonExiste->informes->where('temporada_id',$temporada->id)->reverse()->first()->total_liquidado+($venta2srazon+$venta3srazon-$costo2srazon-$margenrazon-$gastosrazon))}} </p> 
                                               @endif
                                           @else
                                               
@@ -3019,8 +3016,13 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
 
                                           {{ number_format($venta2srazon+$venta3srazon-$costo2srazon-$margenrazon-$gastosrazon, 2) }}
 
+                                        {{-- comment
+                                        @if ($informedit==$name)
+                                            <input wire:model.live="total_liquidado" type="text">
+                                        @else
+
                                         @endif
-                                      
+                                       --}} 
                                       </td>
                                       
                                       <td class="border border-gray-300 px-4 py-2 whitespace-nowrap">{{ number_format($anticiposrazon, 2) }}</td>

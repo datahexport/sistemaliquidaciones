@@ -26,7 +26,16 @@ class InformeUpdate extends Component
         $this->temporada=$temporada;
         $this->razonsocial=$razonsocial;
 
-        $this->informe_edit=Informe::find($this->razonsocial->informes->where('temporada_id',$temporada->id)->reverse()->first()->id);
+                if ($this->razonsocial->informes->where('temporada_id',$this->temporada->id)->first()) {
+                   $this->informe_edit=Informe::find($this->razonsocial->informes->where('temporada_id',$temporada->id)->reverse()->first()->id);
+                }else{
+                    $informe=Informe::create(['temporada_id'=>$this->temporada->id,
+                                        'razonsocial_id'=>$this->razonsocial->id]);
+                    
+                    $this->informe_edit=$informe;
+                }
+
+        
     }
 
     public function updatedRetorno()
@@ -163,8 +172,7 @@ class InformeUpdate extends Component
         $informe = Informe::find($data['id']);
         if ($informe) {
             //dd($data['total_liquidado']);
-            $informe->update(['total_liquidado'=> $data['total_liquidado'],
-                         'diferencia_tipodecambio' => $data['diferencia_tipodecambio']]);
+            $informe->update(['diferencia_tipodecambio' => $data['diferencia_tipodecambio']]);
            
             $this->dispatch('mostrar-mensaje', ['tipo' => 'success', 'mensaje' => 'El informe ha sido actualizado correctamente.']);
           
@@ -278,8 +286,16 @@ class InformeUpdate extends Component
         }
     
         $informe->delete();
-
-        $this->informe_edit=$this->razonsocial->informes->reverse()->first();
+                if ($this->razonsocial->informes->where('temporada_id',$this->temporada->id)->first()) {
+                   $this->informe_edit=Informe::find($this->razonsocial->informes->where('temporada_id',$this->temporada->id)->reverse()->first()->id);
+                }else{
+                    $informe=Informe::create(['temporada_id'=>$this->temporada->id,
+                                        'razonsocial_id'=>$this->razonsocial->id]);
+                    
+                    $this->informe_edit=$informe;
+                }
+                
+        $this->render();
     
         $this->dispatch('mostrar-mensaje', ['tipo' => 'success', 'mensaje' => 'Informe eliminado correctamente.']);
     }
