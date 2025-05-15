@@ -3035,7 +3035,7 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
 
                                           @if ($razonExiste)
                                               @if($razonExiste->informes->where('temporada_id',$temporada->id)->first())
-                                               <p class="font-bold text-red-500">{{$razonExiste->informes->where('temporada_id',$temporada->id)->reverse()->first()->diferencia_tipodecambio}} </p> 
+                                               <p class="font-bold text-red-500">{{number_format($razonExiste->informes->where('temporada_id',$temporada->id)->reverse()->first()->diferencia_tipodecambio)}} </p> 
                                               @endif
                                           @else
                                               
