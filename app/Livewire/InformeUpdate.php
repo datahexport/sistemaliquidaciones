@@ -209,7 +209,7 @@ class InformeUpdate extends Component
             ->get();
 
         
-        $masas = Proceso::selectRaw('CALIBRE_REAL as calibre_real, VARIEDAD as variedad, CANT as cantidad, PESO_PRORRATEADO as peso_prorrateado, costo, fob_id , TIPO as tipo, SEMANA as semana')
+        $masas = Proceso::selectRaw('CALIBRE_REAL as calibre_real, VARIEDAD as variedad, CANT as cantidad, PESO_PRORRATEADO as peso_prorrateado, costo, fob_id , TIPO as tipo, SEMANA as semana,costo_proceso as costo_proceso, costo_materiales as costo_materiales, otros_costos as otros_costos')
             ->where('temporada_id', $this->temporada->id)
             ->where('PRODUCTOR_RECEP_FACTURACION', 'like', '%' . $this->razonsocial->name . '%')
             ->with('fob.tarifas') // Esto carga la relación fob con sus tarifas

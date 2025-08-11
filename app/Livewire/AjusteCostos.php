@@ -47,7 +47,7 @@ class AjusteCostos extends Component
         $fobs=Ajustecosto::filter($this->filters)->where('temporada_id',$this->temporada->id)->paginate($this->ctd);
         $fobsall=Ajustecosto::filter($this->filters)->where('temporada_id',$this->temporada->id)->get();
 
-        $unique_variedades = $detalle_liquidacions->pluck('Variedad_Real')->unique()->sort();
+        $unique_variedades = $fobsall->pluck('n_variedad')->unique()->sort();
         
         $unique_semanas = $detalle_liquidacions->pluck('semana')
             ->unique()
@@ -168,16 +168,14 @@ class AjusteCostos extends Component
 
         foreach($masas as $masa){
 
-            if($masa->CRITERIO=="COMERCIAL"){
+            if(strtoupper(trim($masa->CRITERIO))=="COMERCIAL"){
                 $masa->update([ 'costo'=>floatval($masa->costo_proceso),
                     ]);
             }else{
                 foreach ($fobsall as $fob){
                         
                             
-                    if ($fob->n_calibre==$masa->CALIBRE_REAL && $fob->n_variedad==$masa->VARIEDAD && $fob->semana==$masa->SEMANA){
-                        
-                    
+                    if (strtoupper(trim($fob->n_calibre))==strtoupper(trim($masa->CALIBRE_REAL)) && strtoupper(trim($fob->n_variedad))==strtoupper(trim($masa->VARIEDAD)) && strtoupper(trim($fob->semana))==strtoupper(trim($masa->SEMANA))){
                             
                         
                             $masa->update([ 'costo'=>$masa->PESO_PRORRATEADO*$fob->tarifa_costo,
@@ -233,31 +231,30 @@ class AjusteCostos extends Component
                             $cajadiferencialcom = 0;
                         
                                 // Iterar sobre los procesos y filtrar los que coincidan con variedad, semana y calibre
-                                foreach ($procesos->where('CALIBRE_REAL', $fob->n_calibre)
-                                                ->where('VARIEDAD', $fob->n_variedad)
-                                                ->where('SEMANA', $fob->semana) as $proceso) {
-                                                    
-                                    
-                                    if ($proceso->PESO_CAJA == "2.2") {
-                                        $sumakg22 += floatval($proceso->PESO_PRORRATEADO);
-                                        $cajadiferencial22 += floatval($proceso->costo_proceso + $proceso->costo_materiales + $proceso->otros_costos);
-                                    
-                                    } elseif ($proceso->PESO_CAJA == "2.5") {
-                                        $sumakg25 += floatval($proceso->PESO_PRORRATEADO);
-                                        $cajadiferencial25 += floatval($proceso->costo_proceso + $proceso->costo_materiales + $proceso->otros_costos);
-                                    
-                                    } elseif ($proceso->PESO_CAJA == "5") {
-                                        $sumakg5 += floatval($proceso->PESO_PRORRATEADO);
-                                        $cajadiferencial5 += floatval($proceso->costo_proceso + $proceso->costo_materiales + $proceso->otros_costos);
-                                    
-                                    } elseif ($proceso->PESO_CAJA == "10") {
-                                        $sumakg10 += floatval($proceso->PESO_PRORRATEADO);
-                                        $cajadiferencial10 += floatval($proceso->costo_proceso + $proceso->costo_materiales + $proceso->otros_costos);
-                                    }
-                                    if ($proceso->CRITERIO == "COMERCIAL") {
-                                        $sumakgcom += floatval($proceso->PESO_PRORRATEADO);
-                                        $cajadiferencialcom += floatval($proceso->costo_proceso + $proceso->costo_materiales + $proceso->otros_costos);
-                                    }
+                                foreach ($procesos as $proceso) {
+                                                        
+                                        if(strtoupper(trim($fob->n_calibre))==strtoupper(trim($proceso->CALIBRE_REAL)) && strtoupper(trim($fob->n_variedad))==strtoupper(trim($proceso->VARIEDAD)) && strtoupper(trim($fob->semana))==strtoupper(trim($proceso->SEMANA))){
+                                            if ($proceso->PESO_CAJA == "2.2" || $proceso->PESO_CAJA == "4.4") {
+                                                $sumakg22 += floatval($proceso->PESO_PRORRATEADO);
+                                                $cajadiferencial22 += floatval($proceso->costo_proceso + $proceso->costo_materiales + $proceso->otros_costos);
+                                            
+                                            } elseif ($proceso->PESO_CAJA == "2.5") {
+                                                $sumakg25 += floatval($proceso->PESO_PRORRATEADO);
+                                                $cajadiferencial25 += floatval($proceso->costo_proceso + $proceso->costo_materiales + $proceso->otros_costos);
+                                            
+                                            } elseif ($proceso->PESO_CAJA == "5") {
+                                                $sumakg5 += floatval($proceso->PESO_PRORRATEADO);
+                                                $cajadiferencial5 += floatval($proceso->costo_proceso + $proceso->costo_materiales + $proceso->otros_costos);
+                                            
+                                            } elseif ($proceso->PESO_CAJA == "10") {
+                                                $sumakg10 += floatval($proceso->PESO_PRORRATEADO);
+                                                $cajadiferencial10 += floatval($proceso->costo_proceso + $proceso->costo_materiales + $proceso->otros_costos);
+                                            }
+                                            if ($proceso->CRITERIO == "COMERCIAL") {
+                                                $sumakgcom += floatval($proceso->PESO_PRORRATEADO);
+                                                $cajadiferencialcom += floatval($proceso->costo_proceso + $proceso->costo_materiales + $proceso->otros_costos);
+                                            }
+                                        }
                                 }
 
 

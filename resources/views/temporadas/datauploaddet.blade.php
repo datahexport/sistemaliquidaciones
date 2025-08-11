@@ -80,8 +80,8 @@
                                                         @if ($temporada->masascuatros->count()>0)
                                                             @foreach ($temporada->masascuatros as $item)
                                                                 @php
-                                                                    $kg_liquid+=$item->PESO_TOTAL;
-                                                                    $ingresos_liq+=$item->LIQ_PRODUCTOR;
+                                                                    $kg_liquid+=floatval($item->PESO_TOTAL);
+                                                                    $ingresos_liq+=floatval($item->LIQ_PRODUCTOR);
                                                                 @endphp
                                                             @endforeach
                                                        @endif

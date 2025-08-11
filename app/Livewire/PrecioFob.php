@@ -69,7 +69,7 @@ class PrecioFob extends Component
                                             ->get();
 
         $fobs=Fob::filter($this->filters)->where('temporada_id',$this->temporada->id)->get();
-        $fobsall=Fob::where('temporada_id',$this->temporada->id)->get();
+        $fobsall=Fob::filter($this->filters)->where('temporada_id',$this->temporada->id)->get();
 
         $unique_variedades = $fobsall->pluck('n_variedad')
             ->map(fn($v) => trim($v))
@@ -81,13 +81,13 @@ class PrecioFob extends Component
             ->values();
     
         //    dd($unique_variedades);
-        $unique_semanas = $detalle_liquidacions->pluck('semana')
+        $unique_semanas = $fobsall->pluck('semana')
             ->unique()
             ->sortBy(function ($semana) {
                 // Las semanas mayores a 25 (segundo semestre) deben ir primero
                 // Les restamos 25 para que queden primero en el orden
                 // Las otras las ordenamos después, sumándoles 52 para que vayan al final
-                return $semana > 25 ? $semana - 25 : $semana + 52;
+                return intval($semana) > 25 ? intval($semana) - 25 : intval($semana) + 52;
             })
             ->values(); // Opcional: para resetear los índices
     
@@ -289,10 +289,10 @@ class PrecioFob extends Component
                     if ($detalle->VARIEDAD == $variedad && $detalle->SEMANA == $semana) {
                      
 
-                        $calibre=$detalle->CALIBRE_REAL;
+                        $calibre=strtoupper(trim($detalle->CALIBRE_REAL));
                         
                         if ($detalle->fob) {
-                        $produccion=$detalle->fob->fob_kilo_salida*floatval($detalle->PESO_PRORRATEADO);
+                            $produccion=$detalle->fob->fob_kilo_salida*floatval($detalle->PESO_PRORRATEADO);
                         } else {
                             $produccion=0;
                         }
@@ -449,7 +449,7 @@ class PrecioFob extends Component
             if ($fob->n_variedad=='COMERCIAL') {
 
                 foreach ($ventasall as $detalle) {
-                    if ($detalle->semana == $fob->semana && $detalle->tipo==$fob->n_calibre) {
+                    if ($detalle->semana == $fob->semana && strtoupper(trim($detalle->tipo))==$fob->n_calibre) {
                         // Determinar si es "Comercial" o "Precalibre"
                         $sumafob += $detalle->venta_usd; // Asumiendo que el valor FOB está en fob_value
                        
@@ -458,7 +458,7 @@ class PrecioFob extends Component
 
               
                 foreach ($procesos_comercial as $masa) {
-                    if($masa->SEMANA==$fob->semana && $masa->TIPO== $fob->n_calibre){
+                    if($masa->SEMANA==$fob->semana && strtoupper(trim($masa->TIPO))== $fob->n_calibre){
                         $sumakg += floatval($masa->PESO_PRORRATEADO);
                     }
                 }
@@ -491,7 +491,7 @@ class PrecioFob extends Component
                 foreach ($procesos as $proceso) {
                     if ($proceso->VARIEDAD == $fob->n_variedad && 
                         $proceso->SEMANA == $fob->semana && 
-                        $proceso->CALIBRE_REAL == $fob->n_calibre) {
+                        strtoupper(trim($proceso->CALIBRE_REAL)) == $fob->n_calibre) {
                         
                         // Sumar el valor FOB y el peso en kg
                         if($proceso->fob){
@@ -622,17 +622,16 @@ class PrecioFob extends Component
     
 
     public function precio_create() {
-        $detalle_liquidacions = Balancemasatres::where('temporada_id', $this->temporada->id)
-            ->select('Variedad_Real', 'semana', 'calibre_real', 'Kilos_prod', 'Fob')
-            ->get();
-
-        $unique_variedades = $detalle_liquidacions->pluck('Variedad_Real')->unique()->sort();
-        $unique_semanas = $detalle_liquidacions->pluck('semana')->unique()->sort();
-
         $detalle_liquidacions2 = Balancemasatres::where('temporada_id', $this->temporada->id)
-            ->select('Variedad_Real', 'semana', 'calibre_real', 'Kilos_prod', 'Fob')
+            ->select('Variedad_Real', 'semana', 'calibre_real', 'kg_liq', 'Fob')
             ->get();
-    
+
+        $unique_variedades = $detalle_liquidacions2->pluck('Variedad_Real')->unique()->sort();
+        $unique_semanas = $detalle_liquidacions2->pluck('semana')->unique()->sort();
+
+        
+        
+                        
         foreach ($unique_variedades as $variedad) {
             foreach ($unique_semanas as $semana) {
                 $peso5J = 0;
@@ -652,111 +651,49 @@ class PrecioFob extends Component
                 $ventaXL = 0;
                 $ventaL = 0;
                 $ventaJUP = 0;
+
+              
     
                 foreach ($detalle_liquidacions2 as $detalle) {
                     if ($detalle->Variedad_Real == $variedad && $detalle->semana == $semana) {
-                        /*
-                        if ($detalle->Calibre=='5J' || $detalle->Calibre=='5JD' || $detalle->Calibre=='5JDD'){
-                                $calibre='5J';
-                                            
-                            if ($detalle->Calibre=='5JD' || $detalle->Calibre=='5JDD'){
-                                $color='Dark';
-                            }else{
-                                $color='Light';
-                            }
-                        }
-                        if ($detalle->Calibre=='4J' || $detalle->Calibre=='4JD' || $detalle->Calibre=='4JDD'){
-                                $calibre='4J';
-                            if ($detalle->Calibre=='4JD' || $detalle->Calibre=='4JDD'){
-                                $color='Dark';
-                            }else{
-                                $color='Light';
-                            }
-                        }
-                        if ($detalle->Calibre=='3J' || $detalle->Calibre=='3JD' || $detalle->Calibre=='3JDD'){
-                                $calibre='3J';
-                            if ($detalle->Calibre=='3JD' || $detalle->Calibre=='3JDD'){
-                                $color='Dark';
-                            }else{
-                            $color='Light';
-                            }
-                        }
-                        if ($detalle->Calibre=='2J' || $detalle->Calibre=='2JD' || $detalle->Calibre=='2JDD'){
-                                $calibre='2J';
-                            if ($detalle->Calibre=='2JD' || $detalle->Calibre=='2JDD'){
-                                    $color='Dark';
-                            
-                            }else{
-                                $color='Light';
-                            }
-                        }
-                        if ($detalle->Calibre=='J' || $detalle->Calibre=='JD' || $detalle->Calibre=='JDD'){
-                                $calibre='J';
-                            if ($detalle->Calibre=='JD' || $detalle->Calibre=='JDD'){
-                                    $color='Dark';
-                            }else{
-                                $color='Light';
-                            }
-                        }
-                        if ($detalle->Calibre=='XL' || $detalle->Calibre=='XLD' || $detalle->Calibre=='XLDD'){
-                                $calibre='XL';
-                            if ($detalle->Calibre=='XLD' || $detalle->Calibre=='XLDD'){
-                                $color='Dark';
-                            }else{
-                                $color='Light';
-                            }
-                        }
-                        if ($detalle->Calibre=='L' || $detalle->Calibre=='LD' || $detalle->Calibre=='LDD'){
-                                $calibre='L';
-                            if ($detalle->Calibre=='LD' || $detalle->Calibre=='LDD'){
-                                $color='Dark';
-                            }else{
-                                $color='Light';
-                            }
-                        }
-                        if ($detalle->Calibre=='JUP' || $detalle->Calibre=='JUPD' || $detalle->Calibre=='JUPDD'){
-                                $calibre='JUP';
-                            if ($detalle->Calibre=='XLD' || $detalle->Calibre=='XLDD'){
-                                $color='Dark';
-                            }else{
-                                $color='Light';
-                            }
-                        }
-                        */
+                      
 
-                        $calibre=$detalle->calibre_real;
+                       $calibre = strtoupper(trim($detalle->calibre_real));
+
+
+                        //dd($calibre);
 
                         switch ($calibre) {
                             case '5J':
-                                $peso5J += $detalle->Kilos_prod;
+                                $peso5J += floatval($detalle->kg_liq);
                                 $venta5J += $detalle->Fob;
                                 break;
                             case '4J':
-                                $peso4J += $detalle->Kilos_prod;
+                                $peso4J += floatval($detalle->kg_liq);
                                 $venta4J += $detalle->Fob;
                                 break;
                             case '3J':
-                                $peso3J += $detalle->Kilos_prod;
+                                $peso3J += floatval($detalle->kg_liq);
                                 $venta3J += $detalle->Fob;
                                 break;
                             case '2J':
-                                $peso2J += $detalle->Kilos_prod;
+                                $peso2J += floatval($detalle->kg_liq);
                                 $venta2J += $detalle->Fob;
                                 break;
                             case 'J':
-                                $pesoJ += $detalle->Kilos_prod;
+                                $pesoJ += floatval($detalle->kg_liq);
                                 $ventaJ += $detalle->Fob;
                                 break;
                             case 'XL':
-                                $pesoXL += $detalle->Kilos_prod;
+                                $pesoXL += floatval($detalle->kg_liq);
                                 $ventaXL += $detalle->Fob;
                                 break;
                             case 'L':
-                                $pesoL += $detalle->Kilos_prod;
+                                $pesoL += floatval($detalle->kg_liq);
                                 $ventaL += $detalle->Fob;
                                 break;
                             case 'JUP':
-                                $pesoJUP += $detalle->Kilos_prod;
+                                $pesoJUP += floatval($detalle->kg_liq);
                                 $ventaJUP += $detalle->Fob;
                                 break;
                         }
@@ -775,12 +712,12 @@ class PrecioFob extends Component
                 ];
     
                 foreach ($calibres as $calibre => $data) {
-                    if ($data['venta'] > 0 || $data['peso']>0) {
+                    if ($data['venta'] != 0 || $data['peso']>0) {
                         $exists = Fob::where('temporada_id', $this->temporada->id)
                             ->where('n_variedad', $variedad)
                             ->where('semana', $semana)
                             ->where('n_calibre', $calibre)
-                            ->exists();
+                            ->first();
     
                         if (!$exists) {
                             
@@ -806,6 +743,19 @@ class PrecioFob extends Component
                                 ]);
                             }
                             
+                        }else{
+                             if ($data['peso']>0) {
+                                $exists->update(['suma_fob'        => floatval($data['venta']),
+                                    'cant_kg'         => floatval($data['peso']),
+                                    'fob_kilo_salida' => floatval($data['venta'] / $data['peso'])
+                                ]);
+                            } else {
+                                $exists->update(['suma_fob'        => floatval($data['venta']),
+                                    'cant_kg'         => floatval($data['peso']),
+                                    'fob_kilo_salida' => 0
+                                ]);
+                            }
+                          
                         }
                     }
                 }
@@ -833,43 +783,30 @@ class PrecioFob extends Component
             $ventaComercial = 0;
             $ventaPrecalibre = 0;
         
-            foreach ($ventasall as $detalle) {
-                if ($detalle->semana == $semana) {
+            foreach ($ventasall->where('semana',$semana) as $detalle) {
                     // Determinar si es "Comercial" o "Precalibre"
-                    $tipo = $detalle->tipo;
-                    
-                    
-        
+                    $tipo = strtoupper(trim($detalle->tipo));
+                 
                     switch ($tipo) {
                         case 'COMERCIAL':
                             $pesoComercial += $detalle->cantidad_kilos;
                             $ventaComercial += $detalle->venta_usd;
+                            break;
                         case 'PRE-CALIBRE':
                             $pesoPrecalibre += $detalle->cantidad_kilos;
                             $ventaPrecalibre += $detalle->venta_usd;
-                          
+                            break;
                     }
-                }
+               
             }
-            /*
-                $masa_comercial=0;
-                $masa_precalibre=0;
-                foreach ($masas as $masa) {
-                    if($masa->SEMANA==$semana && $masa->TIPO=="COMERCIAL"){
-                        $masa_comercial+=$masa->PESO_PRORRATEADO;
-                    }
-                    if($masa->SEMANA==$semana && $masa->TIPO=="PRE-CALIBRE"){
-                        $masa_precalibre+=$masa->PESO_PRORRATEADO;
-                    }
-                }
-            */
+            
             $tipos = [
                 'COMERCIAL'  => ['venta' => $ventaComercial, 'peso' => $pesoComercial],
                 'PRE-CALIBRE' => ['venta' => $ventaPrecalibre, 'peso' => $pesoPrecalibre],
             ];
-        
+           
             foreach ($tipos as $tipo => $data) {
-                if ($data['venta'] > 0) {
+                if ($data['venta'] > 0 || $data['peso']>0) {
                     $exists = Fob::where('temporada_id', $this->temporada->id)
                         ->where('n_variedad', 'COMERCIAL')
                         ->where('semana', $semana)

@@ -2,11 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Exports\PlantillaExport;
 use App\Models\Balancemasatres;
 use App\Models\Temporada;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DespachoSearch extends Component
 {   use WithPagination;
@@ -28,7 +30,7 @@ class DespachoSearch extends Component
     public function render()
     {  ini_set('memory_limit', '512M'); // o '512M' si necesitas más
         $despachos=Balancemasatres::filter($this->filters)->where('temporada_id',$this->temporada->id)->paginate(50);
-        $despachosall=Balancemasatres::select('Kilos_prod','Fob')->filter($this->filters)->where('temporada_id',$this->temporada->id)->get();
+        $despachosall=Balancemasatres::select('kg_liq','Fob')->filter($this->filters)->where('temporada_id',$this->temporada->id)->get();
         $despachosall2=Balancemasatres::select('Folio','semana','Variedad_Real','calibre_real')->where('temporada_id',$this->temporada->id)->get();
 
         $unique_folios = $despachosall2->pluck('Folio')->unique()->sort();
@@ -38,7 +40,7 @@ class DespachoSearch extends Component
                             // Las semanas mayores a 25 (segundo semestre) deben ir primero
                             // Les restamos 25 para que queden primero en el orden
                             // Las otras las ordenamos después, sumándoles 52 para que vayan al final
-                            return $semana > 25 ? $semana - 25 : $semana + 52;
+                            return intval($semana) > 25 ? intval($semana) - 25 : intval($semana) + 52;
                         })
                         ->values(); // Opcional: para resetear los índices
 
@@ -55,5 +57,10 @@ class DespachoSearch extends Component
         
         return redirect()->route('temporada.datauploaddesp',$this->temporada);
         
+    }
+
+     public function exportarBalance4()
+    {
+        return Excel::download(new PlantillaExport($this->temporada->id,'basedespacho'), 'plantilla_base_despachos.xlsx');
     }
 }

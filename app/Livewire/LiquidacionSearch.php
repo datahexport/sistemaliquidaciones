@@ -2,11 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Exports\PlantillaExport;
 use App\Models\Balancemasacuatro;
 use App\Models\Temporada;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LiquidacionSearch extends Component
 {   use WithPagination;
@@ -43,5 +45,11 @@ class LiquidacionSearch extends Component
 
         return view('livewire.liquidacion-search',compact('unique_folios','detalles','detallesall','unique_variedads','unique_semanas','unique_calibres'));
     }
+
+    public function exportarBalance4()
+    {
+        return Excel::download(new PlantillaExport($this->temporada->id,'detalleliquidacion'), 'plantilla_detalle_liquidacion.xlsx');
+    }
+
     
 }

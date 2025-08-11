@@ -37,6 +37,7 @@ class TemporadaShow extends Component
 {   use WithPagination;
     public $familia,$unidad, $fobid, $informedit,$difcambio, $total_liquidado, $preciofob, $item, $descuenta, $categoria, $masaid, $preciomasa, $temporada,$vista,$razonsocial,$type,$precio_usd, $etiqueta, $empresa, $exportacionedit_id, $valor, $ctd=25;
     public $statusMessages = [];
+    public $comisiones = [];
 
     #[Url(history: true)]
     public $filters=[
@@ -74,8 +75,21 @@ class TemporadaShow extends Component
 
 
    
+    public function actualizarComision($id, $value)
+    {
+        $razon = \App\Models\RazonSocial::find($id);
+
+        if ($razon) {
+            $razon->comision = $value;
+            $razon->save();
+
+            session()->flash('comision_status_' . $id, 'Comisión actualizada');
+        }
+    }
+
 
     public function mount(Temporada $temporada, $vista){
+        $this->comisiones = RazonSocial::pluck('comision', 'id')->toArray();
         $this->temporada=$temporada;
         $this->vista=$vista;
         $masastotal=Proceso::select([
@@ -145,8 +159,8 @@ class TemporadaShow extends Component
 
     public function render()
     {   $resumes=Resumen::where('temporada_id',$this->temporada->id)->paginate($this->ctd);
-        $anticipos=Anticipo::filter($this->filters)->where('temporada_id',$this->temporada->id)->orderBy('productor', 'desc')->paginate($this->ctd);
-        $anticiposall=Anticipo::filter($this->filters)->where('temporada_id',$this->temporada->id)->orderBy('productor', 'desc')->get();
+        $anticipos=Anticipo::where('temporada_id',$this->temporada->id)->orderBy('id', 'desc')->paginate($this->ctd);
+        $anticiposall=Anticipo::where('temporada_id',$this->temporada->id)->orderBy('id', 'desc')->get();
         
         $CostosPackings=CostoPacking::filter($this->filters)->where('temporada_id',$this->temporada->id)->paginate($this->ctd);
         
@@ -583,7 +597,8 @@ class TemporadaShow extends Component
                                                     'exportacions'=>$exportacions,
                                                     'materialestotal'=>$materialestotal,
                                                     'informe_edit'=>$informe,
-                                                    'categoria_mod'=>$categoria_mod]);
+                                                    'categoria_mod'=>$categoria_mod,
+                                                    'temporada'=>$temporada]);
 
         $pdfContent = $pdf->output();
         $filename = 'Liquidacion '.$razonsocial->name.'.pdf';

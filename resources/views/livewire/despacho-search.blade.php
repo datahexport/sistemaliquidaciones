@@ -5,8 +5,8 @@
     @endphp
     @foreach ($despachosall as $detalle)
         @php
-            $pesovariedad+=$detalle->Kilos_prod;
-            $ventavariedad+=$detalle->Fob;
+            $pesovariedad+=floatval($detalle->kg_liq);
+            $ventavariedad+=floatval($detalle->Fob);
         @endphp
     @endforeach
     <div class="flex mt-2">
@@ -124,6 +124,11 @@
              
             </select>
           </div>
+           <div class="ml-4"> 
+                Plantilla:<br>
+                <button wire:click="exportarBalance4" class="text-white focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-sm leading-none py-3 px-5 bg-gray-500 rounded hover:bg-gray-600 focus:outline-none">DESCARGAR</button>
+
+              </div>
         
         <div class="ml-auto">
             <a href="{{Route('fobupdatedespacho.refresh',$temporada)}}">

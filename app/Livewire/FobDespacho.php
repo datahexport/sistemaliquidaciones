@@ -79,12 +79,12 @@ class FobDespacho extends Component
                                 ->where('calibre_color', $calibre)
                                 ->exists();
                             
-                                $exists2 = Balancemasacuatro::where('temporada_id', $this->temporada->id)
+                            $exists2 = Balancemasacuatro::where('temporada_id', $this->temporada->id)
                                 ->where('N_Pallet', $folio)
                                 ->where('Variedad', $variedad)
                                 ->where('Calibre_y_Color', $calibre)
                                 ->where(function($query) {
-                                    $query->where('VENTA_USD', '!=', 0)
+                                    $query->where('LIQ_CLIENTE', '!=', 0)
                                           ->orWhere('PESO_TOTAL', '>', 0);
                                 })
                                 ->exists();
@@ -162,22 +162,17 @@ class FobDespacho extends Component
     
 
     public function precio_create() {
-        $detalle_liquidacions = Balancemasacuatro::where('temporada_id', $this->temporada->id)
-            ->select('Variedad', 'N_Pallet', 'CALIBRE', 'PESO_TOTAL', 'LIQ_PRODUCTOR')
-            ->get();
 
-        $unique_variedades = $detalle_liquidacions->pluck('Variedad')->unique()->sort();
-
-        $unique_folios = ModelsFobdespacho::WhereNull('suma_fob')->take(1000)->get();
+        $unique_fobs = ModelsFobdespacho::WhereNull('suma_fob')->take(1000)->get();
         
         $detalle_liquidacions2 = Balancemasacuatro::where('temporada_id', $this->temporada->id)
-            ->select('Variedad', 'N_Pallet', 'Calibre_y_Color', 'PESO_TOTAL', 'LIQ_PRODUCTOR','VENTA_USD','COMISION','FLETE','OTROS_GASTOS','Apoyo_Liquidaciones')
+            ->select('Variedad', 'N_Pallet', 'Calibre_y_Color', 'PESO_TOTAL', 'LIQ_CLIENTE','VENTA_USD','COMISION','FLETE','OTROS_GASTOS','Apoyo_Liquidaciones')
             ->get();
 
   
 
     
-            foreach ($unique_folios as $item) {
+            foreach ($unique_fobs as $item) {
 
              
                 
@@ -191,19 +186,19 @@ class FobDespacho extends Component
                 $apoyo = 0;
                 
                
-            // Filtrar la colección
-            $detalle_liquidacions2_filtrado = $detalle_liquidacions2->filter(function ($objet) use ($item) {
-                return $objet->N_Pallet == $item->folio && $objet->Variedad == $item->variedad && $objet->Calibre_y_Color == $item->calibre_color;
-            });
+                // Filtrar la colección
+                $detalle_liquidacions2_filtrado = $detalle_liquidacions2->filter(function ($objet) use ($item) {
+                    return $objet->N_Pallet == $item->folio && $objet->Variedad == $item->variedad && $objet->Calibre_y_Color == $item->calibre_color;
+                });
 
-            // Si deseas obtener una colección nueva con los elementos filtrados:
-            $detalle_liquidacions2_filtrado = $detalle_liquidacions2_filtrado->values();
+                // Si deseas obtener una colección nueva con los elementos filtrados:
+                $detalle_liquidacions2_filtrado = $detalle_liquidacions2_filtrado->values();
 
            
                     foreach ($detalle_liquidacions2_filtrado as $detalle) {
                             
                             $peso += floatval($detalle->PESO_TOTAL);
-                            $venta += floatval($detalle->LIQ_PRODUCTOR);
+                            $venta += floatval($detalle->LIQ_CLIENTE);
 
                             $bruto += $detalle->VENTA_USD;
                             $comision += $detalle->COMISION;
@@ -211,49 +206,13 @@ class FobDespacho extends Component
                             $otros += $detalle->OTROS_GASTOS;
                             $apoyo += $detalle->Apoyo_Liquidaciones;
                     
-                            /*
-                                switch ($detalle->CALIBRE) {
-                                    case '5J':
-                                        $peso5J += $detalle->PESO_TOTAL;
-                                        $venta5J += $detalle->LIQ_PRODUCTOR;
-                                        break;
-                                    case '4J':
-                                        $peso4J += $detalle->PESO_TOTAL;
-                                        $venta4J += $detalle->LIQ_PRODUCTOR;
-                                        break;
-                                    case '3J':
-                                        $peso3J += $detalle->PESO_TOTAL;
-                                        $venta3J += $detalle->LIQ_PRODUCTOR;
-                                        break;
-                                    case '2J':
-                                        $peso2J += $detalle->PESO_TOTAL;
-                                        $venta2J += $detalle->LIQ_PRODUCTOR;
-                                        break;
-                                    case 'J':
-                                        $pesoJ += $detalle->PESO_TOTAL;
-                                        $ventaJ += $detalle->LIQ_PRODUCTOR;
-                                        break;
-                                    case 'XL':
-                                        $pesoXL += $detalle->PESO_TOTAL;
-                                        $ventaXL += $detalle->LIQ_PRODUCTOR;
-                                        break;
-                                    case 'L':
-                                        $pesoL += $detalle->PESO_TOTAL;
-                                        $ventaL += $detalle->LIQ_PRODUCTOR;
-                                        break;
-                                    case 'JUP':
-                                        $pesoJUP += $detalle->PESO_TOTAL;
-                                        $ventaJUP += $detalle->LIQ_PRODUCTOR;
-                                        break;
-                                }
-                            */
                     
                     }
                 
     
    
                        
-                    if ($venta > 0) {
+                if ($venta > 0) {
                        
                         if ($peso>0) {
                              $item->update([ 'suma_fob'        => floatval($venta),
@@ -279,9 +238,31 @@ class FobDespacho extends Component
                         
                        
                    
-                }else{
+                }elseif($venta == 0){
                     if ($peso>0) {
                         $item->update([ 'suma_fob'        => "Sin Venta",
+                               'cant_kg'         => floatval($peso),
+                               'fob_kilo_salida' => floatval($venta/$peso),
+                               'bruto'=>floatval($bruto),
+                               'comision'=>floatval($comision),
+                               'flete'=>floatval($flete),
+                               'otros'=>floatval($otros),
+                               'apoyo'=>floatval($apoyo),
+                           ]);
+                   } else {
+                        $item->update([ 'suma_fob'        => "Sin Venta",
+                               'cant_kg'         => floatval($peso),
+                               'fob_kilo_salida' => 0,
+                               'bruto'=>floatval($bruto),
+                               'comision'=>floatval($comision),
+                               'flete'=>floatval($flete),
+                               'otros'=>floatval($otros),
+                               'apoyo'=>floatval($apoyo),
+                           ]);
+                   }
+                }else{
+                    if ($peso>0) {
+                        $item->update([ 'suma_fob'        => floatval($venta),
                                'cant_kg'         => floatval($peso),
                                'fob_kilo_salida' => floatval($venta/$peso),
                                'bruto'=>floatval($bruto),

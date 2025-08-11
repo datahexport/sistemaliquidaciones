@@ -2000,6 +2000,7 @@
                       $costos2j=0;
                       $costosj=0;
                       $costosxl=0;
+                      $costosxl2=0;
           
                       $otroscostos=0;
                       $totalotroscostos=0;
@@ -2141,7 +2142,9 @@
                               $pesonetoxl+=floatval($masa->peso_prorrateado);
                             
                               $costosxl+=floatval($masa->costo);
+                              $costosxl2+=floatval($masa->costo_proceso)+floatval($masa->costo_materiales)+floatval($masa->otros_costos);
                               $totalcostosxl+=floatval($masa->costo);
+
 
                               if (!IS_NULL($masa->fob)) {
                                               $retornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
@@ -2811,7 +2814,7 @@
                           <td>{{number_format(($margenxl),2,',','.')}}
                           </td>
                           <td>
-                            {{number_format($costosxl,2)}}
+                            {{number_format($costosxl,2)}}// {{number_format($costosxl2,2)}}
                           </td>
                           
                           <td>
@@ -4647,7 +4650,7 @@
                                     @endphp
                                 @endif
               
-                                @if (($masa->calibre_real == 'JUP') && $masa->variedad == $variedad)
+                                @if ((strtoupper(trim($masa->calibre_real)) == 'JUP') && $masa->variedad == $variedad)
                                     @php
                                         $cantidadjup_semana += floatval($masa->cantidad);
                                         $pesonetojup_semana += floatval($masa->peso_prorrateado);
@@ -4672,7 +4675,7 @@
               
               
                             
-                                @if (in_array($masa->calibre_real, ['JUP']) && $masa->variedad == $variedad)
+                                @if (in_array(strtoupper(trim($masa->calibre_real)), ['JUP']) && $masa->variedad == $variedad)
                                     @php
                                         $masatotal_semana += floatval($masa->peso_prorrateado);
                                       
@@ -5172,7 +5175,7 @@
                                           
                         @endphp 
                                 
-                                @if (($masa->calibre_real=='JUP') && $masa->variedad==$variedad)
+                                @if ((strtoupper(trim($masa->calibre_real))=='JUP') && $masa->variedad==$variedad)
                                   @php
                                     $cantidadjup += $masa->cantidad;
                                     $pesonetojup += floatval($masa->peso_prorrateado);
@@ -5193,7 +5196,7 @@
                               
               
                           
-                          @if ( $masa->calibre_real=='JUP')
+                          @if ( strtoupper(trim($masa->calibre_real))=='JUP')
                                 @php
                                       $masatotal+=$masa->peso_prorrateado;
                                 @endphp

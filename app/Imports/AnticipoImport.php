@@ -38,10 +38,10 @@ class AnticipoImport implements ToCollection, WithStartRow
                     'total'       => $row[4], // TOTAL
                     'fecha'       => Carbon::instance(SharedDate::excelToDateTimeObject($row[5])), // FECHA
                     'orden'       => $row[6], // ORDEN
-                    'busqueda'    => $row[7] ?? null, // BUSQUEDA (nullable)
-                    'incluir'     => $row[8] == 'yes' ? 'true' : 'false', // INCLUIR? (consideramos 'yes' o 'no' en los datos)
+                    'busqueda'    => $row[7], // BUSQUEDA (nullable)
+                    'incluir'     => $row[8], // INCLUIR? (consideramos 'yes' o 'no' en los datos)
                     'moneda'      => $row[9], // MONEDA
-                    'detalle'     => $row[10] ?? null, // DETALLE (nullable)
+                    'detalle'     => $row[10], // DETALLE (nullable)
                 
                 ]);
             }

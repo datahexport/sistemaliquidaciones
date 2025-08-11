@@ -33,9 +33,7 @@
                      
                         <div class="relative flex flex-col items-center rounded-[20px] max-w-7xl mx-auto bg-white bg-clip-border shadow-3xl shadow-lg  dark:!bg-navy-800 dark:text-white dark:!shadow-none p-3">
                           
-                            <h4 class="px-2 text-xl font-bold text-navy-700 dark:text-white text-center my-4">
-                                Base Producción
-                                </h4>
+                           
                           
                             @php
                                 $kilosprorrateados=0;
@@ -63,6 +61,7 @@
                                  $peso25=0;
                                  $peso5=0;
                                  $peso10=0;
+                                 $comercialcount=0;
                                  
                             @endphp
                             @foreach ($procesosall as $item)
@@ -106,12 +105,14 @@
                                         } elseif($item->CRITERIO=="COMERCIAL") {
                                             $ingresoscomercial+=$item->fob->fob_kilo_salida*floatval($item->PESO_PRORRATEADO);
                                             $ingresoscomercial2+=$tarifafinal2*floatval($item->PESO_PRORRATEADO);
-
+                                      
                                         } elseif($item->CRITERIO=="COMERCIAL EMBALADA") {
                                             $ingresoscomemb+=$item->fob->fob_kilo_salida*floatval($item->PESO_PRORRATEADO);
                                             $ingresoscomemb2+=$tarifafinal*floatval($item->PESO_PRORRATEADO);
 
                                         }
+                                              $comercialcount+=1;
+
 
                                     }else{
                                         $nulos+=1;
@@ -173,12 +174,15 @@
 
                                 @endphp
                             @endforeach
+                             <h4 class="px-2 text-xl font-bold text-navy-700 dark:text-white text-center my-4">
+                                Base Producción <span class="text-md">({{number_format($comercialcount,0)}} Registros)</span>
+                            </h4>
                             <div class="grid grid-cols-7 gap-4 px-2 w-full">
                                
                              
                                 <div class="flex flex-col justify-center rounded-2xl bg-clip-border px-3 py-4 border-2 bg-green-400 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
                                     <p class="text-3xl font-bold text-gray-600 text-center">Kilos</p>
-                                  
+                                 
                                 </div>
                                
                                 <div class="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 border-2 border-green-400 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
@@ -241,15 +245,19 @@
                                 </div>
                                
                                 <div class="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 border-2 border-red-400 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-                                    <p class="text-sm text-gray-600">Ingresos Totales</p>
+                                    <p class="text-sm text-gray-600">Ingresos Totales s/com</p>
+                                    <p class="text-base font-medium text-navy-700 dark:text-white">
+                                        {{number_format($ingresostotal-$ingresoscomercial,2)}}
+                                    </p>
+                                </div>
+                                 <div class="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 border-2 border-red-400 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+                                    <p class="text-sm text-gray-600">Ingresos Totales c/com</p>
                                     <p class="text-base font-medium text-navy-700 dark:text-white">
                                         {{number_format($ingresostotal,2)}}
                                     </p>
                                 </div>
 
-                                <div>
-
-                                </div>
+                               
                                 <div>
 
                                 </div>
@@ -279,15 +287,19 @@
                                 </div>
                                
                                 <div class="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 border-2 border-red-400 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-                                    <p class="text-sm text-gray-600">Ingresos Totales</p>
+                                    <p class="text-sm text-gray-600">Ingresos Totales s/com</p>
+                                    <p class="text-base font-medium text-navy-700 dark:text-white">
+                                        {{number_format($ingresostotal2-$ingresoscomercial2,2)}}
+                                    </p>
+                                </div>
+                                <div class="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 border-2 border-red-400 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+                                    <p class="text-sm text-gray-600">Ingresos Totales c/com</p>
                                     <p class="text-base font-medium text-navy-700 dark:text-white">
                                         {{number_format($ingresostotal2,2)}}
                                     </p>
                                 </div>
 
-                                <div>
-
-                                </div>
+                               
                                 <div>
 
                                 </div>
@@ -562,7 +574,7 @@
                     <div class="bg-gray-100 rounded px-2 md:p-8 shadow mb-6">
                         <h2 @click.on="openMenu = 1"  class="hidden cursor-pointer text-xs text-blue-500 font-semibold mb-4"><-Abrir Menu</h2>
                 
-                            <div wire:loading wire:target="filters">
+                            <div wire:loading wire:target="filters, checkEtiqueta, exportar">
                     
                                 <div class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
                                   <div class="max-w-sm w-full sm:rounded-2xl bg-white border-2 border-gray-200 shadow-xl">
@@ -682,7 +694,7 @@
                                 
                                 </select>
                             </div>
-                            <div class="ml-4">
+                            <div class="hidden ml-4">
                                 Tipo:<br>
                                 <select wire:model.live="filters.tipo" name="" id="" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-40">
                                 <option value="">Todos</option>
@@ -697,7 +709,7 @@
                                 </select>
                             </div>
                             <div class="ml-4">
-                                Categoria:<br>
+                                Criterio:<br>
                                 <div>
                                 <input checked type="checkbox" wire:model.live="filters.exp" id="exp" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                 <label for="exp">Exportación</label>
@@ -718,6 +730,24 @@
                 
                             
                             </div>
+
+                            {{-- 
+                            <div class="mb-4">
+                                  TIPO:<br>
+                                   @foreach ($unique_tipos as $etiqueta)
+                                        @if ($etiqueta)
+                                            <label>
+                                                <input type="checkbox"
+                                                        @if(in_array($etiqueta, $filters['tipos'])) checked @endif
+                                                        wire:click="checkEtiqueta('{{ $etiqueta }}')"
+                                                        value="{{ $etiqueta }}">
+                                                {{ $etiqueta }}
+                                            </label><br>
+                                        @endif
+                                    @endforeach
+                            </div>
+comment --}}
+                            
                             <div class="ml-4">
                                 Embalaje:<br>
                                 <select wire:model.live="filters.embalaje" name="" id="" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-40">
@@ -731,6 +761,13 @@
                                 
                                 </select>
                             </div>
+
+                            <div class="ml-4">
+                                <button wire:click="exportar" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
+                                    Exportar
+                                </button>
+                            </div>
+
                         
                              
                            
@@ -823,7 +860,7 @@
                                         
                                             <p class="text-gray-900 whitespace-no-wrap">
                                                 @if ($masa->fob)
-                                                    {{ number_format(($masa->fob->fob_kilo_salida*floatval($masa->PESO_PRORRATEADO))*0.92-$masa->costo,2)}}
+                                                    {{ number_format(($masa->fob->fob_kilo_salida*floatval($masa->PESO_PRORRATEADO)),2)}}
                                                 @endif
                                             </p>
                                         
@@ -832,9 +869,17 @@
                                         
                                             <p class="text-gray-900 whitespace-no-wrap">
                                                 @if ($masa->fob)
-                                                    @if ($masa->fob->tarifas->count()>0) 
-                                                        {{ number_format((($masa->fob->tarifas->reverse()->first()->tarifa_fc*floatval($masa->PESO_PRORRATEADO))*0.92-$masa->costo),2)}}
+                                                    @if ($masa->CRITERIO=="COMERCIAL") 
+                                                        @if ($masa->fob->tarifas->count()>0) 
+                                                            {{ number_format((($masa->fob->tarifas->reverse()->first()->tarifa*floatval($masa->PESO_PRORRATEADO))),2)}}
+                                                        @endif
+                                                    @else 
+                                                         @if ($masa->fob->tarifas->count()>0) 
+                                                            {{ number_format((($masa->fob->tarifas->reverse()->first()->tarifa_fc*floatval($masa->PESO_PRORRATEADO))),2)}}
+                                                        @endif
                                                     @endif
+                                             
+                                                   
                                                 @endif
                                             </p>
                                         

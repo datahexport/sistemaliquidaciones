@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Exports\ProcesosExport;
 use App\Models\Proceso;
 use App\Models\Razonsocial;
 use App\Models\Temporada;
@@ -9,6 +10,7 @@ use App\Models\Variedad;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProduccionSearch extends Component
 {   use WithPagination;
@@ -42,12 +44,35 @@ class ProduccionSearch extends Component
         'tipo'=>'',
     ];
 
+
     public function mount(Temporada $temporada){
         $this->temporada=$temporada;
+       
+    }
+
+      public function checkEtiqueta($etiqueta)
+    {
+        if (($key = array_search($etiqueta, $this->filters['tipos'])) !== false) {
+            unset($this->filters['tipos'][$key]);
+        } else {
+            $this->filters['tipos'][] = $etiqueta;
+        }
+
+        $this->filters['tipos'] = array_values($this->filters['tipos']); // reindexar el array
+    }
+
+    public function exportar()
+    {
+        // Asegúrate que la colección esté cargada
+        $procesosFiltrados = Proceso::filter($this->filters)->where('temporada_id',$this->temporada->id)->get();
+        // Cargar relaciones necesarias
+        $procesosFiltrados->load(['fob.tarifas']);
+        // Opcional: puedes usar ->values() para reiniciar los índices si es una colección
+        return Excel::download(new ProcesosExport($procesosFiltrados), 'procesos_filtrados.xlsx');
     }
 
     public function render()
-    {   $procesos=Proceso::filter($this->filters)->where('temporada_id',$this->temporada->id)->paginate(250);
+    {   $procesos=Proceso::filter($this->filters)->where('temporada_id',$this->temporada->id)->paginate(50);
         $procesosall = Proceso::select([
                 'PESO_PRORRATEADO',
                 'CRITERIO',
@@ -86,19 +111,19 @@ class ProduccionSearch extends Component
 
       
 
-        $unique_variedades = $procesosall->pluck('VARIEDAD')->unique()->sort();
+        $unique_variedades = $procesosall2->pluck('VARIEDAD')->unique()->sort();
 
         $unique_calibres = $procesosall2->pluck('CALIBRE_REAL')->unique()->sort();
 
         $unique_semanas = $procesosall2->pluck('SEMANA')
-        ->unique()
-        ->sortBy(function ($semana) {
-            // Las semanas mayores a 25 (segundo semestre) deben ir primero
-            // Les restamos 25 para que queden primero en el orden
-            // Las otras las ordenamos después, sumándoles 52 para que vayan al final
-            return $semana > 25 ? $semana - 25 : $semana + 52;
-        })
-        ->values(); // Opcional: para resetear los índices
+            ->unique()
+            ->sortBy(function ($semana) {
+                // Las semanas mayores a 25 (segundo semestre) deben ir primero
+                // Les restamos 25 para que queden primero en el orden
+                // Las otras las ordenamos después, sumándoles 52 para que vayan al final
+                return $semana > 25 ? $semana - 25 : $semana + 52;
+            })
+            ->values(); // Opcional: para resetear los índices
 
         $razons=Razonsocial::all();
 

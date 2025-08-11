@@ -674,7 +674,7 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                   </div>
               @endif
 
-              @if ($vista!='grafico' && $vista!='saldoaliquidar')
+              @if ($vista!='grafico' && $vista!='saldoaliquidar' && $vista!='saldoaliquidar2')
                 <div class="flex justify-between ml-4 mt-4">
                   @if ($vista=='MASAS')
                     <a href="{{Route('preciofob.refresh',$temporada)}}">
@@ -714,6 +714,7 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                   <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Informe</th>
                                   <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Nota</th>
                                   <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Propio</th>
+                                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Comisión</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -786,6 +787,29 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                               <span class="text-gray-600 text-center mt-2">{{ session('status_' . $razon->id) }}</span>
                                           @endif
                                         </td>
+                                        <td class="text-sm text-gray-900 font-light px-6 py-4 text-center">
+                                            <div class="flex justify-center items-center mb-2">
+                                              <select 
+                                                  wire:change="actualizarComision({{ $razon->id }}, $event.target.value)" 
+                                                  class="border rounded pl-2 py-1 text-sm pr-6"
+                                              >
+                                                  <option value="">-</option>
+                                                  @for ($i = 1; $i <= 15; $i++)
+                                                      <option value="{{ $i }}" {{ $razon->comision == $i ? 'selected' : '' }} @class(['px-4', 'font-bold' => true])>
+                                                          {{ $i }}%
+                                                      </option>
+                                                  @endfor
+                                              </select>
+                                            </div>
+
+                                            @if (session()->has('comision_status_' . $razon->id))
+                                                <span class="text-gray-600 text-center mt-2">
+                                                    {{ session('comision_status_' . $razon->id) }}
+                                                </span>
+                                            @endif
+                                          </td>
+
+
 
                                     
 
@@ -820,13 +844,9 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                   @endif
 
                   @if ($vista=='saldoaliquidar2')
-                    <div class="flex flex-col mb-2">
-                      <div class="-my-2 overflow-x-auto">
-                        <div class="py-2 align-middle inline-block min-w-full">
-                          <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-yellow-400">
+                   <div class="overflow-x-auto max-h-[500px]">
+                        <table class="min-w-full leading-normal">
+                            <thead class="bg-yellow-400 sticky top-0 shadow-md z-10">
                                   <tr>
                                     <th class="px-6 py-0 text-center text-xs font-bold text-gray-900">
                                       PRODUCTOR
@@ -1159,20 +1179,16 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                 </tbody>
                             </table>
                             
-                          </div>
+                         
                         </div>
-                      </div>
-                    </div>
+                     
                   @endif
 
                   @if ($vista=='saldoaliquidar')
                     <!-- Tabla con checkbox interactivo -->
-                    <div class="flex flex-col mb-2">
-                      <div class="-my-2 overflow-x-auto">
-                        <div class="py-2 align-middle inline-block min-w-full">
-                          <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-yellow-400">
+                   <div class="overflow-x-auto max-h-[500px]">
+                        <table class="min-w-full leading-normal">
+                            <thead class="bg-yellow-400 sticky top-0 shadow-md z-10">
                                   <tr>
                                     <th class="px-6 py-0 text-center text-xs font-bold text-gray-900">
                                       PRODUCTOR
@@ -1493,9 +1509,7 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                 </tbody>
                             </table>
                           </div>
-                        </div>
-                      </div>
-                    </div>
+                       
 
                   @endif
 
@@ -2871,6 +2885,8 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                 $totalaliquidar=0;
                                 $control=true;
 
+                                $control_razon=null;
+
                             @endphp
 
                                   @foreach ($facturas as $factura)
@@ -2940,7 +2956,8 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                         @endphp
 
 
-                                       
+                                    @if ($control_razon==null || $control_razon!=$factura->productor)
+                                        
                                       @foreach ($masastotal->filter(function($item) use ($name) {
                                                   return trim($item->PRODUCTOR_RECEP_FACTURACION) === trim($name);
                                                 }) as $item)
@@ -2999,13 +3016,18 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                               @endphp
                                         
                                       @endforeach
+                                      
+                                    @endif
+
                                       @php
                                           $aliquidar=$venta2srazon+$venta3srazon-$costo2srazon-$margenrazon-$gastosrazon;
                                            $totalaliquidar+=$aliquidar;
+
                                       @endphp
 
                                       <td class="border border-gray-300 px-4 py-2 whitespace-nowrap">
-                                       
+                                        @if ($control_razon==null || $control_razon!=$factura->productor)
+                              
                                           @if ($razonExiste)
                                               @if($razonExiste->informes->where('temporada_id',$temporada->id)->reverse()->first()->total_liquidado)
                                                <p class="font-bold text-red-500">{{number_format($razonExiste->informes->where('temporada_id',$temporada->id)->reverse()->first()->total_liquidado+($venta2srazon+$venta3srazon-$costo2srazon-$margenrazon-$gastosrazon))}} </p> 
@@ -3015,7 +3037,7 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                           @endif
 
                                           {{ number_format($venta2srazon+$venta3srazon-$costo2srazon-$margenrazon-$gastosrazon, 2) }}
-
+                                        @endif
                                         {{-- comment
                                         @if ($informedit==$name)
                                             <input wire:model.live="total_liquidado" type="text">
@@ -3025,24 +3047,38 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                        --}} 
                                       </td>
                                       
-                                      <td class="border border-gray-300 px-4 py-2 whitespace-nowrap">{{ number_format($anticiposrazon, 2) }}</td>
-                                      <td class="border border-gray-300 px-4 py-2 whitespace-nowrap">{{ number_format($aliquidar, 2) }}</td>
-                                      <td class="border border-gray-300 px-4 py-2 whitespace-nowrap">{{ number_format($venta2srazon+$venta3srazon-$costo2srazon-$margenrazon-$gastosrazon-$factura->total_dolares, 2) }}</td>
                                       <td class="border border-gray-300 px-4 py-2 whitespace-nowrap">
-                                        @if ($informedit==$name)
-                                            <input wire:model.live="difcambio" type="text">
-                                        @else
-
-                                          @if ($razonExiste)
-                                              @if($razonExiste->informes->where('temporada_id',$temporada->id)->first())
-                                               <p class="font-bold text-red-500">{{number_format($razonExiste->informes->where('temporada_id',$temporada->id)->reverse()->first()->diferencia_tipodecambio)}} </p> 
-                                              @endif
+                                        @if ($control_razon==null || $control_razon!=$factura->productor)
+                                         {{ number_format($anticiposrazon, 2) }}
+                                        @endif  
+                                      </td>
+                                      <td class="border border-gray-300 px-4 py-2 whitespace-nowrap">
+                                        @if ($control_razon==null || $control_razon!=$factura->productor)
+                                         {{ number_format($aliquidar, 2) }}
+                                         @endif
+                                        </td>
+                                      <td class="border border-gray-300 px-4 py-2 whitespace-nowrap">
+                                        @if ($control_razon==null || $control_razon!=$factura->productor)
+                                         {{ number_format($venta2srazon+$venta3srazon-$costo2srazon-$margenrazon-$gastosrazon-$factura->total_dolares, 2) }}
+                                         @endif
+                                        </td>
+                                      <td class="border border-gray-300 px-4 py-2 whitespace-nowrap">
+                                         @if ($control_razon==null || $control_razon!=$factura->productor)
+                                          @if ($informedit==$name)
+                                              <input wire:model.live="difcambio" type="text">
                                           @else
-                                              
+
+                                            @if ($razonExiste)
+                                                @if($razonExiste->informes->where('temporada_id',$temporada->id)->first())
+                                                <p class="font-bold text-red-500">{{number_format(floatval($razonExiste->informes->where('temporada_id',$temporada->id)->reverse()->first()->diferencia_tipodecambio),0,',','.')}} </p> 
+                                                @endif
+                                            @else
+                                                
+                                            @endif
+
+
                                           @endif
-
-
-                                        @endif
+                                         @endif
                                       
                                       </td>
 
@@ -3061,7 +3097,31 @@ z-index: 4; /* Asegura que esta columna esté por encima de las anteriores */
                                       @endif
                                     
                                   </tr>
+                                  @php
+                                          if($control_razon==null || $control_razon!=$factura->productor){
+                                              $control_razon=$factura->productor;
+                                          }
+                                  @endphp
                                   @endforeach
+                                  <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                      {{number_format($totalaliquidar,2,',','.')}}
+                                    </td>
+                                  </tr>
                               </tbody>
                           </table>
                           

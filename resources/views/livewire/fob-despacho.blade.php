@@ -90,7 +90,7 @@
                                                     <button class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-500 rounded hover:bg-gray-600 focus:outline-none">
 
                                                         <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
-                                                            {{number_format($fobsall->where('suma_fob','>',0)->count(),0)}}
+                                                            {{number_format($fobsall->where('suma_fob','!=',0)->count(),0)}}
                                                             
                                                         </h1>
                                                     </button>
@@ -313,7 +313,7 @@
                                                                     <p class="text-gray-900 whitespace-no-wrap"> {{number_format($fob->apoyo,2)}}</p>
                                                                 </td>
                                                                 <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-right">
-                                                                    <p class="text-gray-900 whitespace-no-wrap"> {{number_format($fob->suma_fob,2)}}</p>
+                                                                    <p class="text-gray-900 whitespace-no-wrap"> {{number_format(floatval($fob->suma_fob),2)}}</p>
                                                                 </td>
 
                                                                 <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm text-right">

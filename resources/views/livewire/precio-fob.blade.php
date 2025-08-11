@@ -210,6 +210,21 @@
                                                     <div>
                                                 </div>
                                             </div>
+
+                                            <div class="ml-4">
+                                                Suma fob:<br>
+                                                <div class="flex">
+                            
+                                                
+                                                    <button class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-500 rounded hover:bg-gray-600 focus:outline-none">
+
+                                                        <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
+                                                            {{number_format($ventavariedad,2,',','.')}}
+                                                            
+                                                        </h1>
+                                                    </button>
+                                                </div>
+                                            </div>
                                             
                                             <div class="ml-4">
                                                 Variedades:<br>
@@ -290,20 +305,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="ml-4 hidden">
-                                                Venta:<br>
-                                                <div class="flex">
-                            
-                                                
-                                                    <button class="ml-2 focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-500 rounded hover:bg-gray-600 focus:outline-none">
-
-                                                        <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
-                                                            {{number_format($ventavariedad,0)}}
-                                                            
-                                                        </h1>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                            
 
                                             <div class="ml-4 hidden">
                                                 Norma:<br>
@@ -700,6 +702,7 @@
                                                                     
                                                                         <td class="px-5 py-2 border-b border-gray-200 @if($fob->n_calibre=="JUP") bg-red-200 @else bg-white @endif text-sm text-center">
                                                                             {{number_format(floatval($item->tarifa),2, ',', '.')}}
+                                                                           
                                                                         </td>
 
                                                                         <td class="px-5 py-2 border-b border-gray-200 @if($fob->n_calibre=="JUP") bg-red-200 @else bg-white @endif text-sm text-center">

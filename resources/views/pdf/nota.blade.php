@@ -4924,7 +4924,7 @@
 						<td style="text-align: right; padding-left: 25px; padding-bottom: 4px; margin-top: 10px;">
 							{{$item->no_docto}}
 						</td>
-						<td style="padding-bottom: 4px; margin-top: 10px; text-align: center; padding-right: 10;">
+						<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10;">
 							{{ number_format($item->monto_neto, 0, ',', '.') }}
 						</td>
 						<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10;">
@@ -4956,8 +4956,8 @@
 						</td>
 						<td style="text-align: right; padding-left: 25px; padding-bottom: 4px; margin-top: 10px;">
 						</td>
-						<td style="padding-bottom: 4px; margin-top: 10px; text-align: center; padding-right: 10;">
-								{{ number_format(($total_liquidacion-$totalfacturas)*floatval($temporada->tc), 2, ',', '.') }}
+						<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10;">
+								{{ number_format(($total_liquidacion-$totalfacturas)*floatval($temporada->tc), 0, ',', '.') }}
 						</td>
 						<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10;">
 							{{ number_format(($total_liquidacion-$totalfacturas)*floatval($temporada->tc)*0.19, 0, ',', '.') }}
@@ -4980,10 +4980,10 @@
 						<td style="text-align: right; padding-left: 25px; padding-bottom: 4px; margin-top: 10px;">
 						</td>
 						<td style="padding-bottom: 4px; margin-top: 10px; text-align: center; padding-right: 10;">
-							{{ number_format(($total_liquidacion-$totalfacturas)*floatval($temporada->tc), 2, ',', '.') }}
+							{{ number_format(($total_liquidacion-$totalfacturas)*floatval($temporada->tc), 0, ',', '.') }}
 						</td>
 						<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10;">
-								{{ number_format(($total_liquidacion-$totalfacturas)*floatval($temporada->tc)*0.19, 2, ',', '.') }}
+								{{ number_format(($total_liquidacion-$totalfacturas)*floatval($temporada->tc)*0.19, 0, ',', '.') }}
 						</td>
 						<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10;">
 							
@@ -5005,7 +5005,7 @@
 						<td style="text-align: right; padding-left: 25px; padding-bottom: 4px; margin-top: 10px;">
 							
 						</td>
-						<td style="padding-bottom: 4px; margin-top: 10px; text-align: center; padding-right: 10;">
+						<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10;">
 							{{ number_format($informe_edit->diferencia_tipodecambio, 0, ',', '.') }}
 						</td>
 						<td style="padding-bottom: 4px; margin-top: 10px; text-align: right; padding-right: 10;">
@@ -5035,14 +5035,23 @@
           <td style="text-align: left; padding-left: 25px;" colspan="">
 						
 					</td>
+          <td style="text-align: left; padding-left: 25px;" colspan="">
+						
+					</td>
+          <td style="text-align: left; padding-left: 25px;" colspan="">
+						
+					</td>
+          <td style="text-align: left; padding-left: 25px;" colspan="">
+						
+					</td>
 					<td style="text-align: right; padding-right: 10;">
 						Total Facturado 
 					</td>
 					
-					<td>
+					<td style="text-align: right; padding-right: 5;">
          		{{ number_format(($total_liquidacion-$totalfacturas)*floatval($temporada->tc)+$totalfacturas2+$informe_edit->diferencia_tipodecambio, 0, ',', '.') }}
 					</td>
-					<td style="text-align: right; padding-right: 10;">
+					<td style="text-align: right; padding-right: 5;">
 							{{ number_format((($total_liquidacion-$totalfacturas)*floatval($temporada->tc)+$totalfacturas2+$informe_edit->diferencia_tipodecambio)*0.19, 0, ',', '.') }}
 					</td>
 					<td style="text-align: right; padding-right: 10;">
@@ -5055,7 +5064,7 @@
 			</tbody>
 		</table>
 
-		<table id="balance" style="width:50%; margin-top: 20px;  ">
+		<table id="balance" style="width:50%; margin-top: 20px; font-size: 18px;">
 		
 			<tbody>
 				<tr style="background-color: #ddd; font-weight: bold;" >
@@ -5099,7 +5108,7 @@
 			</tbody>
 		</table>
 		
-		<table id="balance" style="width:100%; margin-top: 20px; border-collapse: collapse;">
+		<table id="balance" style="width:100%; margin-top: 20px; border-collapse: collapse; font-size: 14px;">
 		
 			<tbody>
 				<tr style="background-color: #ddd; font-weight: bold;">

@@ -86,7 +86,11 @@
             </select>
           </div>
 
-     
+            <div class="ml-4"> 
+                Plantilla:<br>
+                <button wire:click="exportarBalance4" class="text-white focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-sm leading-none py-3 px-5 bg-gray-500 rounded hover:bg-gray-600 focus:outline-none">DESCARGAR</button>
+
+            </div>
         
        
         <div class="ml-auto">

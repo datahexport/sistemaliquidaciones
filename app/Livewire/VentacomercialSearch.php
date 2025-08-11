@@ -2,11 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Exports\PlantillaExport;
 use App\Models\Temporada;
 use App\Models\Ventacomercial;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class VentacomercialSearch extends Component
 {   use WithPagination;
@@ -37,7 +39,7 @@ class VentacomercialSearch extends Component
                         // Las semanas mayores a 25 (segundo semestre) deben ir primero
                         // Les restamos 25 para que queden primero en el orden
                         // Las otras las ordenamos después, sumándoles 52 para que vayan al final
-                        return $semana > 25 ? $semana - 25 : $semana + 52;
+                        return intval($semana) > 25 ? intval($semana) - 25 : intval($semana) + 52;
                     })
                     ->values(); // Opcional: para resetear los índices
         
@@ -56,6 +58,11 @@ class VentacomercialSearch extends Component
         
         return redirect()->route('temporada.datauploadcomercial',$this->temporada);
         
+    }
+
+      public function exportarBalance4()
+    {
+        return Excel::download(new PlantillaExport($this->temporada->id,'ventacomercial'), 'plantilla_base_ventacomercial.xlsx');
     }
 }
 

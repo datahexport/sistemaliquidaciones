@@ -662,56 +662,14 @@ class TemporadaController extends Controller
        
       
         foreach($masas as $masa){
-                $calibre='';
-                if ($masa->calibre=='4J' || $masa->calibre=='4JD' || $masa->calibre=='4JDD'){
-				    $calibre='4J';
-									
-                    if ($masa->calibre=='4JD' || $masa->calibre=='4JDD'){
-                          $color='Dark';
-                    }else{
-                      $color='Light';
-                    }
-        		}
-				if ($masa->calibre=='3J' || $masa->calibre=='3JD' || $masa->calibre=='3JDD'){
-                        $calibre='3J';
-                  if ($masa->calibre=='3JD' || $masa->calibre=='3JDD'){
-                          $color='Dark';
-                    }else{
-                      $color='Light';
-                    }
-				}
-				if ($masa->calibre=='2J' || $masa->calibre=='2JD' || $masa->calibre=='2JDD'){
-                    $calibre='2J';
-                    if ($masa->calibre=='2JD' || $masa->calibre=='2JDD'){
-                            $color='Dark';
-                       
-                    }else{
-                        $color='Light';
-                    }
-				}
-				if ($masa->calibre=='J' || $masa->calibre=='JD' || $masa->calibre=='JDD'){
-                        $calibre='J';
-                    if ($masa->calibre=='JD' || $masa->calibre=='JDD'){
-                            $color='Dark';
-                    }else{
-                        $color='Light';
-                    }
-                }
-			    if ($masa->calibre=='XL' || $masa->calibre=='XLD' || $masa->calibre=='XLDD'){
-                    $calibre='XL';
-                  if ($masa->calibre=='XLD' || $masa->calibre=='XLDD'){
-                          $color='Dark';
-                    }else{
-                      $color='Light';
-                    }
-                }
+              
 
                 
                 
                     foreach ($fobsall as $fob){
                        
                         
-                        if ($fob->n_calibre==$masa->CALIBRE_REAL && $fob->n_variedad==$masa->VARIEDAD && $fob->semana==$masa->SEMANA){
+                        if ($fob->n_calibre==strtoupper(trim($masa->CALIBRE_REAL)) && $fob->n_variedad==$masa->VARIEDAD && $fob->semana==$masa->SEMANA){
                             
                                 $masa->update(['fob_id'=>$fob->id]);
 
@@ -724,28 +682,29 @@ class TemporadaController extends Controller
 
        }
 
-        foreach($masas2 as $masa){
-       
+        foreach($masas2 as $masa){ 
+            $costo_proceso=0;
+            $costo_materiales=0;
                     if ($masa->PESO_CAJA=="2.2"){
-                        $costo_proceso=$masa->PESO_PRORRATEADO*$temporada->proceso22;
-                        $costo_materiales=$masa->PESO_PRORRATEADO*$temporada->materiales22;
+                        $costo_proceso=floatval($masa->PESO_PRORRATEADO)*floatval($temporada->proceso22);
+                        $costo_materiales=floatval($masa->PESO_PRORRATEADO)*floatval($temporada->materiales22);
                         
                     } elseif ($masa->PESO_CAJA=="2.5"){
-                        $costo_proceso=$masa->PESO_PRORRATEADO*$temporada->proceso25;
-                        $costo_materiales=$masa->PESO_PRORRATEADO*$temporada->materiales25;
+                        $costo_proceso=floatval($masa->PESO_PRORRATEADO)*floatval($temporada->proceso25);
+                        $costo_materiales=floatval($masa->PESO_PRORRATEADO)*floatval($temporada->materiales25);
 
                     }elseif ($masa->PESO_CAJA=="5"){
-                        $costo_proceso=$masa->PESO_PRORRATEADO*$temporada->proceso5;
-                         $costo_materiales=$masa->PESO_PRORRATEADO*$temporada->materiales5;
+                        $costo_proceso=floatval($masa->PESO_PRORRATEADO)*floatval($temporada->proceso5);
+                         $costo_materiales=floatval($masa->PESO_PRORRATEADO)*floatval($temporada->materiales5);
 
                     }elseif ($masa->PESO_CAJA=="10"){
-                        $costo_proceso=$masa->PESO_PRORRATEADO*$temporada->proceso10;
-                        $costo_materiales=$masa->PESO_PRORRATEADO*$temporada->materiales10;
+                        $costo_proceso=floatval($masa->PESO_PRORRATEADO)*floatval($temporada->proceso10);
+                        $costo_materiales=floatval($masa->PESO_PRORRATEADO)*floatval($temporada->materiales10);
                     }
 
-                    if($costo_proceso>0 || $costo_materiales>0 || $totalotroscostos>0){
+                    if($costo_proceso>=0 || $costo_materiales>=0 || $totalotroscostos>=0){
                         $masa->update([ 'costo_proceso'=>$costo_proceso,
-                                        'costo_materiales'=>$costo_materiales,
+                                        'costo_materiales'=>floatval($costo_materiales),
                                         'otros_costos'=>floatval($totalotroscostos*($masa->PESO_PRORRATEADO/$peso_total))]);
 
                         $nro2+=1;
@@ -863,7 +822,7 @@ class TemporadaController extends Controller
         foreach ($masas as $masa) {
             foreach ($fobsall as $fob) {
                 // Comparar la columna 'TIPO' del Proceso con la columna 'n_calibre' del Fob
-                if ($fob->n_calibre == $masa->TIPO && $fob->semana == $masa->SEMANA) {
+                if ($fob->n_calibre == strtoupper(trim($masa->TIPO)) && $fob->semana == $masa->SEMANA) {
                     $costo_procesos=$masa->PESO_PRORRATEADO*$temporada->procesocom;
 
                     // Actualizamos el campo 'fob_id' del Proceso con el ID correspondiente de la tabla Fob
@@ -882,16 +841,27 @@ class TemporadaController extends Controller
 
         foreach($masas2 as $masa){
        
-           
-                $costo_proceso=$masa->PESO_PRORRATEADO*$temporada->procesocom;
-              
+                    if ($masa->PESO_CAJA=="2.2"){
+                        $costo_proceso=floatval($masa->PESO_PRORRATEADO)*floatval($temporada->proceso22);
+                        
+                    } elseif ($masa->PESO_CAJA=="2.5"){
+                        $costo_proceso=floatval($masa->PESO_PRORRATEADO)*floatval($temporada->proceso25);
+                  
+                    }elseif ($masa->PESO_CAJA=="5"){
+                        $costo_proceso=floatval($masa->PESO_PRORRATEADO)*floatval($temporada->proceso5);
+                  
+                    }elseif ($masa->PESO_CAJA=="10"){
+                        $costo_proceso=floatval($masa->PESO_PRORRATEADO)*floatval($temporada->proceso10);
+                    }elseif ($masa->CRITERIO=="COMERCIAL"){
+                        $costo_proceso=floatval($masa->PESO_PRORRATEADO)*floatval($temporada->procesocom);
+                    }
+               
           
-            if($costo_proceso>0){
                 $masa->update([ 'costo_proceso'=>$costo_proceso]);
 
                 $nro2+=1;
-            }
-}
+            
+        }
         
         return redirect()->back()->with('info', $nro2.' Costos / '.$nro.' Fobs Actualizados con Éxito');
         
@@ -904,7 +874,7 @@ class TemporadaController extends Controller
         $folios_masas = $masas->pluck('Folio')->toArray();
 
         $unique_folios = Fobdespacho::where('temporada_id', $temporada->id)
-            ->where('suma_fob', '>', 0)
+            ->where('suma_fob', '!=', 0)
             ->whereIn('folio', $folios_masas) // Filtrar por los folios en $masas
             ->get();
         

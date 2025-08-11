@@ -97,31 +97,31 @@
                         <tbody class="bg-white">
                            <tr>
                                  <td class="px-6 py-4 border-b border-gray-200">COSTO COMERCIAL</td>
-                                 <td class="px-6 py-4 border-b border-gray-200">{{number_format($pesocom)}}</td>
+                                 <td class="px-6 py-4 border-b border-gray-200">{{number_format($pesocom,2)}}</td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"></td>
                                  <td class="px-6 py-4 border-b border-gray-200"></td>
                                  <td class="px-6 py-4 border-b border-gray-200"></td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                                  
                                        {!! Form::label('procesocom', 'Proceso', ['class' => 'hidden']) !!}
-                                       {!! Form::number('procesocom', null, ['step' => '0.00001', 'class' => 'text-right w-28 mt-1 rounded-lg' . ($errors->has('seguro_carga_maerk') ? ' border-red-600' : '')]) !!}
+                                       {!! Form::number('procesocom', null, ['step' => '0.00000001', 'class' => 'text-right w-28 mt-1 rounded-lg' . ($errors->has('procesocom') ? ' border-red-600' : '')]) !!}
                                  </td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">USD {{number_format($temporada->procesocom*$pesocom,2)}}</td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">USD {{number_format($temporada->procesocom*$pesocom,2)}}</td>
                            </tr>
                            <tr>
                                  <td class="px-6 py-4 border-b border-gray-200">COSTO COMERCIAL ELEGIDO</td>
-                                 <td class="px-6 py-4 border-b border-gray-200">{{number_format($peso10)}}</td>
+                                 <td class="px-6 py-4 border-b border-gray-200">{{number_format($peso10,2)}}</td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">USD {{number_format(($totalotroscostos*$peso10)/($peso2+$peso25+$peso5+$peso10),2)}}</td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                                     {!! Form::label('materiales10', 'materiales', ['class' => 'hidden']) !!}
-                                    {!! Form::number('materiales10', null, ['step' => '0.0001', 'class' => 'text-right w-24 mt-1 rounded-lg']) !!}
+                                    {!! Form::number('materiales10', null, ['step' => '0.0000001', 'class' => 'text-right w-24 mt-1 rounded-lg']) !!}
                                  </td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">USD {{number_format($temporada->materiales10*$peso10,2)}}</td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                                     
                                        {!! Form::label('proceso10', 'Proceso', ['class' => 'hidden']) !!}
-                                       {!! Form::number('proceso10', null, ['step' => '0.00001', 'class' => 'text-right block w-full mt-1 rounded-lg' . ($errors->has('seguro_carga_maerk') ? ' border-red-600' : '')]) !!}
+                                       {!! Form::number('proceso10', null, ['step' => '0.00000001', 'class' => 'text-right block w-full mt-1 rounded-lg' . ($errors->has('seguro_carga_maerk') ? ' border-red-600' : '')]) !!}
                                  </td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">USD {{number_format($temporada->proceso10*$peso10,2)}}</td>
 
@@ -130,17 +130,17 @@
                            </tr>
                            <tr>
                                  <td class="px-6 py-4 border-b border-gray-200">COSTO EXPORTACIÓN 5 KG</td>
-                                 <td class="px-6 py-4 border-b border-gray-200">{{number_format($peso5)}}</td>
+                                 <td class="px-6 py-4 border-b border-gray-200">{{number_format($peso5,2)}}</td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">USD {{number_format(($totalotroscostos*$peso5)/($peso2+$peso25+$peso5+$peso10),2)}}</td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                                     {!! Form::label('materiales5', 'materiales', ['class' => 'hidden']) !!}
-                                    {!! Form::number('materiales5', null, ['step' => '0.0001', 'class' => 'text-right block w-full mt-1 rounded-lg']) !!}
+                                    {!! Form::number('materiales5', null, ['step' => '0.0000000001', 'class' => 'text-right block w-full mt-1 rounded-lg']) !!}
                                  </td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">USD {{number_format($temporada->materiales5*$peso5,2)}}</td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                                     
                                     {!! Form::label('proceso5', 'Proceso', ['class' => 'hidden']) !!}
-                                    {!! Form::number('proceso5', null, ['step' => '0.00001', 'class' => 'text-right block w-full mt-1 rounded-lg' . ($errors->has('seguro_carga_maerk') ? ' border-red-600' : '')]) !!}
+                                    {!! Form::number('proceso5', null, ['step' => '0.00000001', 'class' => 'text-right block w-full mt-1 rounded-lg' . ($errors->has('seguro_carga_maerk') ? ' border-red-600' : '')]) !!}
                                  </td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">USD {{number_format($temporada->proceso5*$peso5,2)}}</td>
 
@@ -149,17 +149,17 @@
                            </tr>
                            <tr>
                                  <td class="px-6 py-4 border-b border-gray-200">COSTO EXPORTACIÓN 2,5 KG</td>
-                                 <td class="px-6 py-4 border-b border-gray-200">{{number_format($peso25)}}</td>
+                                 <td class="px-6 py-4 border-b border-gray-200">{{number_format($peso25,2)}}</td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">USD {{number_format(($totalotroscostos*$peso25)/($peso2+$peso25+$peso5+$peso10),2)}}</td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                                     {!! Form::label('materiales25', 'materiales', ['class' => 'hidden']) !!}
-                                    {!! Form::number('materiales25', null, ['step' => '0.0001', 'class' => 'text-right block w-full mt-1 rounded-lg']) !!}
+                                    {!! Form::number('materiales25', null, ['step' => '0.00000001', 'class' => 'text-right block w-full mt-1 rounded-lg']) !!}
                                  </td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">USD {{number_format($temporada->materiales25*$peso25,2)}}</td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                                     
                                     {!! Form::label('proceso25', 'Proceso', ['class' => 'hidden']) !!}
-                                    {!! Form::number('proceso25', null, ['step' => '0.00001', 'class' => 'text-right block w-full mt-1 rounded-lg' . ($errors->has('seguro_carga_maerk') ? ' border-red-600' : '')]) !!}
+                                    {!! Form::number('proceso25', null, ['step' => '0.00000001', 'class' => 'text-right block w-full mt-1 rounded-lg' . ($errors->has('seguro_carga_maerk') ? ' border-red-600' : '')]) !!}
                                  </td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">USD {{number_format($temporada->proceso25*$peso25,2)}}</td>
 
@@ -167,7 +167,7 @@
                            </tr>
                            <tr>
                                  <td class="px-6 py-4 border-b border-gray-200">COSTO EXPORTACIÓN 2,2 KG</td>
-                                 <td class="px-6 py-4 border-b border-gray-200">{{number_format($peso2)}}</td>
+                                 <td class="px-6 py-4 border-b border-gray-200">{{number_format($peso2,2)}}</td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">USD {{number_format(($totalotroscostos*$peso2)/($peso2+$peso25+$peso5+$peso10),2)}}</td>
                                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                                     {!! Form::label('materiales22', 'materiales', ['class' => 'hidden']) !!}
