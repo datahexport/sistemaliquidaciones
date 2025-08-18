@@ -31,6 +31,22 @@
                                 <strong class="text-xs text-red-600">{{$message}}</strong>
                             @enderror
                         </div>
+
+                        <div class="mb-4">
+                            {!! Form::label('comision', 'Comisión (%)') !!}
+                            {!! Form::select(
+                                'comision',
+                                collect(range(1, 15))->mapWithKeys(fn($i) => [$i => $i.' %']),
+                                8,
+                                ['class' => 'form-select block w-full mt-1'.($errors->has('comision')?' border-red-600':'')]
+                            ) !!}
+
+                            @error('comision')
+                                <strong class="text-xs text-red-600">{{$message}}</strong>
+                            @enderror
+                        </div>
+
+                        
     
                   
 

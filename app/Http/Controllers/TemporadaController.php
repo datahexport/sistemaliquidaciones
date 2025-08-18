@@ -94,7 +94,8 @@ class TemporadaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required'
+            'name'=>'required',
+            'comision' => 'required|integer|min:1|max:15',
         ]);
 
         $temporada = Temporada::create($request->all());
