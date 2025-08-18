@@ -269,6 +269,7 @@ class InformeUpdate extends Component
         Informe::create([
             'temporada_id' => $this->temporada->id,
             'razonsocial_id' => $this->razonsocial->id,
+            'comision'=>0.08
         ]);
     
         $this->dispatch('mostrar-mensaje', ['tipo' => 'success', 'mensaje' => 'Informe creado correctamente.']);
@@ -300,7 +301,8 @@ class InformeUpdate extends Component
                    $this->informe_edit=Informe::find($this->razonsocial->informes->where('temporada_id',$this->temporada->id)->reverse()->first()->id);
                 }else{
                     $informe=Informe::create(['temporada_id'=>$this->temporada->id,
-                                        'razonsocial_id'=>$this->razonsocial->id]);
+                                        'razonsocial_id'=>$this->razonsocial->id,
+                                        'comision'=>0.08]);
                     
                     $this->informe_edit=$informe;
                 }
