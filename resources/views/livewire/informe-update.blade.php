@@ -251,7 +251,7 @@
             $totalModFmt    = $tieneLiquidado ? number_format((float)$informe->total_liquidado + $aliquidar, 2, ',', '.') : null;
             $difTC          = $informe->diferencia_tipodecambio ?? '';
             $difTCFmt       = $difTC !== '' ? number_format($informe->diferencia_tipodecambio, 0, ',', '.') : '-';
-            $comisionValue  = $informe->comision ?? 8; // default 8%
+            $comisionValue  = $informe->comision*100 ?? 8; // default 8%
           @endphp
 
           <div class="flex items-center justify-between">
