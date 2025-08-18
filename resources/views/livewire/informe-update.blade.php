@@ -165,10 +165,11 @@
             @php
                 $peso = floatval($item->PESO_PRORRATEADO);
                 $pesototalaliquidar += floatval($item->PESO_PRORRATEADO);
-              if ($item->fob) {
-                $tarifafinal=0;
+                 $tarifafinal=0;
                 $tarifafinal2=0;
                 $tarifafinal3=0;
+              if ($item->fob) {
+               
                 if ($item->fob->tarifas->count()>0) {
                     $tarifafinal=$item->fob->fob_kilo_salida;
 
