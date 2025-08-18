@@ -244,154 +244,182 @@
         
 
       <div @if($informe_edit->id!=$informe->id) wire:click='set_informe_edit({{$informe->id}})' @endif class="flex items-center justify-between w-full px-8 py-4 mx-auto border rounded-xl dark:border-gray-700 @if($informe_edit->id==$informe->id) bg-gray-200 @else  @endif hover:bg-gray-200">
-          <div class="flex items-center justify-between">
-              <span @if($informe_edit->id==$informe->id) wire:click='set_informe_oficial({{$informe->id}})' @endif class="flex-col text-center justify-center cursor-pointer">
-                <svg  xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mx-auto @if($informe->oficial=='si')text-green-400 @else text-yellow-400 cursor-pointer @endif sm:h-9 sm:w-9" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                @if ($informe->oficial=='si')
-                    OFICIAL
-                @elseif($informe_edit->id==$informe->id)
-                    SET
-                @endif
-              </span>
+          @php
+            $editable = $informe_edit->id === $informe->id;
+            $tieneLiquidado = !is_null($informe->total_liquidado);
+            $aliquidarFmt   = number_format($aliquidar, 2, ',', '.');
+            $totalModFmt    = $tieneLiquidado ? number_format((float)$informe->total_liquidado + $aliquidar, 2, ',', '.') : null;
+            $difTC          = $informe->diferencia_tipodecambio ?? '';
+            $difTCFmt       = $difTC !== '' ? number_format($informe->diferencia_tipodecambio, 0, ',', '.') : '-';
+            $comisionValue  = $informe->comision ?? 8; // default 8%
+          @endphp
 
-              <div class="flex flex-col items-center mx-5 mr-12">
-                <div x-data="{ isEditing: false, totalLiquidado: '{{ number_format(floatval($informe->total_liquidado)+$aliquidar)}}', diferenciaTipoCambio: '{{ $informe->diferencia_tipodecambio ?? '-' }}' }" 
-                  class="flex items-center mx-5 mr-12">
-               <!-- Título del informe -->
-               <div>
+          <div class="flex items-center justify-between">
+            {{-- Botón/indicador OFICIAL --}}
+            <span
+              @if($editable) wire:click="set_informe_oficial({{ $informe->id }})" @endif
+              class="flex-col text-center justify-center cursor-pointer"
+              title="{{ $editable ? 'Marcar como OFICIAL' : '' }}"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg"
+                  class="w-5 h-5 mx-auto {{ $informe->oficial==='si' ? 'text-green-400' : 'text-yellow-400 cursor-pointer' }} sm:h-9 sm:w-9"
+                  viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd" />
+              </svg>
+              @if ($informe->oficial==='si')
+                OFICIAL
+              @elseif($editable)
+                SET
+              @endif
+            </span>
+
+            {{-- Contenedor detalle + acciones --}}
+            <div
+              x-data="{
+                isEditing: false,
+                diferenciaTipoCambio: '{{ $difTC }}',
+                comision: {{ (int)$comisionValue }},
+                submit() {
+                  $wire.guardarCambios({
+                    id: {{ $informe->id }},
+                    diferencia_tipodecambio: this.diferenciaTipoCambio === '' ? null : this.diferenciaTipoCambio,
+                    comision: this.comision
+                  })
+                  .then(() => {
+                    this.isEditing = false;
+                    Swal.fire({ icon:'success', title:'Actualizado', text:'El informe ha sido actualizado correctamente.', showConfirmButton:false, timer:1500 });
+                  })
+                  .catch(() => {
+                    Swal.fire({ icon:'error', title:'Error', text:'Hubo un problema al actualizar el informe.', showConfirmButton:false, timer:1500 });
+                  });
+                }
+              }"
+              class="flex items-center mx-5 mr-12"
+            >
+              {{-- Título + botones --}}
+              <div>
                 <h2 class="text-lg font-medium text-gray-700 sm:text-2xl dark:text-gray-200 whitespace-nowrap">
-                  Informe {{$counter-$n}}
+                  Informe {{ $counter - $n }}
                 </h2>
-              
-                <!-- Botones de acción -->
+
                 <div class="flex">
-                  @if($informe_edit->id==$informe->id)
-                    <button x-show="!isEditing" @click="isEditing = true" 
+                  @if($editable)
+                    <button x-show="!isEditing" @click="isEditing = true"
                             class="bg-blue-900 p-1 mr-2 rounded-lg text-xs text-white">
                       Editar
                     </button>
-                    @if($razonsocial->informes->where('temporada_id',$temporada->id)->count()>1) 
+
+                    @if($razonsocial->informes->where('temporada_id', $temporada->id)->count() > 1)
                       <button class="bg-red-500 p-1 rounded-lg text-xs text-white"
-                              x-data 
                               @click="
-                                  Swal.fire({
-                                      title: '¿Estás seguro?',
-                                      text: 'Esta acción no se puede deshacer.',
-                                      icon: 'warning',
-                                      showCancelButton: true,
-                                      confirmButtonText: 'Sí, eliminar',
-                                      cancelButtonText: 'Cancelar',
-                                      confirmButtonColor: '#d33',
-                                      cancelButtonColor: '#3085d6'
-                                  }).then((result) => {
-                                      if (result.isConfirmed) {
-                                          $wire.eliminarInforme({{ $informe->id }});
-                                          Swal.fire({
-                                              icon: 'success',
-                                              title: 'Eliminado',
-                                              text: 'El informe ha sido eliminado.',
-                                              showConfirmButton: false,
-                                              timer: 1500,
-                                              
-                                          });
-                                      }
-                                  })
+                                Swal.fire({
+                                  title:'¿Estás seguro?',
+                                  text:'Esta acción no se puede deshacer.',
+                                  icon:'warning',
+                                  showCancelButton:true,
+                                  confirmButtonText:'Sí, eliminar',
+                                  cancelButtonText:'Cancelar',
+                                  confirmButtonColor:'#d33',
+                                  cancelButtonColor:'#3085d6'
+                                }).then((result)=>{
+                                  if(result.isConfirmed){
+                                    $wire.eliminarInforme({{ $informe->id }});
+                                    Swal.fire({ icon:'success', title:'Eliminado', text:'El informe ha sido eliminado.', showConfirmButton:false, timer:1500 });
+                                  }
+                                })
                               ">
                         Eliminar
                       </button>
                     @endif
                   @endif
                 </div>
+
+                {{-- Acciones edición --}}
                 <div x-show="isEditing" class="flex space-x-2 mt-2">
-                  <button @click="
-                      isEditing = false; 
-                      $wire.guardarCambios({ id: {{ $informe->id }}, diferencia_tipodecambio: diferenciaTipoCambio }).then(() => {
-                          Swal.fire({
-                              icon: 'success',
-                              title: 'Actualizado',
-                              text: 'El informe ha sido actualizado correctamente.',
-                              showConfirmButton: false,
-                              timer: 1500
-                          });
-                      }).catch((error) => {
-                          Swal.fire({
-                              icon: 'error',
-                              title: 'Error',
-                              text: 'Hubo un problema al actualizar el informe.',
-                              showConfirmButton: false,
-                              timer: 1500
-                          });
-                      });
-                        " class="bg-green-500 text-white px-3 py-1 rounded-md text-xs">
-                      Guardar
+                  <button @click="submit()" class="bg-green-500 text-white px-3 py-1 rounded-md text-xs">
+                    Guardar
                   </button>
-              
-                  <button @click="isEditing = false" 
-                          class="bg-gray-500 text-white px-3 py-1 rounded-md text-xs">
+                  <button @click="isEditing = false" class="bg-gray-500 text-white px-3 py-1 rounded-md text-xs">
                     Cancelar
                   </button>
                 </div>
+              </div>
+
+              @php $n += 1; @endphp
+
+              {{-- Campos en modo edición --}}
+              <div x-show="isEditing" class="space-x-4 my-auto flex ml-6">
+                {{-- Diferencia Tipo de Cambio --}}
+                <div class="flex flex-col">
+                  <label class="text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Diferencia Tipo de Cambio
+                  </label>
+                  <input x-model="diferenciaTipoCambio" type="number" step="0.01"
+                        class="border rounded-md px-2 py-1 w-40" />
                 </div>
-                @php
-                    $n+=1;
-                @endphp
-             
-               <!-- Campos en modo edición -->
-               <div x-show="isEditing" class="space-x-2 my-auto flex ml-6">
-                
-                 <div>
-                   <label class="text-sm font-medium text-gray-700 dark:text-gray-200">Diferencia Tipo de Cambio:</label>
-                   <input x-model="diferenciaTipoCambio" 
-                          type="text" 
-                          class="border rounded-md px-2 py-1" />
-                 </div>
-                 
-               </div>
-             
-               <!-- Modo visualización -->
-               <div x-show="!isEditing" class="mt-4 flex">
+
+                {{-- Comisión (1–15%) --}}
+                <div class="flex flex-col">
+                  <label class="text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Comisión (%)
+                  </label>
+                  <select x-model.number="comision" class="border rounded-md px-2 py-1 w-32">
+                    @for($i = 1; $i <= 15; $i++)
+                      <option value="{{ $i }}">{{ $i }}%</option>
+                    @endfor
+                  </select>
+                </div>
+              </div>
+
+              {{-- Modo visualización --}}
+              <div x-show="!isEditing" class="mt-4 flex">
+                {{-- A liquidar --}}
+                <div class="flex flex-col items-center mx-5 space-y-1 mr-2">
+                  <h2 class="text-lg font-medium text-gray-700 sm:text-2xl dark:text-gray-200 {{ $tieneLiquidado ? 'line-through' : '' }}">
+                    {{ $aliquidarFmt }}
+                  </h2>
+                  <h2 class="text-md font-medium text-gray-700 dark:text-gray-200 text-center">
+                    Liquidado<br>Informe
+                  </h2>
+                </div>
+
+                {{-- Liquidado con modificaciones --}}
+                @if ($tieneLiquidado)
                   <div class="flex flex-col items-center mx-5 space-y-1 mr-2">
-                    <h2 class="text-lg font-medium text-gray-700 sm:text-2xl dark:text-gray-200 @if(!IS_NULL($informe->total_liquidado))line-through @endif">
-                      {{ number_format($aliquidar,2,',','.') }}
+                    <h2 class="text-lg font-medium text-gray-700 sm:text-2xl dark:text-gray-200">
+                      {{ $totalModFmt }}
                     </h2>
-                    <h2 class="text-md font-medium text-gray-700 dark:text-gray-200">Liquidado<br>Informe</h2>
+                    <h2 class="text-md font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap text-center">
+                      Liquidado<br>Con Modificaciones
+                    </h2>
                   </div>
-               
-                  
-                    @if (!IS_NULL($informe->total_liquidado))
-                      <div class="flex flex-col items-center mx-5 space-y-1 mr-2">
-                        <h2 class="text-lg font-medium text-gray-700 sm:text-2xl dark:text-gray-200">
-                          {{  number_format(floatval($informe->total_liquidado)+$aliquidar,2,',','.') }}
-                          </h2>
-                        <h2 class="text-md font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap text-center">Liquidado<br>
-                          Con Modificaciones
-                        </h2>
-                      </div>
-                    @endif
-                    
-                 
-                   
-                 <div class="flex flex-col items-center mx-5 space-y-1 mr-2">
-                   <h2 class="text-lg font-medium text-gray-700 sm:text-2xl dark:text-gray-200">
-                     {{ number_format($informe->diferencia_tipodecambio,0,',','.') ?? '-' }}
-                   </h2>
-                   <h2 class="text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                     Dif. Tipo de Cambio
-                   </h2>
-                 </div>
-               </div>
+                @endif
 
-             </div>
+                {{-- Diferencia Tipo de Cambio --}}
+                <div class="flex flex-col items-center mx-5 space-y-1 mr-2">
+                  <h2 class="text-lg font-medium text-gray-700 sm:text-2xl dark:text-gray-200">
+                    {{ $difTCFmt }}
+                  </h2>
+                  <h2 class="text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
+                    Dif. Tipo de Cambio
+                  </h2>
+                </div>
+
+                {{-- Comisión --}}
+                <div class="flex flex-col items-center mx-5 space-y-1">
+                  <h2 class="text-lg font-medium text-gray-700 sm:text-2xl dark:text-gray-200">
+                    {{ $comisionValue }}%
+                  </h2>
+                  <h2 class="text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
+                    Comisión
+                  </h2>
+                </div>
+              </div>
             </div>
-             
-             
-             
-
-             
-              
           </div>
+
 
           <div class="flex flex-col items-center mx-5 space-y-1 ml-auto">
                 
