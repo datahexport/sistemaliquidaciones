@@ -177,9 +177,9 @@ class InformeUpdate extends Component
         // Comisión (1–15). Si no llega, mantiene o default 8.
         if (array_key_exists('comision', $payload)) {
             $com = (int) $payload['comision'];
-            $informe->comision = ($com >= 1 && $com <= 15) ? $com : ($informe->comision ?? 8);
+            $informe->comision = ($com >= 1 && $com <= 15) ? $com/100 : ($informe->comision ?? 8);
         } else {
-            $informe->comision = $informe->comision ?? 8;
+            $informe->comision = $informe->comision ?? 0.08;
         }
 
         $informe->save();
