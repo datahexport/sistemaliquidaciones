@@ -167,17 +167,27 @@ class InformeUpdate extends Component
     }
 
 
-    public function guardarCambios($data)
+    public function guardarCambios(array $payload)
     {
-        $informe = Informe::find($data['id']);
-        if ($informe) {
-            //dd($data['total_liquidado']);
-            $informe->update(['diferencia_tipodecambio' => $data['diferencia_tipodecambio']]);
-           
-            $this->dispatch('mostrar-mensaje', ['tipo' => 'success', 'mensaje' => 'El informe ha sido actualizado correctamente.']);
-          
+        $informe = Informe::findOrFail($payload['id']);
+
+        // Diferencia tipo de cambio (nullable)
+        $informe->diferencia_tipodecambio = $payload['diferencia_tipodecambio'] ?? null;
+
+        // Comisión (1–15). Si no llega, mantiene o default 8.
+        if (array_key_exists('comision', $payload)) {
+            $com = (int) $payload['comision'];
+            $informe->comision = ($com >= 1 && $com <= 15) ? $com : ($informe->comision ?? 8);
+        } else {
+            $informe->comision = $informe->comision ?? 8;
         }
+
+        $informe->save();
+
+        // Si necesitas refrescar relaciones/listas en pantalla
+        $this->dispatch('informe-actualizado');
     }
+
     
     public function render()
     {     $masastotal=Proceso::select([
