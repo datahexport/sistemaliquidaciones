@@ -80,7 +80,7 @@ class TemporadaShow extends Component
         $razon = RazonSocial::find($id);
 
         if ($razon) {
-            $razon->comision = $value;
+            $razon->comision = $value/100;
             $razon->save();
 
             session()->flash('comision_status_' . $id, 'Comisión actualizada');
