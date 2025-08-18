@@ -77,7 +77,7 @@ class TemporadaShow extends Component
    
     public function actualizarComision($id, $value)
     {
-        $razon = \App\Models\RazonSocial::find($id);
+        $razon = RazonSocial::find($id);
 
         if ($razon) {
             $razon->comision = $value;
