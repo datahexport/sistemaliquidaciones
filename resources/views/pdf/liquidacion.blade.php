@@ -646,7 +646,7 @@
                                   if (!is_null($masa->fob)) {
                                       $retorno5j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                       $retorno_neto5j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                      $margen5j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                      $margen5j_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                   }
                               
                                   $costos5j_semana += floatval($masa->costo);
@@ -657,7 +657,7 @@
                               
                                   if (!is_null($masa->fob)) {
                                       $retorno5j += floatval($masa->peso_prorrateado * $tarifafinal);
-                                      $margen5j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                      $margen5j += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                   }
                               
                                   $costos5j += floatval($masa->costo);
@@ -673,7 +673,7 @@
                                     if (!is_null($masa->fob)) {
                                         $retorno4j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                         $retorno_neto4j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                        $margen4j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                        $margen4j_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                     }
                                     $costos4j_semana += floatval($masa->costo);
                                     $totalmateriales4j_semana += floatval($masa->costo);
@@ -683,7 +683,7 @@
                                     $pesoneto4j += floatval($masa->peso_prorrateado);
                                     if (!is_null($masa->fob)) {
                                         $retorno4j += floatval($masa->peso_prorrateado * $tarifafinal);
-                                        $margen4j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                        $margen4j += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                     }
                                     $costos4j += floatval($masa->costo);
                                     $totalmateriales4j += floatval($masa->costo);
@@ -697,7 +697,7 @@
                                     if (!is_null($masa->fob)) {
                                         $retorno3j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                         $retorno_neto3j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                        $margen3j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                        $margen3j_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                     }
                                     $costos3j_semana += floatval($masa->costo);
                                     $totalmateriales3j_semana += floatval($masa->costo);
@@ -706,7 +706,7 @@
                                     $pesoneto3j += floatval($masa->peso_prorrateado);
                                     if (!is_null($masa->fob)) {
                                         $retorno3j += floatval($masa->peso_prorrateado * $tarifafinal);
-                                        $margen3j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                        $margen3j += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                     }
                                     $costos3j += floatval($masa->costo);
                                     $totalmateriales3j += floatval($masa->costo);
@@ -720,7 +720,7 @@
                                     if (!is_null($masa->fob)) {
                                         $retorno2j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                         $retorno_neto2j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                        $margen2j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                        $margen2j_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                     }
                                     $costos2j_semana += floatval($masa->costo);
                                     $totalmateriales2j_semana += floatval($masa->costo);
@@ -729,7 +729,7 @@
                                     $pesoneto2j += floatval($masa->peso_prorrateado);
                                     if (!is_null($masa->fob)) {
                                         $retorno2j += floatval($masa->peso_prorrateado * $tarifafinal);
-                                        $margen2j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                        $margen2j += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                     }
                                     $costos2j += floatval($masa->costo);
                                     $totalmateriales2j += floatval($masa->costo);
@@ -743,7 +743,7 @@
                                     if (!is_null($masa->fob)) {
                                         $retornoj_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                         $retorno_netoj_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                        $margenj_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                        $margenj_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                     }
                                     $costosj_semana += floatval($masa->costo);
                                     $totalmaterialesj_semana += floatval($masa->costo);
@@ -752,7 +752,7 @@
                                     $pesonetoj += floatval($masa->peso_prorrateado);
                                     if (!is_null($masa->fob)) {
                                         $retornoj += floatval($masa->peso_prorrateado * $tarifafinal);
-                                        $margenj += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                        $margenj += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                     }
                                     $costosj += floatval($masa->costo);
                                     $totalmaterialesj += floatval($masa->costo);
@@ -766,7 +766,7 @@
                                     if (!is_null($masa->fob)) {
                                         $retornoxl_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                         $retorno_netoxl_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                        $margenxl_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                        $margenxl_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                     }
                                     $costosxl_semana += floatval($masa->costo);
                                     $totalmaterialesxl_semana += floatval($masa->costo);
@@ -775,7 +775,7 @@
                                     $pesonetoxl += floatval($masa->peso_prorrateado);
                                     if (!is_null($masa->fob)) {
                                         $retornoxl += floatval($masa->peso_prorrateado * $tarifafinal);
-                                        $margenxl += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                        $margenxl += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                     }
                                     $costosxl += floatval($masa->costo);
                                     $totalmaterialesxl += floatval($masa->costo);
@@ -1619,8 +1619,8 @@
                                               if (!IS_NULL($masa->fob)) {
                                                   $retorno5j+=floatval($masa->peso_prorrateado*$tarifafinal);
                                                   $totalretorno5j+=floatval($masa->peso_prorrateado*$tarifafinal);
-                                                  $margen5j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-                                                  $totalmargen5j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                  $margen5j+=floatval($masa->peso_prorrateado*$tarifafinal*$informe_edit->comision);
+                                                  $totalmargen5j+=floatval($masa->peso_prorrateado*$tarifafinal*$informe_edit->comision);
                                                 }
                                               $cantidadtotal+=floatval($masa->cantidad);
                                               $pesonetototal+=floatval($masa->peso_prorrateado);
@@ -1643,8 +1643,8 @@
                               if (!IS_NULL($masa->fob)) {
                                   $retorno4j+=floatval($masa->peso_prorrateado*$tarifafinal);
                                   $totalretorno4j+=floatval($masa->peso_prorrateado*$tarifafinal);
-                                  $margen4j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-                                  $totalmargen4j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                  $margen4j+=floatval($masa->peso_prorrateado*$tarifafinal*$informe_edit->comision);
+                                  $totalmargen4j+=floatval($masa->peso_prorrateado*$tarifafinal*$informe_edit->comision);
                                 }
                               $cantidadtotal+=floatval($masa->cantidad);
                               $pesonetototal+=floatval($masa->peso_prorrateado);
@@ -1668,8 +1668,8 @@
                                 //dd($masa->fob);
                                                   $retorno3j+=floatval($masa->peso_prorrateado*$tarifafinal);
                                                   $totalretorno3j+=floatval($masa->peso_prorrateado*$tarifafinal);
-                                                  $margen3j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-                                                  $totalmargen3j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                  $margen3j+=floatval($masa->peso_prorrateado*$tarifafinal*$informe_edit->comision);
+                                                  $totalmargen3j+=floatval($masa->peso_prorrateado*$tarifafinal*$informe_edit->comision);
                                                 }
                               $cantidadtotal+=$masa->cantidad;
                               $pesonetototal+=floatval($masa->peso_prorrateado);
@@ -1690,8 +1690,8 @@
                               if (!IS_NULL($masa->fob)) {
                                               $retorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
                                               $totalretorno2j+=floatval($masa->peso_prorrateado*$tarifafinal);
-                                              $margen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-                                              $totalmargen2j+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                              $margen2j+=floatval($masa->peso_prorrateado*$tarifafinal*$informe_edit->comision);
+                                              $totalmargen2j+=floatval($masa->peso_prorrateado*$tarifafinal*$informe_edit->comision);
                                                 }
                               $cantidadtotal+=$masa->cantidad;
                               $pesonetototal+=floatval($masa->peso_prorrateado);
@@ -1712,8 +1712,8 @@
                                 if (!IS_NULL($masa->fob)) {
                                                   $retornoj+=floatval($masa->peso_prorrateado*$tarifafinal);
                                                   $totalretornoj+=floatval($masa->peso_prorrateado*$tarifafinal);
-                                                  $margenj+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-                                                  $totalmargenj+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                                  $margenj+=floatval($masa->peso_prorrateado*$tarifafinal*$informe_edit->comision);
+                                                  $totalmargenj+=floatval($masa->peso_prorrateado*$tarifafinal*$informe_edit->comision);
                                 }
                                 $cantidadtotal+=$masa->cantidad;
                                 $pesonetototal+=floatval($masa->peso_prorrateado);
@@ -1733,8 +1733,8 @@
                               if (!IS_NULL($masa->fob)) {
                                               $retornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
                                               $totalretornoxl+=floatval($masa->peso_prorrateado*$tarifafinal);
-                                              $margenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-                                              $totalmargenxl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                                              $margenxl+=floatval($masa->peso_prorrateado*$tarifafinal*$informe_edit->comision);
+                                              $totalmargenxl+=floatval($masa->peso_prorrateado*$tarifafinal*$informe_edit->comision);
                                                 }
                               $cantidadtotal+=$masa->cantidad;
                               $pesonetototal+=floatval($masa->peso_prorrateado);
@@ -2593,7 +2593,7 @@
                                 if (!is_null($masa->fob)) {
                                     $retorno5j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                     $retorno_neto5j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                    $margen5j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                    $margen5j_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                 }
                             
                                 $costos5j_semana += floatval($masa->costo);
@@ -2604,7 +2604,7 @@
                             
                                 if (!is_null($masa->fob)) {
                                     $retorno5j += floatval($masa->peso_prorrateado * $tarifafinal);
-                                    $margen5j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                    $margen5j += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                 }
                             
                                 $costos5j += floatval($masa->costo);
@@ -2620,7 +2620,7 @@
                                   if (!is_null($masa->fob)) {
                                       $retorno4j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                       $retorno_neto4j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                      $margen4j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                      $margen4j_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                   }
                                   $costos4j_semana += floatval($masa->costo);
                                   $totalmateriales4j_semana += floatval($masa->costo);
@@ -2630,7 +2630,7 @@
                                   $pesoneto4j += floatval($masa->peso_prorrateado);
                                   if (!is_null($masa->fob)) {
                                       $retorno4j += floatval($masa->peso_prorrateado * $tarifafinal);
-                                      $margen4j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                      $margen4j += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                   }
                                   $costos4j += floatval($masa->costo);
                                   $totalmateriales4j += floatval($masa->costo);
@@ -2644,7 +2644,7 @@
                                   if (!is_null($masa->fob)) {
                                       $retorno3j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                       $retorno_neto3j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                      $margen3j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                      $margen3j_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                   }
                                   $costos3j_semana += floatval($masa->costo);
                                   $totalmateriales3j_semana += floatval($masa->costo);
@@ -2653,7 +2653,7 @@
                                   $pesoneto3j += floatval($masa->peso_prorrateado);
                                   if (!is_null($masa->fob)) {
                                       $retorno3j += floatval($masa->peso_prorrateado * $tarifafinal);
-                                      $margen3j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                      $margen3j += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                   }
                                   $costos3j += floatval($masa->costo);
                                   $totalmateriales3j += floatval($masa->costo);
@@ -2667,7 +2667,7 @@
                                   if (!is_null($masa->fob)) {
                                       $retorno2j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                       $retorno_neto2j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                      $margen2j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                      $margen2j_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                   }
                                   $costos2j_semana += floatval($masa->costo);
                                   $totalmateriales2j_semana += floatval($masa->costo);
@@ -2676,7 +2676,7 @@
                                   $pesoneto2j += floatval($masa->peso_prorrateado);
                                   if (!is_null($masa->fob)) {
                                       $retorno2j += floatval($masa->peso_prorrateado * $tarifafinal);
-                                      $margen2j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                      $margen2j += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                   }
                                   $costos2j += floatval($masa->costo);
                                   $totalmateriales2j += floatval($masa->costo);
@@ -2690,7 +2690,7 @@
                                   if (!is_null($masa->fob)) {
                                       $retornoj_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                       $retorno_netoj_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                      $margenj_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                      $margenj_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                   }
                                   $costosj_semana += floatval($masa->costo);
                                   $totalmaterialesj_semana += floatval($masa->costo);
@@ -2699,7 +2699,7 @@
                                   $pesonetoj += floatval($masa->peso_prorrateado);
                                   if (!is_null($masa->fob)) {
                                       $retornoj += floatval($masa->peso_prorrateado * $tarifafinal);
-                                      $margenj += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                      $margenj += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                   }
                                   $costosj += floatval($masa->costo);
                                   $totalmaterialesj += floatval($masa->costo);
@@ -2713,7 +2713,7 @@
                                   if (!is_null($masa->fob)) {
                                       $retornoxl_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                       $retorno_netoxl_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                      $margenxl_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                      $margenxl_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                   }
                                   $costosxl_semana += floatval($masa->costo);
                                   $totalmaterialesxl_semana += floatval($masa->costo);
@@ -2722,7 +2722,7 @@
                                   $pesonetoxl += floatval($masa->peso_prorrateado);
                                   if (!is_null($masa->fob)) {
                                       $retornoxl += floatval($masa->peso_prorrateado * $tarifafinal);
-                                      $margenxl += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                      $margenxl += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                   }
                                   $costosxl += floatval($masa->costo);
                                   $totalmaterialesxl += floatval($masa->costo);
@@ -2737,7 +2737,7 @@
                                     if (!is_null($masa->fob)) {
                                         $retornol_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                         $retorno_netol_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                        $margenl_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                        $margenl_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                     }
                                     $costosl_semana += floatval($masa->costo);
                                     $totalmaterialesl_semana += floatval($masa->costo);
@@ -2746,7 +2746,7 @@
                                     $pesonetol += floatval($masa->peso_prorrateado);
                                     if (!is_null($masa->fob)) {
                                         $retornol += floatval($masa->peso_prorrateado * $tarifafinal);
-                                        $margenl += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                        $margenl += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                     }
                                     $costosl += floatval($masa->costo);
                                     $totalmaterialesl += floatval($masa->costo);
@@ -3164,8 +3164,8 @@
                           if (!IS_NULL($masa->fob)) {
                             $retornol+=floatval($masa->peso_prorrateado*$tarifafinal);
                             $totalretornol+=floatval($masa->peso_prorrateado*$tarifafinal);
-                            $margenl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
-                            $totalmargenl+=floatval($masa->peso_prorrateado*$tarifafinal*0.08);
+                            $margenl+=floatval($masa->peso_prorrateado*$tarifafinal*$informe_edit->comision);
+                            $totalmargenl+=floatval($masa->peso_prorrateado*$tarifafinal*$informe_edit->comision);
                           }
           
                           $cantidadtotal+=$masa->cantidad;
@@ -3647,7 +3647,7 @@
                                     if (!is_null($masa->fob)) {
                                         $retorno5j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                         $retorno_neto5j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                        $margen5j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                        $margen5j_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                     }
                                 
                                     $costos5j_semana += floatval($masa->costo);
@@ -3658,7 +3658,7 @@
                                 
                                     if (!is_null($masa->fob)) {
                                         $retorno5j += floatval($masa->peso_prorrateado * $tarifafinal);
-                                        $margen5j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                        $margen5j += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                     }
                                 
                                     $costos5j += floatval($masa->costo);
@@ -3674,7 +3674,7 @@
                                       if (!is_null($masa->fob)) {
                                           $retorno4j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                           $retorno_neto4j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                          $margen4j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                          $margen4j_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                       }
                                       $costos4j_semana += floatval($masa->costo);
                                       $totalmateriales4j_semana += floatval($masa->costo);
@@ -3684,7 +3684,7 @@
                                       $pesoneto4j += floatval($masa->peso_prorrateado);
                                       if (!is_null($masa->fob)) {
                                           $retorno4j += floatval($masa->peso_prorrateado * $tarifafinal);
-                                          $margen4j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                          $margen4j += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                       }
                                       $costos4j += floatval($masa->costo);
                                       $totalmateriales4j += floatval($masa->costo);
@@ -3698,7 +3698,7 @@
                                       if (!is_null($masa->fob)) {
                                           $retorno3j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                           $retorno_neto3j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                          $margen3j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                          $margen3j_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                       }
                                       $costos3j_semana += floatval($masa->costo);
                                       $totalmateriales3j_semana += floatval($masa->costo);
@@ -3707,7 +3707,7 @@
                                       $pesoneto3j += floatval($masa->peso_prorrateado);
                                       if (!is_null($masa->fob)) {
                                           $retorno3j += floatval($masa->peso_prorrateado * $tarifafinal);
-                                          $margen3j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                          $margen3j += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                       }
                                       $costos3j += floatval($masa->costo);
                                       $totalmateriales3j += floatval($masa->costo);
@@ -3721,7 +3721,7 @@
                                       if (!is_null($masa->fob)) {
                                           $retorno2j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                           $retorno_neto2j_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                          $margen2j_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                          $margen2j_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                       }
                                       $costos2j_semana += floatval($masa->costo);
                                       $totalmateriales2j_semana += floatval($masa->costo);
@@ -3730,7 +3730,7 @@
                                       $pesoneto2j += floatval($masa->peso_prorrateado);
                                       if (!is_null($masa->fob)) {
                                           $retorno2j += floatval($masa->peso_prorrateado * $tarifafinal);
-                                          $margen2j += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                          $margen2j += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                       }
                                       $costos2j += floatval($masa->costo);
                                       $totalmateriales2j += floatval($masa->costo);
@@ -3744,7 +3744,7 @@
                                       if (!is_null($masa->fob)) {
                                           $retornoj_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                           $retorno_netoj_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                          $margenj_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                          $margenj_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                       }
                                       $costosj_semana += floatval($masa->costo);
                                       $totalmaterialesj_semana += floatval($masa->costo);
@@ -3753,7 +3753,7 @@
                                       $pesonetoj += floatval($masa->peso_prorrateado);
                                       if (!is_null($masa->fob)) {
                                           $retornoj += floatval($masa->peso_prorrateado * $tarifafinal);
-                                          $margenj += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                          $margenj += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                       }
                                       $costosj += floatval($masa->costo);
                                       $totalmaterialesj += floatval($masa->costo);
@@ -3767,7 +3767,7 @@
                                       if (!is_null($masa->fob)) {
                                           $retornoxl_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                           $retorno_netoxl_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                          $margenxl_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                          $margenxl_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                       }
                                       $costosxl_semana += floatval($masa->costo);
                                       $totalmaterialesxl_semana += floatval($masa->costo);
@@ -3776,7 +3776,7 @@
                                       $pesonetoxl += floatval($masa->peso_prorrateado);
                                       if (!is_null($masa->fob)) {
                                           $retornoxl += floatval($masa->peso_prorrateado * $tarifafinal);
-                                          $margenxl += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                          $margenxl += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                       }
                                       $costosxl += floatval($masa->costo);
                                       $totalmaterialesxl += floatval($masa->costo);
@@ -3791,7 +3791,7 @@
                                         if (!is_null($masa->fob)) {
                                             $retornol_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                             $retorno_netol_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                            $margenl_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                            $margenl_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                         }
                                         $costosl_semana += floatval($masa->costo);
                                         $totalmaterialesl_semana += floatval($masa->costo);
@@ -3800,7 +3800,7 @@
                                         $pesonetol += floatval($masa->peso_prorrateado);
                                         if (!is_null($masa->fob)) {
                                             $retornol += floatval($masa->peso_prorrateado * $tarifafinal);
-                                            $margenl += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                            $margenl += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                         }
                                         $costosl += floatval($masa->costo);
                                         $totalmaterialesl += floatval($masa->costo);
@@ -3814,7 +3814,7 @@
                                         if (!is_null($masa->fob)) {
                                             $retornojup_semana += floatval($masa->peso_prorrateado * $tarifafinal);
                                             $retorno_netojup_semana += floatval($masa->peso_prorrateado * $tarifafinal);
-                                          // $margenjup_semana += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                          // $margenjup_semana += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                         }
                                         $costosjup_semana += floatval($masa->costo);
                                         $totalmaterialesjup_semana += floatval($masa->costo);
@@ -3823,7 +3823,7 @@
                                         $pesonetojup += floatval($masa->peso_prorrateado);
                                         if (!is_null($masa->fob)) {
                                             $retornojup += floatval($masa->peso_prorrateado * $tarifafinal);
-                                            //$margenjup += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                            //$margenjup += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                         }
                                         $costosjup += floatval($masa->costo);
                                         $totalmaterialesjup += floatval($masa->costo);
@@ -4262,8 +4262,8 @@
                                     if (!IS_NULL($masa->fob)) {
                                       $retornojup += floatval($masa->peso_prorrateado * $tarifafinal);
                                       $totalretornojup += floatval($masa->peso_prorrateado * $tarifafinal);
-                                      //$margenjup += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
-                                      //$totalmargenjup += floatval($masa->peso_prorrateado * $tarifafinal * 0.08);
+                                      //$margenjup += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
+                                      //$totalmargenjup += floatval($masa->peso_prorrateado * $tarifafinal * $informe_edit->comision);
                                     }
                                 
                                     $cantidadtotal += $masa->cantidad;
